@@ -424,6 +424,7 @@ h2.modsummary {
 
 .main h1 { font-size: 30px; margin-bottom: 8px; line-height:30px;}
 .main h2 { font-size: 20px; margin-top:20px;}
+.main h3 { font-size: 14px; margin-top:20px; font-weight: bold;color:rgb(138, 138, 138)}
 
 .notes { opacity:0.6; }
 
