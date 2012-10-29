@@ -3,34 +3,58 @@
 use XML::Twig;
 use Data::Dump qw/dump/;
 use File::Slurp;
+use File::Spec;
 use File::Find qw/find/;
 use strict;
 use warnings;
+use 5.010;
 
 my $delete_en = 0;
 
-my $spec_text = read_file('./specs/stdlib/lists.spec');
-
-my @specs = split /\n\n/, $spec_text;
-
+my $layout = read_file('./layout/default.html');
 my %spec;
+my $erldocs_index = ""
 
-for (@specs) {
-    if (/name:(?<name>.*?)\ndef:(?<def>.*?)\n(types:\n(?<types>.*))?/s) {
-        $spec{ $+{name} }->{def}   = $+{def};
-        $spec{ $+{name} }->{types} = $+{types};
-    }
+my @xml_files;
+sub wanted {
+    push @xml_files, $File::Find::name if $File::Find::name =~ /\.xml$/;
 }
+find \&wanted, './xml_doc/';
 
-my $layout   = read_file('./layout/default.html');
-my $res      = $layout;
-my $xml_html = xml_to_html('./xml_doc/stdlib/lists.xml');
-
-$res =~ s/{{content}}/$xml_html/;
-
-write_file( 'lists.html', $res );
+handle_a_file($_) for @xml_files;
 
 #script ends here, the followings are definitions of functions
+
+sub handle_a_file {
+    my ($xml_file) = @_;
+    my @path_pieses = split '/', $xml_file;
+    my $spec_file =
+      File::Spec->catfile( 'specs',
+        @path_pieses[ $#path_pieses - 1 .. $#path_pieses ] )
+      ;    #generate spec file path by $xml_file
+    $spec_file =~ s/xml/spec/;
+    my $html_file =
+      File::Spec->catfile( @path_pieses[ $#path_pieses - 1 .. $#path_pieses ] )
+      ;    #generate html file path by $xml_file
+    $html_file =~ s/xml/html/;
+
+    my $spec_text = read_file($spec_file);
+    my @specs = split /\n\n/, $spec_text;
+
+    undef %spec;    #reset %spec for every file
+    for (@specs) {
+        if (/name:(?<name>.*?)\ndef:(?<def>.*?)\n(types:\n(?<types>.*))?/s) {
+            $spec{ $+{name} }->{def}   = $+{def};
+            $spec{ $+{name} }->{types} = $+{types};
+        }
+    }
+    my $res      = $layout;
+    my $xml_html = xml_to_html($xml_file);
+
+    $res =~ s/{{content}}/$xml_html/;
+
+    write_file( $html_file, $res );
+}
 
 sub xml_to_html {
     my $t = XML::Twig->new( pretty_print => 'indented' );

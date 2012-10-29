@@ -3,7 +3,10 @@
 #author: terrencehan(hanliang1990@gmail.com)
 #you are welcome to report bugs about this
 #script to my email above. :)
-#The script is disigned for single .erl file. If you have some files to maintain try 'find path/to/.erl files -exec path/to/tiis/script {} path/to/target/dir'
+
+#The script is disigned for single .erl file. 
+#If you have some files to maintain try: 
+#'find path/to/.erl files -exec path/to/tiis/script {} path/to/target/dir'
 
 use 5.010;
 use File::Slurp;
