@@ -23,35 +23,35 @@
   <h1>lists</h1>
   <h2 class="modsummary">List Processing Functions</h2>
   <div class="description">
-    <p>This module contains functions for list processing.</p>
+    <p class="english">This module contains functions for list processing.</p>
     <p>本模块包含列表处理函数</p>
-    <p>Unless otherwise stated, all functions assume that position
+    <p class="english">Unless otherwise stated, all functions assume that position
       numbering starts at 1. That is, the first element of a list is at
       position 1.</p>
     <p>所有的函数都假设位置编号从1开始。也就是说，列表的第一个元素在1号位置</p>
-    <p>Two terms <code>T1</code> and <code>T2</code> compare equal if
+    <p class="english">Two terms <code>T1</code> and <code>T2</code> compare equal if
       <code>T1&nbsp;==&nbsp;T2</code> evaluates to <code>true</code>. They match
       if <code>T1&nbsp;=:=&nbsp;T2</code> evaluates to <code>true</code>.</p>
     <p>两个项<code>T1</code> 和 <code>T2</code>在<code>T1&nbsp;==&nbsp;T2</code>为<code>true</code>时相等。
       当<code>T1&nbsp;=:=&nbsp;T2</code> 为<code>true</code>时，他们完全匹配.</p>
-    <p>Whenever an <marker id="ordering_function"></marker><em>ordering function</em><code>F</code> is expected as argument, it is assumed that the
+    <p class="english">Whenever an <marker id="ordering_function"></marker><em>ordering function</em><code>F</code> is expected as argument, it is assumed that the
       following properties hold of <code>F</code> for all x, y and z:</p>
     <p>当一个<marker id="ordering_function"></marker><em>高阶函数</em><code>F</code> 作为参数的时候, it is assumed that the
       following properties hold of <code>F</code> for all x, y and z:</p>
     <list type="bulleted">
       <item>
-        <p>if x <c>F</c> y and y <c>F</c> x then x = y (<c>F</c>
+        <p class="english">if x <c>F</c> y and y <c>F</c> x then x = y (<c>F</c>
         is antisymmetric);</p>
       </item>
       <item>
-        <p>if x <c>F</c> y and y <c>F</c> z then x <c>F</c> z
+        <p class="english">if x <c>F</c> y and y <c>F</c> z then x <c>F</c> z
         (<c>F</c> is transitive);</p>
       </item>
       <item>
-        <p>x <c>F</c> y or y <c>F</c> x (<c>F</c> is total).</p>
+        <p class="english">x <c>F</c> y or y <c>F</c> x (<c>F</c> is total).</p>
       </item>
     </list>
-    <p>An example of a typical ordering function is less than or equal
+    <p class="english">An example of a typical ordering function is less than or equal
       to, <code>=&lt;/2</code>.</p>
   </div>
   <div class="functions">
@@ -365,7 +365,7 @@ flatmap(Fun, List1) ->
         <p>在元组列表中<code>TupleList</code>搜索一个第<code>N</code>元素与<code>Key</code>相等的元组。如果找到，返回<code>{value, Tuple}</code>, 否则返回<code>false</code>.</p>
         <div class="note">
           <h2>Note:<br/></h2>
-          <p>This function is retained for backward compatibility.
+          <p class="english">This function is retained for backward compatibility.
       The function <c>lists:keyfind/3</c> (introduced in R13A)
       is in most cases more convenient.</p>
           <p>保留这个函数是为了向后兼容.
