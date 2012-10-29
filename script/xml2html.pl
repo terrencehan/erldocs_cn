@@ -1,4 +1,9 @@
 #!/usr/bin/env perl
+#author:terrencehan(hanliang1990@gmail.com)
+#This script is used to extract datas from .xml 
+#and .spec files and generate the responding .html 
+#files. If you find any bug, PLEASE report is to
+#my email :)
 
 use XML::Twig;
 use Data::Dump qw/dump/;
@@ -13,7 +18,7 @@ my $delete_en = 0;
 
 my $layout = read_file('./layout/default.html');
 my %spec;
-my $erldocs_index = ""
+my $erldocs_index = "var index = [";
 
 my @xml_files;
 sub wanted {
