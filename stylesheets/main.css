@@ -157,6 +157,10 @@ h2.modsummary {
     padding-left : 10px;
 }
 
+.type {
+    padding-left : 20px;
+}
+
 .function em {
     font-style  : normal;
     font-weight : bold;
@@ -427,6 +431,10 @@ h2.modsummary {
 .main h3 { font-size: 14px; margin-top:20px; font-weight: bold;color:rgb(138, 138, 138)}
 
 .notes { opacity:0.6; }
+
+.english{
+    opacity:0.6;
+}
 
 .type_desc {
     margin-left:30px;
