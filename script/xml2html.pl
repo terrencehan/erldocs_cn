@@ -109,6 +109,7 @@ sub xml_to_html {
     }
 
     $_->set_tag('span') for ( $root->getElementsByTagName('input') );
+    $_->set_tag('dt') for ( $root->getElementsByTagName('tag') );
 
     for ( $root->getElementsByTagName('code') ) {
         $_->set_tag('pre');
