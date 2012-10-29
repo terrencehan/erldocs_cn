@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>lists</h1>
+  <h2 class="modsummary">List Processing Functions</h2>
+  <div class="description">
+    <p>This module contains functions for list processing.</p>
+    <p>本模块包含列表处理函数</p>
+    <p>Unless otherwise stated, all functions assume that position
+      numbering starts at 1. That is, the first element of a list is at
+      position 1.</p>
+    <p>所有的函数都假设位置编号从1开始。也就是说，列表的第一个元素在1号位置</p>
+    <p>Two terms <code>T1</code> and <code>T2</code> compare equal if
+      <code>T1&nbsp;==&nbsp;T2</code> evaluates to <code>true</code>. They match
+      if <code>T1&nbsp;=:=&nbsp;T2</code> evaluates to <code>true</code>.</p>
+    <p>两个项<code>T1</code> 和 <code>T2</code>在<code>T1&nbsp;==&nbsp;T2</code>为<code>true</code>时相等。
+      当<code>T1&nbsp;=:=&nbsp;T2</code> 为<code>true</code>时，他们完全匹配.</p>
+    <p>Whenever an <marker id="ordering_function"></marker><em>ordering function</em><code>F</code> is expected as argument, it is assumed that the
+      following properties hold of <code>F</code> for all x, y and z:</p>
+    <p>当一个<marker id="ordering_function"></marker><em>高阶函数</em><code>F</code> 作为参数的时候, it is assumed that the
+      following properties hold of <code>F</code> for all x, y and z:</p>
+    <list type="bulleted">
+      <item>
+        <p>if x <c>F</c> y and y <c>F</c> x then x = y (<c>F</c>
+        is antisymmetric);</p>
+      </item>
+      <item>
+        <p>if x <c>F</c> y and y <c>F</c> z then x <c>F</c> z
+        (<c>F</c> is transitive);</p>
+      </item>
+      <item>
+        <p>x <c>F</c> y or y <c>F</c> x (<c>F</c> is total).</p>
+      </item>
+    </list>
+    <p>An example of a typical ordering function is less than or equal
+      to, <code>=&lt;/2</code>.</p>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="2" id="all/2" name="all">all(Pred, List) -> boolean()</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns
+                  <code>true</code> for all elements <code><anno>Elem</anno></code> in <code><anno>List</anno></code>,
+                  otherwise <code>false</code>.</p>
+        <p> 如果对列表<code><anno>List</anno></code>所有元素<code><anno>Elem</anno></code>函数<code><anno>Pred</anno>(<anno>Elem</anno>)</code> 都返回 <code>true</code>, 则返回 <code>true</code> , 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="any/2" name="any">any(Pred, List) -> boolean()</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns
+          <code>true</code> for at least one element <code><anno>Elem</anno></code> in
+          <code><anno>List</anno></code>.</p>
+        <p> 如果列表<code><anno>List</anno></code>中至少有一个元素<code><anno>Elem</anno></code>使得<code><anno>Pred</anno>(<anno>Elem</anno>)</code> 返回 <code>true</code>, 则返回 <code>true</code> , 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="append/1" name="append">append(ListOfLists) -> List1</h3>
+      <div class="type_desc">      ListOfLists = [List],<br/>      List = [T],<br/>      List1 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list in which all the sub-lists of
+          <code><anno>ListOfLists</anno></code> have been appended. For example:</p>
+        <p>返回一个将所有<code><anno>ListOfLists</anno></code>子列表都追加上的列表, 例如:</p>
+        <pre>
+> <span>lists:append([[1, 2, 3], [a, b], [4, 5, 6]]).</span>
+[1,2,3,a,b,4,5,6]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="append/2" name="append">append(List1, List2) -> List3</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      List3 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a new list <code><anno>List3</anno></code> which is made from
+          the elements of <code><anno>List1</anno></code> followed by the elements of
+          <code><anno>List2</anno></code>. For example:</p>
+        <p>返回<code><anno>List1</anno></code>列表元素在前<code><anno>List2</anno></code>列表元素在后的新列表一个<code><anno>List3</anno></code>, 例如:</p>
+        <pre>
+> <span>lists:append("abc", "def").</span>
+"abcdef"</pre>
+        <p class="english"><code>lists:append(A, B)</code> is equivalent to <code>A ++ B</code>.</p>
+        <p><code>lists:append(A, B)</code> 等于<code>A ++ B</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="concat/1" name="concat">concat(Things) -> string()</h3>
+      <div class="type_desc">      Things = [Thing],<br/>      Thing = atom() | integer() | float() | string()</div>
+      <div class="discription">
+        <p class="english">Concatenates the text representation of the elements
+          of <code><anno>Things</anno></code>. elements of <code><anno>Things</anno></code> can be atoms,
+          integers, floats or strings.</p>
+        <p>连接<code><anno>Things</anno></code>列表元素的字面值. <code><anno>Things</anno></code>列表的元素可以是原子、整数、浮点数或字符串.</p>
+        <pre>
+> <span>lists:concat([doc, '/', file, '.', 3]).</span>
+"doc/file.3"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="delete/2" name="delete">delete(Elem, List1) -> List2</h3>
+      <div class="type_desc">      Elem = T,<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a copy of <code><anno>List1</anno></code> where the first element
+          matching <code><anno>Elem</anno></code> is deleted, if there is such an
+          element.</p>
+        <p>如果有的话, 返回删除了第一个匹配的<code><anno>Elem</anno></code>元素的<code><anno>List1</anno></code>副本.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="dropwhile/2" name="dropwhile">dropwhile(Pred, List1) -> List2</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Drops elements <code><anno>Elem</anno></code> from <code><anno>List1</anno></code> while
+          <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns <code>true</code> and returns
+          the remaining list.</p>
+        <p>从列表<code><anno>List1</anno></code>中删除所有使函数<code><anno>Pred</anno>(<anno>Elem</anno>)</code>返回<code>true</code>的<code><anno>Elem</anno></code>，返回删除后的列表副本.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="duplicate/2" name="duplicate">duplicate(N, Elem) -> List</h3>
+      <div class="type_desc">      N = non_neg_integer(),<br/>      Elem = T,<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list which contains <code><anno>N</anno></code> copies of the term
+          <code><anno>Elem</anno></code>. For example:</p>
+        <p>返回包含<code><anno>N</anno></code>个<code><anno>Elem</anno></code>元素的列表. 例如:</p>
+        <pre>
+> <span>lists:duplicate(5, xx).</span>
+[xx,xx,xx,xx,xx]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="filter/2" name="filter">filter(Pred, List1) -> List2</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english"><code><anno>List2</anno></code> is a list of all elements <code><anno>Elem</anno></code> in
+          <code><anno>List1</anno></code> for which <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns
+          <code>true</code>.</p>
+        <p><code><anno>List2</anno></code>列表中的元素是由<code><anno>List1</anno></code>列表中使<code><anno>Pred</anno>(<anno>Elem</anno>)</code>返回<code>true</code>的所有<code><anno>Elem</anno></code>构成的.  </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="flatlength/1" name="flatlength">flatlength(DeepList) -> non_neg_integer()</h3>
+      <div class="type_desc">      DeepList = [term() | DeepList]</div>
+      <div class="discription">
+        <p class="english">Equivalent to <code>length(flatten(<anno>DeepList</anno>))</code>, but more
+          efficient.</p>
+        <p>等同于<code>length(flatten(<anno>DeepList</anno>))</code>, 但是效率更高.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="flatmap/2" name="flatmap">flatmap(Fun, List1) -> List2</h3>
+      <div class="type_desc">      Fun = fun((A) -> [B]),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english">Takes a function from <code><anno>A</anno></code>s to lists of <code><anno>B</anno></code>s, and a
+          list of <code><anno>A</anno></code>s (<code><anno>List1</anno></code>) and produces a list of
+          <code><anno>B</anno></code>s by applying the function to every element in
+          <code><anno>List1</anno></code> and appending the resulting lists.</p>
+        <p>[TODO]Takes a function from <code><anno>A</anno></code>s to lists of <code><anno>B</anno></code>s, and a
+          list of <code><anno>A</anno></code>s (<code><anno>List1</anno></code>) and produces a list of
+          <code><anno>B</anno></code>s by applying the function to every element in
+          <code><anno>List1</anno></code> and appending the resulting lists.</p>
+        <p class="english">That is, <code>flatmap</code> behaves as if it had been defined as
+          follows:</p>
+        <p>就是说<code>flatmap</code> 的行为就像它被定义成：</p>
+        <pre>
+flatmap(Fun, List1) ->
+    append(map(Fun, List1)).</pre>
+        <p class="english">Example:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:flatmap(fun(X)->[X,X] end, [a,b,c]).</span>
+[a,a,b,b,c,c]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="flatten/1" name="flatten">flatten(DeepList) -> List</h3>
+      <div class="type_desc">      DeepList = [term() | DeepList],<br/>      List = [term()]</div>
+      <div class="discription">
+        <p class="english">Returns a flattened version of <code><anno>DeepList</anno></code>.</p>
+        <p>返回<code><anno>DeepList</anno></code>的扁平化版本.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="flatten/2" name="flatten">flatten(DeepList, Tail) -> List</h3>
+      <div class="type_desc">      DeepList = [term() | DeepList],<br/>      Tail = [term()],<br/>      List = [term()]</div>
+      <div class="discription">
+        <p class="english">Returns a flattened version of <code><anno>DeepList</anno></code> with the tail
+          <code><anno>Tail</anno></code> appended.</p>
+        <p>返回追加了<code><anno>Tail</anno></code>后<code><anno>DeepList</anno></code>的扁平化版本.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="foldl/3" name="foldl">foldl(Fun, Acc0, List) -> Acc1</h3>
+      <div class="type_desc">      Fun = fun((Elem = T, AccIn) -> AccOut),<br/>      Acc0 = term(),<br/>      Acc1 = term(),<br/>      AccIn = term(),<br/>      AccOut = term(),<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Calls <code><anno>Fun</anno>(<anno>Elem</anno>, <anno>AccIn</anno>)</code> on successive elements <code>A</code>
+          of <code><anno>List</anno></code>, starting with <code><anno>AccIn</anno> == <anno>Acc0</anno></code>.
+          <code><anno>Fun</anno>/2</code> must return a new accumulator which is passed to
+          the next call. The function returns the final value of
+          the accumulator. <code><anno>Acc0</anno></code> is returned if the list is empty.
+          For example:</p>
+        <p>从<code><anno>AccIn</anno> == <anno>Acc0</anno></code>开始，依次对<code><anno>List</anno></code>列表中的连续元素<code>A</code>调用<code><anno>Fun</anno>(<anno>Elem</anno>, <anno>AccIn</anno>)</code>. <code><anno>Fun</anno>/2</code> 必须返回一个新的累加器，用以下次调用。该函数返回累加器的最终值. 如果列表为空则返回<code><anno>Acc0</anno></code>.例如:</p>
+        <pre>
+> <span>lists:foldl(fun(X, Sum) -> X + Sum end, 0, [1,2,3,4,5]).</span>
+15
+> <span>lists:foldl(fun(X, Prod) -> X * Prod end, 1, [1,2,3,4,5]).</span>
+120</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="foldr/3" name="foldr">foldr(Fun, Acc0, List) -> Acc1</h3>
+      <div class="type_desc">      Fun = fun((Elem = T, AccIn) -> AccOut),<br/>      Acc0 = term(),<br/>      Acc1 = term(),<br/>      AccIn = term(),<br/>      AccOut = term(),<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Like <code>foldl/3</code>, but the list is traversed from right to
+          left. For example:</p>
+        <p>就像<code>foldl/3</code>一样,但是是从右至左遍历列表. 例如:</p>
+        <pre>
+> <span>P = fun(A, AccIn) -> io:format("~p ", [A]), AccIn end.</span>
+#Fun&lt;erl_eval.12.2225172>
+> <span>lists:foldl(P, void, [1,2,3]).</span>
+1 2 3 void
+> <span>lists:foldr(P, void, [1,2,3]).</span>
+3 2 1 void</pre>
+        <p class="english"><code>foldl/3</code> is tail recursive and would usually be
+          preferred to <code>foldr/3</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="foreach/2" name="foreach">foreach(Fun, List) -> ok</h3>
+      <div class="type_desc">      Fun = fun((Elem = T) -> term()),<br/>      List = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Calls <code><anno>Fun</anno>(<anno>Elem</anno>)</code> for each element <code><anno>Elem</anno></code> in
+          <code><anno>List</anno></code>. This function is used for its side effects and
+          the evaluation order is defined to be the same as the order
+          of the elements in the list.</p>
+        <p>对<code><anno>List</anno></code>中的每个元素<code><anno>Elem</anno></code>调用<code><anno>Fun</anno>(<anno>Elem</anno>)</code>. 这个函数被用于它的副作用[TODO]而且求值顺序与列表中元素的定义顺序一致.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="keydelete/3" name="keydelete">keydelete(Key, N, TupleList1) -> TupleList2</h3>
+      <div class="type_desc">      Key = term(),<br/>      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple],<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a copy of <code><anno>TupleList1</anno></code> where the first
+          occurrence of a tuple whose <code><anno>N</anno></code>th element compares equal to
+          <code><anno>Key</anno></code> is deleted, if there is such a tuple.</p>
+        <p>[TODO]如果可以的话，从元组列表<code><anno>TupleList1</anno></code>中删除第一个匹配的第N个元素为Key的 where the first
+          occurrence of a tuple whose <code><anno>N</anno></code>th element compares equal to
+          <code><anno>Key</anno></code> is deleted, if there is such a tuple.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="keyfind/3">keyfind(Key, N, TupleList) -> Tuple | false</h3>
+      <type>
+        <div class="type_desc">Key = term()</div>
+        <div class="type_desc">N = 1..tuple_size(Tuple)</div>
+        <div class="type_desc">TupleList = [Tuple]</div>
+        <div class="type_desc">Tuple = tuple()</div>
+      </type>
+      <div class="discription">
+        <p class="english">Searches the list of tuples <code>TupleList</code> for a
+          tuple whose <code>N</code>th element compares equal to <code>Key</code>.
+          Returns <code>Tuple</code> if such a tuple is found,
+          otherwise <code>false</code>.</p>
+        <p>在元组列表<code>TupleList</code>中搜索第<code>N</code>个元素为<code>Key</code>的元组.如果找到, 返回<code>Tuple</code>,否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="keymap/3" name="keymap">keymap(Fun, N, TupleList1) -> TupleList2</h3>
+      <div class="type_desc">      Fun = fun((Term1 = term()) -> Term2 = term()),<br/>      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple],<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a list of tuples where, for each tuple in
+          <code><anno>TupleList1</anno></code>, the <code><anno>N</anno></code>th element <code><anno>Term1</anno></code> of the tuple
+          has been replaced with the result of calling
+          <code><anno>Fun</anno>(<anno>Term1</anno>)</code>.</p>
+        <p>把<code><anno>TupleList1</anno></code>中的每个元组的第<code><anno>N</anno></code>个元素<code><anno>Term1</anno></code>替换成<code><anno>Fun</anno>(<anno>Term1</anno>)</code>调用结果, 返回处理后的列表副本.</p>
+        <p class="english">Examples:</p>
+        <p>示例:</p>
+        <pre>
+> <span>Fun = fun(Atom) -> atom_to_list(Atom) end.</span>
+#Fun&lt;erl_eval.6.10732646>
+2> <span>lists:keymap(Fun, 2, [{name,jane,22},{name,lizzie,20},{name,lydia,15}]).</span>
+[{name,"jane",22},{name,"lizzie",20},{name,"lydia",15}]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="keymember/3">keymember(Key, N, TupleList) -> boolean()</h3>
+      <type>
+        <div class="type_desc">Key = term()</div>
+        <div class="type_desc">N = 1..tuple_size(Tuple)</div>
+        <div class="type_desc">TupleList = [Tuple]</div>
+        <div class="type_desc">&nbsp;Tuple = tuple()</div>
+      </type>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if there is a tuple in <code>TupleList</code>
+          whose <code>N</code>th element compares equal to <code>Key</code>, otherwise
+          <code>false</code>.</p>
+        <p>如果在<code>TupleList</code>中存在第<code>N</code>个元素与<code>Key</code>相等的元组，返回<code>true</code>，否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="keymerge/3" name="keymerge">keymerge(N, TupleList1, TupleList2) -> TupleList3</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      TupleList1 = [T1],<br/>      TupleList2 = [T2],<br/>      TupleList3 = [(T1 | T2)],<br/>      T1 = Tuple,<br/>      T2 = Tuple,<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>TupleList1</anno></code>
+          and <code><anno>TupleList2</anno></code>. The merge is performed on
+          the <code><anno>N</anno></code>th element of each tuple. Both <code><anno>TupleList1</anno></code> and
+          <code><anno>TupleList2</anno></code> must be key-sorted prior to evaluating this
+          function. When two tuples compare equal, the tuple from
+          <code><anno>TupleList1</anno></code> is picked before the tuple from
+          <code><anno>TupleList2</anno></code>.</p>
+        <p>返回将<code><anno>TupleList1</anno></code>
+          和 <code><anno>TupleList2</anno></code>归并(已排序）后的结果列表. 该操作是基于每个元组的第<code><anno>N</anno></code>个元素. 为了正确实现这个功能，<code><anno>TupleList1</anno></code> 和 
+          <code><anno>TupleList2</anno></code> 必须已经从小到大排序, 当两个元组相等，来自<code><anno>TupleList1</anno></code> 放在<code><anno>TupleList2</anno></code>的前面.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="4" id="keyreplace/4" name="keyreplace">keyreplace(Key, N, TupleList1, NewTuple) -> TupleList2</h3>
+      <div class="type_desc">      Key = term(),<br/>      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple],<br/>      NewTuple = Tuple,<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a copy of <code><anno>TupleList1</anno></code> where the first
+          occurrence of a <code>T</code> tuple whose <code><anno>N</anno></code>th element
+          compares equal to <code><anno>Key</anno></code> is replaced with
+          <code><anno>NewTuple</anno></code>, if there is such a tuple <code>T</code>.</p>
+        <p>如果可以的话，将<code><anno>TupleList1</anno></code>中首个第<code><anno>N</anno></code>元素与<code><anno>Key</anno></code>相等的元组<code>T</code>替换成<code><anno>NewTuple</anno></code>, 返回处理后的列表副本. </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="keysearch/3">keysearch(Key, N, TupleList) -> {value, Tuple} | false</h3>
+      <type>
+        <div class="type_desc">Key = term()</div>
+        <div class="type_desc">N = 1..tuple_size(Tuple)</div>
+        <div class="type_desc">TupleList = [Tuple]</div>
+        <div class="type_desc">Tuple = tuple()</div>
+      </type>
+      <div class="discription">
+        <p class="english">Searches the list of tuples <code>TupleList</code> for a
+          tuple whose <code>N</code>th element compares equal to <code>Key</code>.
+          Returns <code>{value, Tuple}</code> if such a tuple is found,
+          otherwise <code>false</code>.</p>
+        <p>在元组列表中<code>TupleList</code>搜索一个第<code>N</code>元素与<code>Key</code>相等的元组。如果找到，返回<code>{value, Tuple}</code>, 否则返回<code>false</code>.</p>
+        <div class="note">
+          <h2>Note:<br/></h2>
+          <p>This function is retained for backward compatibility.
+      The function <c>lists:keyfind/3</c> (introduced in R13A)
+      is in most cases more convenient.</p>
+          <p>保留这个函数是为了向后兼容.
+      函数<c>lists:keyfind/3</c> (在R13A中引入)
+      在大多数情况下更方便.</p>
+        </div>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="keysort/2" name="keysort">keysort(N, TupleList1) -> TupleList2</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple],<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a list containing the sorted elements of the list
+          <code><anno>TupleList1</anno></code>. Sorting is performed on the <code><anno>N</anno></code>th
+          element of the tuples. The sort is stable.</p>
+        <p>将元组列表<code><anno>TupleList1</anno></code>中的元素排序，返回处理好的列表副本。
+          排序是基于元组的第<code><anno>N</anno></code>个元素进行的. 排序具有稳定性(译注：如果元素A和B中KEY相等，那么它们在新列表中的相对位置不变.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="4" id="keystore/4" name="keystore">keystore(Key, N, TupleList1, NewTuple) -> TupleList2</h3>
+      <div class="type_desc">      Key = term(),<br/>      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple, ...],<br/>      NewTuple = Tuple,<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a copy of <code><anno>TupleList1</anno></code> where the first
+          occurrence of a tuple <code>T</code> whose <code><anno>N</anno></code>th element
+          compares equal to <code><anno>Key</anno></code> is replaced with
+          <code><anno>NewTuple</anno></code>, if there is such a tuple <code>T</code>. If there
+          is no such tuple <code>T</code> a copy of <code><anno>TupleList1</anno></code> where
+          [<code><anno>NewTuple</anno></code>] has been appended to the end is
+          returned.</p>
+        <p>如果可以的话，将<code><anno>TupleList1</anno></code>中首个第<code><anno>N</anno></code>元素与<code><anno>Key</anno></code>相等的元组<code>T</code>替换成<code><anno>NewTuple</anno></code>, 返回处理后的列表副本. 如果不存在这样的<code>T</code>，则返回将[<code><anno>NewTuple</anno></code>]追加到<code><anno>TupleList1</anno></code>后的新列表</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="keytake/3" name="keytake">keytake(Key, N, TupleList1) -> {value, Tuple, TupleList2} | false</h3>
+      <div class="type_desc">      Key = term(),<br/>      N = pos_integer(),<br/>      TupleList1 = [tuple()],<br/>      TupleList2 = [tuple()],<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Searches the list of tuples <code><anno>TupleList1</anno></code> for a tuple
+          whose <code><anno>N</anno></code>th element compares equal to <code><anno>Key</anno></code>.
+          Returns <code>{value, <anno>Tuple</anno>, <anno>TupleList2</anno>}</code> if such a tuple is
+          found, otherwise <code>false</code>. <code><anno>TupleList2</anno></code> is a copy
+          of <code><anno>TupleList1</anno></code> where the first occurrence of
+          <code><anno>Tuple</anno></code> has been removed.</p>
+        <p>在列表<code><anno>TupleList1</anno></code>中搜索一个第<code><anno>N</anno></code>元素与<code><anno>Key</anno></code>相等的元组.
+          如果找到这样一个元组，返回<code>{value, <anno>Tuple</anno>, <anno>TupleList2</anno>}</code>, 否则返回<code>false</code>. <code><anno>TupleList2</anno></code> 是<code><anno>TupleList1</anno></code>剔除了第一个遇到的<code><anno>Tuple</anno></code>后的副本。</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="last/1" name="last">last(List) -> Last</h3>
+      <div class="type_desc">      List = [T,...],<br/>      Last = T,<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the last element in <code><anno>List</anno></code>.</p>
+        <p>返回列表<code><anno>List</anno></code>的最后一个元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="map/2" name="map">map(Fun, List1) -> List2</h3>
+      <div class="type_desc">      Fun = fun((A) -> B),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english">Takes a function from <code><anno>A</anno></code>s to <code><anno>B</anno></code>s, and a list of
+          <code><anno>A</anno></code>s and produces a list of <code><anno>B</anno></code>s by applying
+          the function to every element in the list. This function is
+          used to obtain the return values. The evaluation order is
+          implementation dependent.</p>
+        <p>'map'以一个从元素<code><anno>A</anno></code> 至元素<code><anno>B</anno></code>的映射函数和一个<code><anno>A</anno></code>的列表作为参数，将映射函数应用于列表中的每个元素而生成一个<code><anno>B</anno></code>的列表.该函数用于收集返回结果. 具体计算顺序依赖于实现.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="mapfoldl/3" name="mapfoldl">mapfoldl(Fun, Acc0, List1) -> {List2, Acc1}</h3>
+      <div class="type_desc">      Fun = fun((A, AccIn) -> {B, AccOut}),<br/>      Acc0 = term(),<br/>      Acc1 = term(),<br/>      AccIn = term(),<br/>      AccOut = term(),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english"><code>mapfoldl</code> combines the operations of <code>map/2</code> and
+          <code>foldl/3</code> into one pass. An example, summing
+          the elements in a list and double them at the same time:</p>
+        <p><code>mapfoldl</code> 将<code>map/2</code> 和 <code>foldl/3</code> 合并成一个操作. 例如对列表求和的同时将每个元素加倍:</p>
+        <pre>
+> <span>lists:mapfoldl(fun(X, Sum) -> {2*X, X+Sum} end,</span><span>0, [1,2,3,4,5]).</span>
+{[2,4,6,8,10],15}</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="mapfoldr/3" name="mapfoldr">mapfoldr(Fun, Acc0, List1) -> {List2, Acc1}</h3>
+      <div class="type_desc">      Fun = fun((A, AccIn) -> {B, AccOut}),<br/>      Acc0 = term(),<br/>      Acc1 = term(),<br/>      AccIn = term(),<br/>      AccOut = term(),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english"><code>mapfoldr</code> 将<code>map/2</code>和 <code>foldr/3</code> 合并成一个操作.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="max/1" name="max">max(List) -> Max</h3>
+      <div class="type_desc">      List = [T,...],<br/>      Max = T,<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the first element of <code><anno>List</anno></code> that compares
+          greater than or equal to all other elements of
+          <code><anno>List</anno></code>.</p>
+        <p>返回<code><anno>List</anno></code>中第一个最大的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="member/2">member(Elem, List) -> boolean()</h3>
+      <type>
+        <div class="type_desc">Elem = term()</div>
+        <div class="type_desc">List = [term()]</div>
+      </type>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code>Elem</code> matches some element of
+          <code>List</code>, otherwise <code>false</code>.</p>
+        <p>如果<code>Elem</code>与<code>List</code>中的某些元素匹配返回<code>true</code>, 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="merge/1" name="merge">merge(ListOfLists) -> List1</h3>
+      <div class="type_desc">      ListOfLists = [List],<br/>      List = [T],<br/>      List1 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging all the sub-lists
+          of <code><anno>ListOfLists</anno></code>. All sub-lists must be sorted prior to
+          evaluating this function. When two elements compare equal,
+          the element from the sub-list with the lowest position in
+          <code><anno>ListOfLists</anno></code> is picked before the other element.</p>
+        <p>返回将<code><anno>ListOfLists</anno></code>归并(已排序）后的列表。为了正确实现这个功能，所有的子列表必须从小到大排序. 当两个元素相等, 来自<code><anno>ListOfLists</anno></code>中最低位子列表的元素将会放在前面.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="merge/2" name="merge">merge(List1, List2) -> List3</h3>
+      <div class="type_desc">      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [(X | Y)],<br/>      X = term(),<br/>      Y = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
+          <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
+          sorted prior to evaluating this function. When two elements
+          compare equal, the element from <code><anno>List1</anno></code> is picked
+          before the element from <code><anno>List2</anno></code>.</p>
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表. 为了正确实现这个功能，<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经从小到大排序. 当两个元素相等,来自<code><anno>List1</anno></code>的元素将放在<code><anno>List2</anno></code>的元素之前.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="merge/3" name="merge">merge(Fun, List1, List2) -> List3</h3>
+      <div class="type_desc">      Fun = fun((A, B) -> boolean()),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      List3 = [(A | B)],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
+          <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
+          sorted according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code> prior to evaluating this function. <code><anno>Fun</anno>(<anno>A</anno>,
+          <anno>B</anno>)</code> should return <code>true</code> if <code><anno>A</anno></code> compares less
+          than or equal to <code><anno>B</anno></code> in the ordering, <code>false</code>
+          otherwise. When two elements compare equal, the element from
+          <code><anno>List1</anno></code> is picked before the element from
+          <code><anno>List2</anno></code>.</p>
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code> 按从小到大的顺序完成排序. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
+          <anno>B</anno>)</code> 应该当<code><anno>A</anno></code>小于<code><anno>B</anno></code>时返回<code>true</code> , 否则返回<code>false</code>.归并中当两个元素相等时, 来自 <code><anno>List1</anno></code> 的元素被放在
+          <code><anno>List2</anno></code>的元素之前.</p>
+      </div>
+    </div>
+    <div class="function"><h3 arity="3" id="merge3/3" name="merge3">merge3(List1, List2, List3) -> List4</h3><div class="type_desc">      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [Z],<br/>      List4 = [(X | Y | Z)],<br/>      X = term(),<br/>      Y = term(),<br/>      Z = term()</div> <div class="discription"><p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> and <code><anno>List3</anno></code>. All of <code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> and <code><anno>List3</anno></code> must be sorted prior to
+          evaluating this function. When two elements compare equal,
+          the element from <code><anno>List1</anno></code>, if there is such an element,
+          is picked before the other element, otherwise the element
+          from <code><anno>List2</anno></code> is picked before the element from
+          <code><anno>List3</anno></code>.</p><p>返回将<code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> 和 <code><anno>List3</anno></code>归并(已排序）后的列表. 为了实现这个功能<code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> 和 <code><anno>List3</anno></code> 都必须事先按照从小到达的顺序完成排序。当两个元素相等时，如果该元素是来自<code><anno>List1</anno></code>那么它放放在其他元素之前，如果这个元素来自<code><anno>List2</anno></code>列表，那么它放在<code><anno>List3</anno></code>类表的元素前面 .</p></div></div>
+    <div class="function">
+      <h3 arity="1" id="min/1" name="min">min(List) -> Min</h3>
+      <div class="type_desc">      List = [T,...],<br/>      Min = T,<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the first element of <code><anno>List</anno></code> that compares
+          less than or equal to all other elements of
+          <code><anno>List</anno></code>.</p>
+        <p>返回<code><anno>List</anno></code>中第一个最小的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="nth/2" name="nth">nth(N, List) -> Elem</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      List = [T,...],<br/>      Elem = T,<br/>      T = term()</div>
+      <type_desc variable="N">1..length(<anno>List</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns the <code><anno>N</anno></code>th element of <code><anno>List</anno></code>. For example:</p>
+        <p>返回<code><anno>List</anno></code>中第<code><anno>N</anno></code>个元素. 例如:</p>
+        <pre>
+> <span>lists:nth(3, [a, b, c, d, e]).</span>
+c</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="nthtail/2" name="nthtail">nthtail(N, List) -> Tail</h3>
+      <div class="type_desc">      N = non_neg_integer(),<br/>      List = [T,...],<br/>      Tail = [T],<br/>      T = term()</div>
+      <type_desc variable="N">0..length(<anno>List</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns the <code><anno>N</anno></code>th tail of <code><anno>List</anno></code>, that is, the sublist of
+          <code><anno>List</anno></code> starting at <code><anno>N</anno>+1</code> and continuing up to
+          the end of the list. For example:</p>
+        <p>返回<code><anno>List</anno></code>的第<code><anno>N</anno></code>个尾部列表,该尾部列表是由<code><anno>List</anno></code>从第<code><anno>N</anno>+1</code>个元素开始一直到列表结束的所有元素组成. 例如:</p>
+        <pre>
+> <span>lists:nthtail(3, [a, b, c, d, e]).</span>
+[d,e]
+> <span>tl(tl(tl([a, b, c, d, e]))).</span>
+[d,e]
+> <span>lists:nthtail(0, [a, b, c, d, e]).</span>
+[a,b,c,d,e]
+> <span>lists:nthtail(5, [a, b, c, d, e]).</span>
+[]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="partition/2" name="partition">partition(Pred, List) -> {Satisfying, NotSatisfying}</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List = [T],<br/>      Satisfying = [T],<br/>      NotSatisfying = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Partitions <code><anno>List</anno></code> into two lists, where the first list
+          contains all elements for which <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns
+          <code>true</code>, and the second list contains all elements for
+          which <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns <code>false</code>.</p>
+        <p>将<code><anno>List</anno></code>划分成两个列表, 第一个列表包涵了所有使<code><anno>Pred</anno>(<anno>Elem</anno>)</code>返回
+          <code>true</code>的元素, 第二个列表包涵了所有使<code><anno>Pred</anno>(<anno>Elem</anno>)</code>返回<code>false</code>的元素.</p>
+        <p class="english">Examples:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:partition(fun(A) -> A rem 2 == 1 end, [1,2,3,4,5,6,7]).</span>
+{[1,3,5,7],[2,4,6]}
+> <span>lists:partition(fun(A) -> is_atom(A) end, [a,b,1,c,d,2,3,4,e]).</span>
+{[a,b,c,d,e],[1,2,3,4]}</pre>
+        <p class="english">See also <code>splitwith/2</code> for a different way to partition
+          a list.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="prefix/2" name="prefix">prefix(List1, List2) -> boolean()</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>List1</anno></code> is a prefix of
+          <code><anno>List2</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>List1</anno></code>是<code><anno>List2</anno></code>的前缀,返回<code>true</code>, 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="reverse/1" name="reverse">reverse(List1) -> List2</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list with the elements in <code><anno>List1</anno></code>
+          in reverse order.</p>
+        <p>返回将<code><anno>List1</anno></code>中元素顺序反转后的列表.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="reverse/2">reverse(List1, Tail) -> List2</h3>
+      <type>
+        <div class="type_desc">List1 = Tail = List2 = [term()]</div>
+      </type>
+      <div class="discription">
+        <p class="english">Returns a list with the elements in <code>List1</code>
+          in reverse order, with the tail <code>Tail</code> appended. For
+          example:</p>
+        <p>返回将<code>List1</code>中元素顺序反转后 附加上<code>Tail</code>的列表. 例如:</p>
+        <pre>
+> <span>lists:reverse([1, 2, 3, 4], [a, b, c]).</span>
+[4,3,2,1,a,b,c]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="seq/2" name="seq">seq(From, To) -> Seq</h3>
+      <div class="type_desc">      From = integer(),<br/>      To = integer(),<br/>      Seq = [integer()]</div>
+      <name arity="3" name="seq"/>
+      <div class="discription">
+        <p class="english">Returns a sequence of integers which starts with <code><anno>From</anno></code>
+          and contains the successive results of adding <code><anno>Incr</anno></code> to
+          the previous element, until <code><anno>To</anno></code> has been reached or
+          passed (in the latter case, <code><anno>To</anno></code> is not an element of
+          the sequence). <code><anno>Incr</anno></code> defaults to 1.</p>
+        <p>返回一个整数序列， 该序列从<code><anno>From</anno></code>开始，每个元素都是由前一个元素加上<code><anno>Incr</anno></code>得来, 直到等于或大于<code><anno>To</anno></code>(当大于时，<code><anno>To</anno></code>不包含在序列中）. <code><anno>Incr</anno></code> 默认值为1.</p>
+        <p class="english">Failure: If <code><anno>To</anno>&lt;<anno>From</anno>-<anno>Incr</anno></code> and <code><anno>Incr</anno></code>
+          is positive, or if <code><anno>To</anno>><anno>From</anno>-<anno>Incr</anno></code> and <code><anno>Incr</anno></code> is
+          negative, or if <code><anno>Incr</anno>==0</code> and <code><anno>From</anno>/=<anno>To</anno></code>.</p>
+        <p>失败条件: 如果<code><anno>To</anno>&lt;<anno>From</anno>-<anno>Incr</anno></code> 且<code><anno>Incr</anno></code>
+          为正值, 或者如果<code><anno>To</anno>><anno>From</anno>-<anno>Incr</anno></code>且 <code><anno>Incr</anno></code> 是负值, 或者如果 <code><anno>Incr</anno>==0</code> 且 <code><anno>From</anno>/=<anno>To</anno></code>.</p>
+        <p class="english">The following equalities hold for all sequences:</p>
+        <p>下面等式对所有序列成立:</p>
+        <pre>
+length(lists:seq(From, To)) == To-From+1
+length(lists:seq(From, To, Incr)) == (To-From+Incr) div Incr</pre>
+        <p class="english">Examples:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:seq(1, 10).</span>
+[1,2,3,4,5,6,7,8,9,10]
+> <span>lists:seq(1, 20, 3).</span>
+[1,4,7,10,13,16,19]
+> <span>lists:seq(1, 0, 1).</span>
+[]
+> <span>lists:seq(10, 6, 4).</span>
+[]
+> <span>lists:seq(1, 1, 0).</span>
+[1]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="sort/1" name="sort">sort(List1) -> List2</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list containing the sorted elements of
+          <code><anno>List1</anno></code>.</p>
+        <p>返回一个将<code><anno>List1</anno></code>所有元素排序后的列表.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="sort/2" name="sort">sort(Fun, List1) -> List2</h3>
+      <div class="type_desc">      Fun = fun((A = T, B = T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list containing the sorted elements of
+          <code><anno>List1</anno></code>, according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code>. <code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> should return <code>true</code> if
+          <code><anno>A</anno></code> compares less than or equal to <code><anno>B</anno></code> in the
+          ordering, <code>false</code> otherwise.</p>
+        <p>根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code>返回一个将<code><anno>List1</anno></code>所有元素排序后的列表. 排序中<code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> 应该在<code><anno>A</anno></code> 小于或等于<code><anno>B</anno></code>时返回<code>true</code>, 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="split/2" name="split">split(N, List1) -> {List2, List3}</h3>
+      <div class="type_desc">      N = non_neg_integer(),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      List3 = [T],<br/>      T = term()</div>
+      <type_desc variable="N">0..length(<anno>List1</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Splits <code><anno>List1</anno></code> into <code><anno>List2</anno></code> and <code><anno>List3</anno></code>.
+          <code><anno>List2</anno></code> contains the first <code><anno>N</anno></code> elements and
+          <code><anno>List3</anno></code> the rest of the elements (the <code><anno>N</anno></code>th tail).</p>
+        <p>将<code><anno>List1</anno></code> 分离成 <code><anno>List2</anno></code> 和 <code><anno>List3</anno></code>.
+          <code><anno>List2</anno></code> 包涵前<code><anno>N</anno></code> 个元素, 
+          <code><anno>List3</anno></code> 包涵剩下的元素(也就是第<code><anno>N</anno></code>个尾部列表).</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="splitwith/2" name="splitwith">splitwith(Pred, List) -> {List1, List2}</h3>
+      <div class="type_desc">      Pred = fun((T) -> boolean()),<br/>      List = [T],<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Partitions <code><anno>List</anno></code> into two lists according to
+          <code><anno>Pred</anno></code>. <code>splitwith/2</code> behaves as if it is defined
+          as follows:</p>
+        <p>根据<code><anno>Pred</anno></code>将<code><anno>List</anno></code>划分成两个列表. <code>splitwith/2</code> 的行为也可以定义成:</p>
+        <pre>
+splitwith(Pred, List) ->
+    {takewhile(Pred, List), dropwhile(Pred, List)}.</pre>
+        <p class="english">Examples:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:splitwith(fun(A) -> A rem 2 == 1 end, [1,2,3,4,5,6,7]).</span>
+{[1],[2,3,4,5,6,7]}
+> <span>lists:splitwith(fun(A) -> is_atom(A) end, [a,b,1,c,d,2,3,4,e]).</span>
+{[a,b],[1,c,d,2,3,4,e]}</pre>
+        <p class="english">See also <code>partition/2</code> for a different way to partition
+          a list.</p>
+        <p>也请参考使用<code>partition/2</code>作为另一种划分列表的方法.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="sublist/2" name="sublist">sublist(List1, Len) -> List2</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      Len = non_neg_integer(),<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sub-list of <code><anno>List1</anno></code> starting at position 1
+          and with (max) <code><anno>Len</anno></code> elements. It is not an error for
+          <code><anno>Len</anno></code> to exceed the length of the list -- in that case
+          the whole list is returned.</p>
+        <p>返回从<code><anno>List1</anno></code>的第一个位置开始、最长长度为<code><anno>Len</anno></code>的连续子列表。
+          <code><anno>Len</anno></code>大于列表长度并不是错误, 这种情况下返回整个列表.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="sublist/3" name="sublist">sublist(List1, Start, Len) -> List2</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      Start = pos_integer(),<br/>      Len = non_neg_integer(),<br/>      T = term()</div>
+      <type_desc variable="Start">1..(length(<anno>List1</anno>)+1)</type_desc>
+      <div class="discription">
+        <p class="english">Returns the sub-list of <code><anno>List1</anno></code> starting at <code><anno>Start</anno></code>
+          and with (max) <code><anno>Len</anno></code> elements. It is not an error for
+          <code><anno>Start</anno>+<anno>Len</anno></code> to exceed the length of the list.</p>
+        <p>返回从<code><anno>List1</anno></code>位置<code><anno>Start</anno></code>开始、最长长度为<code><anno>Len</anno></code>的连续子列表。
+            <code><anno>Start</anno></code>+<code><anno>Len</anno></code>大于列表长度并不是错误.</p>
+        <pre>
+> <span>lists:sublist([1,2,3,4], 2, 2).</span>
+[2,3]
+> <span>lists:sublist([1,2,3,4], 2, 5).</span>
+[2,3,4]
+> <span>lists:sublist([1,2,3,4], 5, 2).</span>
+[]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="subtract/2" name="subtract">subtract(List1, List2) -> List3</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      List3 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a new list <code><anno>List3</anno></code> which is a copy of
+          <code><anno>List1</anno></code>, subjected to the following procedure: for each
+          element in <code><anno>List2</anno></code>, its first occurrence in <code><anno>List1</anno></code>
+          is deleted. For example:</p>
+        <p>返回<code><anno>List1</anno></code>列表的副本<code><anno>List3</anno></code>.该副本列表按照如下规则创建:
+          将<code><anno>List2</anno></code>中的每个元素依次作为目标元素与列表<code><anno>List1</anno></code>进行匹配，删除<code><anno>List1</anno></code>中首个与目标元素相等的元素. 例如:</p>
+        <pre>
+> <span>lists:subtract("123212", "212").</span>
+"312".</pre>
+        <p class="english"><code>lists:subtract(A, B)</code> is equivalent to <code>A -- B</code>.</p>
+        <p><code>lists:subtract(A, B)</code> 等同于<code>A -- B</code>.</p>
+        <div class="warning">
+          <h2>Warning:<br/></h2>
+          <p class="english">The complexity of <c>lists:subtract(A, B)</c> is proportional
+	to <c>length(A)*length(B)</c>, meaning that it will be very slow if
+	both <c>A</c> and <c>B</c> are long lists.
+	(Using ordered lists and
+	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>
+    is a much better choice if both lists are long.)</p>
+          <p><c>lists:subtract(A, B)</c>的时间复杂度与<c>length(A)*length(B)</c>成正比，则意味着它可能在<c>A</c> 和 <c>B</c>是长列表时变得很慢。 (如果两个列表很长，最好使用有序列表 和
+	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>.)</p>
+        </div>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="suffix/2" name="suffix">suffix(List1, List2) -> boolean()</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>List1</anno></code> is a suffix of
+          <code><anno>List2</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>List1</anno></code>是 <code><anno>List2</anno></code>的后缀,返回<code>true</code>, 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="sum/1" name="sum">sum(List) -> number()</h3>
+      <div class="type_desc">      List = [number()]</div>
+      <div class="discription">
+        <p class="english">Returns the sum of the elements in <code><anno>List</anno></code>.</p>
+        <p>返回列表<code><anno>List</anno></code>元素的和.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="takewhile/2" name="takewhile">takewhile(Pred, List1) -> List2</h3>
+      <div class="type_desc">      Pred = fun((Elem = T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Takes elements <code><anno>Elem</anno></code> from <code><anno>List1</anno></code> while
+          <code><anno>Pred</anno>(<anno>Elem</anno>)</code> returns <code>true</code>, that is,
+          the function returns the longest prefix of the list for which
+          all elements satisfy the predicate.</p>
+        <p>从<code><anno>List1</anno></code>开始处(连续)提取使<code><anno>Pred</anno>(<anno>Elem</anno>)</code>返回<code>true</code>元素<code><anno>Elem</anno></code>(一直到Pred返回假）, 也就是说,该函数返回满足断言的最长前缀列表 .</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="ukeymerge/3" name="ukeymerge">ukeymerge(N, TupleList1, TupleList2) -> TupleList3</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      TupleList1 = [T1],<br/>      TupleList2 = [T2],<br/>      TupleList3 = [(T1 | T2)],<br/>      T1 = Tuple,<br/>      T2 = Tuple,<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>TupleList1</anno></code>
+          and <code><anno>TupleList2</anno></code>. The merge is performed on the
+          <code><anno>N</anno></code>th element of each tuple. Both <code><anno>TupleList1</anno></code> and
+          <code><anno>TupleList2</anno></code> must be key-sorted without duplicates
+          prior to evaluating this function. When two tuples compare
+          equal, the tuple from <code><anno>TupleList1</anno></code> is picked and the
+          one from <code><anno>TupleList2</anno></code> deleted.</p>
+        <p>返回将<code><anno>TupleList1</anno></code> 和 <code><anno>TupleList2</anno></code>归并（已排序）后的列表. 归并操作是基于元组的第<code><anno>N</anno></code>个元素进行的. 为了正确实现这个功能<code><anno>TupleList1</anno></code> 和 <code><anno>TupleList2</anno></code>必须是已从小到达排序且无重复项的列表. 当归并操作中需要比较的两个元素相等时, 来自<code><anno>TupleList1</anno></code> 的元素将被选中，而<code><anno>TupleList2</anno></code>的元素将被删除.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="ukeysort/2" name="ukeysort">ukeysort(N, TupleList1) -> TupleList2</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      TupleList1 = [Tuple],<br/>      TupleList2 = [Tuple],<br/>      Tuple = tuple()</div>
+      <type_desc variable="N">1..tuple_size(<anno>Tuple</anno>)</type_desc>
+      <div class="discription">
+        <p class="english">Returns a list containing the sorted elements of the list
+          <code><anno>TupleList1</anno></code> where all but the first tuple of the
+          tuples comparing equal have been deleted. Sorting is
+          performed on the <code><anno>N</anno></code>th element of the tuples.</p>
+        <p>返回将<code><anno>TupleList1</anno></code>排序后的列表，在排序比较中，如果两个KEY元素相等删除第一个元组. 排序基于元组的第<code><anno>N</anno></code>元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="umerge/1" name="umerge">umerge(ListOfLists) -> List1</h3>
+      <div class="type_desc">      ListOfLists = [List],<br/>      List = [T],<br/>      List1 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging all the sub-lists
+          of <code><anno>ListOfLists</anno></code>. All sub-lists must be sorted and
+          contain no duplicates prior to evaluating this function.
+          When two elements compare equal, the element from the
+          sub-list with the lowest position in <code><anno>ListOfLists</anno></code> is
+          picked and the other one deleted.</p>
+        <p>将<code><anno>ListOfLists</anno></code>所有子列表归并成一个已排序的列表. 为了实现这个功能，所有子列表必须已经从小到大排序并且无重复项. 归并过程中当两个元素相等时, 选取<code><anno>ListOfLists</anno></code>低位置子列表的元素，删除另外一个.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="umerge/2" name="umerge">umerge(List1, List2) -> List3</h3>
+      <div class="type_desc">      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [(X | Y)],<br/>      X = term(),<br/>      Y = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
+          <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
+          sorted and contain no duplicates prior to evaluating this
+          function. When two elements compare equal, the element from
+          <code><anno>List1</anno></code> is picked and the one from <code><anno>List2</anno></code>
+          deleted.</p>
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表. 为了正确实现这个功能，<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经从小到大排序且无重复项.当归并操作中需要比较的两个元素相等时, 来自<code><anno>TupleList1</anno></code> 的元素将被选中，而<code><anno>TupleList2</anno></code>的元素将被删除.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="umerge/3" name="umerge">umerge(Fun, List1, List2) -> List3</h3>
+      <div class="type_desc">      Fun = fun((A, B) -> boolean()),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      List3 = [(A | B)],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
+          <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
+          sorted according to the <seealso marker="#ordering_function">ordering function</seealso><code>Fun</code> and contain no duplicates prior to evaluating
+          this function. <code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> should return <code>true</code> if
+          <code><anno>A</anno></code> compares less than or equal to <code><anno>B</anno></code> in the
+          ordering, <code>false</code> otherwise. When two elements compare
+          equal, the element from
+          <code><anno>List1</anno></code> is picked and the one from <code><anno>List2</anno></code>
+          deleted.</p>
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能，<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code> 按从小到大的顺序完成排序并且无重复项. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
+          <anno>B</anno>)</code> 应该当<code><anno>A</anno></code>小于<code><anno>B</anno></code>时返回<code>true</code> , 否则返回<code>false</code>.归并中当两个元素相等时, 选取<code><anno>List1</anno></code> 的元素, 而删除<code><anno>List2</anno></code>的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="umerge3/3" name="umerge3">umerge3(List1, List2, List3) -> List4</h3>
+      <div class="type_desc">      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [Z],<br/>      List4 = [(X | Y | Z)],<br/>      X = term(),<br/>      Y = term(),<br/>      Z = term()</div>
+      <div class="discription">
+        <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> and <code><anno>List3</anno></code>. All of <code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> and <code><anno>List3</anno></code> must be sorted and contain no
+          duplicates prior to evaluating this function. When two
+          elements compare equal, the element from <code><anno>List1</anno></code> is
+          picked if there is such an element, otherwise the element
+          from <code><anno>List2</anno></code> is picked, and the other one deleted.</p>
+        <p>返回将<code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> 和 <code><anno>List3</anno></code>归并(已排序）后的列表. 为了实现这个功能<code><anno>List1</anno></code>,
+          <code><anno>List2</anno></code> 和 <code><anno>List3</anno></code> 都必须事先按照从小到达的顺序完成排序且无重复项。当两个元素相等时，如果有元素是来自<code><anno>List1</anno></code>那么选取它，否则如果有元素来自<code><anno>List2</anno></code>列表则选取它，其他的元素被删除.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="unzip/1" name="unzip">unzip(List1) -> {List2, List3}</h3>
+      <div class="type_desc">      List1 = [{A, B}],<br/>      List2 = [A],<br/>      List3 = [B],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription">
+        <p class="english">"Unzips" a list of two-tuples into two lists, where the first
+          list contains the first element of each tuple, and the second
+          list contains the second element of each tuple.</p>
+        <p>"解压"一个二元元组列表到两个列表, 这两个列表第一个存放每个元组的第一个元素，另一个列表存放每个元组的第二个元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="unzip3/1" name="unzip3">unzip3(List1) -> {List2, List3, List4}</h3>
+      <div class="type_desc">      List1 = [{A, B, C}],<br/>      List2 = [A],<br/>      List3 = [B],<br/>      List4 = [C],<br/>      A = term(),<br/>      B = term(),<br/>      C = term()</div>
+      <div class="discription">
+        <p class="english">"Unzips" a list of three-tuples into three lists, where
+          the first list contains the first element of each tuple,
+          the second list contains the second element of each tuple, and
+          the third list contains the third element of each tuple.</p>
+        <p>"解压"一个三元元组列表到三个列表，这三个列表
+          第一个存放每个元组的第一个元素，
+          第二个存放每个元组的第二个元素，
+          第三个存放每个元组的第三个元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="usort/1" name="usort">usort(List1) -> List2</h3>
+      <div class="type_desc">      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list containing the sorted elements of
+          <code><anno>List1</anno></code> where all but the first element of the elements
+          comparing equal have been deleted.</p>
+        <p>返回一个将<code><anno>List1</anno></code>排好序、无重复元素列表. (在原列表中如果两个元素相等，删除第一个元素.)</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="usort/2" name="usort">usort(Fun, List1) -> List2</h3>
+      <div class="type_desc">      Fun = fun((T, T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Returns a list which contains the sorted elements of
+          <code><anno>List1</anno></code> where all but the first element of the elements
+          comparing equal according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code> have been deleted. <code><anno>Fun</anno>(A, B)</code> should return
+          <code>true</code> if <code>A</code> compares less than or equal to
+          <code>B</code> in the ordering, <code>false</code> otherwise.</p>
+        <p>返回一个将<code><anno>List1</anno></code>按<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code>排好序、无重复元素列表. (在原列表中如果两个元素相等，删除第一个元素.)
+          在排序中如果<code>A</code> 小于或等于 <code>B</code>, <code><anno>Fun</anno>(A, B)</code>返回<code>true</code> ,否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="zip/2" name="zip">zip(List1, List2) -> List3</h3>
+      <div class="type_desc">      List1 = [A],<br/>      List2 = [B],<br/>      List3 = [{A, B}],<br/>      A = term(),<br/>      B = term()</div>
+      <div class="discription"><p class="english">"Zips" two lists of equal length into one list of two-tuples,
+          where the first element of each tuple is taken from the first
+          list and the second element is taken from corresponding
+          element in the second list.</p><p>将两个长度相等的列表"压缩"成一个由二元元组构成的列表,在每个二元元组中第一个元素来自第一个列表，第二个元素来自第二个列表中的同样位置.</p> </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="zip3/3" name="zip3">zip3(List1, List2, List3) -> List4</h3>
+      <div class="type_desc">      List1 = [A],<br/>      List2 = [B],<br/>      List3 = [C],<br/>      List4 = [{A, B, C}],<br/>      A = term(),<br/>      B = term(),<br/>      C = term()</div>
+      <div class="discription">
+        <p class="english">"Zips" three lists of equal length into one list of
+          three-tuples, where the first element of each tuple is taken
+          from the first list, the second element is taken from
+          corresponding element in the second list, and the third
+          element is taken from the corresponding element in the third
+          list.</p>
+        <p>将三个长度相等的列表"压缩"成一个由三元元组构成的列表,在每个三元元组中第一个元素来自第一个列表，第二个元素来自第二个列表中的同样位置, 第三个元素来自第三个列表中的同样位置.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="zipwith/3" name="zipwith">zipwith(Combine, List1, List2) -> List3</h3>
+      <div class="type_desc">      Combine = fun((X, Y) -> T),<br/>      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [T],<br/>      X = term(),<br/>      Y = term(),<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Combine the elements of two lists of equal length into one
+          list. For each pair <code><anno>X</anno>, <anno>Y</anno></code> of list elements from the two
+          lists, the element in the result list will be
+          <code><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>)</code>.</p>
+        <p>合并两个长度相等的列表. 对于每个来自两列表的<code><anno>X</anno>, <anno>Y</anno></code>对,在结果列表中的元素是 
+          <code><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>)</code>的返回值.</p>
+        <p class="english"><code>zipwith(fun(X, Y) -> {X,Y} end, List1, List2)</code> is
+          equivalent to <code>zip(List1, List2)</code>.</p>
+        <p><code>zipwith(fun(X, Y) -> {X,Y} end, List1, List2)</code> 等同于
+          <code>zip(List1, List2)</code>.</p>
+        <p class="english">Example:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:zipwith(fun(X, Y) -> X+Y end, [1,2,3], [4,5,6]).</span>
+[5,7,9]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="4" id="zipwith3/4" name="zipwith3">zipwith3(Combine, List1, List2, List3) -> List4</h3>
+      <div class="type_desc">      Combine = fun((X, Y, Z) -> T),<br/>      List1 = [X],<br/>      List2 = [Y],<br/>      List3 = [Z],<br/>      List4 = [T],<br/>      X = term(),<br/>      Y = term(),<br/>      Z = term(),<br/>      T = term()</div>
+      <div class="discription">
+        <p class="english">Combine the elements of three lists of equal length into one
+          list. For each triple <code><anno>X</anno>, <anno>Y</anno>, <anno>Z</anno></code> of list elements from
+          the three lists, the element in the result list will be
+          <code><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>, <anno>Z</anno>)</code>.</p>
+        <p>合并三个长度相等的列表. 对于每个来自三列表的<code><anno>X</anno>, <anno>Y</anno></code>, <anno>Z</anno>对,在结果列表中的元素是 
+          <code><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>, <anno>Z</anno>)</code>的返回值.</p>
+        <p class="english"><code>zipwith3(fun(X, Y, Z) -> {X,Y,Z} end, List1, List2, List3)</code> is equivalent to <code>zip3(List1, List2, List3)</code>.</p>
+        <p><code>zipwith3(fun(X, Y, Z) -> {X,Y,Z} end, List1, List2, List3)</code> 等同于<code>zip3(List1, List2, List3)</code>.</p>
+        <p class="english">Examples:</p>
+        <p>示例:</p>
+        <pre>
+> <span>lists:zipwith3(fun(X, Y, Z) -> X+Y+Z end, [1,2,3], [4,5,6], [7,8,9]).</span>
+[12,15,18]
+> <span>lists:zipwith3(fun(X, Y, Z) -> [X,Y,Z] end, [a,b,c], [x,y,z], [1,2,3]).</span>
+[[a,x,1],[b,y,2],[c,z,3]]</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

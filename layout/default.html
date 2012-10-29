@@ -4,20 +4,29 @@
   <head>
     <meta charset="utf-8" />
     <title>erldos.cn</title>
-    <link type="text/css" rel="stylesheet" href="erldocs.css" />
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
   </head>
   <body>
 
     <div id="sidebar" class="inactive">
-      <!--<input type="text" id="search" autocomplete="off"-->
-             <!--placeholder="press TAB to search" />-->
-      <!--<ul id="results"> </ul>-->
-      here will be a sidebar
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
     </div>
 
     <div id="content">
         {{content}}
     </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
 
   </body>
 </html>

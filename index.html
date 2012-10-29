@@ -9,10 +9,9 @@
   <body>
 
     <div id="sidebar" class="inactive">
-      <!--<input type="text" id="search" autocomplete="off"-->
-             <!--placeholder="press TAB to search" />-->
-      <!--<ul id="results"> </ul>-->
-      here will be a sidebar
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
     </div>
 
     <div id="content" class='main'>
@@ -37,7 +36,7 @@
     <h3>这个站点是怎么建立的？</h3>
     <p>在Dale的帮助下，我在Erlang源代码的目录树中找到了由官方维护的原始文档(xml格式)，为了后期可以方便的维护，直接在xml的副本中进行操作，然后通过我的Perl脚本提取翻译文档和源代码文件中的"-sepc"部分生成静态的html页面。</p>
     <h3>权威性如何?</h3>
-    <p>正如上面提到的本站点的翻译完全是基于Erlang源代码中的文档进行的。可能你和我一样很讨厌某些译文作者自作聪明地修订原文内容, 却曲解或者完全背离了原文的真正意思。所以我们将会逐句翻译，尽量原汁原味(如果我们翻译有误请务必告诉我们)。如果你仍存疑虑，可以在页面中勾选“中英版”, 对照着英文阅读.</p>
+    <p>正如上面提到的本站点的翻译完全是基于Erlang源代码中的文档进行的。可能你和我一样很讨厌某些译文作者自作聪明地修订原文内容, 却曲解或者完全背离了原文的真正意思。所以我们将会逐句翻译，尽量原汁原味(倘若我们翻译有误请务必告诉我们)。</p>
     <h3>我可以帮助翻译么？</h3>
     <p>当然可以！erldocs.cn欢迎任何朋友（无论你的水平如何）加入我们，为Erlang中文社区做贡献。稍后我会写一个具体的合作流程说明，现在如果你想参与进来请直接<a href='mailto:hanliang1990@gmail.com'>联系我</a>。</p>
     <h3>这跟erldocs.com有什么关系?</h3>
@@ -49,5 +48,11 @@
     <p>我是一个无名小卒。完全的Erlang新手, 在学习的过程中我有时候需要翻看Erlang的文档。可能和大多数人一样，我的英文水平一般, 并不能实现“扫一眼就明白”。所以就萌生了做一个中文站点的想法，毕竟我们对中文是非常敏感的，为了方便自己也方便大家erldocs.cn就诞生了。 :)</p>
     </div>
 
+    <script type="text/javascript">
+      var CURRENT_ROOT = "./";
+    </script>
+    <script type="text/javascript" src="./js/jquery.js"></script>
+    <script type="text/javascript" src="./js/erldocs_index.js"></script>
+    <script type="text/javascript" src="./js/erldocs.js"></script>
   </body>
 </html>
