@@ -453,7 +453,9 @@ flatmap(Fun, List1) ->
       <h3 arity="3" id="mapfoldr/3" name="mapfoldr">mapfoldr(Fun, Acc0, List1) -> {List2, Acc1}</h3>
       <div class="type_desc">      Fun = fun((A, AccIn) -> {B, AccOut}),<br/>      Acc0 = term(),<br/>      Acc1 = term(),<br/>      AccIn = term(),<br/>      AccOut = term(),<br/>      List1 = [A],<br/>      List2 = [B],<br/>      A = term(),<br/>      B = term()</div>
       <div class="discription">
-        <p class="english"><code>mapfoldr</code> 将<code>map/2</code>和 <code>foldr/3</code> 合并成一个操作.</p>
+        <p class="english"><code>mapfoldr</code> combines the operations of <code>map/2</code> and
+          <code>foldr/3</code> into one pass.</p>
+        <p><code>mapfoldr</code> 将<code>map/2</code>和 <code>foldr/3</code> 合并成一个操作.</p>
       </div>
     </div>
     <div class="function">

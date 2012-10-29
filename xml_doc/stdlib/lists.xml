@@ -465,7 +465,9 @@ flatmap(Fun, List1) ->
       <name name="mapfoldr" arity="3"/>
       <fsummary>Map and fold in one pass</fsummary>
       <desc>
-        <p><c>mapfoldr</c> 将<c>map/2</c>和 <c>foldr/3</c> 合并成一个操作.</p>
+        <p><c>mapfoldr</c> combines the operations of <c>map/2</c> and
+          <c>foldr/3</c> into one pass.</p>
+        <p_zh><c>mapfoldr</c> 将<c>map/2</c>和 <c>foldr/3</c> 合并成一个操作.</p_zh>
       </desc>
     </func>
     <func>
