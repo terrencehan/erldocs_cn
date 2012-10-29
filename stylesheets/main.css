@@ -438,6 +438,7 @@ h2.modsummary {
 
 .type_desc {
     margin-left:30px;
+    font-size: 13px;
 }
 h3 + .type_desc {
    margin-top:10px;
