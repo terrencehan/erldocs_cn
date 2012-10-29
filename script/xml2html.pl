@@ -1,4 +1,4 @@
-#!/use/bin/env perl
+#!/usr/bin/env perl
 
 use XML::Twig;
 use Data::Dump qw/dump/;
@@ -7,12 +7,24 @@ use File::Find qw/find/;
 use strict;
 use warnings;
 
-my $delete_en = 1;
+my $delete_en = 0;
 
+my $spec_text = read_file('./specs/stdlib/lists.spec');
 
-my $layout   = read_file('./layout.html');
+my @specs = split /\n\n/, $spec_text;
+
+my %spec;
+
+for (@specs) {
+    if (/name:(?<name>.*?)\ndef:(?<def>.*?)\n(types:\n(?<types>.*))?/s) {
+        $spec{ $+{name} }->{def}   = $+{def};
+        $spec{ $+{name} }->{types} = $+{types};
+    }
+}
+
+my $layout   = read_file('./layout/default.html');
 my $res      = $layout;
-my $xml_html = xml_to_html('./lists.xml');
+my $xml_html = xml_to_html('./xml_doc/stdlib/lists.xml');
 
 $res =~ s/{{content}}/$xml_html/;
 
@@ -76,11 +88,40 @@ sub xml_to_html {
             $func->set_att( class => "function" );
 
             my $name = $func->first_child('name');
-            if ( defined $name and defined $name->att('name') ) {
-                my $name_name  = $name->att('name');
-                my $name_arity = $name->att('arity');
+            if ( defined $name ) {
+                if (    $name->att('arity')
+                    and $name->att('name') )
+                {
+                    my $name_name  = $name->att('name');
+                    my $name_arity = $name->att('arity');
+
+                    #$name->delete;
+                    my $str = $spec{ $name_name . '/' . $name_arity }->{def};
+                    $name->set_inner_xml($str);
+                    $name->set_att( id => $name_name . '/' . $name_arity );
+                    $new_node = XML::Twig::Elt->new('div');
+                    $str = $spec{ $name_name . '/' . $name_arity }->{types};
+                    $str =~ s/\n/<br\/>/g;
+                    $new_node->set_inner_xml($str);
+                    $new_node->paste( after => $name );
+                    $new_node->set_att( class => 'type_desc' );
+                }
+                else {    #extract name and type in xml file directely
+                    my $type = $func->first_child('type');
+                    if ( $name->text =~ /(?<fun_name>.*?)\s*\((?<args>.*?)\)/ )
+                    {
+                        my $id = $+{fun_name} . '/' . scalar split /,/,
+                          $+{args};
+                        $name->set_att( id => $id );
+                    }
+                    for ( $type->children('v') ) {
+                        $_->set_tag('div');
+                        $_->set_att( class => 'type_desc' );
+                    }
+                }
+
+                $name->set_tag('h3');
             }
-            $name->delete if defined $name;
 
             my $fsummary = $func->first_child('fsummary');
             $fsummary->delete if defined $fsummary;
@@ -101,29 +142,36 @@ sub xml_to_html {
                     }
                 }
 
-                eval { $_->delete for $desc->children('p') } if $delete_en;
+                eval { $_->delete for $desc->children('p') }
+                  if $delete_en;
 
+                $_->set_att( class => 'english' ) for $desc->children('p');
                 $_->set_tag('p') for $desc->children('p_zh');
                 for ( $desc->children('p') ) {
                     $_->set_tag('code') for $_->children('c');
                 }
 
                 for ( $desc->children('warning') ) {
-                    eval { $_->delete for $_->children('p') } if $delete_en;
+                    $_->set_att( class => 'english' ) for $_->children('p');
+                    eval { $_->delete for $_->children('p') }
+                      if $delete_en;
                     $_->set_tag('div');
                     $_->set_att( class => 'warning' );
                     my $new_node = XML::Twig::Elt->new('h2');
                     $new_node->set_inner_xml("Warning:<br/>");
                     $new_node->paste($_);
+                    $_->set_tag('p') for $_->children('p_zh');
                 }
 
                 for ( $desc->children('note') ) {
-                    eval { $_->delete for $_->children('p') } if $delete_en;
+                    eval { $_->delete for $_->children('p') }
+                      if $delete_en;
                     $_->set_tag('div');
                     $_->set_att( class => 'note' );
                     my $new_node = XML::Twig::Elt->new('h2');
                     $new_node->set_inner_xml("Note:<br/>");
                     $new_node->paste($_);
+                    $_->set_tag('p') for $_->children('p_zh');
                 }
 
             }
@@ -136,4 +184,3 @@ sub xml_to_html {
     $root->print($str_fd);
     $res_str;
 }
-
