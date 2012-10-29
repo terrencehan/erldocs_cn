@@ -74,7 +74,7 @@
               <p>Returns <c>true</c> if <c><anno>Pred</anno>(<anno>Elem</anno>)</c> returns
                   <c>true</c> for all elements <c><anno>Elem</anno></c> in <c><anno>List</anno></c>,
                   otherwise <c>false</c>.</p>
-              <p_zh> 如果对列表<c><anno>List</anno></c>所有元素<c><anno>Elem</anno></c>函数<c><anno>Pred</anno>(<anno>Elem</anno>)</c> 都返回 <c>true</c>, 返回 <c>true</c> , 否则返回<c>false</c>.</p_zh>
+              <p_zh> 如果对列表<c><anno>List</anno></c>所有元素<c><anno>Elem</anno></c>函数<c><anno>Pred</anno>(<anno>Elem</anno>)</c> 都返回 <c>true</c>, 则返回 <c>true</c> , 否则返回<c>false</c>.</p_zh>
           </desc>
       </func>
     <func>
@@ -444,7 +444,7 @@ flatmap(Fun, List1) ->
           the function to every element in the list. This function is
           used to obtain the return values. The evaluation order is
           implementation dependent.</p>
-        <p_zh>'map'以一个从元素<c><anno>A</anno></c> 至元素<c><anno>B</anno></c>的映射函数和一个<c><anno>A</anno></c>的列表作为参数，将映射函数应用于列表中的每个元素而生成一个<c><anno>B</anno></c>的列表.该函数用于收集返回结果. 具体计算顺序以来于实现.</p_zh>
+        <p_zh>'map'以一个从元素<c><anno>A</anno></c> 至元素<c><anno>B</anno></c>的映射函数和一个<c><anno>A</anno></c>的列表作为参数，将映射函数应用于列表中的每个元素而生成一个<c><anno>B</anno></c>的列表.该函数用于收集返回结果. 具体计算顺序依赖于实现.</p_zh>
       </desc>
     </func>
     <func>
@@ -1000,7 +1000,7 @@ splitwith(Pred, List) ->
           list. For each pair <c><anno>X</anno>, <anno>Y</anno></c> of list elements from the two
           lists, the element in the result list will be
           <c><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>)</c>.</p>
-        <p_zh>将两个长度相等的列表合并成一个. 对于每个来自两列表的<c><anno>X</anno>, <anno>Y</anno></c>对,在结果列表中的元素是 
+        <p_zh>合并两个长度相等的列表. 对于每个来自两列表的<c><anno>X</anno>, <anno>Y</anno></c>对,在结果列表中的元素是 
           <c><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>)</c>的返回值.</p_zh>
         <p><c>zipwith(fun(X, Y) -> {X,Y} end, List1, List2)</c> is
           equivalent to <c>zip(List1, List2)</c>.</p>
@@ -1021,7 +1021,7 @@ splitwith(Pred, List) ->
           list. For each triple <c><anno>X</anno>, <anno>Y</anno>, <anno>Z</anno></c> of list elements from
           the three lists, the element in the result list will be
           <c><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>, <anno>Z</anno>)</c>.</p>
-        <p_zh>将三个长度相等的列表合并成一个. 对于每个来自三列表的<c><anno>X</anno>, <anno>Y</anno></c>, <anno>Z</anno>对,在结果列表中的元素是 
+        <p_zh>合并三个长度相等的列表. 对于每个来自三列表的<c><anno>X</anno>, <anno>Y</anno></c>, <anno>Z</anno>对,在结果列表中的元素是 
           <c><anno>Combine</anno>(<anno>X</anno>, <anno>Y</anno>, <anno>Z</anno>)</c>的返回值.</p_zh>
         <p><c>zipwith3(fun(X, Y, Z) -> {X,Y,Z} end, List1, List2, List3)</c> is equivalent to <c>zip3(List1, List2, List3)</c>.</p>
         <p_zh><c>zipwith3(fun(X, Y, Z) -> {X,Y,Z} end, List1, List2, List3)</c> 等同于<c>zip3(List1, List2, List3)</c>.</p_zh>
