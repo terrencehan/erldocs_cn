@@ -40,15 +40,15 @@
       following properties hold of <code>F</code> for all x, y and z:</p>
     <list type="bulleted">
       <item>
-        <p class="english">if x <c>F</c> y and y <c>F</c> x then x = y (<c>F</c>
+        <p class="english">if x <code>F</code> y and y <code>F</code> x then x = y (<code>F</code>
         is antisymmetric);</p>
       </item>
       <item>
-        <p class="english">if x <c>F</c> y and y <c>F</c> z then x <c>F</c> z
-        (<c>F</c> is transitive);</p>
+        <p class="english">if x <code>F</code> y and y <code>F</code> z then x <code>F</code> z
+        (<code>F</code> is transitive);</p>
       </item>
       <item>
-        <p class="english">x <c>F</c> y or y <c>F</c> x (<c>F</c> is total).</p>
+        <p class="english">x <code>F</code> y or y <code>F</code> x (<code>F</code> is total).</p>
       </item>
     </list>
     <p class="english">An example of a typical ordering function is less than or equal
@@ -366,10 +366,10 @@ flatmap(Fun, List1) ->
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">This function is retained for backward compatibility.
-      The function <c>lists:keyfind/3</c> (introduced in R13A)
+      The function <code>lists:keyfind/3</code> (introduced in R13A)
       is in most cases more convenient.</p>
           <p>保留这个函数是为了向后兼容.
-      函数<c>lists:keyfind/3</c> (在R13A中引入)
+      函数<code>lists:keyfind/3</code> (在R13A中引入)
       在大多数情况下更方便.</p>
         </div>
       </div>
@@ -767,13 +767,13 @@ splitwith(Pred, List) ->
         <p><code>lists:subtract(A, B)</code> 等同于<code>A -- B</code>.</p>
         <div class="warning">
           <h2>Warning:<br/></h2>
-          <p class="english">The complexity of <c>lists:subtract(A, B)</c> is proportional
-	to <c>length(A)*length(B)</c>, meaning that it will be very slow if
-	both <c>A</c> and <c>B</c> are long lists.
+          <p class="english">The complexity of <code>lists:subtract(A, B)</code> is proportional
+	to <code>length(A)*length(B)</code>, meaning that it will be very slow if
+	both <code>A</code> and <code>B</code> are long lists.
 	(Using ordered lists and
 	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>
     is a much better choice if both lists are long.)</p>
-          <p><c>lists:subtract(A, B)</c>的时间复杂度与<c>length(A)*length(B)</c>成正比，则意味着它可能在<c>A</c> 和 <c>B</c>是长列表时变得很慢。 (如果两个列表很长，最好使用有序列表 和
+          <p><code>lists:subtract(A, B)</code>的时间复杂度与<code>length(A)*length(B)</code>成正比，则意味着它可能在<code>A</code> 和 <code>B</code>是长列表时变得很慢。 (如果两个列表很长，最好使用有序列表 和
 	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>.)</p>
         </div>
       </div>
