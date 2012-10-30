@@ -30,7 +30,7 @@ sub get_specs_from_file {
     my @res;
 
     while ( $src =~
-/-spec\s*\(?(?<def>(?<fun_name>\w+)\s*\((?<args>.*?)\)\s*->\s*(?<return>.*?))\s*(?<when_zone>when(?<types>.*?))?\)\.\n/gcs
+/-spec\s*\(?(?<def>(?<fun_name>\w+)\s*\((?<args>.*?)\)\s*->\s*(?<return>.*?\)?))\s*(?<when_zone>when(?<types>.*?\)?))?\)?\.\n/gcs
       )
 
 #Attention: here is a bug, we cannot match strings like "-spec funname(fun((T)->boolean()|{true, X}), [T])->List."
