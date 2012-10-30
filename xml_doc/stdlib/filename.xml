@@ -60,7 +60,7 @@
           name. No attempt is made to create the shortest absolute name,
           because this can give incorrect results on file systems which
           allow links.</p>
-        <p_zh>把相对路径<c><anno>Filename</anno></c>转换成绝对路径. No attempt is made to create the shortest absolute name, because this can give incorrect results on file systems which allow links.</p_zh>
+        <p_zh>把相对路径<c><anno>Filename</anno></c>转换成绝对路径. [TODO]不要企图创建最简绝对路径，在支持链接的系统上也样可能会给出错误结果.</p_zh>
         <p>Unix examples:</p>
         <p_zh>Unix 示例:</p_zh>
         <pre>
@@ -92,6 +92,7 @@
         <p>This function works like <c>absname/1</c>, except that
           the directory to which the file name should be made relative
           is given explicitly in the <c><anno>Dir</anno></c> argument.</p>
+        <p_zh>除了与文件名相关的文件夹在参数<c><anno>Dir</anno></c>中显式给出, 该函数与<c>absname/1</c>相似.</p_zh>
       </desc>
     </func>
     <func>
@@ -105,6 +106,9 @@
           components in <c><anno>Filename</anno></c> are matched against trailing
           directory components in <c><anno>Dir</anno></c> so they can be removed
           from the result - minimizing its length.</p>
+        <p_zh>连接一个绝对路径文件夹和相对路径文件名.
+          与<c>join/2</c>相似, 但是在严格限制原始文件长度以及不支持符号链接的平台上 (read: VxWorks), 导致<c><anno>Filename</anno></c>中的父文件夹组件 are matched against trailing
+          directory components in <c><anno>Dir</anno></c> so they can be从结果中删除 - 以最小化它的长度minimizing its length.</p_zh>
       </desc>
     </func>
     <func>
@@ -114,7 +118,7 @@
         <p>Returns the last component of <c><anno>Filename</anno></c>, or
           <c><anno>Filename</anno></c> itself if it does not contain any directory
           separators.</p>
-        <p_zh>返回<c><anno>Filename</anno></c>的最后组成部分, 或者当<c><anno>Filename</anno></c>不包含文件夹分隔符时返回<c><anno>Filename</anno></c>自身> .</p_zh>
+        <p_zh>返回<c><anno>Filename</anno></c>的最后组成部分, 或者当<c><anno>Filename</anno></c>不包含文件夹分隔符时返回<c><anno>Filename</anno></c>自身>.</p_zh>
         <pre>
 5> <input>filename:basename("foo").</input>
 "foo"
@@ -133,7 +137,7 @@
           to remove a specific extension which might, or might not, be
           there. Use <c>rootname(basename(Filename))</c> to remove an
           extension that exists, but you are not sure which one it is.</p>
-        <p_zh>返回去除了扩展名<c><anno>Ext</anno></c>后<c><anno>Filename</anno></c>的最后组成部分.  这个函数被用于去除特定的有或没有的后缀名。使用<c>rootname(basename(Filename))</c>可以删除你不知道的后缀.</p_zh>
+        <p_zh>返回去除了扩展名<c><anno>Ext</anno></c>后<c><anno>Filename</anno></c>的最后组成部分. 这个函数被用于去除特定的有或没有的后缀名. 使用<c>rootname(basename(Filename))</c>可以删除你不知道的后缀.</p_zh>
         <pre>
 8> <input>filename:basename("~/src/kalle.erl", ".erl").</input>
 "kalle"

@@ -25,11 +25,14 @@
   <div class="description">
     <p class="english"><code>Dict</code> implements a <code>Key</code> - <code>Value</code> dictionary.
       The representation of a dictionary is not defined.</p>
+    <p><code>Dict</code> 实现了一个<code>Key</code> - <code>Value</code> 字典.
+      The representation of a dictionary is not defined.</p>
     <p class="english">This module provides exactly the same interface as the module
       <code>orddict</code>. One difference is that while this module
       considers two keys as different if they do not match (<code>=:=</code>),
       <code>orddict</code> considers two keys as different if and only if
       they do not compare equal (<code>==</code>).</p>
+    <p>该模块提供了与<code>orddict</code>模块相同的接口. 一个不同点是该模块当两个键值不匹配(<code>=:=</code>)时认为它们是不同的,<code>orddict</code>则当且仅当它们不相等(<code>==</code>)时认为两个键值不同.  </p>
   </div>
   <datatypes>
     <datatype>
@@ -38,6 +41,7 @@
       </name>
       <desc>
         <p class="english">Dictionary as returned by <code>new/0</code>.</p>
+        <p>字典由<code>new/0</code>返回.</p>
       </desc>
     </datatype>
   </datatypes>
@@ -168,12 +172,16 @@
           the new dictionary.  If a key occurs in both dictionaries then
           <code><anno>Fun</anno></code> is called with the key and both values to return a
           new value. <code>merge</code> could be defined as:</p>
+        <p><code>merge</code> 归并两个字典<code><anno>Dict1</anno></code> 和
+          <code><anno>Dict2</anno></code>来创建一个新的字典.  两个字典的所有<code><anno>Key</anno></code>
+          - <code><anno>Value</anno></code> 对都包含在新字典中.  如果同一个键出现在两个字典中, 那么将以这个键和它对应的那些值作为参数调用 <code><anno>Fun</anno></code> 函数来产生一个新值. <code>merge</code> 可以被定义为:</p>
         <pre>
 merge(Fun, D1, D2) ->
     fold(fun (K, V1, D) ->
                  update(K, fun (V2) -> Fun(K, V1, V2) end, V1, D)
          end, D2, D1).</pre>
         <p class="english">but is faster.</p>
+        <p>但是运行得更块.</p>
       </div>
     </div>
     <div class="function">
@@ -251,6 +259,7 @@ append(Key, Val, D) ->
 update_counter(Key, Incr, D) ->
     update(Key, fun (Old) -> Old + Incr end, Incr, D).</pre>
         <p class="english">but is faster.</p>
+        <p>但是运行得更块.</p>
       </div>
     </div>
   </div>
@@ -259,6 +268,8 @@ update_counter(Key, Incr, D) ->
     <p class="english">The functions <code>append</code> and <code>append_list</code> are included
       so we can store keyed values in a list <em>accumulator</em>. For
       example:</p>
+    <p><code>append</code> 和 <code>append_list</code> 函数都包含在这个模块里，所以我们可以那些将与键关联的值储存在一个列表<em>累加器</em>中.
+      例如:</p>
     <pre>
 > D0 = dict:new(),
   D1 = dict:store(files, [], D0),
@@ -271,8 +282,10 @@ update_counter(Key, Incr, D) ->
       appending a new value to the list of stored values, and storing
       the result.
       </p>
+    <p>这样省去了获取第一个与键关联值的麻烦, 追加一个新值到已储存值的列表中并且储存下来.  </p>
     <p class="english">The function <code>fetch</code> should be used if the key is known to
       be in the dictionary, otherwise <code>find</code>.</p>
+    <p><code>fetch</code>函数应该在知道字典中确实存在要查询的键时使用，否则使用<code>find</code>.</p>
   </section>
   <section>
     <title>See Also</title>

@@ -38,6 +38,7 @@
   <description>
     <p>This module provides an interface to a number of mathematical
       functions.</p>
+    <p_zh>该模块为一系列数学函数提供了接口.</p_zh>
     <note>
       <p>Not all functions are implemented on all platforms. In particular,
         the <c>erf/1</c> and <c>erfc/1</c> functions are not implemented on Windows.</p>

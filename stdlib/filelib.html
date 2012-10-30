@@ -25,9 +25,13 @@
   <div class="description">
     <p class="english">This module contains utilities on a higher level than the <code>file</code>
       module.</p>
+    <p>这个模块包含比<code>file</code>模块更高层次的功能函数.</p>
     <p class="english">The module supports Unicode file names, so that it will match against regular expressions given in Unicode and that it will find and process raw file names (i.e. files named in a way that does not confirm to the expected encoding).</p>
+    <p>该模块支持Unicode文件名, 所以它可以匹配以Unicode形式给出的正则表达式而且也能找到和处理原始文件名 (例如, 文件以一种不确定的编码方式命名).</p>
     <p class="english">If the VM operates in Unicode file naming mode on a machine with transparent file naming, the <code>fun()</code> provided to <code>fold_files/5</code> needs to be prepared to handle binary file names.</p>
+    <p>If the VM operates in Unicode file naming mode on a machine with transparent file naming, the <code>fun()</code> provided to <code>fold_files/5</code> needs to be prepared to handle binary file names.</p>
     <p class="english">For more information about raw file names, see the <seealso marker="kernel:file">file</seealso> module.</p>
+    <p>更多关于原始文件名的信息, 参考<seealso marker="kernel:file">file</seealso>模块.</p>
   </div>
   <datatypes>
     <datatype>
@@ -47,10 +51,12 @@
         <p class="english">The <code>ensure_dir/1</code> function ensures that all parent
           directories for the given file or directory name <code><anno>Name</anno></code>
           exist, trying to create them if necessary.</p>
+        <p><code>ensure_dir/1</code>函数确定对于给定的文件或文件夹名<code><anno>Name</anno></code>中所有的父文件夹是否存在，如果必要的话, 由该函数尝试创建缺失文件夹路径.</p>
         <p class="english">Returns <code>ok</code> if all parent directories already exist
           or could be created, or <code>{error, <anno>Reason</anno>}</code> if some parent
           directory does not exist and could not be created for some
           reason.</p>
+        <p>当所有的父文件夹都存在或者可以被创建时返回<code>ok</code>, 否则当部分父文件夹不存在且因为某些理由不能被创建时返回<code>{error, <anno>Reason</anno>}</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -58,6 +64,7 @@
       <div class="type_desc">      Filename = filename()</div>
       <div class="discription">
         <p class="english">The <code>file_size</code> function returns the size of the given file.</p>
+        <p><code>file_size</code>返回给定文件的大小.</p>
       </div>
     </div>
     <div class="function">
@@ -65,6 +72,14 @@
       <div class="type_desc">      Dir = dirname(),<br/>      RegExp = string(),<br/>      Recursive = boolean(),<br/>      Fun = fun((F = file:filename(), AccIn) -> AccOut),<br/>      AccIn = term(),<br/>      AccOut = term()</div>
       <div class="discription">
         <p class="english">The <code>fold_files/5</code> function folds the function
+          <code><anno>Fun</anno></code> over all (regular) files <code><anno>F</anno></code> in the
+          directory <code><anno>Dir</anno></code> that match the regular expression <code><anno>RegExp</anno></code>
+	  (see the <seealso marker="re">re</seealso> module for a description
+	  of the allowed regular expressions).
+          If <code><anno>Recursive</anno></code> is true all sub-directories to <code>Dir</code>
+          are processed. The regular expression matching is done on just
+	  the filename without the directory part.</p>
+        <p>The <code>fold_files/5</code> function folds the function
           <code><anno>Fun</anno></code> over all (regular) files <code><anno>F</anno></code> in the
           directory <code><anno>Dir</anno></code> that match the regular expression <code><anno>RegExp</anno></code>
 	  (see the <seealso marker="re">re</seealso> module for a description
@@ -90,6 +105,8 @@
       <div class="discription">
         <p class="english">The <code>is_dir/1</code> function returns <code>true</code> if <code><anno>Name</anno></code>
           refers to a directory, and <code>false</code> otherwise.</p>
+        <p>如果<code><anno>Name</anno></code>指向一个文件夹则<code>is_dir/1</code>函数返回<code>true</code>
+          , 否则返回<code>false</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -98,6 +115,7 @@
       <div class="discription">
         <p class="english">The <code>is_file/1</code> function returns <code>true</code> if <code><anno>Name</anno></code>
           refers to a file or a directory, and <code>false</code> otherwise.</p>
+        <p>如果<code><anno>Name</anno></code>指向一个文件，则<code>is_file/1</code> 函数返回<code>true</code>   , 否则返回<code>false</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -106,6 +124,7 @@
       <div class="discription">
         <p class="english">The <code>is_regular/1</code> function returns <code>true</code> if <code><anno>Name</anno></code>
           refers to a file (regular file), and <code>false</code> otherwise.</p>
+        <p>如果<code><anno>Name</anno></code>指向一个普通文件，则<code>is_regular/1</code> 函数返回<code>true</code>   , 否则返回<code>false</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -115,6 +134,7 @@
         <p class="english">The <code>last_modified/1</code> function returns the date and time the
           given file or directory was last modified, or 0 if the file
 	  does not exist.</p>
+        <p><code>last_modified/1</code> 函数返回给定文件或文件夹最后修改时间，如果文件不存在返回0.  </p>
       </div>
     </div>
     <div class="function">
@@ -123,23 +143,32 @@
       <div class="discription">
         <p class="english">The <code>wildcard/1</code> function returns a list of all files
           that match Unix-style wildcard-string <code><anno>Wildcard</anno></code>.</p>
+        <p><code>wildcard/1</code> 函数返回一个包含了所有与Unix风格通配字符串<code><anno>Wildcard</anno></code>匹配的文件名的列表.</p>
         <p class="english">The wildcard string looks like an ordinary filename, except
           that certain "wildcard characters" are interpreted in a special
           way. The following characters are special:
+          </p>
+        <p>除了包含可以被特殊方法翻译的“通配符”以外, 通配字符串看起来跟普通文件名一样.
+           以下是特殊的字符:
           </p>
         <taglist>
           <dt>?</dt>
           <item>
             <p class="english">Matches one character.</p>
+            <p>匹配一个字符.</p>
           </item>
           <dt>*</dt>
           <item>
             <p class="english">Matches any number of characters up to the end of
               the filename, the next dot, or the next slash.</p>
+            <p>匹配任意数目的字符，直到文件名结束，下一个点，或者下一个斜线.</p>
           </item>
           <dt>[Character1,Character2,...]</dt>
           <item>
             <p class="english">Matches any of the characters listed. Two characters
+	    separated by a hyphen will match a range of characters.
+	    Example: <code>[A-Z]</code> will match any uppercase letter.</p>
+            <p>Matches any of the characters listed. Two characters
 	    separated by a hyphen will match a range of characters.
 	    Example: <code>[A-Z]</code> will match any uppercase letter.</p>
           </item>
@@ -156,27 +185,36 @@
           (as in Unix wildcards, but opposed to Windows/DOS wildcards).
           </p>
         <p class="english">Examples:</p>
+        <p>示例:</p>
         <p class="english">The following examples assume that the current directory is the
           top of an Erlang/OTP installation.
           </p>
+        <p>以下示例假设当前工作目录为Erlang/OTP安装目录的根目录.</p>
         <p class="english">To find all <code>.beam</code> files in all applications, the following
           line can be used:</p>
+        <p>为了查找所有应用的<code>.beam</code>文件, 可以使用下一行:</p>
         <pre>
     filelib:wildcard("lib/*/ebin/*.beam").        </pre>
         <p class="english">To find either <code>.erl</code> or <code>.hrl</code> in all applications
           <code>src</code> directories, the following</p>
+        <p>为了在所有应用的<code>src</code>目录中查找<code>.erl</code> 或者 <code>.hrl</code>, 有下一行</p>
         <pre>
     filelib:wildcard("lib/*/src/*.?rl")        </pre>
         <p class="english">or the following line</p>
+        <p>或者下一行</p>
         <pre>
     filelib:wildcard("lib/*/src/*.{erl,hrl}")        </pre>
         <p class="english">can be used.</p>
+        <p>可以使用.</p>
         <p class="english">To find all <code>.hrl</code> files in either <code>src</code> or <code>include</code>
           directories, use:</p>
+        <p>为了在<code>src</code> 或 <code>include</code>目录中查找所有<code>.hrl</code>文件, 使用:</p>
         <pre>
     filelib:wildcard("lib/*/{src,include}/*.hrl").        </pre>
         <p class="english">To find all <code>.erl</code> or <code>.hrl</code> files in either
           <code>src</code> or <code>include</code> directories, use:</p>
+        <p>为了在<code>src</code> 或 <code>include</code>目录中查找<code>.erl</code> 或 <code>.hrl</code> 文件in either
+          , 使用:</p>
         <pre>
     filelib:wildcard("lib/*/{src,include}/*.{erl,hrl}")        </pre>
       </div>
@@ -188,6 +226,7 @@
         <p class="english">The <code>wildcard/2</code> function works like <code>wildcard/1</code>,
           except that instead of the actual working directory, <code><anno>Cwd</anno></code>
           will be used.</p>
+        <p>除了使用<code><anno>Cwd</anno></code>而不是当前工作目录以外, <code>wildcard/2</code>跟<code>wildcard/1</code>一样.</p>
       </div>
     </div>
   </div>

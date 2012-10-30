@@ -54,7 +54,7 @@
           name. No attempt is made to create the shortest absolute name,
           because this can give incorrect results on file systems which
           allow links.</p>
-        <p>把相对路径<code><anno>Filename</anno></code>转换成绝对路径. No attempt is made to create the shortest absolute name, because this can give incorrect results on file systems which allow links.</p>
+        <p>把相对路径<code><anno>Filename</anno></code>转换成绝对路径. [TODO]不要企图创建最简绝对路径，在支持链接的系统上也样可能会给出错误结果.</p>
         <p class="english">Unix examples:</p>
         <p>Unix 示例:</p>
         <pre>
@@ -86,6 +86,7 @@
         <p class="english">This function works like <code>absname/1</code>, except that
           the directory to which the file name should be made relative
           is given explicitly in the <code><anno>Dir</anno></code> argument.</p>
+        <p>除了与文件名相关的文件夹在参数<code><anno>Dir</anno></code>中显式给出, 该函数与<code>absname/1</code>相似.</p>
       </div>
     </div>
     <div class="function">
@@ -99,6 +100,9 @@
           components in <code><anno>Filename</anno></code> are matched against trailing
           directory components in <code><anno>Dir</anno></code> so they can be removed
           from the result - minimizing its length.</p>
+        <p>连接一个绝对路径文件夹和相对路径文件名.
+          与<code>join/2</code>相似, 但是在严格限制原始文件长度以及不支持符号链接的平台上 (read: VxWorks), 导致<code><anno>Filename</anno></code>中的父文件夹组件 are matched against trailing
+          directory components in <code><anno>Dir</anno></code> so they can be从结果中删除 - 以最小化它的长度minimizing its length.</p>
       </div>
     </div>
     <div class="function">
@@ -108,7 +112,7 @@
         <p class="english">Returns the last component of <code><anno>Filename</anno></code>, or
           <code><anno>Filename</anno></code> itself if it does not contain any directory
           separators.</p>
-        <p>返回<code><anno>Filename</anno></code>的最后组成部分, 或者当<code><anno>Filename</anno></code>不包含文件夹分隔符时返回<code><anno>Filename</anno></code>自身> .</p>
+        <p>返回<code><anno>Filename</anno></code>的最后组成部分, 或者当<code><anno>Filename</anno></code>不包含文件夹分隔符时返回<code><anno>Filename</anno></code>自身>.</p>
         <pre>
 5> <span>filename:basename("foo").</span>
 "foo"
@@ -127,7 +131,7 @@
           to remove a specific extension which might, or might not, be
           there. Use <code>rootname(basename(Filename))</code> to remove an
           extension that exists, but you are not sure which one it is.</p>
-        <p>返回去除了扩展名<code><anno>Ext</anno></code>后<code><anno>Filename</anno></code>的最后组成部分.  这个函数被用于去除特定的有或没有的后缀名。使用<code>rootname(basename(Filename))</code>可以删除你不知道的后缀.</p>
+        <p>返回去除了扩展名<code><anno>Ext</anno></code>后<code><anno>Filename</anno></code>的最后组成部分. 这个函数被用于去除特定的有或没有的后缀名. 使用<code>rootname(basename(Filename))</code>可以删除你不知道的后缀.</p>
         <pre>
 8> <span>filename:basename("~/src/kalle.erl", ".erl").</span>
 "kalle"
