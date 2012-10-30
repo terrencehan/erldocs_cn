@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>math</h1>
+  <h2 class="modsummary">Mathematical Functions</h2>
+  <div class="description">
+    <p class="english">This module provides an interface to a number of mathematical
+      functions.</p>
+    <div class="note">
+      <h2>Note:<br/></h2>
+      <p class="english">Not all functions are implemented on all platforms. In particular,
+        the <code>erf/1</code> and <code>erfc/1</code> functions are not implemented on Windows.</p>
+      <p>并不是所有的函数在各种平台上都被实现. 特别是,
+        <code>erf/1</code> 和 <code>erfc/1</code> 在Windows系统上未实现.</p>
+    </div>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="pi/0" name="pi">pi() -> float()</h3>
+      <div class="discription">
+        <p class="english">A useful number.</p>
+        <p>一个有用的数字.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="sin/1">sin(X)</h3>
+      <h3 id="cos/1">cos(X)</h3>
+      <h3 id="tan/1">tan(X)</h3>
+      <h3 id="asin/1">asin(X)</h3>
+      <h3 id="acos/1">acos(X)</h3>
+      <h3 id="atan/1">atan(X)</h3>
+      <h3 id="atan2/2">atan2(Y, X)</h3>
+      <h3 id="sinh/1">sinh(X)</h3>
+      <h3 id="cosh/1">cosh(X)</h3>
+      <h3 id="tanh/1">tanh(X)</h3>
+      <h3 id="asinh/1">asinh(X)</h3>
+      <h3 id="acosh/1">acosh(X)</h3>
+      <h3 id="atanh/1">atanh(X)</h3>
+      <h3 id="exp/1">exp(X)</h3>
+      <h3 id="log/1">log(X)</h3>
+      <h3 id="log10/1">log10(X)</h3>
+      <h3 id="pow/2">pow(X, Y)</h3>
+      <h3 id="sqrt/1">sqrt(X)</h3>
+      <type>
+        <div class="type_desc">X = Y = number()</div>
+      </type>
+      <div class="discription">
+        <p class="english">A collection of math functions which return floats. Arguments
+          are numbers. </p>
+        <p>返回浮点数的数学函数集合. 参数为数字. </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="erf/1">erf(X) -> float()</h3>
+      <type>
+        <div class="type_desc">X = number()</div>
+      </type>
+      <div class="discription">
+        <p class="english">Returns the error function of <code>X</code>, where</p>
+        <p>Returns the error function of <code>X</code>, where</p>
+        <pre>
+erf(X) = 2/sqrt(pi)*integral from 0 to X of exp(-t*t) dt.        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="erfc/1">erfc(X) -> float()</h3>
+      <type>
+        <div class="type_desc">X = number()</div>
+      </type>
+      <div class="discription">
+        <p class="english"><code>erfc(X)</code> returns  <code>1.0 - erf(X)</code>, computed  by
+          methods that avoid cancellation for large <code>X</code>. </p>
+        <p><code>erfc(X)</code> returns  <code>1.0 - erf(X)</code>, computed  by
+          methods that avoid cancellation for large <code>X</code>. </p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <title>Bugs</title>
+    <p class="english">As these are the C library, the bugs are the same.</p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

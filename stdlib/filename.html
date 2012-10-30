@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>filename</h1>
+  <h2 class="modsummary">Filename Manipulation Functions</h2>
+  <div class="description">
+    <p class="english">The module <code>filename</code> provides a number of useful functions
+      for analyzing and manipulating file names. These functions are
+      designed so that the Erlang code can work on many different
+      platforms with different formats for file names. With file name
+      is meant all strings that can be used to denote a file. They can
+      be short relative names like <code>foo.erl</code>, very long absolute
+      name which include a drive designator and directory names like
+      <code>D:\usr/local\bin\erl/lib\tools\foo.erl</code>, or any variations
+      in between.</p>
+    <p><code>filename</code>模块提供了一系有用的分析和管理文件名的函数.设计这些函数是为了让Erlang编写的代码在各种文件名格式不同的平台上 正常工作.文件名字面值可以用来代表文件.它们可以是像<code>foo.erl</code> 一样简短的相对路径文件名，或是像<code>D:\usr/local\bin\erl/lib\tools\foo.erl</code> 这样长的绝对路径文件名，或者是其他介于两者之间的形式.</p>
+    <p class="english">In Windows, all functions return file names with forward slashes
+      only, even if the arguments contain back slashes. Use
+      <code>join/1</code> to normalize a file name by removing redundant
+      directory separators.</p>
+    <p>在Windows操作系统上, 即便参数带有反斜杠，所有函数都只返回带有斜杠的文件名. 使用<code>join/1</code>来规格化文件名，可以避免自己指定文件夹分隔符.</p>
+    <p class="english">The module supports raw file names in the way that if a binary is present, or the file name cannot be interpreted according to the return value of 
+    <seealso marker="kernel:file#native_name_encoding/0">file:native_name_encoding/0</seealso>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <seealso marker="kernel:file">file</seealso> module.</p>
+    <p>The module supports raw file names in the way that if a binary is present, or the file name cannot be interpreted according to the return value of 
+    <seealso marker="kernel:file#native_name_encoding/0">file:native_name_encoding/0</seealso>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <seealso marker="kernel:file">file</seealso> module.</p>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="absname/1" name="absname">absname(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Converts a relative <code><anno>Filename</anno></code> and returns an absolute
+          name. No attempt is made to create the shortest absolute name,
+          because this can give incorrect results on file systems which
+          allow links.</p>
+        <p>把相对路径<code><anno>Filename</anno></code>转换成绝对路径. No attempt is made to create the shortest absolute name, because this can give incorrect results on file systems which allow links.</p>
+        <p class="english">Unix examples:</p>
+        <p>Unix 示例:</p>
+        <pre>
+1> <span>pwd().</span>
+"/usr/local"
+2> <span>filename:absname("foo").</span>
+"/usr/local/foo"
+3> <span>filename:absname("../x").</span>
+"/usr/local/../x"
+4> <span>filename:absname("/").</span>
+"/"</pre>
+        <p class="english">Windows examples:</p>
+        <p>Windows 示例:</p>
+        <pre>
+1> <span>pwd().</span>
+"D:/usr/local"
+2> <span>filename:absname("foo").</span>
+"D:/usr/local/foo"
+3> <span>filename:absname("../x").</span>
+"D:/usr/local/../x"
+4> <span>filename:absname("/").</span>
+"D:/"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="absname/2" name="absname">absname(Filename, Dir) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name(),<br/>      Dir = file:filename()</div>
+      <div class="discription">
+        <p class="english">This function works like <code>absname/1</code>, except that
+          the directory to which the file name should be made relative
+          is given explicitly in the <code><anno>Dir</anno></code> argument.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="absname_join/2" name="absname_join">absname_join(Dir, Filename) -> file:filename()</h3>
+      <div class="type_desc">      Dir = file:filename(),<br/>      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Joins an absolute directory with a relative filename.
+          Similar to <code>join/2</code>, but on platforms with tight
+          restrictions on raw filename length and no support for
+          symbolic links (read: VxWorks), leading parent directory
+          components in <code><anno>Filename</anno></code> are matched against trailing
+          directory components in <code><anno>Dir</anno></code> so they can be removed
+          from the result - minimizing its length.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="basename/1" name="basename">basename(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Returns the last component of <code><anno>Filename</anno></code>, or
+          <code><anno>Filename</anno></code> itself if it does not contain any directory
+          separators.</p>
+        <p>返回<code><anno>Filename</anno></code>的最后组成部分, 或者当<code><anno>Filename</anno></code>不包含文件夹分隔符时返回<code><anno>Filename</anno></code>自身> .</p>
+        <pre>
+5> <span>filename:basename("foo").</span>
+"foo"
+6> <span>filename:basename("/usr/foo").</span>
+"foo"
+7> <span>filename:basename("/").</span>
+[]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="basename/2" name="basename">basename(Filename, Ext) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name(),<br/>      Ext = file:name()</div>
+      <div class="discription">
+        <p class="english">Returns the last component of <code><anno>Filename</anno></code> with the
+          extension <code><anno>Ext</anno></code> stripped. This function should be used
+          to remove a specific extension which might, or might not, be
+          there. Use <code>rootname(basename(Filename))</code> to remove an
+          extension that exists, but you are not sure which one it is.</p>
+        <p>返回去除了扩展名<code><anno>Ext</anno></code>后<code><anno>Filename</anno></code>的最后组成部分.  这个函数被用于去除特定的有或没有的后缀名。使用<code>rootname(basename(Filename))</code>可以删除你不知道的后缀.</p>
+        <pre>
+8> <span>filename:basename("~/src/kalle.erl", ".erl").</span>
+"kalle"
+9> <span>filename:basename("~/src/kalle.beam", ".erl").</span>
+"kalle.beam"
+10> <span>filename:basename("~/src/kalle.old.erl", ".erl").</span>
+"kalle.old"
+11> <span>filename:rootname(filename:basename("~/src/kalle.erl")).</span>
+"kalle"
+12> <span>filename:rootname(filename:basename("~/src/kalle.beam")).</span>
+"kalle"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="dirname/1" name="dirname">dirname(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Returns the directory part of <code><anno>Filename</anno></code>.</p>
+        <p>返回<code><anno>Filename</anno></code>的文件夹部分.</p>
+        <pre>
+13> <span>filename:dirname("/usr/src/kalle.erl").</span>
+"/usr/src"
+14> <span>filename:dirname("kalle.erl").</span>
+"."
+
+5> <span>filename:dirname("\\usr\\src/kalle.erl").</span> % Windows
+"/usr/src"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="extension/1" name="extension">extension(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Returns the file extension of <code><anno>Filename</anno></code>, including
+          the period. Returns an empty string if there is no extension.</p>
+        <p>返回<code><anno>Filename</anno></code>的后缀名（包括点号). 如果没有后缀名返回空字符串.</p>
+        <pre>
+15> <span>filename:extension("foo.erl").</span>
+".erl"
+16> <span>filename:extension("beam.src/kalle").</span>
+[]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="flatten/1" name="flatten">flatten(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <div class="discription">
+        <p class="english">Converts a possibly deep list filename consisting of
+          characters and atoms into the corresponding flat string
+          filename.</p>
+        <p>将包含原子和字符的深层列表转换成相应平整化的字符串文件名.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="join/1" name="join">join(Components) -> file:filename()</h3>
+      <div class="type_desc">      Components = [file:filename()]</div>
+      <div class="discription">
+        <p class="english">Joins a list of file name <code><anno>Components</anno></code> with directory
+          separators. If one of the elements of <code><anno>Components</anno></code>
+          includes an absolute path, for example <code>"/xxx"</code>,
+          the preceding elements, if any, are removed from the result.</p>
+        <p>使用文件夹分隔符连接文件名列表<code><anno>Components</anno></code>. 如果<code><anno>Components</anno></code>的其中一个元素包含绝对路径名, 例如"/xxx", 那么之前的元素将会从结果中删除.</p>
+        <p class="english">The result is "normalized":</p>
+        <p>结果是"规格化的":</p>
+        <list type="bulleted">
+          <item>Redundant directory separators are removed.</item>
+          <item>In Windows, all directory separators are forward
+           slashes and the drive letter is in lower case.</item>
+        </list>
+        <pre>
+17> <span>filename:join(["/usr", "local", "bin"]).</span>
+"/usr/local/bin"
+18> <span>filename:join(["a/b///c/"]).</span>
+"a/b/c"
+
+6> <span>filename:join(["B:a\\b///c/"]).</span> % Windows
+"b:a/b/c"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="join/2" name="join">join(Name1, Name2) -> file:filename()</h3>
+      <div class="type_desc">      Name1 = file:filename(),<br/>      Name2 = file:filename()</div>
+      <div class="discription">
+        <p class="english">Joins two file name components with directory separators. 
+          Equivalent to <code>join([<anno>Name1</anno>, <anno>Name2</anno>])</code>.</p>
+        <p>使用文件夹分隔符链接两个文件名组件.
+          等同于<code>join([<anno>Name1</anno>, <anno>Name2</anno>])</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="nativename/1" name="nativename">nativename(Path) -> file:filename()</h3>
+      <div class="type_desc">      Path = file:filename()</div>
+      <div class="discription">
+        <p class="english">Converts <code><anno>Path</anno></code> to a form accepted by the command shell
+          and native applications on the current platform. On Windows,
+          forward slashes is converted to backward slashes. On all
+          platforms, the name is normalized as done by <code>join/1</code>.</p>
+        <p>将 <code><anno>Path</anno></code>转换成命令行和当前平台本地程序可接受的形式. 
+          在Windows平台上斜线会被转换成反斜线. 在所有平台上, 文件名都像使用<code>join/1</code>似的被规格化.</p>
+        <pre>
+19> <span>filename:nativename("/usr/local/bin/").</span> % Unix
+"/usr/local/bin"
+
+7> <span>filename:nativename("/usr/local/bin/").</span> % Windows
+"\\usr\\local\\bin"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="pathtype/1" name="pathtype">pathtype(Path) -> 'absolute' | 'relative' | 'volumerelative'</h3>
+      <div class="type_desc">      Path = file:name()</div>
+      <div class="discription">
+        <p class="english">Returns the type of path, one of <code>absolute</code>,
+          <code>relative</code>, or <code>volumerelative</code>.</p>
+        <p>返回路径类型, <code>absolute</code>,
+          <code>relative</code>, 或 <code>volumerelative</code>中其一.</p>
+        <taglist>
+          <dt>
+            <code>absolute</code>
+          </dt>
+          <item>
+            <p class="english">The path name refers to a specific file on a specific
+              volume.</p>
+            <p>路径指向特定卷上的特定文件.</p>
+            <p class="english">Unix example: <code>/usr/local/bin</code></p>
+            <p>Unix 示例: <code>/usr/local/bin</code></p>
+            <p class="english">Windows example: <code>D:/usr/local/bin</code></p>
+            <p>Windows 示例: <code>D:/usr/local/bin</code></p>
+          </item>
+          <dt>
+            <code>relative</code>
+          </dt>
+          <item>
+            <p class="english">The path name is relative to the current working
+              directory on the current volume.</p>
+            <p>路径名相对于当前卷上的当前工作目录.</p>
+            <p class="english">Example: <code>foo/bar, ../src</code></p>
+            <p>示例: <code>foo/bar, ../src</code></p>
+          </item>
+          <dt>
+            <code>volumerelative</code>
+          </dt>
+          <item>
+            <p class="english">The path name is relative to the current working
+              directory on a specified volume, or it is a specific file
+              on the current working volume.</p>
+            <p>路径名相对于特定卷上的当前目录, 或者它是当前工作卷上的特定文件.</p>
+            <p class="english">Windows example: <code>D:bar.erl, /bar/foo.erl</code></p>
+            <p>Windows 示例: <code>D:bar.erl, /bar/foo.erl</code></p>
+          </item>
+        </taglist>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="rootname/1" name="rootname">rootname(Filename) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name()</div>
+      <h3 arity="2" id="rootname/2" name="rootname">rootname(Filename, Ext) -> file:filename()</h3>
+      <div class="type_desc">      Filename = file:name(),<br/>      Ext = file:name()</div>
+      <div class="discription">
+        <p class="english">Remove a filename extension. <code>rootname/2</code> works as
+          <code>rootname/1</code>, except that the extension is removed only
+          if it is <code><anno>Ext</anno></code>.</p>
+        <p>删除文件名中的扩展名. <code>rootname/2</code> 除了只删除特定的后缀名<code><anno>Ext</anno></code>以外和<code>rootname/1</code>效果一样 .</p>
+        <pre>
+20> <span>filename:rootname("/beam.src/kalle").</span>
+/beam.src/kalle"
+21> <span>filename:rootname("/beam.src/foo.erl").</span>
+"/beam.src/foo"
+22> <span>filename:rootname("/beam.src/foo.erl", ".erl").</span>
+"/beam.src/foo"
+23> <span>filename:rootname("/beam.src/foo.beam", ".erl").</span>
+"/beam.src/foo.beam"</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="split/1" name="split">split(Filename) -> Components</h3>
+      <div class="type_desc">      Filename = file:name(),<br/>      Components = [file:filename()]</div>
+      <div class="discription">
+        <p class="english">Returns a list whose elements are the path components of
+          <code><anno>Filename</anno></code>.</p>
+        <p>返回由<code><anno>Filename</anno></code>路径组件构成的列表.</p>
+        <pre>
+24> <span>filename:split("/usr/local/bin").</span>
+["/","usr","local","bin"]
+25> <span>filename:split("foo/bar").</span>
+["foo","bar"]
+26> <span>filename:split("a:\\msdev\\include").</span>
+["a:/","msdev","include"]</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="find_src/1" name="find_src">find_src(Beam) -> {SourceFile, Options}
+                      | {error, {ErrorReason, Module}}</h3>
+      <div class="type_desc">      Beam = Module | Filename,<br/>      Filename = atom() | string(),<br/>      Module = module(),<br/>      SourceFile = string(),<br/>      Options = [Option],<br/>      Option = {'i', Path = string()}<br/>              | {'outdir', Path = string()}<br/>              | {'d', atom()},<br/>      ErrorReason = 'non_existing' | 'preloaded' | 'interpreted'</div>
+      <h3 arity="2" id="find_src/2" name="find_src">find_src(Beam, Rules) -> {SourceFile, Options}
+                             | {error, {ErrorReason, Module}}</h3>
+      <div class="type_desc">      Beam = Module | Filename,<br/>      Filename = atom() | string(),<br/>      Rules = [{BinSuffix = string(), SourceSuffix = string()}],<br/>      Module = module(),<br/>      SourceFile = string(),<br/>      Options = [Option],<br/>      Option = {'i', Path = string()}<br/>              | {'outdir', Path = string()}<br/>              | {'d', atom()},<br/>      ErrorReason = 'non_existing' | 'preloaded' | 'interpreted'</div>
+      <div class="discription">
+        <p class="english">Finds the source filename and compiler options for a module.
+          The result can be fed to <code>compile:file/2</code> in order to
+          compile the file again.</p>
+        <p>为模块搜索源文件名和编译选项.结果可以传递给<code>compile:file/2</code>来重新编译文件.</p>
+        <div class="warning"><h2>Warning:<br/></h2><p class="english">We don't recommend using this function. If possible,
+	use <seealso marker="beam_lib">beam_lib(3)</seealso> to extract
+	the abstract code format from the BEAM file and compile that
+    instead.</p> <p>我们不建议使用这个函数. 如果可能的话,
+	使用 <seealso marker="beam_lib">beam_lib(3)</seealso> 从BEAN文件中提取抽象代码并且编译.</p></div>
+        <p class="english">The <code><anno>Beam</anno></code> argument, which can be a string or an atom,
+          specifies either the module name or the path to the source
+          code, with or without the <code>".erl"</code> extension. In either
+          case, the module must be known by the code server, i.e.
+          <code>code:which(<anno>Module</anno>)</code> must succeed.</p>
+        <p>参数<code><anno>Beam</anno></code>(字符串或者原子) 指定模块名或源代码路径
+          code, with or without the <code>".erl"</code> extension. In either
+          case, the module must be known by the code server, i.e.
+          <code>code:which(<anno>Module</anno>)</code> must succeed.</p>
+        <p class="english"><code><anno>Rules</anno></code> describes how the source directory can be found,
+          when the object code directory is known. It is a list of
+          tuples <code>{<anno>BinSuffix</anno>, <anno>SourceSuffix</anno>}</code> and is interpreted
+          as follows: If the end of the directory name where the object
+          is located matches <code><anno>BinSuffix</anno></code>, then the source code
+          directory has the same name, but with <code><anno>BinSuffix</anno></code>
+          replaced by <code><anno>SourceSuffix</anno></code>. <code><anno>Rules</anno></code> defaults to:</p>
+        <pre>
+[{"", ""}, {"ebin", "src"}, {"ebin", "esrc"}]</pre>
+        <p class="english">If the source file is found in the resulting directory, then
+          the function returns that location together with
+          <code><anno>Options</anno></code>. Otherwise, the next rule is tried, and so on.</p>
+        <p class="english">The function returns <code>{<anno>SourceFile</anno>, <anno>Options</anno>}</code> if it succeeds.
+          <code><anno>SourceFile</anno></code> is the absolute path to the source file
+          without the <code>".erl"</code> extension. <code><anno>Options</anno></code> include
+          the options which are necessary to recompile the file with
+          <code>compile:file/2</code>, but excludes options such as
+          <code>report</code> or <code>verbose</code> which do not change the way
+          code is generated. The paths in the <code>{outdir, <anno>Path</anno>}</code>
+          and <code>{i, Path}</code> options are guaranteed to be
+          absolute.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

@@ -29,7 +29,7 @@ sub wanted {
 }
 find \&wanted, './xml_doc/';
 
-handle_a_file($_) for @xml_files;
+handle_a_file($_) for sort @xml_files;
 
 my $erldocs_index_str = dump \@erldocs_index;
 $erldocs_index_str =~ s/"(.*?)"/[$1]/g;
@@ -59,10 +59,10 @@ sub handle_a_file {
     my @specs = split /\n\n/, $spec_text;
     undef %spec;    #reset %spec for every file
     for (@specs) {
-        if (/name:(?<name>.*?)\ndef:(?<def>.*?)\n(types:\n(?<types>.*))?/s) {
+        if (/name:(?<name>.*?)\ndef:(?<def>.*?)($|(\ntypes:\n(?<types>.*)))/s) {
             $spec{ $+{name} }->{def}   = $+{def};
-            $spec{ $+{name} }->{types} = $+{types};
-        }
+            $spec{ $+{name} }->{types} = $+{types} if defined $+{types};
+        }else{die 'spec regexp not match'}
     }
     my $res      = $layout;
     my $xml_html = xml_to_html($xml_file);
@@ -98,6 +98,15 @@ sub xml_to_html {
 
     ##################
     #simple repalce
+    for my $block (qw/note warning/) {
+        for ( $root->getElementsByTagName($block) ) {
+            $_->set_tag('div');
+            $_->set_att( class => $block );
+            my $new_node = XML::Twig::Elt->new('h2');
+            $new_node->set_inner_xml("${\ucfirst($block)}:<br/>");
+            $new_node->paste($_);
+        }
+    }
 
     $_->set_att( class => 'english' ) for ( $root->getElementsByTagName('p') );
     $_->set_tag('p') for ( $root->getElementsByTagName('p_zh') );
@@ -109,7 +118,7 @@ sub xml_to_html {
     }
 
     $_->set_tag('span') for ( $root->getElementsByTagName('input') );
-    $_->set_tag('dt') for ( $root->getElementsByTagName('tag') );
+    $_->set_tag('dt')   for ( $root->getElementsByTagName('tag') );
 
     for ( $root->getElementsByTagName('code') ) {
         $_->set_tag('pre');
@@ -143,22 +152,28 @@ sub xml_to_html {
 
             #if ( my $name = $func->first_child('name') ) {
             for my $name ( $func->children('name') ) {
-                if (    $name->att('arity')
-                    and $name->att('name') )
+                if (    $name->att_exists('arity')
+                    and $name->att_exists('name') )
                 {
                     my $name_name  = $name->att('name');
                     my $name_arity = $name->att('arity');
 
-                    my $str = $spec{ $name_name . '/' . $name_arity }->{def};
-                    $name->set_inner_xml($str);
-                    $name->set_att( id => $name_name . '/' . $name_arity );
-                    $new_node = XML::Twig::Elt->new('div');
-                    $str = $spec{ $name_name . '/' . $name_arity }->{types};
-                    $str =~ s/\n/<br\/>/g;
-                    $new_node->set_inner_xml($str);
-                    $new_node->paste( after => $name );
-                    $new_node->set_att( class => 'type_desc' );
-
+                    if ( $spec{ $name_name . '/' . $name_arity }->{def} ) {
+                        my $str =
+                          $spec{ $name_name . '/' . $name_arity }->{def};
+                        $name->set_inner_xml($str);
+                        $name->set_att( id => $name_name . '/' . $name_arity );
+                        if ( $spec{ $name_name . '/' . $name_arity }->{types} )
+                        {
+                            $new_node = XML::Twig::Elt->new('div');
+                            $str =
+                              $spec{ $name_name . '/' . $name_arity }->{types};
+                            $str =~ s/\n/<br\/>/g;
+                            $new_node->set_inner_xml($str);
+                            $new_node->paste( after => $name );
+                            $new_node->set_att( class => 'type_desc' );
+                        }
+                    }
                     my $temp =
 "'fun', '$app', '${\$module->text}:$name_name/$name_arity', []";
                     push( @erldocs_index, $temp )
@@ -193,16 +208,6 @@ sub xml_to_html {
             if ( my $desc = $func->first_child('desc') ) {
                 $desc->set_tag('div');
                 $desc->set_att( class => 'discription' );
-
-                for my $block (qw/note warning/) {
-                    for ( $desc->children($block) ) {
-                        $_->set_tag('div');
-                        $_->set_att( class => $block );
-                        my $new_node = XML::Twig::Elt->new('h2');
-                        $new_node->set_inner_xml("${\ucfirst($block)}:<br/>");
-                        $new_node->paste($_);
-                    }
-                }
 
             }
 

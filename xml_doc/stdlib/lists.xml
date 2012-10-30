@@ -752,7 +752,7 @@ splitwith(Pred, List) ->
       <desc>
         <p>Returns the sub-list of <c><anno>List1</anno></c> starting at position 1
           and with (max) <c><anno>Len</anno></c> elements. It is not an error for
-          <c><anno>Len</anno></c> to exceed the length of the list -- in that case
+          <c><anno>Len</anno></c> to exceed the length of the list, in that case
           the whole list is returned.</p>
         <p_zh>返回从<c><anno>List1</anno></c>的第一个位置开始、最长长度为<c><anno>Len</anno></c>的连续子列表。
           <c><anno>Len</anno></c>大于列表长度并不是错误, 这种情况下返回整个列表.</p_zh>
