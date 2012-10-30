@@ -29,6 +29,35 @@ def:is_guard_test(Expr) -> boolean()
 types:
       Expr = erl_parse:abstract_expr()
 
+name:module/1
+def:module(AbsForms) -> {ok, Warnings} | {error, Errors, Warnings}
+types:
+      AbsForms = [erl_parse:abstract_form()],
+      Warnings = [{file:filename(),[ErrorInfo]}],
+      Errors = [{FileName2 = file:filename(),[ErrorInfo]}],
+      ErrorInfo = error_info()
+
+name:module/2
+def:module(AbsForms, FileName) ->
+             {ok, Warnings} | {error, Errors, Warnings}
+types:
+      AbsForms = [erl_parse:abstract_form()],
+      FileName = atom() | string(),
+      Warnings = [{file:filename(),[ErrorInfo]}],
+      Errors = [{FileName2 = file:filename(),[ErrorInfo]}],
+      ErrorInfo = error_info()
+
+name:module/3
+def:module(AbsForms, FileName, CompileOptions) ->
+             {ok, Warnings} | {error, Errors, Warnings}
+types:
+      AbsForms = [erl_parse:abstract_form()],
+      FileName = atom() | string(),
+      CompileOptions = [compile:option()],
+      Warnings = [{file:filename(),[ErrorInfo]}],
+      Errors = [{FileName2 = file:filename(),[ErrorInfo]}],
+      ErrorInfo = error_info()
+
 name:on_load/3
 def:on_load(line(), fa(), lint_state()) -> lint_state()
 

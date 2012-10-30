@@ -13,7 +13,7 @@ def:drop_r(Q1 :: queue()) -> Q2 :: queue()
 name:filter/2
 def:filter(Fun, Q1 :: queue()) -> Q2 :: queue()
 types:
-      Fun = fun((Item = term()) -> boolean() | list())
+      Fun = fun((Item = term()) -> boolean() | list()
 
 name:from_list/1
 def:from_list(L :: list()) -> queue()

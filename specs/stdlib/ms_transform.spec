@@ -1,3 +1,9 @@
+name:format_error/1
+def:format_error(Error) -> Chars
+types:
+      Error = {error, module(), term()},
+      Chars = io_lib:chars()
+
 name:parse_transform/2
 def:parse_transform(Forms, Options) -> Forms
 types:

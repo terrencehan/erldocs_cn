@@ -24,13 +24,14 @@ types:
       SupRef = sup_ref(),
       Id = child_id(),
       Result = 'ok' | {'error', Error},
-      Error = 'running' | 'not_found' | 'simple_one_for_one'
+      Error = 'running' | 'restarting' | 'not_found' | 'simple_one_for_one'
 
 name:handle_call/3
 def:handle_call(call(), term(), state()) -> {'reply', term(), state()}
 
-name:handle_cast/2
-def:handle_cast('null', state()) -> {'noreply', state()}
+name:handle_cast/3
+def:handle_cast({try_again_restart, child_id() | pid()}, state()) ->
+			 {'noreply', state()} | {stop, shutdown, state()}
 
 name:handle_info/2
 def:handle_info(term(), state()) ->
@@ -48,7 +49,8 @@ types:
       Result = {'ok', Child = child()}
               | {'ok', Child = child(), Info = term()}
               | {'error', Error},
-      Error = 'running' | 'not_found' | 'simple_one_for_one' | term()
+      Error = 'running' | 'restarting' | 'not_found' | 'simple_one_for_one' |
+	       term()
 
 name:start_child/2
 def:start_child(SupRef, ChildSpec) -> startchild_ret()
@@ -80,12 +82,18 @@ types:
       Result = 'ok' | {'error', Error},
       Error = 'not_found' | 'simple_one_for_one'
 
+name:try_again_restart/2
+def:try_again_restart(SupRef, Child) -> ok
+types:
+      SupRef = sup_ref(),
+      Child = child_id() | pid()
+
 name:which_children/1
 def:which_children(SupRef) -> [{Id,Child,Type,Modules}]
 types:
       SupRef = sup_ref(),
       Id = child_id() | undefined,
-      Child = child(),
+      Child = child() | 'restarting',
       Type = worker(),
       Modules = modules()
 

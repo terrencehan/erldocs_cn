@@ -33,7 +33,7 @@ def:set_attribute(AttributeItem, Attributes, SetAttributeFun) -> Attributes
 types:
       AttributeItem = 'line',
       Attributes = attributes(),
-      SetAttributeFun = fun((info_line()) -> info_line())
+      SetAttributeFun = fun((info_line()) -> info_line()
 
 name:string/1
 def:string(String) -> Return

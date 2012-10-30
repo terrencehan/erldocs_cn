@@ -45,7 +45,7 @@ types:
              | (SysState = 'running' | 'suspended')
              | (Parent = pid())
              | (Dbg = dbg_opt())
-             | (Misc = term())
+             | (Misc = term()
 
 name:get_status/2
 def:get_status(Name, Timeout) -> Status
@@ -57,7 +57,7 @@ types:
              | (SysState = 'running' | 'suspended')
              | (Parent = pid())
              | (Dbg = dbg_opt())
-             | (Misc = term())
+             | (Misc = term()
 
 name:handle_debug/4
 def:handle_debug(Debug, FormFunc, Extra, Event) -> [dbg_opt()]
