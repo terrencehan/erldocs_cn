@@ -72,7 +72,7 @@
       </type>
       <div class="discription">
         <p class="english">The same as <code>compile(Regexp,[])</code></p>
-        <p>与<code>compile(Regexp,[])</code>相似</p>
+        <p>与<code>compile(Regexp,[])</code>相似.</p>
       </div>
     </div>
     <div class="function">
@@ -91,34 +91,44 @@
         <p class="english">This function compiles a regular expression with the syntax
       described below into an internal format to be used later as a
       parameter to the run/2,3 functions.</p>
+        <p>该函数使用下述的语法将一个正则表达式编译成一种内部的格式，而该内部格式作为参数传递给run/2,3函数.</p>
         <p class="english">Compiling the regular expression before matching is useful if
       the same expression is to be used in matching against multiple
       subjects during the program's lifetime. Compiling once and
       executing many times is far more efficient than compiling each
       time one wants to match.</p>
+        <p>如果在程序生命周期内同样的表达式匹配多个对象, 那么在匹配有用之前, 应该编译这个正则表达式.
+      编译一次、执行多次比每次时候的时候再去编译更有效率.</p>
         <p class="english">When the unicode option is given, the regular expression should be given as a valid unicode <code>charlist()</code>, otherwise as any valid <code>iodata()</code>.</p>
+        <p>如果给定unicod选项, 正则表达式应该是合法的unicode类型的<code>charlist()</code>, 否则应该是合法的<code>iodata()</code>.</p>
         <p class="english"><marker id="compile_options"/>The options have the following meanings:</p>
+        <p><marker id="compile_options"/>选项有下列意义:</p>
         <taglist>
           <dt>
             <code>unicode</code>
           </dt>
           <p class="english">The regular expression is given as a unicode <code>charlist()</code> and the resulting regular expression code is to be run against a valid unicode <code>charlist()</code> subject.</p>
+          <p>给定的正则表达式是unicode的<code>charlist()</code>,  而返回的正则表达式代码应该应用于合法的unicode的<code>charlist()</code> 对象.</p>
           <dt>
             <code>anchored</code>
           </dt>
           <p class="english">The pattern is forced to be "anchored", that is, it is constrained to match only at the first matching point in the string that is being searched (the "subject string"). This effect can also be achieved by appropriate constructs in the pattern itself.</p>
+          <p>模式被强行设置成"锚定的", 也就是说, 在正在搜索的字符串中("对象字符串")它被限制成只匹配第一个匹配点. 这个效果也可以由模式本身来实现.</p>
           <dt>
             <code>caseless</code>
           </dt>
           <p class="english">Letters in the pattern match both upper and lower case letters. It is equivalent to Perl's /i option, and it can be changed within a pattern by a (?i) option setting. Uppercase and lowercase letters are defined as in the ISO-8859-1 character set.</p>
+          <p>模式中的字母可任意匹配大写和小写字母. 它与Perl的 /i 选项相同, 并且可以在模式中设置(?i)选项来改变它. 大写和小写字母是按照ISO-8859-1字符集定义的.</p>
           <dt>
             <code>dollar_endonly</code>
           </dt>
           <p class="english">A dollar metacharacter in the pattern matches only at the end of the subject string. Without this option, a dollar also matches immediately before a newline at the end of the string (but not before any other newlines). The <code>dollar_endonly</code> option is ignored if <code>multiline</code> is given. There is no equivalent option in Perl, and no way to set it within a pattern.</p>
+          <p>在模式中的美元元字符只匹配对象字符串的结尾(严格意义的结尾). 没有这个选项的话, 美元符也能匹配字符串结尾的换行符(但不是之前的换行符).如果给出了<code>multiline</code>选项, 那么<code>dollar_endonly</code>将会被忽略. 这与Perl中的选项并不一样, and no way to set it within a pattern.</p>
           <dt>
             <code>dotall</code>
           </dt>
           <p class="english">A dot in the pattern matches all characters, including those that indicate newline. Without it, a dot does not match when the current position is at a newline. This option is equivalent to Perl's /s option, and it can be changed within a pattern by a (?s) option setting. A negative class such as [^a] always matches newline characters, independent of this option's setting.</p>
+          <p>模式中的点匹配包括换行符在内的所有字符. 没有这个选项, 点号不匹配换行符.这个选项与Perl的 /s 相同, 并且可以在模式中设置(?s)来改变它. [TODO], 它不依赖这个选项.</p>
           <dt>
             <code>extended</code>
           </dt>
@@ -151,28 +161,10 @@ This option makes it possible to include comments inside complicated patterns. N
           </dt>
           <p class="english">
             <p class="english">Override the default definition of a newline in the subject string, which is LF (ASCII 10) in Erlang.</p>
-            <taglist>
-              <dt>
-                <code>cr</code>
-              </dt>
-              <p class="english">Newline is indicated by a single character CR (ASCII 13)</p>
-              <dt>
-                <code>lf</code>
-              </dt>
-              <p class="english">Newline is indicated by a single character LF (ASCII 10), the default</p>
-              <dt>
-                <code>crlf</code>
-              </dt>
-              <p class="english">Newline is indicated by the two-character CRLF (ASCII 13 followed by ASCII 10) sequence.</p>
-              <dt>
-                <code>anycrlf</code>
-              </dt>
-              <p class="english">Any of the three preceding sequences should be recognized.</p>
-              <dt>
-                <code>any</code>
-              </dt>
-              <p class="english">Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </p>
-            </taglist>
+            <p>重写对象字符串中默认的换行符定义, Erlang中的默认换行符是:LF (ASCII 10).</p>
+            <taglist><dt><code>cr</code></dt><p class="english">Newline is indicated by a single character CR (ASCII 13)</p><p>换行符有单字符CR (ASCII 13)指定</p>.
+        <dt><code>lf</code></dt><p class="english">Newline is indicated by a single character LF (ASCII 10), the default</p><p>换行符有单字符LF (ASCII 10)指定(默认的）</p>.
+        <dt><code>crlf</code></dt><p class="english">Newline is indicated by the two-character CRLF (ASCII 13 followed by ASCII 10) sequence.</p><p>换行符由双字符序列CRLF (ASCII 13 followed by ASCII 10) 指定.</p><dt><code>anycrlf</code></dt><p class="english">Any of the three preceding sequences should be recognized.</p><p>任意前面三种序列都可以被识别.</p><dt><code>any</code></dt><p class="english">Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </p></taglist>
           </p>
           <dt>
             <code>bsr_anycrlf</code>

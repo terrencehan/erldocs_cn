@@ -60,9 +60,10 @@ sub handle_a_file {
     undef %spec;    #reset %spec for every file
     for (@specs) {
         if (/name:(?<name>.*?)\ndef:(?<def>.*?)($|(\ntypes:\n(?<types>.*)))/s) {
-            $spec{ $+{name} }->{def}   = $+{def};
+            $spec{ $+{name} }->{def} = $+{def};
             $spec{ $+{name} }->{types} = $+{types} if defined $+{types};
-        }else{die 'spec regexp not match'}
+        }
+        else { die 'spec regexp not match' }
     }
     my $res      = $layout;
     my $xml_html = xml_to_html($xml_file);
@@ -98,7 +99,7 @@ sub xml_to_html {
 
     ##################
     #simple repalce
-    $_->set_tag('p') for ( $root->getElementsByTagName('item') );
+    $_->set_tag('p')    for ( $root->getElementsByTagName('item') );
     $_->set_tag('p_zh') for ( $root->getElementsByTagName('item_zh') );
 
     for my $block (qw/note warning/) {
@@ -112,13 +113,15 @@ sub xml_to_html {
     }
 
     $_->set_att( class => 'english' ) for ( $root->getElementsByTagName('p') );
-    $_->set_tag('p') for ( $root->getElementsByTagName('p_zh') );
 
     if ($delete_en) {
         for ( $root->getElementsByTagName('p') ) {
             $_->delete;
         }
     }
+    $_->set_tag('p')
+      for ( $root->getElementsByTagName('p_zh') )
+      ;    # this statement must be behind delete statement
 
     $_->set_tag('span') for ( $root->getElementsByTagName('input') );
     $_->set_tag('dt')   for ( $root->getElementsByTagName('tag') );
