@@ -155,4 +155,13 @@ var index = [
   ['fun', 'stdlib', 'math:sqrt/1', []],
   ['fun', 'stdlib', 'math:erf/1', []],
   ['fun', 'stdlib', 'math:erfc/1', []],
+  ['mod', 'stdlib', 're', []],
+  ['fun', 'stdlib', 're:compile/1', []],
+  ['fun', 'stdlib', 're:compile/2', []],
+  ['fun', 'stdlib', 're:run/2', []],
+  ['fun', 'stdlib', 're:run/3', []],
+  ['fun', 'stdlib', 're:replace/3', []],
+  ['fun', 'stdlib', 're:replace/4', []],
+  ['fun', 'stdlib', 're:split/2', []],
+  ['fun', 'stdlib', 're:split/3', []],
 ];
