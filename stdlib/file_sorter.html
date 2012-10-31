@@ -318,30 +318,36 @@ output(L) ->
     <h4>Functions:</h4>
     <hr/>
     <div class="function">
-      <h3 arity="1" name="sort"/>
+      <h3 arity="1" id="sort/1" name="sort">sort(FileName) -> Reply</h3>
+      <div class="type_desc">      FileName = file_name(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
       <div class="discription">
         <p class="english">Sorts terms on files. <code>sort(FileName)</code> is equivalent
           to <code>sort([FileName], FileName)</code>.</p>
       </div>
     </div>
     <div class="function">
-      <h3 arity="2" name="sort"/>
-      <h3 arity="3" name="sort"/>
+      <h3 arity="2" id="sort/2" name="sort">sort(Input, Output) -> Reply</h3>
+      <div class="type_desc">      Input = input(),<br/>      Output = output(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
+      <h3 arity="3" id="sort/3" name="sort">sort(Input, Output, Options) -> Reply</h3>
+      <div class="type_desc">      Input = input(),<br/>      Output = output(),<br/>      Options = options(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
       <div class="discription">
         <p class="english">Sorts terms on files. <code>sort(Input, Output)</code> is
           equivalent to <code>sort(Input, Output, [])</code>.</p>
       </div>
     </div>
     <div class="function">
-      <h3 arity="2" name="keysort"/>
+      <h3 arity="2" id="keysort/2" name="keysort">keysort(KeyPos, FileName) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      FileName = file_name(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
       <div class="discription">
         <p class="english">Sorts tuples on files. <code>keysort(N, FileName)</code> is
           equivalent to <code>keysort(N, [FileName], FileName)</code>.</p>
       </div>
     </div>
     <div class="function">
-      <h3 arity="3" name="keysort"/>
-      <h3 arity="4" name="keysort"/>
+      <h3 arity="3" id="keysort/3" name="keysort">keysort(KeyPos, Input, Output) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      Input = input(),<br/>      Output = output(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
+      <h3 arity="4" id="keysort/4" name="keysort">keysort(KeyPos, Input, Output, Options) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      Input = input(),<br/>      Output = output(),<br/>      Options = options(),<br/>      Reply = ok | {error, reason()} | input_reply() | output_reply()</div>
       <div class="discription">
         <p class="english">Sorts tuples on files. The sort is performed on the
           element(s) mentioned in <code><anno>KeyPos</anno></code>. If two
@@ -353,8 +359,10 @@ output(L) ->
       </div>
     </div>
     <div class="function">
-      <h3 arity="2" name="merge"/>
-      <h3 arity="3" name="merge"/>
+      <h3 arity="2" id="merge/2" name="merge">merge(FileNames, Output) -> Reply</h3>
+      <div class="type_desc">      FileNames = file_names(),<br/>      Output = output(),<br/>      Reply = ok | {error, reason()} | output_reply()</div>
+      <h3 arity="3" id="merge/3" name="merge">merge(FileNames, Output, Options) -> Reply</h3>
+      <div class="type_desc">      FileNames = file_names(),<br/>      Output = output(),<br/>      Options = options(),<br/>      Reply = ok | {error, reason()} | output_reply()</div>
       <div class="discription">
         <p class="english">Merges terms on files. Each input file is assumed to be
           sorted.</p>
@@ -363,8 +371,10 @@ output(L) ->
       </div>
     </div>
     <div class="function">
-      <h3 arity="3" name="keymerge"/>
-      <h3 arity="4" name="keymerge"/>
+      <h3 arity="3" id="keymerge/3" name="keymerge">keymerge(KeyPos, FileNames, Output) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      FileNames = file_names(),<br/>      Output = output(),<br/>      Reply = ok | {error, reason()} | output_reply()</div>
+      <h3 arity="4" id="keymerge/4" name="keymerge">keymerge(KeyPos, FileNames, Output, Options) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      FileNames = file_names(),<br/>      Output = output(),<br/>      Options = options(),<br/>      Reply = ok | {error, reason()} | output_reply()</div>
       <div class="discription">
         <p class="english">Merges tuples on files. Each input file is assumed to be
           sorted on key(s).</p>
@@ -373,8 +383,10 @@ output(L) ->
       </div>
     </div>
     <div class="function">
-      <h3 arity="1" name="check"/>
-      <h3 arity="2" name="check"/>
+      <h3 arity="1" id="check/1" name="check">check(FileName) -> Reply</h3>
+      <div class="type_desc">      FileName = file_name(),<br/>      Reply = {ok, [Result]} | {error, reason()},<br/>      Result = {FileName, TermPosition, term()},<br/>      TermPosition = pos_integer()</div>
+      <h3 arity="2" id="check/2" name="check">check(FileNames, Options) -> Reply</h3>
+      <div class="type_desc">      FileNames = file_names(),<br/>      Options = options(),<br/>      Reply = {ok, [Result]} | {error, reason()},<br/>      Result = {FileName, TermPosition, term()},<br/>      FileName = file_name(),<br/>      TermPosition = pos_integer()</div>
       <div class="discription">
         <p class="english">Checks files for sortedness. If a file is not sorted, the
           first out-of-order element is returned. The first term on a
@@ -384,8 +396,10 @@ output(L) ->
       </div>
     </div>
     <div class="function">
-      <h3 arity="2" name="keycheck"/>
-      <h3 arity="3" name="keycheck"/>
+      <h3 arity="2" id="keycheck/2" name="keycheck">keycheck(KeyPos, FileName) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      FileName = file_name(),<br/>      Reply = {ok, [Result]} | {error, reason()},<br/>      Result = {FileName, TermPosition, term()},<br/>      TermPosition = pos_integer()</div>
+      <h3 arity="3" id="keycheck/3" name="keycheck">keycheck(KeyPos, FileNames, Options) -> Reply</h3>
+      <div class="type_desc">      KeyPos = key_pos(),<br/>      FileNames = file_names(),<br/>      Options = options(),<br/>      Reply = {ok, [Result]} | {error, reason()},<br/>      Result = {FileName, TermPosition, term()},<br/>      FileName = file_name(),<br/>      TermPosition = pos_integer()</div>
       <div class="discription">
         <p class="english">Checks files for sortedness. If a file is not sorted, the
           first out-of-order element is returned. The first term on a
