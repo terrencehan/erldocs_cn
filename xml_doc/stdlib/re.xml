@@ -39,21 +39,24 @@
 
     <p>This module contains regular expression matching functions for
     strings and binaries.</p>
+    <p_zh>该模块包含了一些用以匹配字符串和二进制串的正则函数.</p_zh>
 
     <p>The regular expression syntax and semantics resemble that of
     Perl.</p>
+    <p_zh>正则表达式的语法和语义与Perl很相似.</p_zh>
 
     <p>The library's matching algorithms are currently based on the
     PCRE library, but not all of the PCRE library is interfaced and
     some parts of the library go beyond what PCRE offers. The sections of
     the PCRE documentation which are relevant to this module are included
     here.</p>
-
+    <p_zh>目前该库的匹配算法基于PCRE, 但并不引入了整个PCRE库甚至有些地方已经超出了PCRE库提供的能力.与本模块相关的PCRE的文档也包含在这篇文档中.</p_zh>
     <note>
     <p>The Erlang literal syntax for strings uses the &quot;\&quot;
     (backslash) character as an escape code. You need to escape
     backslashes in literal strings, both in your code and in the shell,
     with an additional backslash, i.e.: &quot;\\&quot;.</p>
+    <p_zh>在Erlang中字符串字面语法使用&quot;\&quot; (反面斜线)作为转义字符. 无论在代码还是Erlang的命令行中，如果你要在字符串中转义反斜线，你需要使用一个额外的反斜线，例如: &quot;\\&quot;.</p_zh>
     </note>
 
 
@@ -85,6 +88,7 @@
       </type>
       <desc>
       <p>The same as <c>compile(Regexp,[])</c></p>
+      <p_zh>与<c>compile(Regexp,[])</c>相似.</p_zh>
       </desc>
     </func> 
     <func>
@@ -104,6 +108,12 @@
       <p>This function compiles a regular expression with the syntax
       described below into an internal format to be used later as a
       parameter to the run/2,3 functions.</p>
+      <p_zh>该函数使用下述的语法将一个正则表达式编译成一种内部的格式，[TODO]该格式可以后来被使用作为run/2,3函数的一个参数.</p_zh>
+      <p>Compiling the regular expression before matching is useful if
+      the same expression is to be used in matching against multiple
+      subjects during the program's lifetime. Compiling once and
+      executing many times is far more efficient than compiling each
+      time one wants to match.</p>
       <p>Compiling the regular expression before matching is useful if
       the same expression is to be used in matching against multiple
       subjects during the program's lifetime. Compiling once and

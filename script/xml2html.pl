@@ -98,6 +98,9 @@ sub xml_to_html {
 
     ##################
     #simple repalce
+    $_->set_tag('p') for ( $root->getElementsByTagName('item') );
+    $_->set_tag('p_zh') for ( $root->getElementsByTagName('item_zh') );
+
     for my $block (qw/note warning/) {
         for ( $root->getElementsByTagName($block) ) {
             $_->set_tag('div');
