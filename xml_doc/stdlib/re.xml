@@ -291,7 +291,7 @@ This option makes it possible to include comments inside complicated patterns. N
       be done either by specifying <c>none</c> or an empty list as
       <c>ValueSpec</c>.</p>
 
-      <p_zh>如果capture选项指出根本不进行子字符串的捕获(<c>{capture, none}</c>), 函数将会对成功匹配返回但原子<c>match</c>, 否则返回元组<c>{match, ValueList}</c>. 可以通过将<c>ValueSpec</c>设为<c>none</c>或者空列表来禁止捕获行为.</p_zh>
+      <p_zh>如果capture选项指出根本不进行子字符串的捕获(<c>{capture, none}</c>), 函数将会对成功匹配返回单原子<c>match</c>, 否则返回元组<c>{match, ValueList}</c>. 可以通过将<c>ValueSpec</c>设为<c>none</c>或者空列表来禁止捕获行为.</p_zh>
 
       <p>The options relevant for execution are:</p>
       <p_zh>与执行相关的选项如下:</p_zh>
