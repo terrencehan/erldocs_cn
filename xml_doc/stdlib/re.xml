@@ -136,24 +136,34 @@
       <item_zh>在模式中的美元元字符只匹配对象字符串的结尾(严格意义的结尾). 没有这个选项的话, 美元符也能匹配字符串结尾的换行符(但不是之前的换行符).如果给出了<c>multiline</c>选项, 那么<c>dollar_endonly</c>将会被忽略. 这与Perl中的选项并不一样, and no way to set it within a pattern.</item_zh>
       <tag><c>dotall</c></tag>
       <item>A dot in the pattern matches all characters, including those that indicate newline. Without it, a dot does not match when the current position is at a newline. This option is equivalent to Perl's /s option, and it can be changed within a pattern by a (?s) option setting. A negative class such as [^a] always matches newline characters, independent of this option's setting.</item>
-      <item_zh>模式中的点匹配包括换行符在内的所有字符. 没有这个选项, 点号不匹配换行符.这个选项与Perl的 /s 相同, 并且可以在模式中设置(?s)来改变它. [TODO], 它不依赖这个选项.</item_zh>
+      <item_zh>模式中的点匹配包括换行符在内的所有字符. 没有这个选项, 点号不匹配换行符.这个选项与Perl的 /s 相同, 并且可以在模式中设置(?s)来改变它. 像[^a]这样的负值字符集合总是匹配换行符, 它不依赖这个选项.</item_zh>
       <tag><c>extended</c></tag>
       <item>Whitespace data characters in the pattern are ignored except when escaped or inside a character class. Whitespace does not include the VT character (ASCII 11). In addition, characters between an unescaped # outside a character class and the next newline, inclusive, are also ignored. This is equivalent to Perl's /x option, and it can be changed within a pattern by a (?x) option setting.
 
 This option makes it possible to include comments inside complicated patterns. Note, however, that this applies only to data characters. Whitespace characters may never appear within special character sequences in a pattern, for example within the sequence <c>(?(</c> which introduces a conditional subpattern.</item>
+      <item_zh>空白字符在匹配模式中是被忽略的，除非它们是被转义的或者在一个字符集合里面. 空白字符不包括VT字符(ASCII 11). 另外, [TODO]characters between an unescaped # outside a character class and the next newline, inclusive, are also ignored. 这与Perl的 /x 选项相同, 而且还可以通过在模式中通过设置(?x)选项来改变它.
+这样就可以在复杂的模式内部加入注释. 注意, 这只适用于数据字符. 空白字符可能永远不会出现在匹配模式中的特殊字符序列中, 例如序列<c>(?(</c> [TODO]which introduces a conditional subpattern.</item_zh>
       <tag><c>firstline</c></tag>
       <item>An unanchored pattern is required to match before or at the first newline in the subject string, though the matched text may continue over the newline.</item>
+      <item_zh>[TODO]An unanchored pattern is required to match before or at the first newline in the subject string, though the matched text may continue over the newline.</item_zh>
       <tag><c>multiline</c></tag>
       <item><p>By default, PCRE treats the subject string as consisting of a single line of characters (even if it actually contains newlines). The "start of line" metacharacter (^) matches only at the start of the string, while the "end of line" metacharacter ($) matches only at the end of the string, or before a terminating newline (unless <c>dollar_endonly</c> is given). This is the same as Perl.</p>
+      <p_zh>默认的, PCRE 将目标字符串视为单行字符(即使包含换行符). "行首" 元字符(^) 只匹配字符串的开始, 而"行尾" 元字符($) 只匹配字符串的结束, 或者是终结换行符之前(除非给定<c>dollar_endonly</c> ). 这与Perl相同.</p_zh>
 
-<p>When <c>multiline</c> is given, the "start of line" and "end of line" constructs match immediately following or immediately before internal newlines in the subject string, respectively, as well as at the very start and end. This is equivalent to Perl's /m option, and it can be changed within a pattern by a (?m) option setting. If there are no newlines in a subject string, or no occurrences of ^ or $ in a pattern, setting <c>multiline</c> has no effect.</p> </item>
+<p>When <c>multiline</c> is given, the "start of line" and "end of line" constructs match immediately following or immediately before internal newlines in the subject string, respectively, as well as at the very start and end. This is equivalent to Perl's /m option, and it can be changed within a pattern by a (?m) option setting. If there are no newlines in a subject string, or no occurrences of ^ or $ in a pattern, setting <c>multiline</c> has no effect.</p> 
+<p_zh>当给定<c>multiline</c> 选项时, "行首" 和 "行尾" 将独立匹配换行符之后或者之前的位置以及整个目标字符串的开头和结尾的位置. 这等同于Perl中的 /m 选项, 并且可以在匹配模式中设置(?m)选项来改变. 如果在目标字符串中没有换行符, 或者在模式中没有^或$, 那么<c>multiline</c>设置没有效果.</p_zh> </item>
+ 
       <tag><c>no_auto_capture</c></tag>
       <item>Disables the use of numbered capturing parentheses in the pattern. Any opening parenthesis that is not followed by ? behaves as if it were followed by ?: but named parentheses can still be used for capturing (and they acquire numbers in the usual way). There is no equivalent of this option in Perl.
 </item>
+      <item_zh>在匹配模式中取消对可获取匹配结果的括号的编号功能. 这样, 任何没有后跟?的左括号与?:相同, 但是命名的括号仍可以用来获取匹配结果(并且它们跟往常一样也获得一个编号). 在Perl中没有与此相同的选项.
+</item_zh>
       <tag><c>dupnames</c></tag>
       <item>Names used to identify capturing subpatterns need not be unique. This can be helpful for certain types of pattern when it is known that only one instance of the named subpattern can ever be matched. There are more details of named subpatterns below</item>
+      <item_zh>用以标示捕获的子模式的命名并不要求是唯一的. 当已知命名的子模式只可能匹配一个实例的时候这样会很有帮助. 下面将会对命名子模式进行更多的介绍.</item_zh>
       <tag><c>ungreedy</c></tag>
       <item>This option inverts the "greediness" of the quantifiers so that they are not greedy by default, but become greedy if followed by "?". It is not compatible with Perl. It can also be set by a (?U) option setting within the pattern.</item>
+      <item_zh>这个选项颠倒了量词的"贪婪"特性，所以将"非贪婪"的作为量词的默认设置, 但是如果后跟"?"那么将会成为贪婪的. 这与Perl是不兼容的. 这也可以通过在模式中设置(?U)选项来实现.</item_zh>
       <tag><c>{newline, NLSpec}</c></tag>
       <item>
       <p>Override the default definition of a newline in the subject string, which is LF (ASCII 10) in Erlang.</p>
@@ -161,10 +171,10 @@ This option makes it possible to include comments inside complicated patterns. N
       <taglist>
         <tag><c>cr</c></tag>
         <item>Newline is indicated by a single character CR (ASCII 13)</item>
-        <item_zh>换行符有单字符CR (ASCII 13)指定</item_zh>.
+        <item_zh>换行符有单字符CR (ASCII 13)指定.</item_zh>
         <tag><c>lf</c></tag>
         <item>Newline is indicated by a single character LF (ASCII 10), the default</item>
-        <item_zh>换行符有单字符LF (ASCII 10)指定(默认的）</item_zh>.
+        <item_zh>换行符有单字符LF (ASCII 10)指定(默认的）.</item_zh>
         <tag><c>crlf</c></tag>
         <item>Newline is indicated by the two-character CRLF (ASCII 13 followed by ASCII 10) sequence.</item>
         <item_zh>换行符由双字符序列CRLF (ASCII 13 followed by ASCII 10) 指定.</item_zh>
@@ -173,12 +183,15 @@ This option makes it possible to include comments inside complicated patterns. N
         <item_zh>任意前面三种序列都可以被识别.</item_zh>
         <tag><c>any</c></tag>
         <item>Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </item>
+        <item_zh>任何以上换行符, 以及Unicode 序列 VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), 和 PS (paragraph separator, U+2029). </item_zh>
       </taglist>
       </item>
       <tag><c>bsr_anycrlf</c></tag>
       <item>Specifies specifically that \R is to match only the cr, lf or crlf sequences, not the Unicode specific newline characters.</item>
+      <item_zh>特别指出\R只匹配cr, lf 或 crlf 序列, 而不是Unicode 特有的换行字符.</item_zh>
       <tag><c>bsr_unicode</c></tag>
       <item>Specifies specifically that \R is to match all the Unicode newline characters (including crlf etc, the default).</item>
+      <item_zh>特别指出\R 匹配Unicode 所有的换行符(默认包括crlf等).</item_zh>
       </taglist>
     </desc>
     </func> 
@@ -194,6 +207,7 @@ This option makes it possible to include comments inside complicated patterns. N
       </type>
       <desc>
       <p>The same as <c>run(Subject,RE,[])</c>.</p>
+      <p_zh>等同于<c>run(Subject,RE,[])</c>.</p_zh>
       </desc>
     </func> 
     <func>
@@ -223,11 +237,15 @@ This option makes it possible to include comments inside complicated patterns. N
       automatically compiled (as by <c>re:compile/2</c>) and executed,
       or as a pre compiled <c>mp()</c> in which case it is executed
       against the subject directly.</p>
+      <p_zh>执行一个正则匹配, 返回<c>match/{match,
+      Captured}</c> 或 <c>nomatch</c>. 正则表达式可以以<c>iodata()</c>的形式给出，在这种情况下会自动编译(就像<c>re:compile/2</c>) 并且执行, 或者以预先编译<c>mp()</c>的形式给出，在这种情况下直接对目标字符串进行匹配.</p_zh>
 
       <p>When compilation is involved, the exception <c>badarg</c> is
       thrown if a compilation error occurs. Call <c>re:compile/2</c>
       to get information about the location of the error in the
       regular expression.</p>
+
+  <p_zh>在编译阶段, 如果遇到一个编译错误将会抛出异常<c>badarg</c>. 调用<c>re:compile/2</c>函数可以获得正则表达式中错误定位信息.</p_zh>
 
       <p>If the regular expression is previously compiled, the option
       list can only contain the options <c>anchored</c>,
@@ -241,6 +259,8 @@ This option makes it possible to include comments inside complicated patterns. N
       the compilation and execution if present together with a non
       pre-compiled regular expression.</p>
 
+      <p_zh>如果正则表达式是预先编译好的,选项列表只能包含<c>anchored</c>, <c>global</c>, <c>notbol</c>, <c>noteol</c>, <c>notempty</c>, <c>{offset, integer() >= 0}</c>, <c>{newline, NLSpec}</c> 和 <c>{capture, ValueSpec}/{capture, ValueSpec, Type}</c>.  另外，所有对<c>re:compile/2</c>函数合法的选项都在此适用. 选项对编译和执行阶段都有效，也就是说<c>anchored</c> 和 <c>{newline, NLSpec}</c> 将会作用于编译和执行阶段(假设在不提供预先编译的正则表示的情况下).</p_zh>
+
       <p>If the regular expression was previously compiled with the
       option <c>unicode</c>, the <c>Subject</c> should be provided as
       a valid Unicode <c>charlist()</c>, otherwise any <c>iodata()</c>
@@ -248,6 +268,8 @@ This option makes it possible to include comments inside complicated patterns. N
       <c>unicode</c> is given, both the <c>Subject</c> and the regular
       expression should be given as valid Unicode
       <c>charlists()</c>.</p>
+
+      <p_zh>如果正则表达式是以<c>unicode</c>选项预先编译好的, 那么<c>Subject</c>应该以合法的Unicode的<c>charlist()</c>形式给出, [TODO]otherwise any <c>iodata()</c> will do. 如果调用编译且给定<c>unicode</c>选项, 那么<c>Subject</c>和正则表达式都应该是合法的Unicode<c>charlists()形式</c>.</p_zh>
 
       <p>The <c>{capture, ValueSpec}/{capture, ValueSpec, Type}</c>
       defines what to return from the function upon successful
@@ -259,6 +281,8 @@ This option makes it possible to include comments inside complicated patterns. N
       quite flexible and powerful. The different options are described
       in detail below.</p>
 
+      <p_zh><c>{capture, ValueSpec}/{capture, ValueSpec, Type}</c>定义了当匹配成功时函数返回的内容. <c>capture</c> 元组可能包括一个值说明，它指出了返回哪个捕获的子字符串, 以及一个类型说明，它指出了捕获的子字符串的返回形式(索引元组、列表或二进制串). <c>capture</c> 选项使函数相当的灵活和强力. 其它选项将会在下面进行详细的描述.</p_zh>
+
       <p>If the capture options describe that no substring capturing
       at all is to be done (<c>{capture, none}</c>), the function will
       return the single atom <c>match</c> upon successful matching,
@@ -267,7 +291,10 @@ This option makes it possible to include comments inside complicated patterns. N
       be done either by specifying <c>none</c> or an empty list as
       <c>ValueSpec</c>.</p>
 
+      <p_zh>如果capture选项指出根本不进行子字符串的捕获(<c>{capture, none}</c>), 函数将会对成功匹配返回但原子<c>match</c>, 否则返回元组<c>{match, ValueList}</c>. 可以通过将<c>ValueSpec</c>设为<c>none</c>或者空列表来禁止捕获行为.</p_zh>
+
       <p>The options relevant for execution are:</p>
+      <p_zh>与执行相关的选项如下:</p_zh>
 
       <taglist>
       <tag><c>anchored</c></tag>

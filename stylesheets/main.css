@@ -440,6 +440,11 @@ h2.modsummary {
     margin-left:30px;
     font-size: 13px;
 }
+
+.taglist{
+    margin-left:20px;
+}
+
 h3 + .type_desc {
    margin-top:10px;
 }

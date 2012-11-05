@@ -103,7 +103,7 @@
         <p>如果给定unicod选项, 正则表达式应该是合法的unicode类型的<code>charlist()</code>, 否则应该是合法的<code>iodata()</code>.</p>
         <p class="english"><marker id="compile_options"/>The options have the following meanings:</p>
         <p><marker id="compile_options"/>选项有下列意义:</p>
-        <taglist>
+        <div class="taglist">
           <dt>
             <code>unicode</code>
           </dt>
@@ -128,53 +128,86 @@
             <code>dotall</code>
           </dt>
           <p class="english">A dot in the pattern matches all characters, including those that indicate newline. Without it, a dot does not match when the current position is at a newline. This option is equivalent to Perl's /s option, and it can be changed within a pattern by a (?s) option setting. A negative class such as [^a] always matches newline characters, independent of this option's setting.</p>
-          <p>模式中的点匹配包括换行符在内的所有字符. 没有这个选项, 点号不匹配换行符.这个选项与Perl的 /s 相同, 并且可以在模式中设置(?s)来改变它. [TODO], 它不依赖这个选项.</p>
+          <p>模式中的点匹配包括换行符在内的所有字符. 没有这个选项, 点号不匹配换行符.这个选项与Perl的 /s 相同, 并且可以在模式中设置(?s)来改变它. 像[^a]这样的负值字符集合总是匹配换行符, 它不依赖这个选项.</p>
           <dt>
             <code>extended</code>
           </dt>
           <p class="english">Whitespace data characters in the pattern are ignored except when escaped or inside a character class. Whitespace does not include the VT character (ASCII 11). In addition, characters between an unescaped # outside a character class and the next newline, inclusive, are also ignored. This is equivalent to Perl's /x option, and it can be changed within a pattern by a (?x) option setting.
 
 This option makes it possible to include comments inside complicated patterns. Note, however, that this applies only to data characters. Whitespace characters may never appear within special character sequences in a pattern, for example within the sequence <code>(?(</code> which introduces a conditional subpattern.</p>
+          <p>空白字符在匹配模式中是被忽略的，除非它们是被转义的或者在一个字符集合里面. 空白字符不包括VT字符(ASCII 11). 另外, [TODO]characters between an unescaped # outside a character class and the next newline, inclusive, are also ignored. 这与Perl的 /x 选项相同, 而且还可以通过在模式中通过设置(?x)选项来改变它.
+这样就可以在复杂的模式内部加入注释. 注意, 这只适用于数据字符. 空白字符可能永远不会出现在匹配模式中的特殊字符序列中, 例如序列<code>(?(</code> [TODO]which introduces a conditional subpattern.</p>
           <dt>
             <code>firstline</code>
           </dt>
           <p class="english">An unanchored pattern is required to match before or at the first newline in the subject string, though the matched text may continue over the newline.</p>
+          <p>[TODO]An unanchored pattern is required to match before or at the first newline in the subject string, though the matched text may continue over the newline.</p>
           <dt>
             <code>multiline</code>
           </dt>
-          <p class="english"><p class="english">By default, PCRE treats the subject string as consisting of a single line of characters (even if it actually contains newlines). The "start of line" metacharacter (^) matches only at the start of the string, while the "end of line" metacharacter ($) matches only at the end of the string, or before a terminating newline (unless <code>dollar_endonly</code> is given). This is the same as Perl.</p><p class="english">When <code>multiline</code> is given, the "start of line" and "end of line" constructs match immediately following or immediately before internal newlines in the subject string, respectively, as well as at the very start and end. This is equivalent to Perl's /m option, and it can be changed within a pattern by a (?m) option setting. If there are no newlines in a subject string, or no occurrences of ^ or $ in a pattern, setting <code>multiline</code> has no effect.</p> </p>
+          <p class="english"><p class="english">By default, PCRE treats the subject string as consisting of a single line of characters (even if it actually contains newlines). The "start of line" metacharacter (^) matches only at the start of the string, while the "end of line" metacharacter ($) matches only at the end of the string, or before a terminating newline (unless <code>dollar_endonly</code> is given). This is the same as Perl.</p><p>默认的, PCRE 将目标字符串视为单行字符(即使包含换行符). "行首" 元字符(^) 只匹配字符串的开始, 而"行尾" 元字符($) 只匹配字符串的结束, 或者是终结换行符之前(除非给定<code>dollar_endonly</code> ). 这与Perl相同.</p><p class="english">When <code>multiline</code> is given, the "start of line" and "end of line" constructs match immediately following or immediately before internal newlines in the subject string, respectively, as well as at the very start and end. This is equivalent to Perl's /m option, and it can be changed within a pattern by a (?m) option setting. If there are no newlines in a subject string, or no occurrences of ^ or $ in a pattern, setting <code>multiline</code> has no effect.</p><p>当给定<code>multiline</code> 选项时, "行首" 和 "行尾" 将独立匹配换行符之后或者之前的位置以及整个目标字符串的开头和结尾的位置. 这等同于Perl中的 /m 选项, 并且可以在匹配模式中设置(?m)选项来改变. 如果在目标字符串中没有换行符, 或者在模式中没有^或$, 那么<code>multiline</code>设置没有效果.</p> </p>
           <dt>
             <code>no_auto_capture</code>
           </dt>
           <p class="english">Disables the use of numbered capturing parentheses in the pattern. Any opening parenthesis that is not followed by ? behaves as if it were followed by ?: but named parentheses can still be used for capturing (and they acquire numbers in the usual way). There is no equivalent of this option in Perl.
 </p>
+          <p>在匹配模式中取消对可获取匹配结果的括号的编号功能. 这样, 任何没有后跟?的左括号与?:相同, 但是命名的括号仍可以用来获取匹配结果(并且它们跟往常一样也获得一个编号). 在Perl中没有与此相同的选项.
+</p>
           <dt>
             <code>dupnames</code>
           </dt>
           <p class="english">Names used to identify capturing subpatterns need not be unique. This can be helpful for certain types of pattern when it is known that only one instance of the named subpattern can ever be matched. There are more details of named subpatterns below</p>
+          <p>用以标示捕获的子模式的命名并不要求是唯一的. 当已知命名的子模式只可能匹配一个实例的时候这样会很有帮助. 下面将会对命名子模式进行更多的介绍.</p>
           <dt>
             <code>ungreedy</code>
           </dt>
           <p class="english">This option inverts the "greediness" of the quantifiers so that they are not greedy by default, but become greedy if followed by "?". It is not compatible with Perl. It can also be set by a (?U) option setting within the pattern.</p>
+          <p>这个选项颠倒了量词的"贪婪"特性，所以将"非贪婪"的作为量词的默认设置, 但是如果后跟"?"那么将会成为贪婪的. 这与Perl是不兼容的. 这也可以通过在模式中设置(?U)选项来实现.</p>
           <dt>
             <code>{newline, NLSpec}</code>
           </dt>
           <p class="english">
             <p class="english">Override the default definition of a newline in the subject string, which is LF (ASCII 10) in Erlang.</p>
             <p>重写对象字符串中默认的换行符定义, Erlang中的默认换行符是:LF (ASCII 10).</p>
-            <taglist><dt><code>cr</code></dt><p class="english">Newline is indicated by a single character CR (ASCII 13)</p><p>换行符有单字符CR (ASCII 13)指定</p>.
-        <dt><code>lf</code></dt><p class="english">Newline is indicated by a single character LF (ASCII 10), the default</p><p>换行符有单字符LF (ASCII 10)指定(默认的）</p>.
-        <dt><code>crlf</code></dt><p class="english">Newline is indicated by the two-character CRLF (ASCII 13 followed by ASCII 10) sequence.</p><p>换行符由双字符序列CRLF (ASCII 13 followed by ASCII 10) 指定.</p><dt><code>anycrlf</code></dt><p class="english">Any of the three preceding sequences should be recognized.</p><p>任意前面三种序列都可以被识别.</p><dt><code>any</code></dt><p class="english">Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </p></taglist>
+            <div class="taglist">
+              <dt>
+                <code>cr</code>
+              </dt>
+              <p class="english">Newline is indicated by a single character CR (ASCII 13)</p>
+              <p>换行符有单字符CR (ASCII 13)指定.</p>
+              <dt>
+                <code>lf</code>
+              </dt>
+              <p class="english">Newline is indicated by a single character LF (ASCII 10), the default</p>
+              <p>换行符有单字符LF (ASCII 10)指定(默认的）.</p>
+              <dt>
+                <code>crlf</code>
+              </dt>
+              <p class="english">Newline is indicated by the two-character CRLF (ASCII 13 followed by ASCII 10) sequence.</p>
+              <p>换行符由双字符序列CRLF (ASCII 13 followed by ASCII 10) 指定.</p>
+              <dt>
+                <code>anycrlf</code>
+              </dt>
+              <p class="english">Any of the three preceding sequences should be recognized.</p>
+              <p>任意前面三种序列都可以被识别.</p>
+              <dt>
+                <code>any</code>
+              </dt>
+              <p class="english">Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </p>
+              <p>任何以上换行符, 以及Unicode 序列 VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), 和 PS (paragraph separator, U+2029). </p>
+            </div>
           </p>
           <dt>
             <code>bsr_anycrlf</code>
           </dt>
           <p class="english">Specifies specifically that \R is to match only the cr, lf or crlf sequences, not the Unicode specific newline characters.</p>
+          <p>特别指出\R只匹配cr, lf 或 crlf 序列, 而不是Unicode 特有的换行字符.</p>
           <dt>
             <code>bsr_unicode</code>
           </dt>
           <p class="english">Specifies specifically that \R is to match all the Unicode newline characters (including crlf etc, the default).</p>
-        </taglist>
+          <p>特别指出\R 匹配Unicode 所有的换行符(默认包括crlf等).</p>
+        </div>
       </div>
     </div>
     <div class="function">
@@ -187,6 +220,7 @@ This option makes it possible to include comments inside complicated patterns. N
       </type>
       <div class="discription">
         <p class="english">The same as <code>run(Subject,RE,[])</code>.</p>
+        <p>等同于<code>run(Subject,RE,[])</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -214,10 +248,13 @@ This option makes it possible to include comments inside complicated patterns. N
       automatically compiled (as by <code>re:compile/2</code>) and executed,
       or as a pre compiled <code>mp()</code> in which case it is executed
       against the subject directly.</p>
+        <p>执行一个正则匹配, 返回<code>match/{match,
+      Captured}</code> 或 <code>nomatch</code>. 正则表达式可以以<code>iodata()</code>的形式给出，在这种情况下会自动编译(就像<code>re:compile/2</code>) 并且执行, 或者以预先编译<code>mp()</code>的形式给出，在这种情况下直接对目标字符串进行匹配.</p>
         <p class="english">When compilation is involved, the exception <code>badarg</code> is
       thrown if a compilation error occurs. Call <code>re:compile/2</code>
       to get information about the location of the error in the
       regular expression.</p>
+        <p>在编译阶段, 如果遇到一个编译错误将会抛出异常<code>badarg</code>. 调用<code>re:compile/2</code>函数可以获得正则表达式中错误定位信息.</p>
         <p class="english">If the regular expression is previously compiled, the option
       list can only contain the options <code>anchored</code>,
       <code>global</code>, <code>notbol</code>, <code>noteol</code>,
@@ -229,6 +266,7 @@ This option makes it possible to include comments inside complicated patterns. N
       <code>anchored</code> and <code>{newline, NLSpec}</code>, will affect both
       the compilation and execution if present together with a non
       pre-compiled regular expression.</p>
+        <p>如果正则表达式是预先编译好的,选项列表只能包含<code>anchored</code>, <code>global</code>, <code>notbol</code>, <code>noteol</code>, <code>notempty</code>, <code>{offset, integer() >= 0}</code>, <code>{newline, NLSpec}</code> 和 <code>{capture, ValueSpec}/{capture, ValueSpec, Type}</code>.  另外，所有对<code>re:compile/2</code>函数合法的选项都在此适用. 选项对编译和执行阶段都有效，也就是说<code>anchored</code> 和 <code>{newline, NLSpec}</code> 将会作用于编译和执行阶段(假设在不提供预先编译的正则表示的情况下).</p>
         <p class="english">If the regular expression was previously compiled with the
       option <code>unicode</code>, the <code>Subject</code> should be provided as
       a valid Unicode <code>charlist()</code>, otherwise any <code>iodata()</code>
@@ -236,6 +274,7 @@ This option makes it possible to include comments inside complicated patterns. N
       <code>unicode</code> is given, both the <code>Subject</code> and the regular
       expression should be given as valid Unicode
       <code>charlists()</code>.</p>
+        <p>如果正则表达式是以<code>unicode</code>选项预先编译好的, 那么<code>Subject</code>应该以合法的Unicode的<code>charlist()</code>形式给出, [TODO]otherwise any <code>iodata()</code> will do. 如果调用编译且给定<code>unicode</code>选项, 那么<code>Subject</code>和正则表达式都应该是合法的Unicode<code>charlists()形式</code>.</p>
         <p class="english">The <code>{capture, ValueSpec}/{capture, ValueSpec, Type}</code>
       defines what to return from the function upon successful
       matching. The <code>capture</code> tuple may contain both a
@@ -245,6 +284,7 @@ This option makes it possible to include comments inside complicated patterns. N
       lists or binaries). The <code>capture</code> option makes the function
       quite flexible and powerful. The different options are described
       in detail below.</p>
+        <p><code>{capture, ValueSpec}/{capture, ValueSpec, Type}</code>定义了当匹配成功时函数返回的内容. <code>capture</code> 元组可能包括一个值说明，它指出了返回哪个捕获的子字符串, 以及一个类型说明，它指出了捕获的子字符串的返回形式(索引元组、列表或二进制串). <code>capture</code> 选项使函数相当的灵活和强力. 其它选项将会在下面进行详细的描述.</p>
         <p class="english">If the capture options describe that no substring capturing
       at all is to be done (<code>{capture, none}</code>), the function will
       return the single atom <code>match</code> upon successful matching,
@@ -252,8 +292,10 @@ This option makes it possible to include comments inside complicated patterns. N
       <code>{match, ValueList}</code> is returned. Disabling capturing can
       be done either by specifying <code>none</code> or an empty list as
       <code>ValueSpec</code>.</p>
+        <p>如果capture选项指出根本不进行子字符串的捕获(<code>{capture, none}</code>), 函数将会对成功匹配返回但原子<code>match</code>, 否则返回元组<code>{match, ValueList}</code>. 可以通过将<code>ValueSpec</code>设为<code>none</code>或者空列表来禁止捕获行为.</p>
         <p class="english">The options relevant for execution are:</p>
-        <taglist>
+        <p>与执行相关的选项如下:</p>
+        <div class="taglist">
           <dt>
             <code>anchored</code>
           </dt>
@@ -282,7 +324,7 @@ This option makes it possible to include comments inside complicated patterns. N
       > 0, the result is included.  For example:</p>
             <pre>    re:run("cat","(|at)",[global]).</pre>
             <p class="english">The following matching will be performed:</p>
-            <taglist>
+            <div class="taglist">
               <dt>At offset <code>0</code></dt>
               <p class="english">The regexp <code>(|at)</code> will first match at the initial
       position of the string <code>cat</code>, giving the result set
@@ -310,7 +352,7 @@ This option makes it possible to include comments inside complicated patterns. N
               <dt>At offset <code>1</code> with <code>[anchored, notempty]</code></dt>
               <p class="english">This will give no result of length > 0 and we are at
       the last position, so the global search is complete.</p>
-            </taglist>
+            </div>
             <p class="english">The result of the call is:</p>
             <pre>     {match,[[{0,0},{0,0}],[{1,0},{1,0}],[{1,2},{1,2}],[{3,0},{3,0}]]}</pre>
           </p>
@@ -367,7 +409,7 @@ This option makes it possible to include comments inside complicated patterns. N
           </dt>
           <p class="english">
             <p class="english">Override the default definition of a newline in the subject string, which is LF (ASCII 10) in Erlang.</p>
-            <taglist>
+            <div class="taglist">
               <dt>
                 <code>cr</code>
               </dt>
@@ -388,7 +430,7 @@ This option makes it possible to include comments inside complicated patterns. N
                 <code>any</code>
               </dt>
               <p class="english">Any of the newline sequences above, plus the Unicode sequences VT (vertical tab, U+000B), FF (formfeed, U+000C), NEL (next line, U+0085), LS (line separator, U+2028), and PS (paragraph separator, U+2029). </p>
-            </taglist>
+            </div>
           </p>
           <dt>
             <code>bsr_anycrlf</code>
@@ -426,14 +468,14 @@ This option makes it possible to include comments inside complicated patterns. N
       list and the rest of the subpatterns being added in the
       order they occurred in the regular expression.</p>
             <p class="english">The capture tuple is built up as follows:</p>
-            <taglist>
+            <div class="taglist">
               <dt>
                 <code>ValueSpec</code>
               </dt>
               <p class="english">
                 <p class="english">Specifies which captured (sub)patterns are to be returned. The ValueSpec can either be an atom describing a predefined set of return values, or a list containing either the indexes or the names of specific subpatterns to return.</p>
                 <p class="english">The predefined sets of subpatterns are:</p>
-                <taglist>
+                <div class="taglist">
                   <dt>
                     <code>all</code>
                   </dt>
@@ -450,7 +492,7 @@ This option makes it possible to include comments inside complicated patterns. N
                     <code>none</code>
                   </dt>
                   <p class="english">Do not return matching subpatterns at all, yielding the single atom <code>match</code> as the return value of the function when matching successfully instead of the <code>{match, list()}</code> return. Specifying an empty list gives the same behavior.</p>
-                </taglist>
+                </div>
                 <p class="english">The value list is a list of indexes for the subpatterns to return, where index 0 is for all of the pattern, and 1 is for the first explicit capturing subpattern in the regular expression, and so forth. When using named captured subpatterns (see below) in the regular expression, one can use <code>atom()</code>s or <code>string()</code>s to specify the subpatterns to be returned. For example, consider the regular expression:</p>
                 <pre>    ".*(abcd).*"</pre>
                 <p class="english">matched against the string ""ABCabcdABC", capturing only the "abcd" part (the first explicit subpattern):</p>
@@ -479,7 +521,7 @@ This option makes it possible to include comments inside complicated patterns. N
               </dt>
               <p class="english">
                 <p class="english">Optionally specifies how captured substrings are to be returned. If omitted, the default of <code>index</code> is used. The <code>Type</code> can be one of the following:</p>
-                <taglist>
+                <div class="taglist">
                   <dt>
                     <code>index</code>
                   </dt>
@@ -492,9 +534,9 @@ This option makes it possible to include comments inside complicated patterns. N
                     <code>binary</code>
                   </dt>
                   <p class="english">Return matching substrings as binaries. If the <code>unicode</code> option is used, these binaries are in UTF-8. If the \C sequence is used together with <code>unicode</code> the binaries may be invalid UTF-8.</p>
-                </taglist>
+                </div>
               </p>
-            </taglist>
+            </div>
             <p class="english">In general, subpatterns that were not assigned a value in the match are returned as the tuple <code>{-1,0}</code> when <code>type</code> is <code>index</code>. Unassigned subpatterns are returned as the empty binary or list, respectively, for other return types. Consider the regular expression:</p>
             <pre>    ".*((?&lt;FOO>abdd)|a(..d)).*"</pre>
             <p class="english">There are three explicitly capturing subpatterns, where the opening parenthesis position determines the order in the result, hence <code>((?&lt;FOO>abdd)|a(..d))</code> is subpattern index 1, <code>(?&lt;FOO>abdd)</code> is subpattern index 2 and <code>(..d)</code> is subpattern index 3. When matched against the following string:</p>
@@ -512,7 +554,7 @@ This option makes it possible to include comments inside complicated patterns. N
             <p class="english">gives the result:</p>
             <pre>    {match,[["a"],["b"]]}</pre>
           </p>
-        </taglist>
+        </div>
         <p class="english">The options solely affecting the compilation step are described in the <code>re:compile/2</code> function.</p>
       </div>
     </div>
@@ -664,18 +706,18 @@ This option makes it possible to include comments inside complicated patterns. N
       to that when the Perl routine is given a negative integer as the
       third parameter.</p>
         <p class="english">Summary of options not previously described for the <code>re:run/3</code> function:</p>
-        <taglist>
+        <div class="taglist">
           <dt>{return,<anno>ReturnType</anno>}</dt>
           <p class="english">
             <p class="english">Specifies how the parts of the original string are presented in the result list. The possible types are:</p>
-            <taglist>
+            <div class="taglist">
               <dt>iodata</dt>
               <p class="english">The variant of <code>iodata()</code> that gives the least copying of data with the current implementation (often a binary, but don't depend on it).</p>
               <dt>binary</dt>
               <p class="english">All parts returned as binaries.</p>
               <dt>list</dt>
               <p class="english">All parts returned as lists of characters ("strings").</p>
-            </taglist>
+            </div>
           </p>
           <dt>group</dt>
           <p class="english">
@@ -705,7 +747,7 @@ This option makes it possible to include comments inside complicated patterns. N
       corresponds to the default behaviour of the <code>split</code>
       built in function in Perl.</p>
           </p>
-        </taglist>
+        </div>
       </div>
     </div>
   </div>
@@ -809,7 +851,7 @@ character, the two-character sequence CRLF
 Unicode newline sequence.</p>
     <p class="english">It is also possible to specify a newline convention by starting a pattern
 string with one of the following five sequences:</p>
-    <taglist><dt>(*CR)</dt>        <p class="english">carriage return</p><dt>(*LF)</dt>        <p class="english">linefeed</p><dt>(*CRLF)</dt>      <p class="english">carriage return, followed by linefeed</p><dt>(*ANYCRLF)</dt>   <p class="english">any of the three above</p><dt>(*ANY)</dt>       <p class="english">all Unicode newline sequences</p></taglist>
+    <div class="taglist"><dt>(*CR)</dt>        <p class="english">carriage return</p><dt>(*LF)</dt>        <p class="english">linefeed</p><dt>(*CRLF)</dt>      <p class="english">carriage return, followed by linefeed</p><dt>(*ANYCRLF)</dt>   <p class="english">any of the three above</p><dt>(*ANY)</dt>       <p class="english">all Unicode newline sequences</p></div>
     <p class="english">These override the default and the options given to <code>re:compile/2</code>. For
 example, the pattern:</p>
     <quote>
@@ -851,14 +893,14 @@ themselves but instead are interpreted in some special way.</p>
 anywhere in the pattern except within square brackets, and those that are
 recognized within square brackets. Outside square brackets, the metacharacters
 are as follows:</p>
-    <taglist><dt>\</dt>      <p class="english">general escape character with several uses</p><dt>^</dt>      <p class="english">assert start of string (or line, in multiline mode)</p><dt>$</dt>      <p class="english">assert end of string (or line, in multiline mode)</p><dt>.</dt>      <p class="english">match any character except newline (by default)</p><dt>[</dt>      <p class="english">start character class definition</p><dt>|</dt>      <p class="english">start of alternative branch</p><dt>(</dt>      <p class="english">start subpattern</p><dt>)</dt>      <p class="english">end subpattern</p><dt>?</dt>      <p class="english">extends the meaning of (,
+    <div class="taglist"><dt>\</dt>      <p class="english">general escape character with several uses</p><dt>^</dt>      <p class="english">assert start of string (or line, in multiline mode)</p><dt>$</dt>      <p class="english">assert end of string (or line, in multiline mode)</p><dt>.</dt>      <p class="english">match any character except newline (by default)</p><dt>[</dt>      <p class="english">start character class definition</p><dt>|</dt>      <p class="english">start of alternative branch</p><dt>(</dt>      <p class="english">start subpattern</p><dt>)</dt>      <p class="english">end subpattern</p><dt>?</dt>      <p class="english">extends the meaning of (,
                           also 0 or 1 quantifier,
                           also quantifier minimizer</p><dt>*</dt>      <p class="english">0 or more quantifier</p><dt>+</dt>      <p class="english">1 or more quantifier,
-                          also "possessive quantifier"</p><dt>{</dt>      <p class="english">start min/max quantifier</p></taglist>
+                          also "possessive quantifier"</p><dt>{</dt>      <p class="english">start min/max quantifier</p></div>
     <p class="english">Part of a pattern that is in square brackets is called a "character class". In
 a character class the only metacharacters are:</p>
-    <taglist><dt>\</dt>      <p class="english">general escape character</p><dt>^</dt>      <p class="english">negate the class, but only if the first character</p><dt>-</dt>      <p class="english">indicates character range</p><dt>[</dt>      <p class="english">POSIX character class (only if followed by POSIX
-           syntax)</p><dt>]</dt>      <p class="english">terminates the character class</p></taglist>
+    <div class="taglist"><dt>\</dt>      <p class="english">general escape character</p><dt>^</dt>      <p class="english">negate the class, but only if the first character</p><dt>-</dt>      <p class="english">indicates character range</p><dt>[</dt>      <p class="english">POSIX character class (only if followed by POSIX
+           syntax)</p><dt>]</dt>      <p class="english">terminates the character class</p></div>
     <p class="english">The following sections describe the use of each of the metacharacters.</p>
   </section>
   <section>
@@ -897,7 +939,7 @@ non-printing characters, apart from the binary zero that terminates a pattern,
 but when a pattern is being prepared by text editing, it is usually easier to
 use one of the following escape sequences than the binary character it
 represents:</p>
-    <taglist><dt>\a</dt>        <p class="english">alarm, that is, the BEL character (hex 07)</p><dt>\cx</dt>       <p class="english">"control-x", where x is any character</p><dt>\e </dt>       <p class="english">escape (hex 1B)</p><dt>\f</dt>        <p class="english">formfeed (hex 0C)</p><dt>\n</dt>        <p class="english">linefeed (hex 0A)</p><dt>\r</dt>        <p class="english">carriage return (hex 0D)</p><dt>\t </dt>       <p class="english">tab (hex 09)</p><dt>\ddd</dt>      <p class="english">character with octal code ddd, or backreference</p><dt>\xhh </dt>     <p class="english">character with hex code hh</p><dt>\x{hhh..}</dt> <p class="english">character with hex code hhh..</p></taglist>
+    <div class="taglist"><dt>\a</dt>        <p class="english">alarm, that is, the BEL character (hex 07)</p><dt>\cx</dt>       <p class="english">"control-x", where x is any character</p><dt>\e </dt>       <p class="english">escape (hex 1B)</p><dt>\f</dt>        <p class="english">formfeed (hex 0C)</p><dt>\n</dt>        <p class="english">linefeed (hex 0A)</p><dt>\r</dt>        <p class="english">carriage return (hex 0D)</p><dt>\t </dt>       <p class="english">tab (hex 09)</p><dt>\ddd</dt>      <p class="english">character with octal code ddd, or backreference</p><dt>\xhh </dt>     <p class="english">character with hex code hh</p><dt>\x{hhh..}</dt> <p class="english">character with hex code hhh..</p></div>
     <p class="english">The precise effect of \cx is as follows: if x is a lower case letter, it
 is converted to upper case. Then bit 6 of the character (hex 40) is inverted.
 Thus \cz becomes hex 1A, but \c{ becomes hex 3B, while \c; becomes hex
@@ -937,12 +979,12 @@ character specified in octal must be less than \400. In UTF-8 mode, values up
 to \777 are permitted. 
 
 For example:</p>
-    <taglist><dt>\040</dt>   <p class="english">is another way of writing a space</p><dt>\40</dt>    <p class="english">is the same, provided there are fewer than 40
+    <div class="taglist"><dt>\040</dt>   <p class="english">is another way of writing a space</p><dt>\40</dt>    <p class="english">is the same, provided there are fewer than 40
             previous capturing subpatterns</p><dt>\7</dt>     <p class="english">is always a back reference</p><dt>\11</dt>   <p class="english"> might be a back reference, or another way of
             writing a tab</p><dt>\011</dt>   <p class="english">is always a tab</p><dt>\0113</dt>  <p class="english">is a tab followed by the character "3"</p><dt>\113</dt>   <p class="english">might be a back reference, otherwise the
             character with octal code 113</p><dt>\377</dt>   <p class="english">might be a back reference, otherwise
             the byte consisting entirely of 1 bits</p><dt>\81</dt>    <p class="english">is either a back reference, or a binary zero
-            followed by the two characters "8" and "1"</p></taglist>
+            followed by the two characters "8" and "1"</p></div>
     <p class="english">Note that octal values of 100 or greater must not be introduced by
 a leading zero, because no more than three octal digits are ever
 read.</p>
@@ -965,7 +1007,7 @@ parenthesized subpatterns.</p>
     </p>
     <p class="english">Another use of backslash is for specifying generic character types. The
 following are always recognized:</p>
-    <taglist><dt>\d</dt>     <p class="english">any decimal digit</p><dt>\D</dt>     <p class="english">any character that is not a decimal digit</p><dt>\h</dt>     <p class="english">any horizontal whitespace character</p><dt>\H</dt>     <p class="english">any character that is not a horizontal whitespace character</p><dt>\s</dt>     <p class="english">any whitespace character</p><dt>\S</dt>     <p class="english">any character that is not a whitespace character</p><dt>\v</dt>     <p class="english">any vertical whitespace character</p><dt>\V</dt>     <p class="english">any character that is not a vertical whitespace character</p><dt>\w</dt>     <p class="english">any "word" character</p><dt>\W</dt>     <p class="english">any "non-word" character</p></taglist>
+    <div class="taglist"><dt>\d</dt>     <p class="english">any decimal digit</p><dt>\D</dt>     <p class="english">any character that is not a decimal digit</p><dt>\h</dt>     <p class="english">any horizontal whitespace character</p><dt>\H</dt>     <p class="english">any character that is not a horizontal whitespace character</p><dt>\s</dt>     <p class="english">any whitespace character</p><dt>\S</dt>     <p class="english">any character that is not a whitespace character</p><dt>\v</dt>     <p class="english">any vertical whitespace character</p><dt>\V</dt>     <p class="english">any character that is not a vertical whitespace character</p><dt>\w</dt>     <p class="english">any "word" character</p><dt>\W</dt>     <p class="english">any "non-word" character</p></div>
     <p class="english">Each pair of escape sequences partitions the complete set of characters into
 two disjoint sets. Any given character matches one, and only one, of each pair.</p>
     <p class="english">These character type sequences can appear both inside and outside character
@@ -985,9 +1027,9 @@ reasons.</p>
     <p class="english">The sequences \h, \H, \v, and \V are Perl 5.10 features. In contrast to the
 other sequences, these do match certain high-valued codepoints in UTF-8 mode.
 The horizontal space characters are:</p>
-    <taglist><dt>U+0009</dt>     <p class="english">Horizontal tab</p><dt>U+0020</dt>     <p class="english">Space</p><dt>U+00A0</dt>     <p class="english">Non-break space</p><dt>U+1680</dt>     <p class="english">Ogham space mark</p><dt>U+180E</dt>     <p class="english">Mongolian vowel separator</p><dt>U+2000</dt>     <p class="english">En quad</p><dt>U+2001</dt>     <p class="english">Em quad</p><dt>U+2002</dt>     <p class="english">En space</p><dt>U+2003</dt>     <p class="english">Em space</p><dt>U+2004</dt>     <p class="english">Three-per-em space</p><dt>U+2005</dt>     <p class="english">Four-per-em space</p><dt>U+2006</dt>     <p class="english">Six-per-em space</p><dt>U+2007</dt>     <p class="english">Figure space</p><dt>U+2008</dt>     <p class="english">Punctuation space</p><dt>U+2009</dt>     <p class="english">Thin space</p><dt>U+200A</dt>     <p class="english">Hair space</p><dt>U+202F</dt>     <p class="english">Narrow no-break space</p><dt>U+205F</dt>     <p class="english">Medium mathematical space</p><dt>U+3000</dt>     <p class="english">Ideographic space</p></taglist>
+    <div class="taglist"><dt>U+0009</dt>     <p class="english">Horizontal tab</p><dt>U+0020</dt>     <p class="english">Space</p><dt>U+00A0</dt>     <p class="english">Non-break space</p><dt>U+1680</dt>     <p class="english">Ogham space mark</p><dt>U+180E</dt>     <p class="english">Mongolian vowel separator</p><dt>U+2000</dt>     <p class="english">En quad</p><dt>U+2001</dt>     <p class="english">Em quad</p><dt>U+2002</dt>     <p class="english">En space</p><dt>U+2003</dt>     <p class="english">Em space</p><dt>U+2004</dt>     <p class="english">Three-per-em space</p><dt>U+2005</dt>     <p class="english">Four-per-em space</p><dt>U+2006</dt>     <p class="english">Six-per-em space</p><dt>U+2007</dt>     <p class="english">Figure space</p><dt>U+2008</dt>     <p class="english">Punctuation space</p><dt>U+2009</dt>     <p class="english">Thin space</p><dt>U+200A</dt>     <p class="english">Hair space</p><dt>U+202F</dt>     <p class="english">Narrow no-break space</p><dt>U+205F</dt>     <p class="english">Medium mathematical space</p><dt>U+3000</dt>     <p class="english">Ideographic space</p></div>
     <p class="english">The vertical space characters are:</p>
-    <taglist><dt>U+000A</dt>     <p class="english">Linefeed</p><dt>U+000B</dt>     <p class="english">Vertical tab</p><dt>U+000C</dt>     <p class="english">Formfeed</p><dt>U+000D</dt>     <p class="english">Carriage return</p><dt>U+0085</dt>     <p class="english">Next line</p><dt>U+2028</dt>     <p class="english">Line separator</p><dt>U+2029</dt>     <p class="english">Paragraph separator</p></taglist>
+    <div class="taglist"><dt>U+000A</dt>     <p class="english">Linefeed</p><dt>U+000B</dt>     <p class="english">Vertical tab</p><dt>U+000C</dt>     <p class="english">Formfeed</p><dt>U+000D</dt>     <p class="english">Carriage return</p><dt>U+0085</dt>     <p class="english">Next line</p><dt>U+2028</dt>     <p class="english">Line separator</p><dt>U+2029</dt>     <p class="english">Paragraph separator</p></div>
     <p class="english">A "word" character is an underscore or any character less than 256 that is a
 letter or digit. The definition of letters and digits is controlled by PCRE's
 low-valued character tables, which are always ISO-8859-1.</p>
@@ -1131,13 +1173,13 @@ examples have the same effect:</p>
       <p class="english">\pL</p>
     </list>
     <p class="english">The following general category property codes are supported:</p>
-    <taglist><dt>C</dt>     <p class="english">Other</p><dt>Cc</dt>    <p class="english">Control</p><dt>Cf</dt>    <p class="english">Format</p><dt>Cn</dt>    <p class="english">Unassigned</p><dt>Co</dt>    <p class="english">Private use</p><dt>Cs</dt>    <p class="english">Surrogate</p></taglist>
-    <taglist><dt>L</dt>     <p class="english">Letter</p><dt>Ll</dt>    <p class="english">Lower case letter</p><dt>Lm</dt>    <p class="english">Modifier letter</p><dt>Lo</dt>    <p class="english">Other letter</p><dt>Lt</dt>    <p class="english">Title case letter</p><dt>Lu</dt>    <p class="english">Upper case letter</p></taglist>
-    <taglist><dt>M</dt>     <p class="english">Mark</p><dt>Mc</dt>    <p class="english">Spacing mark</p><dt>Me</dt>    <p class="english">Enclosing mark</p><dt>Mn</dt>    <p class="english">Non-spacing mark</p></taglist>
-    <taglist><dt>N</dt>     <p class="english">Number</p><dt>Nd</dt>    <p class="english">Decimal number</p><dt>Nl</dt>    <p class="english">Letter number</p><dt>No</dt>    <p class="english">Other number</p></taglist>
-    <taglist><dt>P</dt>     <p class="english">Punctuation</p><dt>Pc</dt>    <p class="english">Connector punctuation</p><dt>Pd</dt>    <p class="english">Dash punctuation</p><dt>Pe</dt>    <p class="english">Close punctuation</p><dt>Pf</dt>    <p class="english">Final punctuation</p><dt>Pi</dt>    <p class="english">Initial punctuation</p><dt>Po</dt>    <p class="english">Other punctuation</p><dt>Ps</dt>    <p class="english">Open punctuation</p></taglist>
-    <taglist><dt>S</dt>     <p class="english">Symbol</p><dt>Sc</dt>    <p class="english">Currency symbol</p><dt>Sk</dt>    <p class="english">Modifier symbol</p><dt>Sm</dt>    <p class="english">Mathematical symbol</p><dt>So</dt>    <p class="english">Other symbol</p></taglist>
-    <taglist><dt>Z</dt>     <p class="english">Separator</p><dt>Zl</dt>    <p class="english">Line separator</p><dt>Zp</dt>    <p class="english">Paragraph separator</p><dt>Zs</dt>    <p class="english">Space separator</p></taglist>
+    <div class="taglist"><dt>C</dt>     <p class="english">Other</p><dt>Cc</dt>    <p class="english">Control</p><dt>Cf</dt>    <p class="english">Format</p><dt>Cn</dt>    <p class="english">Unassigned</p><dt>Co</dt>    <p class="english">Private use</p><dt>Cs</dt>    <p class="english">Surrogate</p></div>
+    <div class="taglist"><dt>L</dt>     <p class="english">Letter</p><dt>Ll</dt>    <p class="english">Lower case letter</p><dt>Lm</dt>    <p class="english">Modifier letter</p><dt>Lo</dt>    <p class="english">Other letter</p><dt>Lt</dt>    <p class="english">Title case letter</p><dt>Lu</dt>    <p class="english">Upper case letter</p></div>
+    <div class="taglist"><dt>M</dt>     <p class="english">Mark</p><dt>Mc</dt>    <p class="english">Spacing mark</p><dt>Me</dt>    <p class="english">Enclosing mark</p><dt>Mn</dt>    <p class="english">Non-spacing mark</p></div>
+    <div class="taglist"><dt>N</dt>     <p class="english">Number</p><dt>Nd</dt>    <p class="english">Decimal number</p><dt>Nl</dt>    <p class="english">Letter number</p><dt>No</dt>    <p class="english">Other number</p></div>
+    <div class="taglist"><dt>P</dt>     <p class="english">Punctuation</p><dt>Pc</dt>    <p class="english">Connector punctuation</p><dt>Pd</dt>    <p class="english">Dash punctuation</p><dt>Pe</dt>    <p class="english">Close punctuation</p><dt>Pf</dt>    <p class="english">Final punctuation</p><dt>Pi</dt>    <p class="english">Initial punctuation</p><dt>Po</dt>    <p class="english">Other punctuation</p><dt>Ps</dt>    <p class="english">Open punctuation</p></div>
+    <div class="taglist"><dt>S</dt>     <p class="english">Symbol</p><dt>Sc</dt>    <p class="english">Currency symbol</p><dt>Sk</dt>    <p class="english">Modifier symbol</p><dt>Sm</dt>    <p class="english">Mathematical symbol</p><dt>So</dt>    <p class="english">Other symbol</p></div>
+    <div class="taglist"><dt>Z</dt>     <p class="english">Separator</p><dt>Zl</dt>    <p class="english">Line separator</p><dt>Zp</dt>    <p class="english">Paragraph separator</p><dt>Zs</dt>    <p class="english">Space separator</p></div>
     <p class="english">The special property L&amp; is also supported: it matches a character that has
 the Lu, Ll, or Lt property, in other words, a letter that is not classified as
 a modifier or "other".</p>
@@ -1203,10 +1245,10 @@ assertion specifies a condition that has to be met at a particular
 point in a match, without consuming any characters from the subject
 string. The use of subpatterns for more complicated assertions is
 described below. The backslashed assertions are:</p>
-    <taglist><dt>\b</dt>     <p class="english">matches at a word boundary</p><dt>\B</dt>     <p class="english">matches when not at a word boundary</p><dt>\A</dt>     <p class="english">matches at the start of the subject</p><dt>\Z</dt>     <p class="english">matches at the end of the subject
+    <div class="taglist"><dt>\b</dt>     <p class="english">matches at a word boundary</p><dt>\B</dt>     <p class="english">matches when not at a word boundary</p><dt>\A</dt>     <p class="english">matches at the start of the subject</p><dt>\Z</dt>     <p class="english">matches at the end of the subject
                            also matches before a newline at the end of 
                            the subject</p><dt>\z</dt>     <p class="english">matches only at the end of the subject</p><dt>\G</dt>     <p class="english">matches at the first matching position in the 
-                           subject</p></taglist>
+                           subject</p></div>
     <p class="english">These assertions may not appear in character classes (but note that \b has a
 different meaning, namely the backspace character, inside a character class).</p>
     <p class="english">A word boundary is a position in the subject string where the current character
@@ -1415,7 +1457,7 @@ this notation. For example,</p>
     </quote>
     <p class="english">matches "0", "1", any alphabetic character, or "%". The supported class names
 are</p>
-    <taglist><dt>alnum</dt>    <p class="english">letters and digits</p><dt>alpha</dt>    <p class="english">letters</p><dt>ascii</dt>    <p class="english">character codes 0 - 127</p><dt>blank</dt>    <p class="english">space or tab only</p><dt>cntrl</dt>    <p class="english">control characters</p><dt>digit</dt>    <p class="english">decimal digits (same as \d)</p><dt>graph</dt>    <p class="english">printing characters, excluding space</p><dt>lower</dt>    <p class="english">lower case letters</p><dt>print</dt>    <p class="english">printing characters, including space</p><dt>punct</dt>    <p class="english">printing characters, excluding letters and digits</p><dt>space</dt>    <p class="english">whitespace (not quite the same as \s)</p><dt>upper</dt>    <p class="english">upper case letters</p><dt>word</dt>     <p class="english">"word" characters (same as \w)</p><dt>xdigit</dt>   <p class="english">hexadecimal digits</p></taglist>
+    <div class="taglist"><dt>alnum</dt>    <p class="english">letters and digits</p><dt>alpha</dt>    <p class="english">letters</p><dt>ascii</dt>    <p class="english">character codes 0 - 127</p><dt>blank</dt>    <p class="english">space or tab only</p><dt>cntrl</dt>    <p class="english">control characters</p><dt>digit</dt>    <p class="english">decimal digits (same as \d)</p><dt>graph</dt>    <p class="english">printing characters, excluding space</p><dt>lower</dt>    <p class="english">lower case letters</p><dt>print</dt>    <p class="english">printing characters, including space</p><dt>punct</dt>    <p class="english">printing characters, excluding letters and digits</p><dt>space</dt>    <p class="english">whitespace (not quite the same as \s)</p><dt>upper</dt>    <p class="english">upper case letters</p><dt>word</dt>     <p class="english">"word" characters (same as \w)</p><dt>xdigit</dt>   <p class="english">hexadecimal digits</p></div>
     <p class="english">The "space" characters are HT (9), LF (10), VT (11), FF (12), CR (13), and
 space (32). Notice that this list includes the VT character (code 11). This
 makes "space" different to \s, which does not include VT (for Perl
@@ -1455,7 +1497,7 @@ the subpattern.</p>
 <code>extended</code> options (which are Perl-compatible) can be changed from within
 the pattern by a sequence of Perl option letters enclosed between "(?" and ")".
 The option letters are</p>
-    <taglist><dt>i</dt>  <p class="english">for <code>caseless</code></p><dt>m</dt>  <p class="english">for <code>multiline</code></p><dt>s</dt>  <p class="english">for <code>dotall</code></p><dt>x</dt>  <p class="english">for <code>extended</code></p></taglist>
+    <div class="taglist"><dt>i</dt>  <p class="english">for <code>caseless</code></p><dt>m</dt>  <p class="english">for <code>multiline</code></p><dt>s</dt>  <p class="english">for <code>dotall</code></p><dt>x</dt>  <p class="english">for <code>extended</code></p></div>
     <p class="english">For example, (?im) sets caseless, multiline matching. It is also possible to
 unset these options by preceding the letter with a hyphen, and a combined
 setting and unsetting such as (?im-sx), which sets <code>caseless</code> and
@@ -1676,7 +1718,7 @@ which may be several bytes long (and they may be of different lengths).</p>
 previous item and the quantifier were not present.</p>
     <p class="english">For convenience, the three most common quantifiers have single-character
 abbreviations:</p>
-    <taglist><dt>*</dt>    <p class="english">is equivalent to {0,}</p><dt>+</dt>     <p class="english">is equivalent to {1,}</p><dt>?</dt>     <p class="english">is equivalent to {0,1}</p></taglist>
+    <div class="taglist"><dt>*</dt>    <p class="english">is equivalent to {0,}</p><dt>+</dt>     <p class="english">is equivalent to {1,}</p><dt>?</dt>     <p class="english">is equivalent to {0,1}</p></div>
     <p class="english">It is possible to construct infinite loops by following a
 subpattern that can match no characters with a quantifier that has no
 upper limit, for example:</p>

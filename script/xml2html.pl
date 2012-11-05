@@ -102,6 +102,11 @@ sub xml_to_html {
     $_->set_tag('p')    for ( $root->getElementsByTagName('item') );
     $_->set_tag('p_zh') for ( $root->getElementsByTagName('item_zh') );
 
+    for ( $root->getElementsByTagName('taglist') ){
+        $_->set_tag('div');
+        $_->set_att( class => 'taglist');
+    }
+
     for my $block (qw/note warning/) {
         for ( $root->getElementsByTagName($block) ) {
             $_->set_tag('div');
