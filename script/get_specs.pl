@@ -6,7 +6,7 @@
 
 #The script is disigned for single .erl file. 
 #If you have some files to maintain try: 
-#'find path/to/.erl files -exec path/to/tiis/script {} path/to/target/dir'
+#'find path/to/.erl_files -name "*.erl" -exec path/to/this/script {} path/to/target/dir'
 
 use 5.010;
 use File::Slurp;

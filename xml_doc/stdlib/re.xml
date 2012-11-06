@@ -304,6 +304,7 @@ This option makes it possible to include comments inside complicated patterns. N
       turned out to be anchored by virtue of its contents, it cannot
       be made unanchored at matching time, hence there is no
       <c>unanchored</c> option.</item>
+      <item_zh>限制<c>re:run/3</c>函数只匹配第一个可匹配点. 如果匹配模式以<c>anchored</c>选项编译好, 或者或者是因为模式本身而具备同等的效果，那么, 在匹配阶段就不能设置为非锚定的. 因此存在一个<c>unanchored</c>选项.</item_zh>
 
       <tag><c>global</c></tag>
       <item>
@@ -315,6 +316,7 @@ This option makes it possible to include comments inside complicated patterns. N
       option</c>). The <c>Captured</c> part of the return value will
       hence be a <c>list()</c> of <c>list()</c>s when this
       option is given.</p>
+      <p_zh>实现全局(可重复的)搜索 (在Perl中则是<c>g</c>标志). 每个匹配都是以一个独立的<c>list()</c>形式返回，每个<c>list()</c> 包含特定的匹配以及任何匹配的子表达式(或者由<c>capture选项</c>指定). 如果给定了此选项（global)，<c>捕获的</c>部分将会以<c>list()</c> 的 <c>list()</c>形式返回.</p_zh>
 
       <p>The interaction of the global option with a regular
       expression which matches an empty string surprises some users.
@@ -323,10 +325,16 @@ This option makes it possible to include comments inside complicated patterns. N
       point will be retried with the options <c>[anchored,
       notempty]</c> as well. If that search gives a result of length
       &gt; 0, the result is included.  For example:</p>
+
+      <p_zh>global选项与匹配空字符串的正则表达式的相互作用可能会使有些用户感到惊讶. 当给定global选项时, <c>re:run/3</c> 处理空匹配的方式与Perl相同: a zero-length match at any
+      point will be retried with the options <c>[anchored,
+      notempty]</c> as well. If that search gives a result of length
+      &gt; 0, the result is included.  例如:</p_zh>
       
 <code>    re:run("cat","(|at)",[global]).</code>
 
       <p>The following matching will be performed:</p>
+      <p_zh>将会执行以下匹配:</p_zh>
       <taglist>
       <tag>At offset <c>0</c></tag>
       <item>The regexp <c>(|at)</c> will first match at the initial

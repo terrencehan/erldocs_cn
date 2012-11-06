@@ -292,7 +292,7 @@ This option makes it possible to include comments inside complicated patterns. N
       <code>{match, ValueList}</code> is returned. Disabling capturing can
       be done either by specifying <code>none</code> or an empty list as
       <code>ValueSpec</code>.</p>
-        <p>如果capture选项指出根本不进行子字符串的捕获(<code>{capture, none}</code>), 函数将会对成功匹配返回但原子<code>match</code>, 否则返回元组<code>{match, ValueList}</code>. 可以通过将<code>ValueSpec</code>设为<code>none</code>或者空列表来禁止捕获行为.</p>
+        <p>如果capture选项指出根本不进行子字符串的捕获(<code>{capture, none}</code>), 函数将会对成功匹配返回单原子<code>match</code>, 否则返回元组<code>{match, ValueList}</code>. 可以通过将<code>ValueSpec</code>设为<code>none</code>或者空列表来禁止捕获行为.</p>
         <p class="english">The options relevant for execution are:</p>
         <p>与执行相关的选项如下:</p>
         <div class="taglist">
@@ -304,6 +304,7 @@ This option makes it possible to include comments inside complicated patterns. N
       turned out to be anchored by virtue of its contents, it cannot
       be made unanchored at matching time, hence there is no
       <code>unanchored</code> option.</p>
+          <p>限制<code>re:run/3</code>函数只匹配第一个可匹配点. 如果匹配模式以<code>anchored</code>选项编译好, 或者或者是因为模式本身而具备同等的效果，那么, 在匹配阶段就不能设置为非锚定的. 因此存在一个<code>unanchored</code>选项.</p>
           <dt>
             <code>global</code>
           </dt>
@@ -315,6 +316,7 @@ This option makes it possible to include comments inside complicated patterns. N
       option</code>). The <code>Captured</code> part of the return value will
       hence be a <code>list()</code> of <code>list()</code>s when this
       option is given.</p>
+            <p>实现全局(可重复的)搜索 (在Perl中则是<code>g</code>标志). 每个匹配都是以一个独立的<code>list()</code>形式返回，每个<code>list()</code> 包含特定的匹配以及任何匹配的子表达式(或者由<code>capture选项</code>指定). 如果给定了此选项（global)，<code>捕获的</code>部分将会以<code>list()</code> 的 <code>list()</code>形式返回.</p>
             <p class="english">The interaction of the global option with a regular
       expression which matches an empty string surprises some users.
       When the global option is given, <code>re:run/3</code> handles empty
@@ -322,8 +324,13 @@ This option makes it possible to include comments inside complicated patterns. N
       point will be retried with the options <code>[anchored,
       notempty]</code> as well. If that search gives a result of length
       > 0, the result is included.  For example:</p>
+            <p>global选项与匹配空字符串的正则表达式的相互作用可能会使有些用户感到惊讶. 当给定global选项时, <code>re:run/3</code> 处理空匹配的方式与Perl相同: a zero-length match at any
+      point will be retried with the options <code>[anchored,
+      notempty]</code> as well. If that search gives a result of length
+      > 0, the result is included.  例如:</p>
             <pre>    re:run("cat","(|at)",[global]).</pre>
             <p class="english">The following matching will be performed:</p>
+            <p>将会执行以下匹配:</p>
             <div class="taglist">
               <dt>At offset <code>0</code></dt>
               <p class="english">The regexp <code>(|at)</code> will first match at the initial
