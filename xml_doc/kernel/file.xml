@@ -59,21 +59,14 @@
     cannot be decoded will only be accessible by using &quot;raw
     file names&quot;, in other word file names given as binaries.</p>
 
-   <p_zh>Unicode字符转换的默认行为取决于底层系统或文件系统对文件名长度的限制. 在那些所有文件名确定可以是一个或其它编码系统的系统上, Unicode编码是默认的(目前Windows和MacOSX是这样的）. 在文件名是完全透明的系统上(例如除了MacOSX的所有Unix系统), ISO-latin-1的文件名编码是默认的. The reason for the ISO-latin-1 default is that
-    file names are not guaranteed to be possible to interpret according to
-    the Unicode encoding expected (i.e. UTF-8), and file names that
-    cannot be decoded will only be accessible by using &quot;raw
-    file names&quot;, in other word file names given as binaries.</p_zh>
+   <p_zh>Unicode字符转换的默认行为取决于底层系统或文件系统对文件名长度的限制. 在那些所有文件名确定可以是一个或其它编码系统的系统上, Unicode编码是默认的(目前Windows和MacOSX是这样的）. 在文件名是完全透明的系统上(例如除了MacOSX以外所有Unix系统), ISO-latin-1的文件名编码是默认的. 使用ISO-latin-1作为默认编码的原因是文件名不能保证可以根据所期望的Unicode编码(例如UTF-8)进行解释, 并且那写不能解码的文件名将只能会通过使用&quot;原始文件名&quot;, 也就是说文件名以二进制的形式给出.</p_zh>
  
     <p>As file names are traditionally not binaries in Erlang,
     applications that need to handle raw file names need to be
     converted, why the Unicode mode for file names is not default on
     systems having completely transparent file naming.</p>
 
-    <p_zh>As file names are traditionally not binaries in Erlang,
-    applications that need to handle raw file names need to be
-    converted, why the Unicode mode for file names is not default on
-    systems having completely transparent file naming.</p_zh>
+    <p_zh>因为在Erlang中文件名通常不是二进制形式, 所以在处理原始文件名的应用中需要进行转换, 这也就是为什么在拥有完全透明的文件名的系统上Unicode模式的文件名不是默认的原因.</p_zh>
 
     <note>
       <p>As of R14B01, the most basic file handling modules
@@ -81,6 +74,8 @@
       <c>filename</c>) accept raw file names, but the rest of OTP is not
       guaranteed to handle them, why Unicode file naming on systems
       where it is not default is still considered experimental.</p>
+
+      <p_zh>在R14B01中, 最基本的文件处理模块(<c>file</c>, <c>prim_file</c>, <c>filelib</c> 和 <c>filename</c>) 都能够接受原始文件名, 但是不能保证OTP其他部分也能处理它们, 这就是为什么Unicode编码的文件名在[TODO] 系统why Unicode file naming on systems where it is not default is still considered experimental.</p_zh>
     </note>
 
     <p>Raw file names is a new feature in OTP R14B01, which allows the
@@ -102,12 +97,29 @@
     file names even though the VM is not started in Unicode file name
     translation mode.</p>
 
+    <p_zh>原始文件名是R14B01的一个新特性，这样就允许用户给底层的系统或文件系统提供根本未被翻译的文件名. 它们被以二进制的形式提供, [TODO]根据用户为环境提供正确的编码方式. 函数<c>file:native_name_encoding()</c>可以用来检测虚拟机是工作在什么编码环境下. 如果该函数返回<c>latin1</c>, 文件名将不会被以任何方式转换成Unicode, 如果返回<c>utf8</c>, 那么原始文件名应该被编码成UTF-8
+    be encoded as UTF-8 if they are to follow the convention of the VM
+    (and usually the convention of the OS as well). Using raw
+    file names is useful if you have a filesystem with inconsistent
+    file naming, where some files are named in UTF-8 encoding while
+    others are not. A file:list_dir on such mixed file name systems
+    when the VM is in Unicode file name mode might return file names as
+    raw binaries as they cannot be interpreted as Unicode
+    file names. Raw file names can also be used to give UTF-8 encoded
+    file names even though the VM is not started in Unicode file name
+    translation mode.</p_zh>
+
     <p>Note that on Windows, <c>file:native_name_encoding()</c>
     returns <c>utf8</c> per default, which is the format for raw
     file names even on Windows, although the underlying OS specific
     code works in a limited version of little endian UTF16. As far as
     the Erlang programmer is concerned, Windows native Unicode format
     is UTF-8...</p>
+
+    <p_zh>注意在Windows系统上, <c>file:native_name_encoding()</c> 默认返回<c>utf8</c>, 即便原始文件名格式是在Windows系统上
+    , 尽管底层的操作系统特有代码在一个限制的小端UTF16的版本. As far as
+    the Erlang programmer is concerned, Windows native Unicode format
+    is UTF-8...</p_zh>
   </description>
 
   <datatypes>
@@ -181,7 +193,9 @@
         <p><c>advise/4</c> can be used to announce an intention to access file
           data in a specific pattern in the future, thus allowing the
           operating system to perform appropriate optimizations.</p>
+        <p_zh><c>advise/4</c>可以用来预示一个通过某种模式访问文件数据的意向，使得操作系统进行适当的优化.</p_zh>
         <p>On some platforms, this function might have no effect.</p>
+        <p_zh>在某些平台这个函数可能没有效果.</p_zh>
       </desc>
     </func>
     <func>
@@ -190,6 +204,8 @@
       <desc>
         <p>Changes group of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件的所属组. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -198,6 +214,8 @@
       <desc>
         <p>Changes permissions of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件权限. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -206,6 +224,8 @@
       <desc>
         <p>Changes owner of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件的所有者. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -214,6 +234,8 @@
       <desc>
         <p>Changes owner and group of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件的所有者和所有组. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -222,6 +244,8 @@
       <desc>
         <p>Changes the modification and access times of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件的修改和访问时间. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -230,6 +254,8 @@
       <desc>
         <p>Changes the modification and last access times of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p_zh>更改文件的修改和访问时间. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -239,10 +265,12 @@
         <p>Closes the file referenced by <c><anno>IoDevice</anno></c>. It mostly
           returns <c>ok</c>, expect for some severe errors such as out
           of memory.</p>
+        <p_zh>关闭以<c><anno>IoDevice</anno></c>代表的文件. 这通常会返回<c>ok</c>, 除非发生像超出内存这样的服务器错误.</p_zh>
         <p>Note that if the option <c>delayed_write</c> was
           used when opening the file, <c>close/1</c> might return an
           old write error and not even try to close the file. See
           <seealso marker="#open/2">open/2</seealso>.</p>
+        <p_zh>注意，如果在打开文件的时候使用了<c>delayed_write</c> 选项, <c>close/1</c> 可能返回一个过时写错误，甚至不会尝试关闭这个文件. 参阅 <seealso marker="#open/2">open/2</seealso>.</p_zh>
       </desc>
     </func>
     <func>
@@ -251,16 +279,19 @@
       <desc>
         <p>Reads Erlang terms, separated by '.', from
            <c><anno>Filename</anno></c>. Returns one of the following:</p>
+        <p_zh>从<c><anno>Filename</anno></c>中读取用'.'分隔的Erlang项. 返回下列其中一种:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>Terms</anno>}</c></tag>
           <item>
             <p>The file was successfully read.</p>
+            <p_zh>成功读取文件.</p_zh>
           </item>
           <tag><c>{error, atom()}</c></tag>
           <item>
             <p>An error occurred when opening the file or reading it.
               See <seealso marker="#open/2">open/2</seealso> for a list
               of typical error codes.</p>
+            <p_zh>当打开或读文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码.</p_zh>
           </item>
           <tag><c>{error, {<anno>Line</anno>, <anno>Mod</anno>,
                            <anno>Term</anno>}}</c></tag>
@@ -269,9 +300,11 @@
               the file. Use <c>format_error/1</c> to convert
               the three-element tuple to an English description of
               the error.</p>
+            <p_zh>当翻译文件中的Erlang项时发生一个错误. 使用<c>format_error/1</c>来将三元素的元组翻译成错误的英文描述.</p_zh>
           </item>
         </taglist>
         <p>Example:</p>
+        <p_zh>示例:</p_zh>
 <code type="none">f.txt:  {person, "kalle", 25}.
         {person, "pelle", 30}.</code>
 <pre>1> <input>file:consult("f.txt").</input>

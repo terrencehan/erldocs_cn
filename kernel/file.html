@@ -48,19 +48,12 @@
     the Unicode encoding expected (i.e. UTF-8), and file names that
     cannot be decoded will only be accessible by using "raw
     file names", in other word file names given as binaries.</p>
-    <p>Unicode字符转换的默认行为取决于底层系统或文件系统对文件名长度的限制. 在那些所有文件名确定可以是一个或其它编码系统的系统上, Unicode编码是默认的(目前Windows和MacOSX是这样的）. 在文件名是完全透明的系统上(例如除了MacOSX的所有Unix系统), ISO-latin-1的文件名编码是默认的. The reason for the ISO-latin-1 default is that
-    file names are not guaranteed to be possible to interpret according to
-    the Unicode encoding expected (i.e. UTF-8), and file names that
-    cannot be decoded will only be accessible by using "raw
-    file names", in other word file names given as binaries.</p>
+    <p>Unicode字符转换的默认行为取决于底层系统或文件系统对文件名长度的限制. 在那些所有文件名确定可以是一个或其它编码系统的系统上, Unicode编码是默认的(目前Windows和MacOSX是这样的）. 在文件名是完全透明的系统上(例如除了MacOSX以外所有Unix系统), ISO-latin-1的文件名编码是默认的. 使用ISO-latin-1作为默认编码的原因是文件名不能保证可以根据所期望的Unicode编码(例如UTF-8)进行解释, 并且那写不能解码的文件名将只能会通过使用"原始文件名", 也就是说文件名以二进制的形式给出.</p>
     <p class="english">As file names are traditionally not binaries in Erlang,
     applications that need to handle raw file names need to be
     converted, why the Unicode mode for file names is not default on
     systems having completely transparent file naming.</p>
-    <p>As file names are traditionally not binaries in Erlang,
-    applications that need to handle raw file names need to be
-    converted, why the Unicode mode for file names is not default on
-    systems having completely transparent file naming.</p>
+    <p>因为在Erlang中文件名通常不是二进制形式, 所以在处理原始文件名的应用中需要进行转换, 这也就是为什么在拥有完全透明的文件名的系统上Unicode模式的文件名不是默认的原因.</p>
     <div class="note">
       <h2>Note:<br/></h2>
       <p class="english">As of R14B01, the most basic file handling modules
@@ -68,6 +61,7 @@
       <code>filename</code>) accept raw file names, but the rest of OTP is not
       guaranteed to handle them, why Unicode file naming on systems
       where it is not default is still considered experimental.</p>
+      <p>在R14B01中, 最基本的文件处理模块(<code>file</code>, <code>prim_file</code>, <code>filelib</code> 和 <code>filename</code>) 都能够接受原始文件名, 但是不能保证OTP其他部分也能处理它们, 这就是为什么Unicode编码的文件名在[TODO] 系统why Unicode file naming on systems where it is not default is still considered experimental.</p>
     </div>
     <p class="english">Raw file names is a new feature in OTP R14B01, which allows the
     user to supply completely uninterpreted file names to the
@@ -87,10 +81,25 @@
     file names. Raw file names can also be used to give UTF-8 encoded
     file names even though the VM is not started in Unicode file name
     translation mode.</p>
+    <p>原始文件名是R14B01的一个新特性，这样就允许用户给底层的系统或文件系统提供根本未被翻译的文件名. 它们被以二进制的形式提供, [TODO]根据用户为环境提供正确的编码方式. 函数<code>file:native_name_encoding()</code>可以用来检测虚拟机是工作在什么编码环境下. 如果该函数返回<code>latin1</code>, 文件名将不会被以任何方式转换成Unicode, 如果返回<code>utf8</code>, 那么原始文件名应该被编码成UTF-8
+    be encoded as UTF-8 if they are to follow the convention of the VM
+    (and usually the convention of the OS as well). Using raw
+    file names is useful if you have a filesystem with inconsistent
+    file naming, where some files are named in UTF-8 encoding while
+    others are not. A file:list_dir on such mixed file name systems
+    when the VM is in Unicode file name mode might return file names as
+    raw binaries as they cannot be interpreted as Unicode
+    file names. Raw file names can also be used to give UTF-8 encoded
+    file names even though the VM is not started in Unicode file name
+    translation mode.</p>
     <p class="english">Note that on Windows, <code>file:native_name_encoding()</code>
     returns <code>utf8</code> per default, which is the format for raw
     file names even on Windows, although the underlying OS specific
     code works in a limited version of little endian UTF16. As far as
+    the Erlang programmer is concerned, Windows native Unicode format
+    is UTF-8...</p>
+    <p>注意在Windows系统上, <code>file:native_name_encoding()</code> 默认返回<code>utf8</code>, 即便原始文件名格式是在Windows系统上
+    , 尽管底层的操作系统特有代码在一个限制的小端UTF16的版本. As far as
     the Erlang programmer is concerned, Windows native Unicode format
     is UTF-8...</p>
   </div>
@@ -166,7 +175,9 @@
         <p class="english"><code>advise/4</code> can be used to announce an intention to access file
           data in a specific pattern in the future, thus allowing the
           operating system to perform appropriate optimizations.</p>
+        <p><code>advise/4</code>可以用来预示一个通过某种模式访问文件数据的意向，使得操作系统进行适当的优化.</p>
         <p class="english">On some platforms, this function might have no effect.</p>
+        <p>在某些平台这个函数可能没有效果.</p>
       </div>
     </div>
     <div class="function">
@@ -174,6 +185,8 @@
       <div class="type_desc">      Filename = name(),<br/>      Gid = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes group of a file. See
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件的所属组. 参阅
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
@@ -183,6 +196,8 @@
       <div class="discription">
         <p class="english">Changes permissions of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件权限. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
     <div class="function">
@@ -190,6 +205,8 @@
       <div class="type_desc">      Filename = name(),<br/>      Uid = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes owner of a file. See
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件的所有者. 参阅
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
@@ -199,6 +216,8 @@
       <div class="discription">
         <p class="english">Changes owner and group of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件的所有者和所有组. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
     <div class="function">
@@ -207,6 +226,8 @@
       <div class="discription">
         <p class="english">Changes the modification and access times of a file. See
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件的修改和访问时间. 参阅
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
     <div class="function">
@@ -214,6 +235,8 @@
       <div class="type_desc">      Filename = name(),<br/>      Atime = date_time(),<br/>      Mtime = date_time(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes the modification and last access times of a file. See
+          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+        <p>更改文件的修改和访问时间. 参阅
           <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
       </div>
     </div>
@@ -224,10 +247,12 @@
         <p class="english">Closes the file referenced by <code><anno>IoDevice</anno></code>. It mostly
           returns <code>ok</code>, expect for some severe errors such as out
           of memory.</p>
+        <p>关闭以<code><anno>IoDevice</anno></code>代表的文件. 这通常会返回<code>ok</code>, 除非发生像超出内存这样的服务器错误.</p>
         <p class="english">Note that if the option <code>delayed_write</code> was
           used when opening the file, <code>close/1</code> might return an
           old write error and not even try to close the file. See
           <seealso marker="#open/2">open/2</seealso>.</p>
+        <p>注意，如果在打开文件的时候使用了<code>delayed_write</code> 选项, <code>close/1</code> 可能返回一个过时写错误，甚至不会尝试关闭这个文件. 参阅 <seealso marker="#open/2">open/2</seealso>.</p>
       </div>
     </div>
     <div class="function">
@@ -236,12 +261,14 @@
       <div class="discription">
         <p class="english">Reads Erlang terms, separated by '.', from
            <code><anno>Filename</anno></code>. Returns one of the following:</p>
+        <p>从<code><anno>Filename</anno></code>中读取用'.'分隔的Erlang项. 返回下列其中一种:</p>
         <div class="taglist">
           <dt>
             <code>{ok, <anno>Terms</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">The file was successfully read.</p>
+            <p>成功读取文件.</p>
           </p>
           <dt>
             <code>{error, atom()}</code>
@@ -250,6 +277,7 @@
             <p class="english">An error occurred when opening the file or reading it.
               See <seealso marker="#open/2">open/2</seealso> for a list
               of typical error codes.</p>
+            <p>当打开或读文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -260,9 +288,11 @@
               the file. Use <code>format_error/1</code> to convert
               the three-element tuple to an English description of
               the error.</p>
+            <p>当翻译文件中的Erlang项时发生一个错误. 使用<code>format_error/1</code>来将三元素的元组翻译成错误的英文描述.</p>
           </p>
         </div>
         <p class="english">Example:</p>
+        <p>示例:</p>
         <pre>f.txt:  {person, "kalle", 25}.
         {person, "pelle", 30}.</pre>
         <pre>1> <span>file:consult("f.txt").</span>
