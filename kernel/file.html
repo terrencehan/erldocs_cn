@@ -312,28 +312,35 @@
           to either filenames or IO devices from e.g. <code>open/2</code>.
           <code><anno>ByteCount</anno></code> defaults to <code>infinity</code>, denoting an
           infinite number of bytes.</p>
+        <p>从<code><anno>Source</anno></code> 向 <code><anno>Destination</anno></code>拷贝<code><anno>ByteCount</anno></code>字节. <code><anno>Source</anno></code> 和 <code><anno>Destination</anno></code> 指向文件名或IO设备(例如<code>open/2</code>返回的IO). <code><anno>ByteCount</anno></code> 默认值 <code>infinity</code>, 代表无限字节.</p>
         <p class="english">The argument <code><anno>Modes</anno></code> is a list of possible modes,
           see <seealso marker="#open/2">open/2</seealso>, and defaults to
           [].</p>
+        <p>参数<code><anno>Modes</anno></code> 是一个模式列表, 参阅 <seealso marker="#open/2">open/2</seealso>, 默认值为[].</p>
         <p class="english">If both <code><anno>Source</anno></code> and
           <code><anno>Destination</anno></code> refer to
           filenames, the files are opened with <code>[read, binary]</code>
           and <code>[write, binary]</code> prepended to their mode lists,
           respectively, to optimize the copy.</p>
+        <p>如果<code><anno>Source</anno></code> 和 <code><anno>Destination</anno></code> 都是文件名, 那么这些文件将会分别以<code>[read, binary]</code> 和<code>[write, binary]</code> 作为模式列表的前缀来优化拷贝.</p>
         <p class="english">If <code><anno>Source</anno></code> refers to a filename, it is opened with
           <code>read</code> mode prepended to the mode list before the copy,
           and closed when done.</p>
+        <p>如果 <code><anno>Source</anno></code> 是一个文件名, 那么它会在拷贝之前以<code>read</code>作为模式列表的前缀打开, 并且在结束的时候关闭.</p>
         <p class="english">If <code><anno>Destination</anno></code> refers to a filename, it is opened
           with <code>write</code> mode prepended to the mode list before
           the copy, and closed when done.</p>
+        <p>如果 <code><anno>Destination</anno></code> 是一个文件名, 那么它会在拷贝之前以<code>write</code>作为模式列表的前缀打开, 并且在结束的时候关闭.</p>
         <p class="english">Returns <code>{ok, <anno>BytesCopied</anno>}</code> where
           <code><anno>BytesCopied</anno></code> is
           the number of bytes that actually was copied, which may be
           less than <code><anno>ByteCount</anno></code> if end of file was
           encountered on the source. If the operation fails,
           <code>{error, <anno>Reason</anno>}</code> is returned.</p>
+        <p>返回 <code>{ok, <anno>BytesCopied</anno>}</code> 其中<code><anno>BytesCopied</anno></code> 是实际拷贝的字节数，如果遇到了文件结束符可能会小于<code><anno>ByteCount</anno></code>. 如果操作失败返回 <code>{error, <anno>Reason</anno>}</code>.</p>
         <p class="english">Typical error reasons: As for <code>open/2</code> if a file had to
           be opened, and as for <code>read/2</code> and <code>write/2</code>.</p>
+        <p>典型的错误原因: 如果需要打开文件时参阅<code>open/2</code> , 以及<code>read/2</code> 和<code>write/2</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -344,7 +351,9 @@
           The directory must
           be empty before it can be deleted. Returns <code>ok</code> if
           successful.</p>
+        <p>尝试删除文件夹<code><anno>Dir</anno></code>.删除之前文件夹必须为空. 如果删除成功返回<code>ok</code>.</p>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -352,18 +361,21 @@
           <p class="english">
             <p class="english">Missing search or write permissions for the parent
               directories of <code><anno>Dir</anno></code>.</p>
+            <p>缺少对<code><anno>Dir</anno></code>父文件夹的搜索和写权限.</p>
           </p>
           <dt>
             <code>eexist</code>
           </dt>
           <p class="english">
             <p class="english">The directory is not empty.</p>
+            <p>文件夹不为空.</p>
           </p>
           <dt>
             <code>enoent</code>
           </dt>
           <p class="english">
             <p class="english">The directory does not exist.</p>
+            <p>文件夹不存在.</p>
           </p>
           <dt>
             <code>enotdir</code>
@@ -371,6 +383,7 @@
           <p class="english">
             <p class="english">A component of <code><anno>Dir</anno></code> is not a directory.
               On some platforms, <code>enoent</code> is returned instead.</p>
+            <p><code><anno>Dir</anno></code>路径中存在不是文件夹的部分. 在某些平台, 返回的是<code>enoent</code>.</p>
           </p>
           <dt>
             <code>einval</code>
@@ -378,6 +391,7 @@
           <p class="english">
             <p class="english">Attempt to delete the current directory. On some
               platforms, <code>eacces</code> is returned instead.</p>
+            <p>试图删除当前文件夹. 在某些平台上, 返回的是<code>eacces</code>.</p>
           </p>
         </div>
       </div>
@@ -388,25 +402,30 @@
       <div class="discription">
         <p class="english">Tries to delete the file <code><anno>Filename</anno></code>.
           Returns <code>ok</code> if successful.</p>
+        <p>尝试删除文件<code><anno>Filename</anno></code>.如果成功, 返回<code>ok</code>.</p>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>enoent</code>
           </dt>
           <p class="english">
             <p class="english">The file does not exist.</p>
+            <p>文件不存在.</p>
           </p>
           <dt>
             <code>eacces</code>
           </dt>
           <p class="english">
             <p class="english">Missing permission for the file or one of its parents.</p>
+            <p>缺失该文件或者它其中一个父文件夹的权限.</p>
           </p>
           <dt>
             <code>eperm</code>
           </dt>
           <p class="english">
             <p class="english">The file is a directory and the user is not super-user.</p>
+            <p>该文件是一个文件夹并且用户不是超级用户.</p>
           </p>
           <dt>
             <code>enotdir</code>
@@ -414,12 +433,14 @@
           <p class="english">
             <p class="english">A component of the file name is not a directory. On some
               platforms, <code>enoent</code> is returned instead.</p>
+            <p>文件路径中有部分不是文件夹. 在某些平台上, 返回的是<code>enoent</code>.</p>
           </p>
           <dt>
             <code>einval</code>
           </dt>
           <p class="english">
             <p class="english"><code><anno>Filename</anno></code> had an improper type, such as tuple.</p>
+            <p><code><anno>Filename</anno></code>类型不正确, 例如元组.</p>
           </p>
         </div>
         <div class="warning">
@@ -427,6 +448,7 @@
           <p class="english">In a future release, a bad type for the
             <code><anno>Filename</anno></code> argument will probably generate
             an exception.</p>
+          <p class="english">在以后的版本中, <code><anno>Filename</anno></code>的类型错误问题可能会产生一个异常.</p>
         </div>
       </div>
     </div>
@@ -439,12 +461,17 @@
           <code><anno>Filename</anno></code>. The actual result of the evaluation
           is not returned; any expression sequence in the file must be there
           for its side effect. Returns one of the following:</p>
+        <p>从<code><anno>Filename</anno></code>读取并且计算Erlang表达式, separated by '.' (or
+          ',', a sequence of expressions is also an expression), from
+          . 实际的计算结果并不返回; 并且任何any expression sequence in the file must be there
+          for its side effect. 返回如下所示:</p>
         <div class="taglist">
           <dt>
             <code>ok</code>
           </dt>
           <p class="english">
             <p class="english">The file was read and evaluated.</p>
+            <p>文件被读取并计算.</p>
           </p>
           <dt>
             <code>{error, atom()}</code>
@@ -452,6 +479,7 @@
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
               See <code>open/2</code> for a list of typical error codes.</p>
+            <p>在打开或读取文件的时候遇到一个错误. 参阅 <code>open/2</code> 中的典型错误代码.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -462,6 +490,7 @@
               expressions in the file. Use <code>format_error/1</code> to
               convert the three-element tuple to an English description
               of the error.</p>
+            <p>在解释文件中的Erlang表达式时遇到一个错误. 使用 <code>format_error/1</code> 函数将三元素元组转换成错误的英文描述信息.</p>
           </p>
         </div>
       </div>
@@ -474,6 +503,7 @@
           <code><anno>Bindings</anno></code> are used in the evaluation. See
           <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> about
           variable bindings.</p>
+        <p>除了在计算过程中使用变量绑定<code><anno>Bindings</anno></code> 以外与<code>eval/1</code>相同. 参阅 <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> 中关于变量绑定的内容.</p>
       </div>
     </div>
     <div class="function">
@@ -481,6 +511,7 @@
       <div class="discription">
         <p class="english">This function is obsolete. Use <code>read_file_info/1,2</code>
           instead.</p>
+        <p>该函数已过时. 请使用<code>read_file_info/1,2</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -489,6 +520,7 @@
       <div class="discription">
         <p class="english">Given the error reason returned by any function in this
           module, returns a descriptive string of the error in English.</p>
+        <p>给定一个由本模块任何一个函数返回的错误原因, 返回该错误的英文描述字符串.</p>
       </div>
     </div>
     <div class="function">
@@ -498,13 +530,16 @@
         <p class="english">Returns <code>{ok, <anno>Dir</anno>}</code>, where <code><anno>Dir</anno></code>
           is the current
           working directory of the file server.</p>
+        <p>返回 <code>{ok, <anno>Dir</anno>}</code>, 其中 <code><anno>Dir</anno></code>是文件服务器的当前工作目录.</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">In rare circumstances, this function can fail on Unix.
             It may happen if read permission does not exist for
             the parent directories of the current directory.</p>
+          <p>特殊环境下, 该函数在Unix系统上会失败. 这可能发生在没有当前文件夹路径上父文件夹的读权限时.</p>
         </div>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -512,6 +547,7 @@
           <p class="english">
             <p class="english">Missing read permission for one of the parents of
               the current directory.</p>
+            <p>缺失当前文件夹路径上某个父文件夹的读权限.</p>
           </p>
         </div>
       </div>
@@ -526,27 +562,34 @@
           <code>{error, <anno>Reason</anno>}</code>, where <code><anno>Dir</anno></code>
           is the current
           working directory of the drive specified.</p>
+        <p><code><anno>Drive</anno></code> 应该是"<code>Letter</code><code>:</code>"的形式,
+          例如"c:". 返回 <code>{ok, <anno>Dir</anno>}</code> 或 <code>{error, <anno>Reason</anno>}</code>, 其中 <code><anno>Dir</anno></code> 是指定分区上的当前工作目录.</p>
         <p class="english">This function returns <code>{error, enotsup}</code> on platforms
           which have no concept of current drive (Unix, for example).</p>
+        <p>该函数在没有当前分区概念的平台(例如Unix)上返回<code>{error, enotsup}</code>.</p>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>enotsup</code>
           </dt>
           <p class="english">
             <p class="english">The operating system has no concept of drives.</p>
+            <p>当前操作系统没有分区的概念.</p>
           </p>
           <dt>
             <code>eacces</code>
           </dt>
           <p class="english">
             <p class="english">The drive does not exist.</p>
+            <p>分区不存在.</p>
           </p>
           <dt>
             <code>einval</code>
           </dt>
           <p class="english">
             <p class="english">The format of <code><anno>Drive</anno></code> is invalid.</p>
+            <p><code><anno>Drive</anno></code>格式不合法.</p>
           </p>
         </div>
       </div>
@@ -561,7 +604,10 @@
           <code><anno>Filenames</anno></code> is a list of
           the names of all the files in the directory. The names are
           not sorted.</p>
+        <p>列出文件夹下的所有文件. 如果成功, 返回<code>{ok, <anno>Filenames</anno>}</code>.
+          否则, 返回<code>{error, <anno>Reason</anno>}</code>. <code><anno>Filenames</anno></code> 是一个包含文件夹中所有文件名的列表. 这些名字没有保存下来.</p>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -569,12 +615,14 @@
           <p class="english">
             <p class="english">Missing search or write permissions for <code><anno>Dir</anno></code>
               or one of its parent directories.</p>
+            <p>缺失<code><anno>Dir</anno></code>某个父文件夹的搜索或写权限.</p>
           </p>
           <dt>
             <code>enoent</code>
           </dt>
           <p class="english">
             <p class="english">The directory does not exist.</p>
+            <p>文件夹不存在.</p>
           </p>
         </div>
       </div>
@@ -586,7 +634,9 @@
         <p class="english">Tries to create the directory <code><anno>Dir</anno></code>. Missing parent
           directories are <em>not</em> created. Returns <code>ok</code> if
           successful.</p>
+        <p>尝试创建文件夹<code><anno>Dir</anno></code>. 缺失父文件夹时<em>不</em>创建文件夹. 如果成功, 返回<code>ok</code>.</p>
         <p class="english">Typical error reasons are:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -594,24 +644,28 @@
           <p class="english">
             <p class="english">Missing search or write permissions for the parent
               directories of <code><anno>Dir</anno></code>.</p>
+            <p>缺失<code><anno>Dir</anno></code>某些父文件夹的搜索或写权限.</p>
           </p>
           <dt>
             <code>eexist</code>
           </dt>
           <p class="english">
             <p class="english">There is already a file or directory named <code><anno>Dir</anno></code>.</p>
+            <p>已存在一个以<code><anno>Dir</anno></code>命名的文件或文件夹.</p>
           </p>
           <dt>
             <code>enoent</code>
           </dt>
           <p class="english">
             <p class="english">A component of <code><anno>Dir</anno></code> does not exist.</p>
+            <p><code><anno>Dir</anno></code>路径名中某部分不存在.</p>
           </p>
           <dt>
             <code>enospc</code>
           </dt>
           <p class="english">
             <p class="english">There is a no space left on the device.</p>
+            <p class="english">空间不足.</p>
           </p>
           <dt>
             <code>enotdir</code>
@@ -619,6 +673,7 @@
           <p class="english">
             <p class="english">A component of <code><anno>Dir</anno></code> is not a directory.
               On some platforms, <code>enoent</code> is returned instead.</p>
+            <p><code><anno>Dir</anno></code>路径名中某部分不是文件夹. 在某些平台上返回的是<code>enoent</code>.</p>
           </p>
         </div>
       </div>
@@ -633,7 +688,9 @@
           <code>ok</code> if the link was successfully created, or
           <code>{error, <anno>Reason</anno>}</code>. On platforms that do not support
           links, <code>{error,enotsup}</code> is returned.</p>
+        <p>在支持链接的平台上（例如unix, windows)创建一个从<code><anno>Existing</anno></code>到<code><anno>New</anno></code>的硬链接. 如果链接创建成功返回 <code>ok</code>, 否则返回 <code>{error, <anno>Reason</anno>}</code>. 在不支持链接的平台上, 返回<code>{error,enotsup}</code> .</p>
         <p class="english">Typical error reasons:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -642,18 +699,21 @@
             <p class="english">Missing read or write permissions for the parent
               directories of <code><anno>Existing</anno></code> or
               <code><anno>New</anno></code>.</p>
+            <p>缺失<code><anno>Existing</anno></code> 或 <code><anno>New</anno></code>父文件夹的读或写权限.</p>
           </p>
           <dt>
             <code>eexist</code>
           </dt>
           <p class="english">
             <p class="english"><code><anno>New</anno></code> already exists.</p>
+            <p><code><anno>New</anno></code>已存在.</p>
           </p>
           <dt>
             <code>enotsup</code>
           </dt>
           <p class="english">
             <p class="english">Hard links are not supported on this platform.</p>
+            <p>当前平台不支持硬链接.</p>
           </p>
         </div>
       </div>
@@ -672,7 +732,9 @@
           On platforms
           that do not support symbolic links, <code>{error, enotsup}</code>
           is returned.</p>
+        <p>在支持符号链接的平台上（例如unix, Vista之后的windows)创建一个从<code><anno>Existing</anno></code>到<code><anno>New</anno></code>的符号链接. <code><anno>Existing</anno></code>不必一定存在. 如果创建成功返回 <code>ok</code>, 否则返回 <code>{error, <anno>Reason</anno>}</code>. 在不支持符号链接的平台上, 返回<code>{error,enotsup}</code> .</p>
         <p class="english">Typical error reasons:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>eacces</code>
@@ -680,18 +742,21 @@
           <p class="english">
             <p class="english">Missing read or write permissions for the parent directories
             of <code><anno>Existing</anno></code> or <code><anno>New</anno></code>.</p>
+            <p>缺失<code><anno>Existing</anno></code> 或 <code><anno>New</anno></code>父文件夹的读或写权限.</p>
           </p>
           <dt>
             <code>eexist</code>
           </dt>
           <p class="english">
             <p class="english"><code><anno>New</anno></code> already exists.</p>
+            <p><code><anno>New</anno></code> 已存在.</p>
           </p>
           <dt>
             <code>enotsup</code>
           </dt>
           <p class="english">
             <p class="english">Symbolic links are not supported on this platform.</p>
+            <p>当前平台不支持符号链接.</p>
           </p>
         </div>
       </div>
@@ -711,12 +776,14 @@
         <p class="english">Opens the file <code><anno>Filename</anno></code> in the mode determined
           by <code><anno>Modes</anno></code>, which may contain one or more of the
           following items:</p>
+        <p>以由<code><anno>Modes</anno></code>确定的模式打开文件<code><anno>Filename</anno></code>, 这些模式可以包含下述一个或多个项:</p>
         <div class="taglist">
           <dt>
             <code>read</code>
           </dt>
           <p class="english">
             <p class="english">The file, which must exist, is opened for reading.</p>
+            <p>打开已存在的文件来进行读操作.</p>
           </p>
           <dt>
             <code>write</code>
@@ -725,6 +792,7 @@
             <p class="english">The file is opened for writing. It is created if it does
               not exist. If the file exists, and if <code>write</code> is not
               combined with <code>read</code>, the file will be truncated.</p>
+            <p>打开文件来进行写操作. 如果文件不存在，创建一个新文件. 如果文件存在, 并且<code>write</code> 不和<code>read</code>一起使用时, 文件将被截断(清空）.</p>
           </p>
           <dt>
             <code>append</code>
@@ -734,6 +802,7 @@
               created if it does not exist. Every write operation to a
               file opened with <code>append</code> will take place at
               the end of the file.</p>
+            <p>打开文件来进行写操作, 如果文件不存在则创建新文件. 当写以<code>append</code>模式打开的文件时, 写操作发生在文件的结尾.</p>
           </p>
           <dt>
             <code>exclusive</code>
@@ -742,9 +811,15 @@
             <p class="english">The file, when opened for writing, is created if it
               does not exist. If the file exists, open will return
               <code>{error, eexist}</code>.</p>
+            <p>当打开来进行写操作的文件不存在时，创建一个新文件. 如果文件存在, open返回 <code>{error, eexist}</code>.</p>
             <div class="warning">
               <h2>Warning:<br/></h2>
               <p class="english">This option does not guarantee exclusiveness on
+	    file systems that do not support O_EXCL properly,
+	    such as NFS. Do not depend on this option unless you
+	    know that the file system supports it (in general, local
+        file systems should be safe).</p>
+              <p>This option does not guarantee exclusiveness on
 	    file systems that do not support O_EXCL properly,
 	    such as NFS. Do not depend on this option unless you
 	    know that the file system supports it (in general, local
@@ -759,19 +834,24 @@
               because no Erlang process is needed to handle the file.
               However, a file opened in this way has the following
               limitations:</p>
+            <p><code>raw</code>选项可以使文件的访问更快, 因为这样在处理文件的时候不再需要Erlang的进程. 然而，用这种方式打开的文件有如下限制:</p>
             <list type="bulleted">
               <p class="english">The functions in the <code>io</code> module cannot be used,
                because they can only talk to an Erlang process.
                Instead, use the <code>read/2</code>, <code>read_line/1</code> and 
 	       <code>write/2</code>
                functions.</p>
+              <p>不能使用<code>io</code>模块中的函数, 因为这些函数只能和Erlang进程通信. 作为代替, 可以使用<code>read/2</code>, <code>read_line/1</code> 以及 <code>write/2</code> 函数.</p>
               <p class="english">Especially if <code>read_line/1</code> is to be used on a <code>raw</code> file, it is recommended to combine this option with the <code>{read_ahead, Size}</code> option as line oriented I/O is inefficient without buffering.</p>
+              <p>特别是 if <code>read_line/1</code> is to be used on a <code>raw</code> file, it is recommended to combine this option with the <code>{read_ahead, Size}</code> option as line oriented I/O is inefficient without buffering.</p>
               <p class="english">Only the Erlang process which opened the file can use
                it.</p>
+              <p>只能由打开文件的进程使用这个文件.</p>
               <p class="english">A remote Erlang file server cannot be used;
                the computer on which the Erlang node is running must
                have access to the file system (directly or through
                NFS).</p>
+              <p>不能使用远程的Erlang文件系统; 运行Erlang节点的计算机必须直接或者通过NFS访问该文件系统.</p>
             </list>
           </p>
           <dt>
@@ -780,6 +860,7 @@
           <p class="english">
             <p class="english">When this option has been given, read operations on the file
 	       will return binaries rather than lists.</p>
+            <p>当给定这个选项时, 对文件的读操作将会返回二进制串而不是列表.</p>
           </p>
           <dt>
             <code>{delayed_write, Size, Delay}</code>
@@ -792,11 +873,14 @@
               data is written in one operating system call.
               The buffered data is also flushed before some other file
               operation than <code>write/2</code> is executed.</p>
+            <p>如果使用这个选项, 那么后续<code>write/2</code>函数调用中的数据将会在达到或者超过<code>Size</code>字节之前一直被缓存，或者最早的缓存数据已经超过了<code>Delay</code>毫秒. 之后，所有缓存的数据将会通过一次系统函数调用写入. 缓冲数据也在除了<code>write/2</code>以外的文件操作执行之前被冲刷.</p>
             <p class="english">The purpose of this option is to increase performance
               by reducing the number of operating system calls, so the
               <code>write/2</code> calls should be for sizes significantly
               less than <code>Size</code>, and not interspersed by to many
               other file operations, for this to happen.</p>
+            <p>这个选项的目的是通过减少系统调用的次数来提高性能
+             为了能达到这个效果， <code>write/2</code> 函数调用应该适用于远小于<code>Size</code>的数据, 并且不能穿插在其他文件操作当中.</p>
             <p class="english">When this option is used, the result of <code>write/2</code>
               calls may prematurely be reported as successful, and if
               a write error should actually occur the error is
@@ -816,6 +900,7 @@
             <p class="english">The same as <code>{delayed_write, Size, Delay}</code> with
               reasonable default values for <code>Size</code> and
               <code>Delay</code>. (Roughly some 64 KBytes, 2 seconds)</p>
+            <p>等同于拥有<code>Size</code> 和 <code>Delay</code>默认值(大约是64字节, 2秒钟)的<code>{delayed_write, Size, Delay}</code>. </p>
           </p>
           <dt>
             <code>{read_ahead, Size}</code>
@@ -907,12 +992,14 @@
           <p class="english">
             <p class="english">The file has been opened in the requested mode.
               <code><anno>IoDevice</anno></code> is a reference to the file.</p>
+            <p>文件已经按照要求的模式打开. <code><anno>IoDevice</anno></code>是该文件的一个引用.</p>
           </p>
           <dt>
             <code>{error, <anno>Reason</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">The file could not be opened.</p>
+            <p>不能打开文件.</p>
           </p>
         </div>
         <p class="english"><code><anno>IoDevice</anno></code> is really the pid of the process which
@@ -923,6 +1010,8 @@
           An <code><anno>IoDevice</anno></code> returned from this call can be used
           as an argument to the IO functions (see
           <seealso marker="stdlib:io">io(3)</seealso>).</p>
+        <p><code><anno>IoDevice</anno></code> 是处理文件的进程号. 该进程与最初打开文件的进程相链接. 如果<code><anno>IoDevice</anno></code>链接的任意一个进程终止，那么文件将被关闭而该进程也会被终止.  由该函数调用返回的 <code><anno>IoDevice</anno></code> 可以作为IO函数的参数(参阅
+          <seealso marker="stdlib:io">io(3)</seealso>).</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">In previous versions of <code>file</code>, modes were given
@@ -931,14 +1020,17 @@
             for reasons of backwards compatibility, but should not be
             used for new code. Also note that <code>read_write</code> is not
             allowed in a mode list.</p>
+          <p>在<code>file</code>之前的版本中, 模式是通过给定<code>read</code>, <code>write</code>, 或者 <code>read_write</code>其中一个原子而不是一个列表指出的. 出于向后兼容的原因，仍然可以使用这种方式，但是对于新代码就不应该使用了. 同时也请注意<code>read_write</code>不能出现在模式列表中.</p>
         </div>
         <p class="english">Typical error reasons:</p>
+        <p>典型的错误原因:</p>
         <div class="taglist">
           <dt>
             <code>enoent</code>
           </dt>
           <p class="english">
             <p class="english">The file does not exist.</p>
+            <p>文件不存在.</p>
           </p>
           <dt>
             <code>eacces</code>
@@ -946,6 +1038,7 @@
           <p class="english">
             <p class="english">Missing permission for reading the file or searching one
               of the parent directories.</p>
+            <p>缺失该文件的读权限或者某个父文件夹的搜索权限.</p>
           </p>
           <dt>
             <code>eisdir</code>
@@ -953,6 +1046,7 @@
           <p class="english">
             <p class="english">The named file is not a regular file. It may be a
               directory, a fifo, or a device.</p>
+            <p>该命名的文件不是一个普通文件. 它可能是一个目录，一个FIFO管道文件，或者一个设备</p>
           </p>
           <dt>
             <code>enotdir</code>
@@ -960,6 +1054,7 @@
           <p class="english">
             <p class="english">A component of the file name is not a directory. On some
               platforms, <code>enoent</code> is returned instead.</p>
+            <p>文件路径的某个组成部分不是文件夹. 在某些平台上, 返回的是<code>enoent</code>.</p>
           </p>
           <dt>
             <code>enospc</code>
@@ -967,6 +1062,7 @@
           <p class="english">
             <p class="english">There is a no space left on the device (if <code>write</code>
               access was specified).</p>
+            <p>空间不足(如果指定了<code>write</code>访问).</p>
           </p>
         </div>
       </div>
@@ -1184,11 +1280,13 @@
           </dt>
           <p class="english">
             <p class="english">In all other cases.</p>
+            <p>其它情况.</p>
           </p>
         </div>
         <div class="warning">
           <h2>Warning:<br/></h2>
           <p class="english">This function is intended for debugging only.</p>
+          <p>设计该函数只是用于调试.</p>
         </div>
       </div>
     </div>
