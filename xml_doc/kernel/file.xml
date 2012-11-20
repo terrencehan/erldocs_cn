@@ -437,7 +437,7 @@
           <p>In a future release, a bad type for the
             <c><anno>Filename</anno></c> argument will probably generate
             an exception.</p>
-          <p>在以后的版本中, <c><anno>Filename</anno></c>的类型错误问题可能会产生一个异常.</p>
+          <p_zh>在以后的版本中, <c><anno>Filename</anno></c>的类型错误问题可能会产生一个异常.</p_zh>
         </warning>
       </desc>
     </func>
@@ -759,7 +759,7 @@
 	    such as NFS. Do not depend on this option unless you
 	    know that the file system supports it (in general, local
         file systems should be safe).</p>
-        <p_zh>在像NFS这样不能很好的支持O_EXCL的文件系统上，该选项不能确保排它性的实现. 除非你知道当前的文件爱你系统支持这个选项(通常本地文件系统是安全支持的)，否则不要依赖它.</p_zh>
+        <p_zh>在像NFS这样不能很好的支持O_EXCL的文件系统上，该选项不能确保排它性的实现. 除非你知道当前的文件系统支持这个选项(通常本地文件系统是安全支持的)，否则不要依赖它.</p_zh>
         </warning>
           </item>
           <tag><c>raw</c></tag>
