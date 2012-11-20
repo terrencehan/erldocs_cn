@@ -265,7 +265,7 @@
         <p>Closes the file referenced by <c><anno>IoDevice</anno></c>. It mostly
           returns <c>ok</c>, expect for some severe errors such as out
           of memory.</p>
-        <p_zh>关闭以<c><anno>IoDevice</anno></c>代表的文件. 这通常会返回<c>ok</c>, 除非发生像超出内存这样的服务器错误.</p_zh>
+        <p_zh>关闭<c><anno>IoDevice</anno></c>引用的文件. 这通常会返回<c>ok</c>, 除非发生像超出内存这样的服务器错误.</p_zh>
         <p>Note that if the option <c>delayed_write</c> was
           used when opening the file, <c>close/1</c> might return an
           old write error and not even try to close the file. See
@@ -453,7 +453,7 @@
         <p_zh>从<c><anno>Filename</anno></c>读取并且计算Erlang表达式, separated by '.' (or
           ',', a sequence of expressions is also an expression), from
           . 实际的计算结果并不返回; 并且任何any expression sequence in the file must be there
-          for its side effect. 返回如下所示:</p_zh>
+          for its side effect. 返回下列之一:</p_zh>
         <taglist>
           <tag><c>ok</c></tag>
           <item>
@@ -628,7 +628,7 @@
           <tag><c>enospc</c></tag>
           <item>
             <p>There is a no space left on the device.</p>
-            <p>空间不足.</p>
+            <p_zh>空间不足.</p_zh>
           </item>
           <tag><c>enotdir</c></tag>
           <item>
@@ -759,11 +759,7 @@
 	    such as NFS. Do not depend on this option unless you
 	    know that the file system supports it (in general, local
         file systems should be safe).</p>
-        <p_zh>This option does not guarantee exclusiveness on
-	    file systems that do not support O_EXCL properly,
-	    such as NFS. Do not depend on this option unless you
-	    know that the file system supports it (in general, local
-	    file systems should be safe).</p_zh>
+        <p_zh>在像NFS这样不能很好的支持O_EXCL的文件系统上，该选项不能确保排它性的实现. 除非你知道当前的文件爱你系统支持这个选项(通常本地文件系统是安全支持的)，否则不要依赖它.</p_zh>
         </warning>
           </item>
           <tag><c>raw</c></tag>
@@ -772,7 +768,7 @@
               because no Erlang process is needed to handle the file.
               However, a file opened in this way has the following
               limitations:</p>
-            <p_zh><c>raw</c>选项可以使文件的访问更快, 因为这样在处理文件的时候不再需要Erlang的进程. 然而，用这种方式打开的文件有如下限制:</p_zh>
+            <p_zh><c>raw</c>选项可以使文件的访问更快, 因为这样在处理文件的时候不再需要Erlang的进程. 然而，用这种方式打开的文件有下列限制:</p_zh>
             <list type="bulleted">
               <item>The functions in the <c>io</c> module cannot be used,
                because they can only talk to an Erlang process.
@@ -820,12 +816,14 @@
               a write error should actually occur the error is
               reported as the result of the next file operation, which
               is not executed.</p>
+            <p_zh>当使用这个选项的时候, <c>write/2</c>马上返回成功的返回结果，如果遇到一个写时错误，那么将延迟到下次文件操作时报错（报错时的文件操作没有执行）. </p_zh>
             <p>For example, when <c>delayed_write</c> is used, after a
               number of <c>write/2</c> calls, <c>close/1</c> might
               return <c>{error, enospc}</c> because there was not enough
               space on the disc for previously written data, and
               <c>close/1</c> should probably be called again since the
               file is still open.</p>
+            <p_zh>例如, 当使用<c>delayed_write</c>时, 在一系列的<c>write/2</c>的调用之后, <c>close/1</c> 可能返回<c>{error, enospc}</c> 这是因为没有足够的磁盘空间分配给之前写入的数据, 而且应该再次调用<c>close/1</c>函数来关闭仍处于打开状态的文件.</p_zh>
           </item>
           <tag><c>delayed_write</c></tag>
           <item>
@@ -843,18 +841,25 @@
               bytes. The extra data is buffered and returned in
               subsequent <c>read/2</c> calls, giving a performance gain
               since the number of operating system calls is reduced.</p>
+            <p_zh>该选项激活了读操作数据缓冲区. <c>read/2</c>函数调用是针对于远小于<c>Size</c>字节的数据, 面向操作系统的读操作仍然操作于<c>Size</c>字节大小的数据块. 额外的数据被缓冲下来待下次<c>read/2</c>调用时返回, 这样就通过减少了系统调用次数而获得性能的提高.</p_zh>
 	    <p>The <c>read_ahead</c> buffer is also highly utilized
 	      by the <c>read_line/1</c> function in <c>raw</c> mode,
 	      why this option is recommended (for performance reasons)
 	      when accessing raw files using that function.</p>
+	    <p_zh>The <c>read_ahead</c> buffer is also highly utilized
+	      by the <c>read_line/1</c> function in <c>raw</c> mode,
+	      why this option is recommended (for performance reasons)
+	      when accessing raw files using that function.</p_zh>
             <p>If <c>read/2</c> calls are for sizes not significantly
               less than, or even greater than <c>Size</c> bytes, no
               performance gain can be expected.</p>
+            <p_zh>如果<c>read/2</c>函数调用的数据并不远小于, 或者大于<c>Size</c>字节, 那么将不能获得预期的高性能.</p_zh>
           </item>
           <tag><c>read_ahead</c></tag>
           <item>
             <p>The same as <c>{read_ahead, Size}</c> with a reasonable
               default value for <c>Size</c>. (Roughly some 64 KBytes)</p>
+            <p_zh>除了<c>Size</c>拥有一个合理的默认值(大概是64KB), 与<c>{read_ahead, Size}</c>相同. </p_zh>
           </item>
           <tag><c>compressed</c></tag>
           <item>
@@ -864,6 +869,7 @@
 	      Note that the file size obtained with
               <c>read_file_info/1</c> will most probably not match the
               number of bytes that can be read from a compressed file.</p>
+            <p_zh>使读或写gzip压缩文件成为可能. <c>compressed</c> 选项必须和<c>read</c> 或 <c>write</c>其中之一一起使用.  注意, 通过<c>read_file_info/1</c>函数调用获得的文件大小可能与可读的压缩文件字节数目不匹配.</p_zh>
           </item>
           <tag><c>{encoding, Encoding}</c></tag>
           <item>
@@ -871,6 +877,7 @@
 	    <p>Depending on the encoding, different methods of reading and writing data is preferred. The default encoding of <c>latin1</c> implies using this (the file) module for reading and writing data, as the interfaces provided here work with byte-oriented data, while using other (Unicode) encodings makes the  <seealso marker="stdlib:io">io(3)</seealso> module's <c>get_chars</c>, <c>get_line</c> and <c>put_chars</c> functions more suitable, as they can work with the full Unicode range.</p>
 	    <p>If data is sent to an <c>io_device()</c> in a format that cannot be converted to the specified encoding, or if data is read by a function that returns data in a format that cannot cope with the character range of the data, an error occurs and the file will be closed.</p> 
 	    <p>The allowed values for <c>Encoding</c> are:</p>
+	    <p_zh><c>Encoding</c>的可用值:</p_zh>
 	    <taglist>
 	    <tag><c>latin1</c></tag>
 	    <item>
@@ -903,6 +910,7 @@
           </item>
         </taglist>
         <p>Returns:</p>
+        <p_zh>返回值:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>IoDevice</anno>}</c></tag>
           <item>
@@ -980,22 +988,26 @@
           is an absolute filename, <c><anno>Path</anno></c> is ignored.
           Then reads Erlang terms, separated by '.', from the file.
           Returns one of the following:</p>
+        <p_zh>搜索路径<c><anno>Path</anno></c> (一个文件夹路径列表) 直到发现<c><anno>Filename</anno></c>文件. 如果<c><anno>Filename</anno></c>是一个绝对路径, 那么将会忽略<c><anno>Path</anno></c>. 之后从文件中读取以'.'分隔的Erlang项. 返回下列之一:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>Terms</anno>, <anno>FullName</anno>}</c></tag>
           <item>
             <p>The file was successfully read. <c><anno>FullName</anno></c> is
               the full name of the file.</p>
+            <p_zh>成功读取文件. <c><anno>FullName</anno></c>是文件的完整路径名.</p_zh>
           </item>
           <tag><c>{error, enoent}</c></tag>
           <item>
             <p>The file could not be found in any of the directories in
               <c><anno>Path</anno></c>.</p>
+            <p_zh>列表<c><anno>Path</anno></c>里所有的文件夹中都未找到目标文件.</p_zh>
           </item>
           <tag><c>{error, atom()}</c></tag>
           <item>
             <p>An error occurred when opening the file or reading it.
               See <seealso marker="#open/2">open/2</seealso> for a list
               of typical error codes.</p>
+            <p_zh>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p_zh>
           </item>
           <tag><c>{error, {<anno>Line</anno>, <anno>Mod</anno>,
                            <anno>Term</anno>}}</c></tag>
@@ -1004,6 +1016,7 @@
               the file. Use <c>format_error/1</c> to convert
               the three-element tuple to an English description of
               the error.</p>
+            <p_zh>当翻译文件中的Erlang项时发生一个错误. 使用<c>format_error/1</c>来将三元素的元组翻译成错误的英文描述.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1021,22 +1034,28 @@
           The actual result of evaluation is not returned; any
           expression sequence in the file must be there for its side
           effect. Returns one of the following:</p>
+        <p_zh>搜索路径<c><anno>Path</anno></c> (一个文件夹路径列表) 直到发现<c><anno>Filename</anno></c>文件. 如果<c><anno>Filename</anno></c>是一个绝对路径, 那么将会忽略<c><anno>Path</anno></c>. Then reads and evaluates Erlang expressions, separated by '.' (or ',', a sequence of expressions is also an expression), from the file.
+          The actual result of evaluation is not returned; any
+          expression sequence in the file must be there for its side
+          effect. Returns one of the following:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>FullName</anno>}</c></tag>
           <item>
-            <p>The file was read and evaluated. <c><anno>FullName</anno></c> is
-              the full name of the file.</p>
+            <p>The file was read and evaluated. <c><anno>FullName</anno></c> 是完整的文件路径.</p>
+            <p_zh>读取并求值. <c><anno>FullName</anno></c> 是文件的完整路径名.</p_zh>
           </item>
           <tag><c>{error, enoent}</c></tag>
           <item>
             <p>The file could not be found in any of the directories in
               <c><anno>Path</anno></c>.</p>
+            <p_zh>列表<c><anno>Path</anno></c>里所有的文件夹中都未找到目标文件.</p_zh>
           </item>
           <tag><c>{error, atom()}</c></tag>
           <item>
             <p>An error occurred when opening the file or reading it.
               See <seealso marker="#open/2">open/2</seealso> for a list
               of typical error codes.</p>
+            <p_zh>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p_zh>
           </item>
           <tag><c>{error, {<anno>Line</anno>, <anno>Mod</anno>,
                            <anno>Term</anno>}}</c></tag>
@@ -1045,6 +1064,7 @@
               expressions in the file. Use <c>format_error/1</c> to
               convert the three-element tuple to an English description
               of the error.</p>
+            <p_zh>当翻译文件中的Erlang项时发生一个错误. 使用<c>format_error/1</c>来将三元素的元组翻译成错误的英文描述.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1059,21 +1079,25 @@
           is an absolute file name, <c><anno>Path</anno></c> is ignored.
           Then opens the file in the mode determined by <c><anno>Modes</anno></c>.
           Returns one of the following:</p>
+        <p_zh>搜索路径<c><anno>Path</anno></c> (一个文件夹路径列表) 直到发现<c><anno>Filename</anno></c>文件. 如果<c><anno>Filename</anno></c>是一个绝对路径, 那么将会忽略<c><anno>Path</anno></c>. 之后以<c><anno>Modes</anno></c>确定的模式打开文件.  返回下列之一:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>IoDevice</anno>, <anno>FullName</anno>}</c></tag>
           <item>
             <p>The file has been opened in the requested mode.
               <c><anno>IoDevice</anno></c> is a reference to the file and
               <c><anno>FullName</anno></c> is the full name of the file.</p>
+            <p_zh>文件以所需的模式打开. <c><anno>IoDevice</anno></c> 文件的一个引用, <c><anno>FullName</anno></c> 是文件的完整路径.</p_zh>
           </item>
           <tag><c>{error, enoent}</c></tag>
           <item>
             <p>The file could not be found in any of the directories in
               <c><anno>Path</anno></c>.</p>
+            <p_zh>列表<c><anno>Path</anno></c>里所有的文件夹中都未找到目标文件.</p_zh>
           </item>
           <tag><c>{error, atom()}</c></tag>
           <item>
             <p>The file could not be opened.</p>
+            <p_zh>无法打开文件.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1095,17 +1119,21 @@
             <p>The file was read and evaluated. <c><anno>FullName</anno></c> is
               the full name of the file and <c><anno>Value</anno></c> the value of
               the last expression.</p>
+            <p_zh>读取文件并求值. <c><anno>FullName</anno></c> is the full name of the file and <c><anno>Value</anno></c> the value of
+              the last expression.</p_zh>
           </item>
           <tag><c>{error, enoent}</c></tag>
           <item>
             <p>The file could not be found in any of the directories in
               <c><anno>Path</anno></c>.</p>
+            <p_zh>列表<c><anno>Path</anno></c>里所有的文件夹中都未找到目标文件.</p_zh>
           </item>
           <tag><c>{error, atom()}</c></tag>
           <item>
             <p>An error occurred when opening the file or reading it.
               See <seealso marker="#open/2">open/2</seealso> for a list
               of typical error codes.</p>
+            <p_zh>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p_zh>
           </item>
           <tag><c>{error, {<anno>Line</anno>, <anno>Mod</anno>,
                            <anno>Term</anno>}}</c></tag>
@@ -1114,6 +1142,7 @@
               expressions in the file. Use <c>format_error/1</c> to
               convert the three-element tuple to an English description
               of the error.</p>
+            <p_zh>当翻译文件中的Erlang项时发生一个错误. 使用<c>format_error/1</c>来将三元素的元组翻译成错误的英文描述.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1134,6 +1163,7 @@
       <desc>
         <p>If <c><anno>Pid</anno></c> is an IO device, that is, a pid returned from
           <c>open/2</c>, this function returns the filename, or rather:</p>
+        <p_zh>如果<c><anno>Pid</anno></c> 是一个IO设备, 也就是说该进程号是由<c>open/2</c>返回的, 该函数返回相应的文件名, 更确切的是:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>Filename</anno>}</c></tag>
           <item>
@@ -1142,6 +1172,7 @@
               <c><anno>Pid</anno></c> must be a local pid) and the file is not
               closed. <c><anno>Filename</anno></c> is the filename in flat string
               format.</p>
+            <p_zh>如果该节点的文件服务器不是"slave", 文件由该节点的文件服务器打开, (暗指<c><anno>Pid</anno></c> 必须是本地进程号) 并且文件没有关闭. <c><anno>Filename</anno></c> 是平坦化的字符串文件名.</p_zh>
           </item>
           <tag><c>undefined</c></tag>
           <item>
@@ -1165,30 +1196,38 @@
           absolute offset) if successful, otherwise
           <c>{error, <anno>Reason</anno>}</c>. <c><anno>Location</anno></c> is
           one of the following:</p>
+        <p_zh>设置<c><anno>IoDevice</anno></c>引用的文件指针位置为<c><anno>Location</anno></c>.  如果成功的话返回<c>{ok, <anno>NewPosition</anno>}</c> (绝对文件偏移量), 否则返回<c>{error, <anno>Reason</anno>}</c>. <c><anno>Location</anno></c>为下列之一:</p_zh>
         <taglist>
           <tag><c>Offset</c></tag>
           <item>
             <p>The same as <c>{bof, Offset}</c>.</p>
+            <p_zh>等同于<c>{bof, Offset}</c>.</p_zh>
           </item>
           <tag><c>{bof, Offset}</c></tag>
           <item>
             <p>Absolute offset.</p>
+            <p_zh>绝对偏移量.</p_zh>
           </item>
           <tag><c>{cur, Offset}</c></tag>
           <item>
             <p>Offset from the current position.</p>
+            <p_zh>相对当前位置的偏移量.</p_zh>
           </item>
           <tag><c>{eof, Offset}</c></tag>
           <item>
             <p>Offset from the end of file.</p>
+            <p_zh>相对文件结尾的偏移量.</p_zh>
           </item>
           <tag><c>bof | cur | eof</c></tag>
           <item>
             <p>The same as above with <c>Offset</c> 0.</p>
+            <p_zh>与以上相同，但<c>Offset</c> 为0.</p_zh>
           </item>
         </taglist>
 	<p>Note that offsets are counted in bytes, not in characters. If the file is opened using some other <c>encoding</c> than <c>latin1</c>, one byte does not correspond to one character. Positioning in such a file can only be done to known character boundaries, i.e. to a position earlier retrieved by getting a current position, to the beginning/end of the file or to some other position <em>known</em> to be on a correct character boundary by some other means (typically beyond a byte order mark in the file, which has a known byte-size).</p>
+	<p_zh>注意, 偏移量的单位是字节而不是字符. 如果文件以其他的<c>encoding</c> 而不是<c>latin1</c>打开时, 一个字节并不对应一个字符. Positioning in such a file can only be done to known character boundaries, i.e. to a position earlier retrieved by getting a current position, to the beginning/end of the file or to some other position <em>known</em> to be on a correct character boundary by some other means (typically beyond a byte order mark in the file, which has a known byte-size).</p_zh>
         <p>Typical error reasons are:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>einval</c></tag>
           <item>
@@ -1197,6 +1236,10 @@
               negative offset in the file. Note that if the resulting
               position is a negative value, the result is an error, and
               after the call the file position is undefined.</p>
+            <p_zh><c><anno>Location</anno></c> 不合法或者计算出一个文件的负偏移量
+              negative offset in the file. Note that if the resulting
+              position is a negative value, the result is an error, and
+              after the call the file position is undefined.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1289,6 +1332,7 @@
           </item>
         </taglist>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>ebadf</c></tag>
           <item>
@@ -1311,6 +1355,7 @@
           <c><anno>Filename</anno></c>, or
           <c>{error, <anno>Reason</anno>}</c> if an error occurs.</p>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>enoent</c></tag>
           <item>
@@ -1458,6 +1503,7 @@
           </item>
         </taglist>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>eacces</c></tag>
           <item>
@@ -1503,6 +1549,7 @@
           </item>
         </taglist>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>ebadf</c></tag>
           <item>
@@ -1525,6 +1572,7 @@
           On platforms that do not support symbolic links, the return
           value will be <c>{error,enotsup}</c>.</p>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>einval</c></tag>
           <item>
@@ -1577,6 +1625,7 @@
             (see <c>eacces</c> below).</p>
         </note>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>eacces</c></tag>
           <item>
@@ -1647,6 +1696,7 @@
               expressions in the file. Use <c>format_error/1</c> to
               convert the three-element tuple to an English description
               of the error.</p>
+            <p_zh>当翻译文件中的Erlang项时发生一个错误. 使用<c>format_error/1</c>来将三元素的元组翻译成错误的英文描述.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -1668,6 +1718,7 @@
         <p>Sets the current working directory of the file server to
           <c><anno>Dir</anno></c>. Returns <c>ok</c> if successful.</p>
         <p>Typical error reasons are:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>enoent</c></tag>
           <item>
@@ -1704,6 +1755,7 @@
           (not by the Erlang runtime system) are written to disk. On
           some platforms, this function might have no effect.</p>
         <p>Typical error reasons are:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>enospc</c></tag>
           <item>
@@ -1797,6 +1849,7 @@
           <c>{error, <anno>Reason</anno>}</c> otherwise.</p>
 	  <p>If the file is opened with <c>encoding</c> set to something else than <c>latin1</c>, each byte written might result in several bytes actually being written to the file, as the byte range 0..255 might represent anything between one and four bytes depending on value and UTF encoding type.</p>
         <p>Typical error reasons are:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>ebadf</c></tag>
           <item>
@@ -1819,6 +1872,7 @@
           exist. If it exists, the previous contents are
           overwritten. Returns <c>ok</c>, or <c>{error, <anno>Reason</anno>}</c>.</p>
         <p>Typical error reasons are:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>enoent</c></tag>
           <item>
@@ -1937,6 +1991,7 @@
           </item>
         </taglist>
         <p>Typical error reasons:</p>
+        <p_zh>典型的错误原因:</p_zh>
         <taglist>
           <tag><c>eacces</c></tag>
           <item>
@@ -2127,6 +2182,10 @@ create_file(FD, M, N0, R) ->
       module, the process which handles the file will exit. The dead
       file process might hang if a process tries to access it later.
       This will be fixed in a future release.</p>
+    <p_zh>If an error occurs when accessing an open file with the <c>io</c>
+      module, the process which handles the file will exit. The dead
+      file process might hang if a process tries to access it later.
+      This will be fixed in a future release.</p_zh>
   </section>
 
   <section>
