@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>erl_parse</h1>
+  <h2 class="modsummary">The Erlang Parser</h2>
+  <div class="description">
+    <p class="english">This module is the basic Erlang parser which converts tokens into
+      the abstract form of either forms (i.e., top-level constructs),
+      expressions, or terms. The Abstract Format is described in the
+      <a class="seealso" href="../erts/absform.html">ERTS User's Guide</a>.
+      Note that a token list must end with the <em>dot</em> token in order
+      to be acceptable to the parse functions (see <a class="seealso" href="">erl_scan(3)</a>).</p>
+    <p>This module is the basic Erlang parser which converts tokens into
+      the abstract form of either forms (i.e., top-level constructs),
+      expressions, or terms. The Abstract Format is described in the
+      <a class="seealso" href="../erts/absform.html">ERTS User's Guide</a>.
+      Note that a token list must end with the <em>dot</em> token in order
+      to be acceptable to the parse functions (see <a class="seealso" href="">erl_scan(3)</a>).</p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="abstract_clause"></name>
+      <desc>
+        <p class="english">Parse tree for Erlang clause.</p>
+        <p>Erlang句子的分析树.</p>
+      </desc>
+    </datatype>
+    <datatype>
+      <name name="abstract_expr"></name>
+      <desc>
+        <p class="english">Parse tree for Erlang expression.</p>
+        <p>Erlang表达式的分析树.</p>
+      </desc>
+    </datatype>
+    <datatype>
+      <name name="abstract_form"></name>
+      <desc>
+        <p class="english">Parse tree for Erlang form.</p>
+      </desc>
+    </datatype>
+    <datatype>
+      <name name="error_description"></name>
+    </datatype>
+    <datatype>
+      <name name="error_info"></name>
+    </datatype>
+    <datatype>
+      <name name="token"></name>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="parse_form/1" name="parse_form">parse_form(Tokens) -> {ok, AbsForm} | {error, ErrorInfo}</h3>
+      <div class="type_desc">      Tokens = [token()],<br/>      AbsForm = abstract_form(),<br/>      ErrorInfo = error_info()</div>
+      <div class="discription">
+        <p class="english">This function parses <code><anno>Tokens</anno></code> as if it were
+          a form. It returns:</p>
+        <div class="taglist">
+          <dt>
+            <code>{ok, <anno>AbsForm</anno>}</code>
+          </dt>
+          <p class="english">
+            <p class="english">The parsing was successful. <code><anno>AbsForm</anno></code> is the
+              abstract form of the parsed form.</p>
+          </p>
+          <dt>
+            <code>{error, <anno>ErrorInfo</anno>}</code>
+          </dt>
+          <p class="english">
+            <p class="english">An error occurred.</p>
+            <p>发生一个错误.</p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="parse_exprs/1" name="parse_exprs">parse_exprs(Tokens) -> {ok, ExprList} | {error, ErrorInfo}</h3>
+      <div class="type_desc">      Tokens = [token()],<br/>      ExprList = [abstract_expr()],<br/>      ErrorInfo = error_info()</div>
+      <div class="discription">
+        <p class="english">This function parses <code><anno>Tokens</anno></code> as if it were
+          a list of expressions. It returns:</p>
+        <div class="taglist">
+          <dt>
+            <code>{ok, <anno>ExprList</anno>}</code>
+          </dt>
+          <p class="english">
+            <p class="english">The parsing was successful. <code><anno>ExprList</anno></code> is a
+              list of the abstract forms of the parsed expressions.</p>
+          </p>
+          <dt>
+            <code>{error, <anno>ErrorInfo</anno>}</code>
+          </dt>
+          <p class="english">
+            <p class="english">An error occurred.</p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="parse_term/1" name="parse_term">parse_term(Tokens) -> {ok, Term} | {error, ErrorInfo}</h3>
+      <div class="type_desc">      Tokens = [token()],<br/>      Term = term(),<br/>      ErrorInfo = error_info()</div>
+      <div class="discription">
+        <p class="english">This function parses <code><anno>Tokens</anno></code> as if it were
+          a term. It returns:</p>
+        <div class="taglist">
+          <dt>
+            <code>{ok, <anno>Term</anno>}</code>
+          </dt>
+          <p class="english">
+            <p class="english">The parsing was successful. <code><anno>Term</anno></code> is
+              the Erlang term corresponding to the token list.</p>
+          </p>
+          <dt>
+            <code>{error, ErrorInfo}</code>
+          </dt>
+          <p class="english">
+            <p class="english">An error occurred.</p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="format_error/1">format_error(ErrorDescriptor) -> Chars</h3>
+      <type>
+        <div class="type_desc">ErrorDescriptor = <a class="seealso" href="#type-error_info">error_description()</a></div>
+        <div class="type_desc">Chars = [char() | Chars]</div>
+      </type>
+      <div class="discription">
+        <p class="english">Uses an <code>ErrorDescriptor</code> and returns a string
+          which describes the error. This function is usually called
+          implicitly when an <code>ErrorInfo</code> structure is processed
+          (see below).</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="tokens/1" name="tokens">tokens(AbsTerm) -> Tokens</h3>
+      <div class="type_desc">      AbsTerm = abstract_expr(),<br/>      Tokens = [token()]</div>
+      <h3 arity="2" id="tokens/2" name="tokens">tokens(AbsTerm, MoreTokens) -> Tokens</h3>
+      <div class="type_desc">      AbsTerm = abstract_expr(),<br/>      MoreTokens = [token()],<br/>      Tokens = [token()]</div>
+      <div class="discription">
+        <p class="english">This function generates a list of tokens representing the abstract
+          form <code><anno>AbsTerm</anno></code> of an expression. Optionally, it
+          appends <code><anno>MoreTokens</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="normalise/1" name="normalise">normalise(AbsTerm) -> Data</h3>
+      <div class="type_desc">      AbsTerm = abstract_expr(),<br/>      Data = term()</div>
+      <div class="discription">
+        <p class="english">Converts the abstract form <code><anno>AbsTerm</anno></code> of a
+          term into a
+          conventional Erlang data structure (i.e., the term itself).
+          This is the inverse of <code>abstract/1</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="abstract/1" name="abstract">abstract(Data) -> AbsTerm</h3>
+      <div class="type_desc">      Data = term(),<br/>      AbsTerm = abstract_expr()</div>
+      <div class="discription">
+        <p class="english">Converts the Erlang data structure <code><anno>Data</anno></code> into an
+          abstract form of type <code><anno>AbsTerm</anno></code>.
+          This is the inverse of <code>normalise/1</code>.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>Error Information</h4>
+    <p class="english">The <code>ErrorInfo</code> mentioned above is the standard
+      <code>ErrorInfo</code> structure which is returned from all IO
+      modules. It has the format:
+      </p>
+    <pre>
+    {ErrorLine, Module, ErrorDescriptor}    </pre>
+    <p class="english">A string which describes the error is obtained with the following call:
+      </p>
+    <pre>
+    Module:format_error(ErrorDescriptor)    </pre>
+  </section>
+  <section>
+    <h4>See Also</h4>
+    <p class="english"><a class="seealso" href="">io(3)</a>,
+      <a class="seealso" href="">erl_scan(3)</a>,
+      ERTS User's Guide</p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

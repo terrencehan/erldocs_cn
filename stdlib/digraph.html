@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>digraph</h1>
+  <h2 class="modsummary">Directed Graphs</h2>
+  <div class="description">
+    <p class="english">The <code>digraph</code> module implements a version of labeled
+      directed graphs. What makes the graphs implemented here
+      non-proper directed graphs is that multiple edges between
+      vertices are allowed. However, the customary definition of
+      directed graphs will be used in the text that follows.
+      </p>
+    <p><code>digraph</code>模块实现了一个有标签的有向图. 允许顶点之间有多条边使这里实现的图为不完全有向图. 然而, the customary definition of directed graphs will be used in the text that follows.
+      </p>
+    <p class="english">A <marker id="digraph"></marker><em>directed graph</em> (or just
+      "digraph") is a pair (V,&nbsp;E) of a finite set V of 
+      <marker id="vertex"></marker><em>vertices</em> and a finite set E of
+      <marker id="edge"></marker><em>directed edges</em> (or just "edges"). 
+      The set of
+      edges E is a subset of V&nbsp;&times;&nbsp;V (the Cartesian
+      product of V with itself). In this module, V is allowed to be
+      empty; the so obtained unique digraph is called the 
+      <marker id="empty_digraph"></marker><em>empty digraph</em>. 
+      Both vertices and edges are represented by unique Erlang terms.
+      </p>
+    <p> <marker id="digraph"></marker><em>有向图</em> (或称为"图")是一个由<marker id="vertex"></marker><em>顶点</em>的有限集合V 和<marker id="edge"></marker><em>有向边</em> (或称为"边")的有限集合E构成的(V,&nbsp;E)对. 
+      边集合E 是V&nbsp;&times;&nbsp;V (V和它自身的笛卡尔积)的一个子集. 在这个模块中, V 允许为空; 所以获得的唯一有向图称为
+      <marker id="empty_digraph"></marker><em>空有向图</em>. 
+      顶点和边都是由唯一的Erlang项表示.
+      </p>
+    <p class="english">Digraphs can be annotated with additional information. Such
+      information may be attached to the vertices and to the edges of
+      the digraph. A digraph which has been annotated is called a
+      <em>labeled digraph</em>, and the information attached to a
+      vertex or an edge is called a <marker id="label"></marker><em>label</em>. Labels are Erlang terms.
+      </p>
+    <p>有向图可以通过额外的信息来注释. 这样的信息可以加到顶点或者边上. A digraph which has been annotated is called a <em>labeled digraph</em>, and the information attached to a vertex or an edge is called a <marker id="label"></marker> <em>label</em>. Labels are Erlang terms.
+      </p>
+    <p class="english">An edge e&nbsp;=&nbsp;(v,&nbsp;w) is said to 
+      <marker id="emanate"></marker><em>emanate</em> from vertex v and 
+      to be <marker id="incident"></marker><em>incident</em> on vertex w. 
+      The <marker id="out_degree"></marker><em>out-degree</em> of a vertex 
+      is the number of edges emanating from that vertex. 
+      The <marker id="in_degree"></marker><em>in-degree</em> of a vertex 
+      is the number of edges incident on that vertex. 
+      If there is an edge emanating from v and incident on w, then w is 
+      said to be an <marker id="out_neighbour"></marker><em>out-neighbour</em> of v, and v is said to be an 
+      <marker id="in_neighbour"></marker><em>in-neighbour</em> of w. 
+      A <marker id="path"></marker><em>path</em> P from v[1] to v[k] 
+      in a digraph (V,&nbsp;E) is a non-empty sequence
+      v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] of vertices in V such that
+      there is an edge (v[i],v[i+1]) in E for
+      1&nbsp;&lt;=&nbsp;i&nbsp;&lt;&nbsp;k. 
+      The <marker id="length"></marker><em>length</em> of the path P is k-1. 
+      P is <marker id="simple_path"></marker><em>simple</em> if all 
+      vertices are distinct, except that the first and the last vertices
+      may be the same. 
+      P is a <marker id="cycle"></marker><em>cycle</em> if the length 
+      of P is not zero and v[1] = v[k]. 
+      A <marker id="loop"></marker><em>loop</em> is a cycle of length one. 
+      A <marker id="simple_cycle"></marker><em>simple cycle</em> is a path
+      that is both a cycle and simple. 
+      An <marker id="acyclic_digraph"></marker><em>acyclic digraph</em>
+      is a digraph that has no cycles.
+      </p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="d_type"/>
+    </datatype>
+    <datatype>
+      <name name="d_cyclicity"/>
+    </datatype>
+    <datatype>
+      <name name="d_protection"/>
+    </datatype>
+    <datatype>
+      <name>
+        <marker id="type-digraph">digraph()</marker>
+      </name>
+      <desc>
+        <p class="english">A digraph as returned by <code>new/0,1</code>.</p>
+      </desc>
+    </datatype>
+    <datatype>
+      <name>
+        <marker id="type-edge">edge()</marker>
+      </name>
+    </datatype>
+    <datatype>
+      <name name="label"/>
+    </datatype>
+    <datatype>
+      <name>
+        <marker id="type-vertex">vertex()</marker>
+      </name>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="3" id="add_edge/3" name="add_edge">add_edge(G, V1, V2) -> edge() | {'error', add_edge_err_rsn()}</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V1 = vertex(),<br/>      V2 = vertex()</div>
+      <h3 arity="4" id="add_edge/4" name="add_edge">add_edge(G, V1, V2, Label) -> edge() | {'error', add_edge_err_rsn()}</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Label = label()</div>
+      <h3 arity="5" id="add_edge/5" name="add_edge">add_edge(G, E, V1, V2, Label) -> edge() | {'error', add_edge_err_rsn()}</h3>
+      <div class="type_desc">      G = digraph(),<br/>      E = edge(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Label = label()</div>
+      <type name="add_edge_err_rsn"/>
+      <div class="discription">
+        <p class="english"><code>add_edge/5</code> creates (or modifies) the edge <code><anno>E</anno></code>
+          of the digraph <code><anno>G</anno></code>, using <code><anno>Label</anno></code> as the (new)
+          <a class="seealso" href="#label">label</a> of the edge. The
+          edge is <a class="seealso" href="#emanate">emanating</a> from
+          <code><anno>V1</anno></code> and <a class="seealso" href="#incident">incident</a>
+          on <code><anno>V2</anno></code>. Returns <code><anno>E</anno></code>.
+          </p>
+        <p class="english"><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code> is
+          equivalent to
+          <code>add_edge(<anno>G</anno>,&nbsp;<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code>,
+          where <code><anno>E</anno></code> is a created edge. The created edge is
+          represented by the term <code>['$e'&nbsp;|&nbsp;N]</code>, where N
+          is an integer&nbsp;>=&nbsp;0.
+          </p>
+        <p class="english"><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>)</code> is equivalent to
+          <code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;[])</code>.
+          </p>
+        <p class="english">If the edge would create a cycle in 
+	  an <a class="seealso" href="#acyclic_digraph">acyclic digraph</a>,
+	  then <code>{error,&nbsp;{bad_edge,&nbsp;<anno>Path</anno>}}</code> is returned. If
+          either of <code><anno>V1</anno></code> or <code><anno>V2</anno></code> is not a vertex of the
+          digraph <code><anno>G</anno></code>, then
+          <code>{error,&nbsp;{bad_vertex,&nbsp;</code><anno>V</anno><code>}}</code> is
+          returned, <anno>V</anno>&nbsp;=&nbsp;<code><anno>V1</anno></code> or
+          <anno>V</anno>&nbsp;=&nbsp;<code><anno>V2</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="add_vertex/1" name="add_vertex">add_vertex(G) -> vertex()</h3>
+      <div class="type_desc">      G = digraph()</div>
+      <h3 arity="2" id="add_vertex/2" name="add_vertex">add_vertex(G, V) -> vertex()</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex()</div>
+      <h3 arity="3" id="add_vertex/3" name="add_vertex">add_vertex(G, V, Label) -> vertex()</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Label = label()</div>
+      <div class="discription">
+        <p class="english"><code>add_vertex/3</code> creates (or modifies) the vertex <code><anno>V</anno></code>
+          of the digraph <code><anno>G</anno></code>, using <code><anno>Label</anno></code> as the (new)
+          <a class="seealso" href="#label">label</a> of the
+          vertex. Returns <code><anno>V</anno></code>.
+          </p>
+        <p class="english"><code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>)</code> is equivalent to
+          <code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>,&nbsp;[])</code>.
+          </p>
+        <p class="english"><code>add_vertex/1</code> creates a vertex using the empty list
+          as label, and returns the created vertex. The created vertex
+          is represented by the term <code>['$v'&nbsp;|&nbsp;N]</code>,
+          where N is an integer&nbsp;>=&nbsp;0.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_edge/2" name="del_edge">del_edge(G, E) -> 'true'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      E = edge()</div>
+      <div class="discription">
+        <p class="english">Deletes the edge <code><anno>E</anno></code> from the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_edges/2" name="del_edges">del_edges(G, Edges) -> 'true'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      Edges = [edge()]</div>
+      <div class="discription">
+        <p class="english">Deletes the edges in the list <code><anno>Edges</anno></code> from the digraph
+          <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="del_path/3" name="del_path">del_path(G, V1, V2) -> 'true'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V1 = vertex(),<br/>      V2 = vertex()</div>
+      <div class="discription">
+        <p class="english">Deletes edges from the digraph <code><anno>G</anno></code> until there are no
+          <a class="seealso" href="#path">paths</a> from the vertex
+          <code><anno>V1</anno></code> to the vertex <code><anno>V2</anno></code>.
+          </p>
+        <p class="english">A sketch of the procedure employed: Find an arbitrary
+          <a class="seealso" href="#simple_path">simple path</a>
+          v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] from <code><anno>V1</anno></code> to
+          <code><anno>V2</anno></code> in <code><anno>G</anno></code>. Remove all edges of
+	  <code><anno>G</anno></code> <a class="seealso" href="#emanate">emanating</a> from v[i]
+	  and <a class="seealso" href="#incident">incident</a> to v[i+1] for
+          1&nbsp;&lt;=&nbsp;i&nbsp;&lt;&nbsp;k (including multiple
+          edges). Repeat until there is no path between <code><anno>V1</anno></code> and
+          <code><anno>V2</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_vertex/2" name="del_vertex">del_vertex(G, V) -> 'true'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex()</div>
+      <div class="discription">
+        <p class="english">Deletes the vertex <code><anno>V</anno></code> from the digraph <code><anno>G</anno></code>. Any
+          edges <a class="seealso" href="#emanate">emanating</a> from
+          <code><anno>V</anno></code> or <a class="seealso" href="#incident">incident</a>
+          on <code><anno>V</anno></code> are also deleted.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_vertices/2" name="del_vertices">del_vertices(G, Vertices) -> 'true'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      Vertices = [vertex()]</div>
+      <div class="discription">
+        <p class="english">Deletes the vertices in the list <code><anno>Vertices</anno></code> from the
+          digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="delete/1" name="delete">delete(G) -> 'true'</h3>
+      <div class="type_desc">      G = digraph()</div>
+      <div class="discription">
+        <p class="english">Deletes the digraph <code><anno>G</anno></code>. This call is important
+          because digraphs are implemented with <code>ETS</code>. There is
+          no garbage collection of <code>ETS</code> tables. The digraph
+          will, however, be deleted if the process that created the
+          digraph terminates.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="edge/2" name="edge">edge(G, E) -> {E, V1, V2, Label} | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      E = edge(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Label = label()</div>
+      <div class="discription">
+        <p class="english">Returns <code>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</code> where
+          <code><anno>Label</anno></code> is the <a class="seealso" href="#label">label</a>
+          of the edge 
+	  <code><anno>E</anno></code> <a class="seealso" href="#emanate">emanating</a> from
+	  <code><anno>V1</anno></code> and <a class="seealso" href="#incident">incident</a> on
+	  <code><anno>V2</anno></code> of the digraph <code><anno>G</anno></code>.
+	  If there is no edge <code><anno>E</anno></code> of the
+          digraph <code><anno>G</anno></code>, then <code>false</code> is returned.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="edges/1" name="edges">edges(G) -> Edges</h3>
+      <div class="type_desc">      G = digraph(),<br/>      Edges = [edge()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all edges of the digraph <code><anno>G</anno></code>, in
+          some unspecified order.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="edges/2" name="edges">edges(G, V) -> Edges</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Edges = [edge()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all 
+	edges <a class="seealso" href="#emanate">emanating</a> from 
+	or <a class="seealso" href="#incident">incident</a> on <code><anno>V</anno></code>
+	of the digraph <code><anno>G</anno></code>, in some unspecified order.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="get_cycle/2" name="get_cycle">get_cycle(G, V) -> Vertices | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Vertices = [vertex(),...]</div>
+      <div class="discription">
+        <p class="english">If there is 
+	  a <a class="seealso" href="#simple_cycle">simple cycle</a> of 
+	  length two or more through the vertex
+          <code><anno>V</anno></code>, then the cycle is returned as a list
+          <code>[<anno>V</anno>,&nbsp;...,&nbsp;<anno>V</anno>]</code> of vertices, otherwise if there
+          is a <a class="seealso" href="#loop">loop</a> through
+          <code><anno>V</anno></code>, then the loop is returned as a list <code>[<anno>V</anno>]</code>. If
+          there are no cycles through <code><anno>V</anno></code>, then <code>false</code> is
+          returned.
+          </p>
+        <p class="english"><code>get_path/3</code> is used for finding a simple cycle
+          through <code><anno>V</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="get_path/3" name="get_path">get_path(G, V1, V2) -> Vertices | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Vertices = [vertex(),...]</div>
+      <div class="discription">
+        <p class="english">Tries to find 
+	  a <a class="seealso" href="#simple_path">simple path</a> from 
+	  the vertex <code><anno>V1</anno></code> to the vertex
+          <code><anno>V2</anno></code> of the digraph <code><anno>G</anno></code>. Returns the path as a
+          list <code>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</code> of vertices, or
+          <code>false</code> if no simple path from <code><anno>V1</anno></code> to <code><anno>V2</anno></code>
+          of length one or more exists.
+          </p>
+        <p class="english">The digraph <code><anno>G</anno></code> is traversed in a depth-first manner,
+          and the first path found is returned.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="get_short_cycle/2" name="get_short_cycle">get_short_cycle(G, V) -> Vertices | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Vertices = [vertex(),...]</div>
+      <div class="discription">
+        <p class="english">Tries to find an as short as 
+	  possible <a class="seealso" href="#simple_cycle">simple cycle</a> through
+	  the vertex <code><anno>V</anno></code> of the digraph <code>G</code>. Returns the cycle
+          as a list <code>[<anno>V</anno>,&nbsp;...,&nbsp;<anno>V</anno>]</code> of vertices, or
+          <code>false</code> if no simple cycle through <code><anno>V</anno></code> exists.
+          Note that a <a class="seealso" href="#loop">loop</a> through
+          <code><anno>V</anno></code> is returned as the list <code>[<anno>V</anno>,&nbsp;<anno>V</anno>]</code>.
+          </p>
+        <p class="english"><code>get_short_path/3</code> is used for finding a simple cycle
+          through <code><anno>V</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="get_short_path/3" name="get_short_path">get_short_path(G, V1, V2) -> Vertices | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Vertices = [vertex(),...]</div>
+      <div class="discription">
+        <p class="english">Tries to find an as short as 
+	  possible <a class="seealso" href="#simple_path">simple path</a> from
+	  the vertex <code><anno>V1</anno></code> to the vertex <code><anno>V2</anno></code> of the digraph <code><anno>G</anno></code>.
+          Returns the path as a list <code>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</code> of
+          vertices, or <code>false</code> if no simple path from <code><anno>V1</anno></code>
+          to <code><anno>V2</anno></code> of length one or more exists.
+          </p>
+        <p class="english">The digraph <code><anno>G</anno></code> is traversed in a breadth-first
+          manner, and the first path found is returned.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="in_degree/2" name="in_degree">in_degree(G, V) -> non_neg_integer()</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex()</div>
+      <div class="discription">
+        <p class="english">Returns the <a class="seealso" href="#in_degree">in-degree</a> of the vertex
+          <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="in_edges/2" name="in_edges">in_edges(G, V) -> Edges</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Edges = [edge()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all 
+	  edges <a class="seealso" href="#incident">incident</a> on
+	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="in_neighbours/2" name="in_neighbours">in_neighbours(G, V) -> Vertex</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Vertex = [vertex()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of 
+	  all <a class="seealso" href="#in_neighbour">in-neighbours</a> of 
+	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="info/1" name="info">info(G) -> InfoList</h3>
+      <div class="type_desc">      G = digraph(),<br/>      InfoList = [{'cyclicity', Cyclicity = d_cyclicity()} |<br/>                   {'memory', NoWords = non_neg_integer()} |<br/>                   {'protection', Protection = d_protection()}]</div>
+      <type name="d_cyclicity"/>
+      <type name="d_protection"/>
+      <div class="discription">
+        <p class="english">Returns a list of <code>{Tag, Value}</code> pairs describing the
+          digraph <code><anno>G</anno></code>. The following pairs are returned:
+          </p>
+        <list type="bulleted">
+          <p class="english">
+            <p class="english"><code>{cyclicity, <anno>Cyclicity</anno>}</code>, where <code><anno>Cyclicity</anno></code>
+              is <code>cyclic</code> or <code>acyclic</code>, according to the
+              options given to <code>new</code>.</p>
+          </p>
+          <p class="english">
+            <p class="english"><code>{memory, <anno>NoWords</anno>}</code>, where <code><anno>NoWords</anno></code> is
+              the number of words allocated to the <code>ETS</code> tables.</p>
+          </p>
+          <p class="english">
+            <p class="english"><code>{protection, <anno>Protection</anno>}</code>, where <code><anno>Protection</anno></code>
+              is <code>protected</code> or <code>private</code>, according
+              to the options given to <code>new</code>.</p>
+          </p>
+        </list>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="new/0" name="new">new() -> digraph()</h3>
+      <div class="discription">
+        <p class="english">Equivalent to <code>new([])</code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="new/1" name="new">new(Type) -> digraph()</h3>
+      <div class="type_desc">      Type = [d_type()]</div>
+      <type variable="Type"/>
+      <type name="d_type"/>
+      <type name="d_cyclicity"/>
+      <type name="d_protection"/>
+      <div class="discription">
+        <p class="english">Returns 
+	  an <a class="seealso" href="#empty_digraph">empty digraph</a> with 
+	  properties according to the options in <code><anno>Type</anno></code>:</p>
+        <div class="taglist">
+          <dt>
+            <code>cyclic</code>
+          </dt>
+          <p class="english">Allow <a class="seealso" href="#cycle">cycles</a> in the
+           digraph (default).</p>
+          <dt>
+            <code>acyclic</code>
+          </dt>
+          <p class="english">The digraph is to be kept <a class="seealso" href="#acyclic_digraph">acyclic</a>.</p>
+          <dt>
+            <code>protected</code>
+          </dt>
+          <p class="english">Other processes can read the digraph (default).</p>
+          <dt>
+            <code>private</code>
+          </dt>
+          <p class="english">The digraph can be read and modified by the creating
+           process only.</p>
+        </div>
+        <p class="english">If an unrecognized type option <code>T</code> is given or <code><anno>Type</anno></code>
+	   is not a proper list, there will be a <code>badarg</code> exception.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="no_edges/1" name="no_edges">no_edges(G) -> non_neg_integer()</h3>
+      <div class="type_desc">      G = digraph()</div>
+      <div class="discription">
+        <p class="english">Returns the number of edges of the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="no_vertices/1" name="no_vertices">no_vertices(G) -> non_neg_integer()</h3>
+      <div class="type_desc">      G = digraph()</div>
+      <div class="discription">
+        <p class="english">Returns the number of vertices of the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="out_degree/2" name="out_degree">out_degree(G, V) -> non_neg_integer()</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex()</div>
+      <div class="discription">
+        <p class="english">Returns the <a class="seealso" href="#out_degree">out-degree</a> of the vertex
+          <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="out_edges/2" name="out_edges">out_edges(G, V) -> Edges</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Edges = [edge()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all 
+	  edges <a class="seealso" href="#emanate">emanating</a> from 
+          <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="out_neighbours/2" name="out_neighbours">out_neighbours(G, V) -> Vertices</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Vertices = [vertex()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of 
+	  all <a class="seealso" href="#out_neighbour">out-neighbours</a> of 
+	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="vertex/2" name="vertex">vertex(G, V) -> {V, Label} | 'false'</h3>
+      <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Label = label()</div>
+      <div class="discription">
+        <p class="english">Returns <code>{<anno>V</anno>,&nbsp;<anno>Label</anno>}</code> where <code><anno>Label</anno></code> is the
+          <a class="seealso" href="#label">label</a> of the vertex
+          <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, or <code>false</code> if there
+          is no vertex <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
+          </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="vertices/1" name="vertices">vertices(G) -> Vertices</h3>
+      <div class="type_desc">      G = digraph(),<br/>      Vertices = [vertex()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all vertices of the digraph <code><anno>G</anno></code>, in
+          some unspecified order.
+          </p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>See Also</h4>
+    <p class="english"><a class="seealso" href="">digraph_utils(3)</a>, 
+      <a class="seealso" href="">ets(3)</a></p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
