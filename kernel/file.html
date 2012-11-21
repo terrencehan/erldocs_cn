@@ -29,8 +29,8 @@
       file operations be performed in threads of their own, allowing
       other Erlang processes to continue executing in parallel with
       the file operations. See the command line flag
-      <code>+A</code> in <seealso marker="erts:erl">erl(1)</seealso>.</p>
-    <p>在支持线程的操作系统上, 可能会让文件操作在它们自己的线程上进行, 从而使得Erlang的进程能够与文件系统并行的执行. 参阅<seealso marker="erts:erl">erl(1)</seealso>中的命令行标记<code>+A</code> .</p>
+      <code>+A</code> in <a class="seealso" href="../erts/erl.html">erl(1)</a>.</p>
+    <p>在支持线程的操作系统上, 可能会让文件操作在它们自己的线程上进行, 从而使得Erlang的进程能够与文件系统并行的执行. 参阅<a class="seealso" href="../erts/erl.html">erl(1)</a>中的命令行标记<code>+A</code> .</p>
     <p class="english">The Erlang VM supports file names in Unicode to a limited
     extent.  Depending on how the VM is started (with the parameter
     <code>+fnu</code> or <code>+fnl</code>), file names given can contain
@@ -117,7 +117,7 @@
       <name name="io_device"/>
       <desc>
         <p class="english">As returned by
-          <seealso marker="#open/2">file:open/2</seealso>,
+          <a class="seealso" href="#open/2">file:open/2</a>,
           a process handling IO protocols.</p>
       </desc>
     </datatype>
@@ -185,9 +185,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Gid = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes group of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件的所属组. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -195,9 +195,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Mode = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes permissions of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件权限. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -205,9 +205,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Uid = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes owner of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件的所有者. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -215,9 +215,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Uid = integer(),<br/>      Gid = integer(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes owner and group of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件的所有者和所有组. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -225,9 +225,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Mtime = date_time(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes the modification and access times of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件的修改和访问时间. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -235,9 +235,9 @@
       <div class="type_desc">      Filename = name(),<br/>      Atime = date_time(),<br/>      Mtime = date_time(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">Changes the modification and last access times of a file. See
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
         <p>更改文件的修改和访问时间. 参阅
-          <seealso marker="#write_file_info/2">write_file_info/2</seealso>.</p>
+          <a class="seealso" href="#write_file_info/2">write_file_info/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -251,8 +251,8 @@
         <p class="english">Note that if the option <code>delayed_write</code> was
           used when opening the file, <code>close/1</code> might return an
           old write error and not even try to close the file. See
-          <seealso marker="#open/2">open/2</seealso>.</p>
-        <p>注意，如果在打开文件的时候使用了<code>delayed_write</code> 选项, <code>close/1</code> 可能返回一个过时写错误，甚至不会尝试关闭这个文件. 参阅 <seealso marker="#open/2">open/2</seealso>.</p>
+          <a class="seealso" href="#open/2">open/2</a>.</p>
+        <p>注意，如果在打开文件的时候使用了<code>delayed_write</code> 选项, <code>close/1</code> 可能返回一个过时写错误，甚至不会尝试关闭这个文件. 参阅 <a class="seealso" href="#open/2">open/2</a>.</p>
       </div>
     </div>
     <div class="function">
@@ -275,9 +275,9 @@
           </dt>
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
-              See <seealso marker="#open/2">open/2</seealso> for a list
+              See <a class="seealso" href="#open/2">open/2</a> for a list
               of typical error codes.</p>
-            <p>当打开或读文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码.</p>
+            <p>当打开或读文件的时候发生一个错误. 参阅 <a class="seealso" href="#open/2">open/2</a> 中的典型错误代码.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -314,9 +314,9 @@
           infinite number of bytes.</p>
         <p>从<code><anno>Source</anno></code> 向 <code><anno>Destination</anno></code>拷贝<code><anno>ByteCount</anno></code>字节. <code><anno>Source</anno></code> 和 <code><anno>Destination</anno></code> 指向文件名或IO设备(例如<code>open/2</code>返回的IO). <code><anno>ByteCount</anno></code> 默认值 <code>infinity</code>, 代表无限字节.</p>
         <p class="english">The argument <code><anno>Modes</anno></code> is a list of possible modes,
-          see <seealso marker="#open/2">open/2</seealso>, and defaults to
+          see <a class="seealso" href="#open/2">open/2</a>, and defaults to
           [].</p>
-        <p>参数<code><anno>Modes</anno></code> 是一个模式列表, 参阅 <seealso marker="#open/2">open/2</seealso>, 默认值为[].</p>
+        <p>参数<code><anno>Modes</anno></code> 是一个模式列表, 参阅 <a class="seealso" href="#open/2">open/2</a>, 默认值为[].</p>
         <p class="english">If both <code><anno>Source</anno></code> and
           <code><anno>Destination</anno></code> refer to
           filenames, the files are opened with <code>[read, binary]</code>
@@ -448,7 +448,7 @@
           <p class="english">In a future release, a bad type for the
             <code><anno>Filename</anno></code> argument will probably generate
             an exception.</p>
-          <p class="english">在以后的版本中, <code><anno>Filename</anno></code>的类型错误问题可能会产生一个异常.</p>
+          <p>在以后的版本中, <code><anno>Filename</anno></code>的类型错误问题可能会产生一个异常.</p>
         </div>
       </div>
     </div>
@@ -501,9 +501,9 @@
       <div class="discription">
         <p class="english">The same as <code>eval/1</code> but the variable bindings
           <code><anno>Bindings</anno></code> are used in the evaluation. See
-          <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> about
+          <a class="seealso" href="../stdlib/erl_eval.html">erl_eval(3)</a> about
           variable bindings.</p>
-        <p>除了在计算过程中使用变量绑定<code><anno>Bindings</anno></code> 以外与<code>eval/1</code>相同. 参阅 <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> 中关于变量绑定的内容.</p>
+        <p>除了在计算过程中使用变量绑定<code><anno>Bindings</anno></code> 以外与<code>eval/1</code>相同. 参阅 <a class="seealso" href="../stdlib/erl_eval.html">erl_eval(3)</a> 中关于变量绑定的内容.</p>
       </div>
     </div>
     <div class="function">
@@ -819,7 +819,7 @@
 	    such as NFS. Do not depend on this option unless you
 	    know that the file system supports it (in general, local
         file systems should be safe).</p>
-              <p>在像NFS这样不能很好的支持O_EXCL的文件系统上，该选项不能确保排它性的实现. 除非你知道当前的文件爱你系统支持这个选项(通常本地文件系统是安全支持的)，否则不要依赖它.</p>
+              <p>在像NFS这样不能很好的支持O_EXCL的文件系统上，该选项不能确保排它性的实现. 除非你知道当前的文件系统支持这个选项(通常本地文件系统是安全支持的)，否则不要依赖它.</p>
             </div>
           </p>
           <dt>
@@ -950,7 +950,7 @@
           </dt>
           <p class="english">
             <p class="english">Makes the file perform automatic translation of characters to and from a specific (Unicode) encoding. Note that the data supplied to file:write or returned by file:read still is byte oriented, this option only denotes how data is actually stored in the disk file.</p>
-            <p class="english">Depending on the encoding, different methods of reading and writing data is preferred. The default encoding of <code>latin1</code> implies using this (the file) module for reading and writing data, as the interfaces provided here work with byte-oriented data, while using other (Unicode) encodings makes the  <seealso marker="stdlib:io">io(3)</seealso> module's <code>get_chars</code>, <code>get_line</code> and <code>put_chars</code> functions more suitable, as they can work with the full Unicode range.</p>
+            <p class="english">Depending on the encoding, different methods of reading and writing data is preferred. The default encoding of <code>latin1</code> implies using this (the file) module for reading and writing data, as the interfaces provided here work with byte-oriented data, while using other (Unicode) encodings makes the  <a class="seealso" href="../stdlib/io.html">io(3)</a> module's <code>get_chars</code>, <code>get_line</code> and <code>put_chars</code> functions more suitable, as they can work with the full Unicode range.</p>
             <p class="english">If data is sent to an <code>io_device()</code> in a format that cannot be converted to the specified encoding, or if data is read by a function that returns data in a format that cannot cope with the character range of the data, an error occurs and the file will be closed.</p>
             <p class="english">The allowed values for <code>Encoding</code> are:</p>
             <p><code>Encoding</code>的可用值:</p>
@@ -959,11 +959,11 @@
                 <code>latin1</code>
               </dt>
               <p class="english">
-                <p class="english">The default encoding. Bytes supplied to i.e. file:write are written as is on the file, likewise bytes read from the file are returned to i.e. file:read as is. If the <seealso marker="stdlib:io">io(3)</seealso> module is used for writing, the file can only cope with Unicode characters up to codepoint 255 (the ISO-latin-1 range).</p>
+                <p class="english">The default encoding. Bytes supplied to i.e. file:write are written as is on the file, likewise bytes read from the file are returned to i.e. file:read as is. If the <a class="seealso" href="../stdlib/io.html">io(3)</a> module is used for writing, the file can only cope with Unicode characters up to codepoint 255 (the ISO-latin-1 range).</p>
               </p>
               <dt><code>unicode</code> or <code>utf8</code></dt>
               <p class="english">
-                <p class="english">Characters are translated to and from the UTF-8 encoding before being written to or read from the file. A file opened in this way might be readable using the file:read function, as long as no data stored on the file lies beyond the ISO-latin-1 range (0..255), but failure will occur if the data contains Unicode codepoints beyond that range. The file is best read with the functions in the Unicode aware   <seealso marker="stdlib:io">io(3)</seealso> module.</p>
+                <p class="english">Characters are translated to and from the UTF-8 encoding before being written to or read from the file. A file opened in this way might be readable using the file:read function, as long as no data stored on the file lies beyond the ISO-latin-1 range (0..255), but failure will occur if the data contains Unicode codepoints beyond that range. The file is best read with the functions in the Unicode aware   <a class="seealso" href="../stdlib/io.html">io(3)</a> module.</p>
                 <p class="english">Bytes written to the file by any means are translated to UTF-8 encoding before actually being stored on the disk file.</p>
               </p>
               <dt><code>utf16</code> or <code>{utf16,big}</code></dt>
@@ -987,7 +987,7 @@
                 <p class="english">Works like <code>unicode</code>, but translation is done to and from little endian UTF-32 instead of UTF-8.</p>
               </p>
             </div>
-            <p class="english">The Encoding can be changed for a file "on the fly" by using the <seealso marker="stdlib:io#setopts/2">io:setopts/2</seealso> function, why a file can be analyzed in latin1 encoding for i.e. a BOM, positioned beyond the BOM and then be set for the right encoding before further reading.See the <seealso marker="stdlib:unicode">unicode(3)</seealso> module for functions identifying BOM's.</p>
+            <p class="english">The Encoding can be changed for a file "on the fly" by using the <a class="seealso" href="../stdlib/io.html#setopts/2">io:setopts/2</a> function, why a file can be analyzed in latin1 encoding for i.e. a BOM, positioned beyond the BOM and then be set for the right encoding before further reading.See the <a class="seealso" href="../stdlib/unicode.html">unicode(3)</a> module for functions identifying BOM's.</p>
             <p class="english">This option is not allowed on <code>raw</code> files.</p>
           </p>
         </div>
@@ -1017,9 +1017,9 @@
           be closed and the process itself will be terminated.
           An <code><anno>IoDevice</anno></code> returned from this call can be used
           as an argument to the IO functions (see
-          <seealso marker="stdlib:io">io(3)</seealso>).</p>
+          <a class="seealso" href="../stdlib/io.html">io(3)</a>).</p>
         <p><code><anno>IoDevice</anno></code> 是处理文件的进程号. 该进程与最初打开文件的进程相链接. 如果<code><anno>IoDevice</anno></code>链接的任意一个进程终止，那么文件将被关闭而该进程也会被终止.  由该函数调用返回的 <code><anno>IoDevice</anno></code> 可以作为IO函数的参数(参阅
-          <seealso marker="stdlib:io">io(3)</seealso>).</p>
+          <a class="seealso" href="../stdlib/io.html">io(3)</a>).</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">In previous versions of <code>file</code>, modes were given
@@ -1108,9 +1108,9 @@
           </dt>
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
-              See <seealso marker="#open/2">open/2</seealso> for a list
+              See <a class="seealso" href="#open/2">open/2</a> for a list
               of typical error codes.</p>
-            <p>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p>
+            <p>在打开或者读取文件的时候发生一个错误. 参阅 <a class="seealso" href="#open/2">open/2</a> 中的典型错误代码列表.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -1164,9 +1164,9 @@
           </dt>
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
-              See <seealso marker="#open/2">open/2</seealso> for a list
+              See <a class="seealso" href="#open/2">open/2</a> for a list
               of typical error codes.</p>
-            <p>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p>
+            <p>在打开或者读取文件的时候发生一个错误. 参阅 <a class="seealso" href="#open/2">open/2</a> 中的典型错误代码列表.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -1258,9 +1258,9 @@
           </dt>
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
-              See <seealso marker="#open/2">open/2</seealso> for a list
+              See <a class="seealso" href="#open/2">open/2</a> for a list
               of typical error codes.</p>
-            <p>在打开或者读取文件的时候发生一个错误. 参阅 <seealso marker="#open/2">open/2</seealso> 中的典型错误代码列表.</p>
+            <p>在打开或者读取文件的时候发生一个错误. 参阅 <a class="seealso" href="#open/2">open/2</a> 中的典型错误代码列表.</p>
           </p>
           <dt>
             <code>{error, {<anno>Line</anno>, <anno>Mod</anno>,
@@ -1283,7 +1283,7 @@
       <div class="discription">
         <p class="english">The same as <code>path_script/2</code> but the variable bindings
           <code><anno>Bindings</anno></code> are used in the evaluation. See
-          <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> about
+          <a class="seealso" href="../stdlib/erl_eval.html">erl_eval(3)</a> about
           variable bindings.</p>
       </div>
     </div>
@@ -1431,7 +1431,7 @@
           <anno>Reason</anno>}}</code>, where
           <code><anno>N</anno></code> is the number of successful writes that was done
           before the failure.</p>
-        <p class="english">When positioning in a file with other <code>encoding</code> than <code>latin1</code>, caution must be taken to set the position on a correct character boundary, see <seealso marker="#position/2">position/2</seealso> for details.</p>
+        <p class="english">When positioning in a file with other <code>encoding</code> than <code>latin1</code>, caution must be taken to set the position on a correct character boundary, see <a class="seealso" href="#position/2">position/2</a> for details.</p>
       </div>
     </div>
     <div class="function">
@@ -1445,7 +1445,7 @@
           to be an
           integer; and the current position of the file is undefined
           after the operation.</p>
-        <p class="english">When positioning in a file with other <code>encoding</code> than <code>latin1</code>, caution must be taken to set the position on a correct character boundary, see <seealso marker="#position/2">position/2</seealso> for details.</p>
+        <p class="english">When positioning in a file with other <code>encoding</code> than <code>latin1</code>, caution must be taken to set the position on a correct character boundary, see <a class="seealso" href="#position/2">position/2</a> for details.</p>
       </div>
     </div>
     <div class="function">
@@ -1459,7 +1459,7 @@
           opened in raw mode (although they work for normally opened
           files, too).</p>
         <p class="english">For files where <code>encoding</code> is set to something else than <code>latin1</code>, one character might be represented by more than one byte on the file. The parameter <code>Number</code> always denotes the number of <em>characters</em> read from the file, why the position in the file might be moved a lot more than this number when reading a Unicode file.</p>
-        <p class="english">Also if <code>encoding</code> is set to something else than <code>latin1</code>, the <code>read/3</code> call will fail if the data contains characters larger than 255, why the <seealso marker="stdlib:io">io(3)</seealso> module is to be preferred when reading such a file.</p>
+        <p class="english">Also if <code>encoding</code> is set to something else than <code>latin1</code>, the <code>read/3</code> call will fail if the data contains characters larger than 255, why the <a class="seealso" href="../stdlib/io.html">io(3)</a> module is to be preferred when reading such a file.</p>
         <p class="english">The function returns:</p>
         <div class="taglist">
           <dt>
@@ -1600,19 +1600,19 @@
             <p class="english">The current system access to the file.</p>
           </p>
           <dt>
-            <code>atime = <seealso marker="#type-date_time">date_time()</seealso> | integer() </code>
+            <code>atime = <a class="seealso" href="#type-date_time">date_time()</a> | integer() </code>
           </dt>
           <p class="english">
             <p class="english">The last time the file was read.</p>
           </p>
           <dt>
-            <code>mtime = <seealso marker="#type-date_time">date_time()</seealso> | integer() </code>
+            <code>mtime = <a class="seealso" href="#type-date_time">date_time()</a> | integer() </code>
           </dt>
           <p class="english">
             <p class="english">The last time the file was written.</p>
           </p>
           <dt>
-            <code>ctime = <seealso marker="#type-date_time">date_time()</seealso> | integer() </code>
+            <code>ctime = <a class="seealso" href="#type-date_time">date_time()</a> | integer() </code>
           </dt>
           <p class="english">
             <p class="english">The interpretation of this time field depends on
@@ -1728,9 +1728,9 @@
       <div class="type_desc">      IoDevice = io_device() | atom(),<br/>      Data = string() | binary(),<br/>      Reason = posix() | badarg | terminated</div>
       <div class="discription">
         <p class="english">Reads a line of bytes/characters from the file referenced by
-          <code><anno>IoDevice</anno></code>. Lines are defined to be delimited by the linefeed (LF, <code>\n</code>) character, but any carriage return (CR, <code>\r</code>) followed by a newline is also treated as a single LF character (the carriage return is silently ignored). The line is returned <em>including</em> the LF, but excluding any CR immediately followed by a LF. This behaviour is consistent with the behaviour of <seealso marker="stdlib:io#get_line/2">io:get_line/2</seealso>. If end of file is reached without any LF ending the last line, a line with no trailing LF is returned.</p>
+          <code><anno>IoDevice</anno></code>. Lines are defined to be delimited by the linefeed (LF, <code>\n</code>) character, but any carriage return (CR, <code>\r</code>) followed by a newline is also treated as a single LF character (the carriage return is silently ignored). The line is returned <em>including</em> the LF, but excluding any CR immediately followed by a LF. This behaviour is consistent with the behaviour of <a class="seealso" href="../stdlib/io.html#get_line/2">io:get_line/2</a>. If end of file is reached without any LF ending the last line, a line with no trailing LF is returned.</p>
         <p class="english">The function can be used on files opened in <code>raw</code> mode. It is however inefficient to use it on <code>raw</code> files if the file is not opened with the option <code>{read_ahead, Size}</code> specified, why combining <code>raw</code> and <code>{read_ahead, Size}</code> is highly recommended when opening a text file for raw line oriented reading.</p>
-        <p class="english">If <code>encoding</code> is set to something else than <code>latin1</code>, the <code>read_line/1</code> call will fail if the data contains characters larger than 255, why the <seealso marker="stdlib:io">io(3)</seealso> module is to be preferred when reading such a file.</p>
+        <p class="english">If <code>encoding</code> is set to something else than <code>latin1</code>, the <code>read_line/1</code> call will fail if the data contains characters larger than 255, why the <a class="seealso" href="../stdlib/io.html">io(3)</a> module is to be preferred when reading such a file.</p>
         <p class="english">The function returns:</p>
         <div class="taglist">
           <dt>
@@ -1813,7 +1813,7 @@
       <div class="type_desc">      Name = name(),<br/>      Opts = [file_info_option()],<br/>      FileInfo = file_info(),<br/>      Reason = posix() | badarg</div>
       <div class="discription">
         <p class="english">This function works like 
-			 <seealso marker="#read_file_info/2">read_file_info/1,2</seealso> except that
+			 <a class="seealso" href="#read_file_info/2">read_file_info/1,2</a> except that
           if <code><anno>Name</anno></code> is a symbolic link, information about
           the link will be returned in the <code>file_info</code> record and
           the <code>type</code> field of the record will be set to
@@ -1923,7 +1923,7 @@
           </dt>
           <p class="english">
             <p class="english">An error occurred when opening the file or reading it.
-              See <seealso marker="#open/2">open/2</seealso> for a list
+              See <a class="seealso" href="#open/2">open/2</a> for a list
               of typical error codes.</p>
           </p>
           <dt>
@@ -1946,7 +1946,7 @@
       <div class="discription">
         <p class="english">The same as <code>script/1</code> but the variable bindings
           <code><anno>Bindings</anno></code> are used in the evaluation. See
-          <seealso marker="stdlib:erl_eval">erl_eval(3)</seealso> about
+          <a class="seealso" href="../stdlib/erl_eval.html">erl_eval(3)</a> about
           variable bindings.</p>
       </div>
     </div>
@@ -2072,7 +2072,7 @@ types: Filename = file:name(),
 	0 all data after the given <code>Offset</code> is sent.</p>
         <p class="english">The file used must be opened using the raw flag, and the process
 	calling sendfile must be the controlling process of the socket.
-	See <seealso marker="gen_tcp#controlling_process-2">gen_tcp:controlling_process/2</seealso></p>
+	See <a class="seealso" href="">gen_tcp:controlling_process/2</a></p>
         <p class="english">If the OS used does not support sendfile, an Erlang fallback
 	using file:read and gen_tcp:send is used.</p>
         <p class="english">The option list can contain the following options:
@@ -2081,7 +2081,7 @@ types: Filename = file:name(),
 	  which comfortably fits in the systems memory. Default is 20 MB.</p></div></p>
         <p class="english">On operating systems with thread support, it is recommended to use
 	async threads. See the command line flag
-	<code>+A</code> in <seealso marker="erts:erl">erl(1)</seealso>. If it is not
+	<code>+A</code> in <a class="seealso" href="../erts/erl.html">erl(1)</a>. If it is not
 	possible to use async threads for sendfile, it is recommended to use
 	a relatively small value for the send buffer on the socket. Otherwise
 	the Erlang VM might loose some of its soft realtime guarantees.
@@ -2170,7 +2170,7 @@ types: Filename = file:name(),
       <div class="discription">
         <p class="english">Same as <code>write_file/2</code>, but takes a third argument
           <code><anno>Modes</anno></code>, a list of possible modes, see
-          <seealso marker="#open/2">open/2</seealso>. The mode flags
+          <a class="seealso" href="#open/2">open/2</a>. The mode flags
           <code>binary</code> and <code>write</code> are implicit, so they should
           not be used.</p>
       </div>
@@ -2200,19 +2200,19 @@ types: Filename = file:name(),
           given.</p>
         <div class="taglist">
           <dt>
-            <code>atime = <seealso marker="#type-date_time">date_time()</seealso> | integer()</code>
+            <code>atime = <a class="seealso" href="#type-date_time">date_time()</a> | integer()</code>
           </dt>
           <p class="english">
             <p class="english">The last time the file was read.</p>
           </p>
           <dt>
-            <code>mtime = <seealso marker="#type-date_time">date_time()</seealso> | integer()</code>
+            <code>mtime = <a class="seealso" href="#type-date_time">date_time()</a> | integer()</code>
           </dt>
           <p class="english">
             <p class="english">The last time the file was written.</p>
           </p>
           <dt>
-            <code>ctime = <seealso marker="#type-date_time">date_time()</seealso> | integer()</code>
+            <code>ctime = <a class="seealso" href="#type-date_time">date_time()</a> | integer()</code>
           </dt>
           <p class="english">
             <p class="english">On Unix, any value give for this field will be ignored
@@ -2296,7 +2296,7 @@ types: Filename = file:name(),
     </div>
   </div>
   <section>
-    <title>POSIX Error Codes</title>
+    <h4>POSIX Error Codes</h4>
     <list type="bulleted">
       <p class="english"><code>eacces</code> - permission denied</p>
       <p class="english"><code>eagain</code> - resource temporarily unavailable</p>
@@ -2333,7 +2333,7 @@ types: Filename = file:name(),
     </list>
   </section>
   <section>
-    <title>Performance</title>
+    <h4>Performance</h4>
     <p class="english">Some operating system file operations, for example a
       <code>sync/1</code> or <code>close/1</code> on a huge file, may block their 
       calling thread for seconds. If this befalls the emulator main
@@ -2459,7 +2459,7 @@ create_file(FD, M, N0, R) ->
       <code>create_file/2</code>. </p>
   </section>
   <section>
-    <title>Warnings</title>
+    <h4>Warnings</h4>
     <p class="english">If an error occurs when accessing an open file with the <code>io</code>
       module, the process which handles the file will exit. The dead
       file process might hang if a process tries to access it later.
@@ -2470,9 +2470,9 @@ create_file(FD, M, N0, R) ->
       This will be fixed in a future release.</p>
   </section>
   <section>
-    <title>SEE ALSO</title>
+    <h4>SEE ALSO</h4>
     <p class="english">
-      <seealso marker="stdlib:filename">filename(3)</seealso>
+      <a class="seealso" href="../stdlib/filename.html">filename(3)</a>
     </p>
   </section>
 </div>
