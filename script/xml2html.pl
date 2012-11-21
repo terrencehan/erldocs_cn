@@ -101,10 +101,11 @@ sub xml_to_html {
     #simple repalce
     $_->set_tag('p')    for ( $root->getElementsByTagName('item') );
     $_->set_tag('p_zh') for ( $root->getElementsByTagName('item_zh') );
+    $_->set_tag('h4')   for ( $root->getElementsByTagName('title') );
 
-    for ( $root->getElementsByTagName('taglist') ){
+    for ( $root->getElementsByTagName('taglist') ) {
         $_->set_tag('div');
-        $_->set_att( class => 'taglist');
+        $_->set_att( class => 'taglist' );
     }
 
     for my $block (qw/note warning/) {
@@ -138,6 +139,35 @@ sub xml_to_html {
     $_->set_tag('code') for $root->getElementsByTagName('c');
 
     ##################
+
+    for ( $root->getElementsByTagName('seealso') ) {
+
+        $_->set_tag('a');
+        my $marker = $_->att('marker');
+        $_->del_atts;
+        $_->set_att(
+            class => 'seealso',
+
+            #href  => "../" . ( join( '/', split( /:/, $marker ) ) ) . ".html"
+            href => eval {
+                given ($marker)
+                {
+                    #$marker =~ /(?<app>.*?):(?<module>[^#]*)(?<fun_id>.*)?/;
+                    when (/(?<app>.*?):(?<module>[^#]*)(?<fun_id>.*)?/) {
+
+                        return "../"
+                          . $+{'app'} . '/'
+                          . $+{'module'} . ".html"
+                          . eval { defined $+{'fun_id'} ? $+{'fun_id'} : "" };
+                    }
+                    when (/^#.*/) {
+                        return $&;
+                    }
+                }
+            }
+        );    #todo=>id
+
+    }
 
     if ( my $description = $root->first_child('description') ) {
         $description->set_tag('div');

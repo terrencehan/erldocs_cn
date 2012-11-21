@@ -39,9 +39,9 @@
       directory separators.</p>
     <p>在Windows操作系统上, 即便参数带有反斜杠，所有函数都只返回带有斜杠的文件名. 使用<code>join/1</code>来规格化文件名，可以避免自己指定文件夹分隔符.</p>
     <p class="english">The module supports raw file names in the way that if a binary is present, or the file name cannot be interpreted according to the return value of 
-    <seealso marker="kernel:file#native_name_encoding/0">file:native_name_encoding/0</seealso>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <seealso marker="kernel:file">file</seealso> module.</p>
+    <a class="seealso" href="../kernel/file.html#native_name_encoding/0">file:native_name_encoding/0</a>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <a class="seealso" href="../kernel/file.html">file</a> module.</p>
     <p>The module supports raw file names in the way that if a binary is present, or the file name cannot be interpreted according to the return value of 
-    <seealso marker="kernel:file#native_name_encoding/0">file:native_name_encoding/0</seealso>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <seealso marker="kernel:file">file</seealso> module.</p>
+    <a class="seealso" href="../kernel/file.html#native_name_encoding/0">file:native_name_encoding/0</a>, a raw file name will also be returned. For example filename:join/1 provided with a path component being a binary (and also not being possible to interpret under the current native file name encoding) will result in a raw file name being returned (the join operation will have been performed of course). For more information about raw file names, see the <a class="seealso" href="../kernel/file.html">file</a> module.</p>
   </div>
   <div class="functions">
     <h4>Functions:</h4>
@@ -336,10 +336,10 @@
           compile the file again.</p>
         <p>为模块搜索源文件名和编译选项.结果可以传递给<code>compile:file/2</code>来重新编译文件.</p>
         <div class="warning"><h2>Warning:<br/></h2><p class="english">We don't recommend using this function. If possible,
-	use <seealso marker="beam_lib">beam_lib(3)</seealso> to extract
+	use <a class="seealso" href="">beam_lib(3)</a> to extract
 	the abstract code format from the BEAM file and compile that
     instead.</p> <p>我们不建议使用这个函数. 如果可能的话,
-	使用 <seealso marker="beam_lib">beam_lib(3)</seealso> 从BEAN文件中提取抽象代码并且编译.</p></div>
+	使用 <a class="seealso" href="">beam_lib(3)</a> 从BEAN文件中提取抽象代码并且编译.</p></div>
         <p class="english">The <code><anno>Beam</anno></code> argument, which can be a string or an atom,
           specifies either the module name or the path to the source
           code, with or without the <code>".erl"</code> extension. In either

@@ -510,13 +510,13 @@ flatmap(Fun, List1) ->
       <div class="discription">
         <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
           <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
-          sorted according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code> prior to evaluating this function. <code><anno>Fun</anno>(<anno>A</anno>,
+          sorted according to the <a class="seealso" href="#ordering_function">ordering function</a><code><anno>Fun</anno></code> prior to evaluating this function. <code><anno>Fun</anno>(<anno>A</anno>,
           <anno>B</anno>)</code> should return <code>true</code> if <code><anno>A</anno></code> compares less
           than or equal to <code><anno>B</anno></code> in the ordering, <code>false</code>
           otherwise. When two elements compare equal, the element from
           <code><anno>List1</anno></code> is picked before the element from
           <code><anno>List2</anno></code>.</p>
-        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code> 按从小到大的顺序完成排序. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<a class="seealso" href="#ordering_function">高阶函数</a><code><anno>Fun</anno></code> 按从小到大的顺序完成排序. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
           <anno>B</anno>)</code> 应该当<code><anno>A</anno></code>小于<code><anno>B</anno></code>时返回<code>true</code> , 否则返回<code>false</code>.归并中当两个元素相等时, 来自 <code><anno>List1</anno></code> 的元素被放在
           <code><anno>List2</anno></code>的元素之前.</p>
       </div>
@@ -678,10 +678,10 @@ length(lists:seq(From, To, Incr)) == (To-From+Incr) div Incr</pre>
       <div class="type_desc">      Fun = fun((A = T, B = T) -> boolean()),<br/>      List1 = [T],<br/>      List2 = [T],<br/>      T = term()</div>
       <div class="discription">
         <p class="english">Returns a list containing the sorted elements of
-          <code><anno>List1</anno></code>, according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code>. <code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> should return <code>true</code> if
+          <code><anno>List1</anno></code>, according to the <a class="seealso" href="#ordering_function">ordering function</a><code><anno>Fun</anno></code>. <code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> should return <code>true</code> if
           <code><anno>A</anno></code> compares less than or equal to <code><anno>B</anno></code> in the
           ordering, <code>false</code> otherwise.</p>
-        <p>根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code>返回一个将<code><anno>List1</anno></code>所有元素排序后的列表. 排序中<code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> 应该在<code><anno>A</anno></code> 小于或等于<code><anno>B</anno></code>时返回<code>true</code>, 否则返回<code>false</code>.</p>
+        <p>根据<a class="seealso" href="#ordering_function">高阶函数</a><code><anno>Fun</anno></code>返回一个将<code><anno>List1</anno></code>所有元素排序后的列表. 排序中<code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> 应该在<code><anno>A</anno></code> 小于或等于<code><anno>B</anno></code>时返回<code>true</code>, 否则返回<code>false</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -772,10 +772,10 @@ splitwith(Pred, List) ->
 	to <code>length(A)*length(B)</code>, meaning that it will be very slow if
 	both <code>A</code> and <code>B</code> are long lists.
 	(Using ordered lists and
-	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>
+	<a class="seealso" href="">ordsets:subtract/2</a>
     is a much better choice if both lists are long.)</p>
           <p><code>lists:subtract(A, B)</code>的时间复杂度与<code>length(A)*length(B)</code>成正比，则意味着它可能在<code>A</code> 和 <code>B</code>是长列表时变得很慢。 (如果两个列表很长，最好使用有序列表 和
-	<seealso marker="ordsets#subtract/2">ordsets:subtract/2</seealso>.)</p>
+	<a class="seealso" href="">ordsets:subtract/2</a>.)</p>
         </div>
       </div>
     </div>
@@ -866,14 +866,14 @@ splitwith(Pred, List) ->
       <div class="discription">
         <p class="english">Returns the sorted list formed by merging <code><anno>List1</anno></code> and
           <code><anno>List2</anno></code>. Both <code><anno>List1</anno></code> and <code><anno>List2</anno></code> must be
-          sorted according to the <seealso marker="#ordering_function">ordering function</seealso><code>Fun</code> and contain no duplicates prior to evaluating
+          sorted according to the <a class="seealso" href="#ordering_function">ordering function</a><code>Fun</code> and contain no duplicates prior to evaluating
           this function. <code><anno>Fun</anno>(<anno>A</anno>, <anno>B</anno>)</code> should return <code>true</code> if
           <code><anno>A</anno></code> compares less than or equal to <code><anno>B</anno></code> in the
           ordering, <code>false</code> otherwise. When two elements compare
           equal, the element from
           <code><anno>List1</anno></code> is picked and the one from <code><anno>List2</anno></code>
           deleted.</p>
-        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能，<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code> 按从小到大的顺序完成排序并且无重复项. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
+        <p>返回将<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code>归并（已排序）后的列表.为了实现这个功能，<code><anno>List1</anno></code> 和 <code><anno>List2</anno></code> 必须已经根据<a class="seealso" href="#ordering_function">高阶函数</a><code><anno>Fun</anno></code> 按从小到大的顺序完成排序并且无重复项. 在排序中<code><anno>Fun</anno>(<anno>A</anno>,
           <anno>B</anno>)</code> 应该当<code><anno>A</anno></code>小于<code><anno>B</anno></code>时返回<code>true</code> , 否则返回<code>false</code>.归并中当两个元素相等时, 选取<code><anno>List1</anno></code> 的元素, 而删除<code><anno>List2</anno></code>的元素.</p>
       </div>
     </div>
@@ -933,10 +933,10 @@ splitwith(Pred, List) ->
       <div class="discription">
         <p class="english">Returns a list which contains the sorted elements of
           <code><anno>List1</anno></code> where all but the first element of the elements
-          comparing equal according to the <seealso marker="#ordering_function">ordering function</seealso><code><anno>Fun</anno></code> have been deleted. <code><anno>Fun</anno>(A, B)</code> should return
+          comparing equal according to the <a class="seealso" href="#ordering_function">ordering function</a><code><anno>Fun</anno></code> have been deleted. <code><anno>Fun</anno>(A, B)</code> should return
           <code>true</code> if <code>A</code> compares less than or equal to
           <code>B</code> in the ordering, <code>false</code> otherwise.</p>
-        <p>返回一个将<code><anno>List1</anno></code>按<seealso marker="#ordering_function">高阶函数</seealso><code><anno>Fun</anno></code>排好序、无重复元素列表. (在原列表中如果两个元素相等，删除第一个元素.)
+        <p>返回一个将<code><anno>List1</anno></code>按<a class="seealso" href="#ordering_function">高阶函数</a><code><anno>Fun</anno></code>排好序、无重复元素列表. (在原列表中如果两个元素相等，删除第一个元素.)
           在排序中如果<code>A</code> 小于或等于 <code>B</code>, <code><anno>Fun</anno>(A, B)</code>返回<code>true</code> ,否则返回 <code>false</code>.</p>
       </div>
     </div>
