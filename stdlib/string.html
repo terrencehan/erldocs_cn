@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>string</h1>
+  <h2 class="modsummary">String Processing Functions</h2>
+  <div class="description">
+    <p class="english">This module contains functions for string processing.</p>
+    <p>本模块包含字符串处理函数.</p>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="len/1" name="len">len(String) -> Length</h3>
+      <div class="type_desc">      String = string(),<br/>      Length = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the number of characters in the string.</p>
+        <p>返回字符串中字符数量.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="equal/2" name="equal">equal(String1, String2) -> boolean()</h3>
+      <div class="type_desc">      String1 = string(),<br/>      String2 = string()</div>
+      <div class="discription">
+        <p class="english">Tests whether two strings are equal. Returns <code>true</code> if
+          they are, otherwise <code>false</code>.</p>
+        <p>测试两个字符串是否相等. 如果相等返回<code>true</code>, 否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="concat/2" name="concat">concat(String1, String2) -> String3</h3>
+      <div class="type_desc">      String1 = string(),<br/>      String2 = string(),<br/>      String3 = string()</div>
+      <div class="discription">
+        <p class="english">Concatenates two strings to form a new string. Returns the
+          new string.</p>
+        <p>通过连接两个字符来产生一个新字符串. 返回新字符串.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="chr/2" name="chr">chr(String, Character) -> Index</h3>
+      <div class="type_desc">      String = string(),<br/>      Character = char(),<br/>      Index = non_neg_integer()</div>
+      <h3 arity="2" id="rchr/2" name="rchr">rchr(String, Character) -> Index</h3>
+      <div class="type_desc">      String = string(),<br/>      Character = char(),<br/>      Index = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the index of the first/last occurrence of
+          <code><anno>Character</anno></code> in <code><anno>String</anno></code>. <code>0</code> is returned if <code><anno>Character</anno></code> does not
+          occur.</p>
+        <p>返回<code><anno>String</anno></code>中遇到的第一个/最后一个<code><anno>Character</anno></code>的位置索引. 如果没有遇到<code><anno>Character</anno></code>返回<code>0</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="str/2" name="str">str(String, SubString) -> Index</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Index = non_neg_integer()</div>
+      <h3 arity="2" id="rstr/2" name="rstr">rstr(String, SubString) -> Index</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Index = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the position where the first/last occurrence of
+          <code><anno>SubString</anno></code> begins in <code><anno>String</anno></code>. <code>0</code> is returned if <code><anno>SubString</anno></code>
+          does not exist in <code><anno>String</anno></code>.
+          For example:</p>
+        <p>返回<code><anno>String</anno></code>中遇到的第一个/最后一个<code><anno>SubString</anno></code>开始位置. <code><anno>String</anno>中没有</code> <code><anno>SubString</anno></code>返回<code>0</code> .
+          例如:</p>
+        <pre>
+> string:str(" Hello Hello World World ", "Hello World").
+8        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="span/2" name="span">span(String, Chars) -> Length</h3>
+      <div class="type_desc">      String = string(),<br/>      Chars = string(),<br/>      Length = non_neg_integer()</div>
+      <h3 arity="2" id="cspan/2" name="cspan">cspan(String, Chars) -> Length</h3>
+      <div class="type_desc">      String = string(),<br/>      Chars = string(),<br/>      Length = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the length of the maximum initial segment of
+          <code><anno>String</anno></code>, which consists entirely of characters from (not
+          from) <code><anno>Chars</anno></code>.</p>
+        <p class="english">Returns the length of the maximum initial segment of
+          <code><anno>String</anno></code>, which consists entirely of characters from (not
+          from) <code><anno>Chars</anno></code>.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> string:span("\t    abcdef", " \t").
+5
+> string:cspan("\t    abcdef", " \t").
+0        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="substr/2" name="substr">substr(String, Start) -> SubString</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Start = pos_integer()</div>
+      <h3 arity="3" id="substr/3" name="substr">substr(String, Start, Length) -> SubString</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Start = pos_integer(),<br/>      Length = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns a substring of <code><anno>String</anno></code>, starting at the
+          position <code><anno>Start</anno></code>, and ending at the end of the string or
+          at length <code><anno>Length</anno></code>.</p>
+        <p>返回<code><anno>String</anno></code>的一个子字符串, 该子串从位置<code><anno>Start</anno></code>开始, 到整个字符串的末尾或者达到<code><anno>Length</anno></code>长度时结尾.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> substr("Hello World", 4, 5).
+"lo Wo"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="tokens/2" name="tokens">tokens(String, SeparatorList) -> Tokens</h3>
+      <div class="type_desc">      String = string(),<br/>      SeparatorList = string(),<br/>      Tokens = [Token = nonempty_string()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of tokens in <code><anno>String</anno></code>, separated by the
+          characters in <code><anno>SeparatorList</anno></code>.</p>
+        <p>返回<code><anno>String</anno></code>中的符号列表, 这些符号以<code><anno>SeparatorList</anno></code>中的字符作为分隔.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> tokens("abc defxxghix jkl", "x ").
+["abc", "def", "ghi", "jkl"]        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="join/2" name="join">join(StringList, Separator) -> String</h3>
+      <div class="type_desc">      StringList = [string()],<br/>      Separator = string(),<br/>      String = string()</div>
+      <div class="discription">
+        <p class="english">Returns a string with the elements of <code><anno>StringList</anno></code>
+	  separated by the string in <code><anno>Separator</anno></code>.</p>
+        <p>返回一个将<code><anno>StringList</anno></code>中的每个元素以<code><anno>Separator</anno></code>作为分隔构成的字符串.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> join(["one", "two", "three"], ", ").
+"one, two, three"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="chars/2" name="chars">chars(Character, Number) -> String</h3>
+      <div class="type_desc">      Character = char(),<br/>      Number = non_neg_integer(),<br/>      String = string()</div>
+      <h3 arity="3" id="chars/3" name="chars">chars(Character, Number, Tail) -> String</h3>
+      <div class="type_desc">      Character = char(),<br/>      Number = non_neg_integer(),<br/>      Tail = string(),<br/>      String = string()</div>
+      <div class="discription">
+        <p class="english">Returns a string consisting of <code><anno>Number</anno></code> of characters
+          <code><anno>Character</anno></code>. Optionally, the string can end with the
+          string <code><anno>Tail</anno></code>.</p>
+        <p>返回一个由<code><anno>Number</anno></code>个<code><anno>Character</anno></code>字符组成的字符串. 返回的字符串也能以<code><anno>Tail</anno></code>结尾.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="copies/2" name="copies">copies(String, Number) -> Copies</h3>
+      <div class="type_desc">      String = string(),<br/>      Copies = string(),<br/>      Number = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns a string containing <code><anno>String</anno></code> repeated
+          <code><anno>Number</anno></code> times.</p>
+        <p>返回一个将<code><anno>String</anno></code>重复<code><anno>Number</anno></code>遍得到的字符串.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="words/1" name="words">words(String) -> Count</h3>
+      <div class="type_desc">      String = string(),<br/>      Count = pos_integer()</div>
+      <h3 arity="2" id="words/2" name="words">words(String, Character) -> Count</h3>
+      <div class="type_desc">      String = string(),<br/>      Character = char(),<br/>      Count = pos_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the number of words in <code><anno>String</anno></code>, separated by
+          blanks or <code><anno>Character</anno></code>.</p>
+        <p>返回<code><anno>String</anno></code>中的单词数, 单词是以空格或者<code><anno>Character</anno></code>作为分隔.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> words(" Hello old boy!", $o).
+4        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="sub_word/2" name="sub_word">sub_word(String, Number) -> Word</h3>
+      <div class="type_desc">      String = string(),<br/>      Word = string(),<br/>      Number = integer()</div>
+      <h3 arity="3" id="sub_word/3" name="sub_word">sub_word(String, Number, Character) -> Word</h3>
+      <div class="type_desc">      String = string(),<br/>      Word = string(),<br/>      Number = integer(),<br/>      Character = char()</div>
+      <div class="discription">
+        <p class="english">Returns the word in position <code><anno>Number</anno></code> of <code><anno>String</anno></code>.
+          Words are separated by blanks or <code><anno>Character</anno></code>s.</p>
+        <p>返回<code><anno>String</anno></code>中第<code><anno>Number</anno></code>个位置的单词. 单词以空格或<code><anno>Character</anno></code>作为分隔.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> string:sub_word(" Hello old boy !",3,$o).
+"ld b"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="strip/1" name="strip">strip(string()) -> string()</h3>
+      <h3 arity="2" id="strip/2" name="strip">strip(String, Direction) -> Stripped</h3>
+      <div class="type_desc">      String = string(),<br/>      Stripped = string(),<br/>      Direction = left | right | both</div>
+      <h3 arity="3" id="strip/3" name="strip">strip(String, Direction, Character) -> Stripped</h3>
+      <div class="type_desc">      String = string(),<br/>      Stripped = string(),<br/>      Direction = left | right | both,<br/>      Character = char()</div>
+      <div class="discription">
+        <p class="english">Returns a string, where leading and/or trailing blanks or a
+          number of <code><anno>Character</anno></code> have been removed.
+          <code><anno>Direction</anno></code> can be <code>left</code>, <code>right</code>, or
+          <code>both</code> and indicates from which direction blanks are to be
+          removed. The function <code>strip/1</code> is equivalent to
+          <code>strip(String, both)</code>.</p>
+        <p>返回一个将开头和（或）结尾的空格或<code><anno>Character</anno></code>移除的字符串.<code><anno>Direction</anno></code>可以是<code>left</code>, <code>right</code>, 或者 <code>both</code>, 它指定了空格的移除方向函数<code>strip/1</code>等同于<code>strip(String, both)</code>.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> string:strip("...Hello.....", both, $.).
+"Hello"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="left/2" name="left">left(String, Number) -> Left</h3>
+      <div class="type_desc">      String = string(),<br/>      Left = string(),<br/>      Number = non_neg_integer()</div>
+      <h3 arity="3" id="left/3" name="left">left(String, Number, Character) -> Left</h3>
+      <div class="type_desc">      String = string(),<br/>      Left = string(),<br/>      Number = non_neg_integer(),<br/>      Character = char()</div>
+      <div class="discription">
+        <p class="english">Returns the <code><anno>String</anno></code> with the length adjusted in
+          accordance with <code><anno>Number</anno></code>. The left margin is
+          fixed. If the <code>length(<anno>String</anno>)</code> &lt; <code><anno>Number</anno></code>,
+          <code><anno>String</anno></code> is padded with blanks or <code><anno>Character</anno></code>s.</p>
+        <p class="english">根据<code><anno>Number</anno></code>调整<code><anno>String</anno></code>的长度并返回操作后的字符串. 左内边距是固定的. 如果<code>length(<anno>String</anno>)</code> &lt; <code><anno>Number</anno></code>, 将向<code><anno>String</anno></code>填补空格或<code><anno>Character</anno></code>s.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> string:left("Hello",10,$.).
+"Hello....."        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="right/2" name="right">right(String, Number) -> Right</h3>
+      <div class="type_desc">      String = string(),<br/>      Right = string(),<br/>      Number = non_neg_integer()</div>
+      <h3 arity="3" id="right/3" name="right">right(String, Number, Character) -> Right</h3>
+      <div class="type_desc">      String = string(),<br/>      Right = string(),<br/>      Number = non_neg_integer(),<br/>      Character = char()</div>
+      <div class="discription">
+        <p class="english">Returns the <code><anno>String</anno></code> with the length adjusted in
+          accordance with <code><anno>Number</anno></code>. The right margin is
+          fixed. If the length of <code>(<anno>String</anno>)</code> &lt; <code><anno>Number</anno></code>,
+          <code><anno>String</anno></code> is padded with blanks or <code><anno>Character</anno></code>s.</p>
+        <p>根据<code><anno>Number</anno></code>调整<code><anno>String</anno></code>的长度并返回操作后的字符串. 右内边距是固定的. 如果<code>length(<anno>String</anno>)</code> &lt; <code><anno>Number</anno></code>, 将向<code><anno>String</anno></code>填补空格或<code><anno>Character</anno></code>s.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+> string:right("Hello", 10, $.).
+".....Hello"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="centre/2" name="centre">centre(String, Number) -> Centered</h3>
+      <div class="type_desc">      String = string(),<br/>      Centered = string(),<br/>      Number = non_neg_integer()</div>
+      <h3 arity="3" id="centre/3" name="centre">centre(String, Number, Character) -> Centered</h3>
+      <div class="type_desc">      String = string(),<br/>      Centered = string(),<br/>      Number = non_neg_integer(),<br/>      Character = char()</div>
+      <div class="discription">
+        <p class="english">Returns a string, where <code><anno>String</anno></code> is centred in the
+          string and surrounded by blanks or characters. The resulting
+          string will have the length <code><anno>Number</anno></code>.</p>
+        <p>返回将<code><anno>String</anno></code>居中并环绕空格或字符的字符串. 最终的字符串长度为<code><anno>Number</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="sub_string/2" name="sub_string">sub_string(String, Start) -> SubString</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Start = pos_integer()</div>
+      <h3 arity="3" id="sub_string/3" name="sub_string">sub_string(String, Start, Stop) -> SubString</h3>
+      <div class="type_desc">      String = string(),<br/>      SubString = string(),<br/>      Start = pos_integer(),<br/>      Stop = pos_integer()</div>
+      <div class="discription">
+        <p class="english">Returns a substring of <code><anno>String</anno></code>, starting at the
+          position <code><anno>Start</anno></code> to the end of the string, or to and
+          including the <code><anno>Stop</anno></code> position.</p>
+        <p>返回<code><anno>String</anno></code>的一个子串, 这个子串从位置<code><anno>Start</anno></code>开始直到原字符串的结尾, 或者到<code><anno>Stop</anno></code>(包含)位置.</p>
+        <p class="english">For example:</p>
+        <p>例如:</p>
+        <pre>
+sub_string("Hello World", 4, 8).
+"lo Wo"        </pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="to_float/1">to_float(String) -> {Float,Rest} | {error,Reason} </h3>
+      <type>
+        <div class="type_desc">String = string()</div>
+        <div class="type_desc">Float = float()</div>
+        <div class="type_desc">Rest = string()</div>
+        <div class="type_desc">Reason = no_float | not_a_list</div>
+      </type>
+      <div class="discription">
+        <p class="english">Argument <code>String</code> is expected to start with a valid text
+          represented float (the digits being ASCII values). Remaining characters 
+          in the string after the float are returned in <code>Rest</code>.</p>
+        <p>参数<code>String</code>的开头应该包含一个合法的浮点数字面量(数字是ASCII值). 浮点数之后剩余的字符将在<code>Rest</code>中返回.</p>
+        <p class="english">Example:</p>
+        <p>示例:</p>
+        <pre>
+          > {F1,Fs} = string:to_float("1.0-1.0e-1"),
+          > {F2,[]} = string:to_float(Fs),
+          > F1+F2.
+          0.9
+          > string:to_float("3/2=1.5").
+          {error,no_float}
+          > string:to_float("-1.5eX").
+          {-1.5,"eX"}</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="to_integer/1">to_integer(String) -> {Int,Rest} | {error,Reason} </h3>
+      <type>
+        <div class="type_desc">String = string()</div>
+        <div class="type_desc">Int = integer()</div>
+        <div class="type_desc">Rest = string()</div>
+        <div class="type_desc">Reason = no_integer | not_a_list</div>
+      </type>
+      <div class="discription">
+        <p class="english">Argument <code>String</code> is expected to start with a valid text
+          represented integer (the digits being ASCII values). Remaining characters 
+          in the string after the integer are returned in <code>Rest</code>.</p>
+        <p>参数<code>String</code>的开头应该包含一个合法的整数字面量(数字是ASCII值). 浮点数之后剩余的字符将在<code>Rest</code>中返回.</p>
+        <p class="english">Example:</p>
+        <p>示例:</p>
+        <pre>
+          > {I1,Is} = string:to_integer("33+22"),
+          > {I2,[]} = string:to_integer(Is),
+          > I1-I2.
+          11
+          > string:to_integer("0.5").
+          {0,".5"}
+          > string:to_integer("x=2").
+          {error,no_integer}</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" clause_i="1" id="to_lower/1" name="to_lower">to_lower(String) -> Result</h3>
+      <div class="type_desc">                  String = string(),<br/>                  Result = string()<br/>	    ; (Char) -> CharResult when<br/>                  Char = char(),<br/>                  CharResult = char()</div>
+      <h3 arity="1" clause_i="2" id="to_lower/1" name="to_lower">to_lower(String) -> Result</h3>
+      <div class="type_desc">                  String = string(),<br/>                  Result = string()<br/>	    ; (Char) -> CharResult when<br/>                  Char = char(),<br/>                  CharResult = char()</div>
+      <h3 arity="1" clause_i="1" id="to_upper/1" name="to_upper">to_upper(String) -> Result</h3>
+      <div class="type_desc">                  String = string(),<br/>                  Result = string()<br/>	    ; (Char) -> CharResult when<br/>                  Char = char(),<br/>                  CharResult = char()</div>
+      <h3 arity="1" clause_i="2" id="to_upper/1" name="to_upper">to_upper(String) -> Result</h3>
+      <div class="type_desc">                  String = string(),<br/>                  Result = string()<br/>	    ; (Char) -> CharResult when<br/>                  Char = char(),<br/>                  CharResult = char()</div>
+      <type name_i="1" variable="String"/>
+      <type name_i="1" variable="Result"/>
+      <type variable="Char"/>
+      <type variable="CharResult"/>
+      <div class="discription">
+        <p class="english">The given string or character is case-converted. Note that
+          the supported character set is ISO/IEC 8859-1 (a.k.a. Latin 1),
+          all values outside this set is unchanged</p>
+        <p>对给定的字符串或字符进行大小写转换. 注意，仅支持ISO/IEC 8859-1 (又称 Latin 1)字符集, 其他超出此字符集的量将不会转换</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>Notes</h4>
+    <p class="english">Some of the general string functions may seem to overlap each
+      other. The reason for this is that this string package is the
+      combination of two earlier packages and all the functions of
+      both packages have been retained.
+      </p>
+    <p>存在一些字符串函数在功能上会有重叠. 之所以这样是因为string包是由两个早前的包合并而成，而这两个原来包中的所有函数都被保留了下来.
+      </p>
+    <div class="note">
+      <h2>Note:<br/></h2>
+      <p class="english">Any undocumented functions in <code>string</code> should not be used.</p>
+      <p>不应该使用<code>string</code>模块中未写入文档的函数.</p>
+    </div>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

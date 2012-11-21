@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>c</h1>
+  <h2 class="modsummary">Command Interface Module</h2>
+  <div class="description">
+    <p class="english">The <code>c</code> module enables users to enter the short form of
+      some commonly used commands.</p>
+    <p><code>c</code>模块可以让用户用简短的形式输入一些常用命令.</p>
+    <div class="note">
+      <h2>Note:<br/></h2>
+      <p class="english">These functions are are intended for interactive use in
+        the Erlang shell only. The module prefix may be omitted.</p>
+      <p>这些函数是设计用来在(只在)Erlang的shell中进行交互的. 可以省略模块前缀.</p>
+    </div>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="bt/1" name="bt">bt(Pid) -> 'ok' | 'undefined'</h3>
+      <div class="type_desc">      Pid = pid()</div>
+      <div class="discription">
+        <p class="english">Stack backtrace for a process. Equivalent to
+          <code>erlang:process_display(<anno>Pid</anno>, backtrace)</code>.</p>
+        <p>对一个进程进行栈回朔. 等同于<code>erlang:process_display(<anno>Pid</anno>, backtrace)</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="c/1" name="c">c(File) -> {'ok', Module} | 'error'</h3>
+      <div class="type_desc">      File = file:name(),<br/>      Module = module()</div>
+      <h3 arity="2" id="c/2" name="c">c(File, Options) -> {'ok', Module} | 'error'</h3>
+      <div class="type_desc">      File = file:name(),<br/>      Options = [compile:option()],<br/>      Module = module()</div>
+      <div class="discription">
+        <p class="english"><code>c/1,2</code> compiles and then purges and loads the code for
+          a file. <code><anno>Options</anno></code> defaults to []. Compilation is
+          equivalent to:</p>
+        <pre>
+compile:file(<anno>File</anno>, <anno>Options</anno> ++ [report_errors, report_warnings])</pre>
+        <p class="english">Note that purging the code means that any processes
+          lingering in old code for the module are killed without
+          warning. See <code>code/3</code> for more information.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="cd/1" name="cd">cd(Dir) -> 'ok'</h3>
+      <div class="type_desc">      Dir = file:name()</div>
+      <div class="discription">
+        <p class="english">Changes working directory to <code><anno>Dir</anno></code>, which may be a
+          relative name, and then prints the name of the new working
+          directory.</p>
+        <p>切换工作目录至<code><anno>Dir</anno></code>(可以是一个相对路径), 并输出新工作目录.</p>
+        <pre>
+2> <span>cd("../erlang").</span>
+/home/ron/erlang</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="flush/0" name="flush">flush() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Flushes any messages sent to the shell.</p>
+        <p>冲刷所有发向当前shell的信息.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="help/0" name="help">help() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Displays help information: all valid shell internal commands,
+          and commands in this module.</p>
+        <p>显式帮助信息: 所有的shell交互命令能够, 以及本模块的命令.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="i/0" name="i">i() -> 'ok'</h3>
+      <h3 arity="0" id="ni/0" name="ni">ni() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english"><code>i/0</code> displays information about the system, listing
+          information about all processes. <code>ni/0</code> does the same,
+          but for all nodes the network.</p>
+        <p><code>i/0</code> 显示系统信息, 它列出了所有进程信息. <code>ni/0</code>同样, 但是它针对的是网络中的所有节点.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="i/3" name="i">i(X, Y, Z) -> [{atom(), term()}]</h3>
+      <div class="type_desc">      X = non_neg_integer(),<br/>      Y = non_neg_integer(),<br/>      Z = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Displays information about a process, Equivalent to
+          <code>process_info(pid(<anno>X</anno>, <anno>Y</anno>, <anno>Z</anno>))</code>, but location transparent.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="l/1" name="l">l(Module) -> code:load_ret()</h3>
+      <div class="type_desc">      Module = module()</div>
+      <div class="discription">
+        <p class="english">Purges and loads, or reloads, a module by calling
+          <code>code:purge(<anno>Module</anno>)</code> followed by
+          <code>code:load_file(<anno>Module</anno>)</code>.</p>
+        <p class="english">Note that purging the code means that any processes
+          lingering in old code for the module are killed without
+          warning. See <code>code/3</code> for more information.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="lc/1">lc(Files) -> ok</h3>
+      <type>
+        <div class="type_desc">Files = [File]</div>
+        <div class="type_desc">File = <a class="seealso" href="">file:filename()
+          </a></div>
+      </type>
+      <div class="discription">
+        <p class="english">Compiles a list of files by calling <code>compile:file(File, [report_errors, report_warnings])</code> for each <code>File</code>
+          in <code>Files</code>.</p>
+        <p>通过对<code>Files</code>中的每个<code>File</code>调用<code>compile:file(File, [report_errors, report_warnings])</code>来编译一个文件列表.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="ls/0" name="ls">ls() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Lists files in the current directory.</p>
+        <p>列出当前文件夹中的文件.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="ls/1" name="ls">ls(Dir) -> 'ok'</h3>
+      <div class="type_desc">      Dir = file:name()</div>
+      <div class="discription">
+        <p class="english">Lists files in directory <code><anno>Dir</anno></code>.</p>
+        <p>列出<code><anno>Dir</anno></code>文件夹中的文件.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="m/0" name="m">m() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Displays information about the loaded modules, including
+          the files from which they have been loaded.</p>
+        <p>显示已加载模块的信息, 包括这些模块是从哪个文件加载的.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="m/1" name="m">m(Module) -> 'ok'</h3>
+      <div class="type_desc">      Module = module()</div>
+      <div class="discription">
+        <p class="english">Displays information about <code><anno>Module</anno></code>.</p>
+        <p>显示<code><anno>Module</anno></code>模块的信息.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="memory/0" name="memory">memory() -> [{Type, Size}]</h3>
+      <div class="type_desc">      Type = atom(),<br/>      Size = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Memory allocation information. Equivalent to
+          <a class="seealso" href="../erts/erlang.html#memory/0"><code>erlang:memory/0</code></a>.</p>
+        <p>内存分配信息. 等同于 <a class="seealso" href="../erts/erlang.html#memory/0"><code>erlang:memory/0</code></a>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" clause_i="1" id="memory/1" name="memory">memory(Type) -> Size</h3>
+      <div class="type_desc">               Type = atom(),<br/>               Size = non_neg_integer()<br/>          ; (Types) -> [{Type, Size}] when<br/>               Types = [Type],<br/>               Type = atom(),<br/>               Size = non_neg_integer()</div>
+      <h3 arity="1" clause_i="2" id="memory/1" name="memory">memory(Type) -> Size</h3>
+      <div class="type_desc">               Type = atom(),<br/>               Size = non_neg_integer()<br/>          ; (Types) -> [{Type, Size}] when<br/>               Types = [Type],<br/>               Type = atom(),<br/>               Size = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Memory allocation information. Equivalent to
+          <a class="seealso" href="../erts/erlang.html#memory/1"><code>erlang:memory/1</code></a>.</p>
+        <p>内存分配信息. 等同于
+          <a class="seealso" href="../erts/erlang.html#memory/1"><code>erlang:memory/1</code></a>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="nc/1" name="nc">nc(File) -> {'ok', Module} | 'error'</h3>
+      <div class="type_desc">      File = file:name(),<br/>      Module = module()</div>
+      <h3 arity="2" id="nc/2" name="nc">nc(File, Options) -> {'ok', Module} | 'error'</h3>
+      <div class="type_desc">      File = file:name(),<br/>      Options = [Option] | Option,<br/>      Option= compile:option(),<br/>      Module = module()</div>
+      <div class="discription">
+        <p class="english">Compiles and then loads the code for a file on all nodes.
+          <code><anno>Options</anno></code> defaults to []. Compilation is equivalent to:</p>
+        <p>在所有节点上编译并加载一个文件中的代码.
+          <code><anno>Options</anno></code> 默认为[]. 编译部分等同于:</p>
+        <pre>
+compile:file(<anno>File</anno>, <anno>Options</anno> ++ [report_errors, report_warnings])</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="nl/1" name="nl">nl(Module) -> abcast | error</h3>
+      <div class="type_desc">      Module = module()</div>
+      <div class="discription">
+        <p class="english">Loads <code><anno>Module</anno></code> on all nodes.</p>
+        <p>在所有节点上加载<code><anno>Module</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="pid/3" name="pid">pid(X, Y, Z) -> pid()</h3>
+      <div class="type_desc">      X = non_neg_integer(),<br/>      Y = non_neg_integer(),<br/>      Z = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Converts <code><anno>X</anno></code>, <code><anno>Y</anno></code>, <code><anno>Z</anno></code> to the pid
+          <code><![CDATA[<X.Y.Z>]]></code>. This function should only be used when
+          debugging.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="pwd/0" name="pwd">pwd() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Prints the name of the working directory.</p>
+        <p>输出工作目录名.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="q/0" name="q">q() -> no_return()</h3>
+      <div class="discription">
+        <p class="english">This function is shorthand for <code>init:stop()</code>, that is,
+          it causes the node to stop in a controlled fashion.</p>
+        <p>这个函数是<code>init:stop()</code>的简写, 也就是, 它致使该节点以一种受控的方式停止.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="regs/0" name="regs">regs() -> 'ok'</h3>
+      <h3 arity="0" id="nregs/0" name="nregs">nregs() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english"><code>regs/0</code> displays information about all registered
+          processes. <code>nregs/0</code> does the same, but for all nodes
+          in the network.</p>
+        <p><code>regs/0</code> 显示所有注册进程信息. <code>nregs/0</code>同样, 但是它针对与网络中的所有节点.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="xm/1">xm(ModSpec) -> void()</h3>
+      <type>
+        <div class="type_desc">ModSpec = Module | Filename</div>
+        <div class="type_desc">&nbsp;Module = atom()</div>
+        <div class="type_desc">&nbsp;Filename = string()</div>
+      </type>
+      <div class="discription">
+        <p class="english">This function finds undefined functions, unused functions,
+          and calls to deprecated functions in a module by calling
+          <code>xref:m/1</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="y/1">y(File) -> YeccRet</h3>
+      <type>
+        <div class="type_desc">File = name() -- see filename(3)</div>
+        <div class="type_desc">YeccRet = -- see yecc:file/2</div>
+      </type>
+      <div class="discription">
+        <p class="english">Generates an LALR-1 parser. Equivalent to:</p>
+        <p>生成一个LALR-1文法分析器. 等同于:</p>
+        <pre>
+yecc:file(File)</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="y/2">y(File, Options) -> YeccRet</h3>
+      <type>
+        <div class="type_desc">File = name() -- see filename(3)</div>
+        <div class="type_desc">Options, YeccRet = -- see yecc:file/2</div>
+      </type>
+      <div class="discription">
+        <p class="english">Generates an LALR-1 parser. Equivalent to:</p>
+        <p>生成一个LALR-1文法分析器. 等同于:</p>
+        <pre>
+yecc:file(File, Options)</pre>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>See Also</h4>
+    <p class="english"><a class="seealso" href="../compiler/compile.html">compile(3)</a>,
+      <a class="seealso" href="">filename(3)</a>, 
+      <a class="seealso" href="../erts/erlang.html">erlang(3)</a>, 
+      <a class="seealso" href="../parsetools/yecc.html">yecc(3)</a>,
+      <a class="seealso" href="../tools/xref.html">xref(3)</a></p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

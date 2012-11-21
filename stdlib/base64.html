@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>base64</h1>
+  <h2 class="modsummary">Implements base 64 encode and decode, see RFC2045.</h2>
+  <div class="description">
+    <p class="english">Implements base 64 encode and decode, see RFC2045. </p>
+    <p>实现 base 64 编码及解码, 参阅 RFC2045. </p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="ascii_string"/>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="encode/1" name="encode">encode(Data) -> Base64</h3>
+      <div class="type_desc">      Data = string() | binary(),<br/>      Base64 = binary()</div>
+      <h3 arity="1" id="encode_to_string/1" name="encode_to_string">encode_to_string(Data) -> Base64String</h3>
+      <div class="type_desc">      Data = string() | binary(),<br/>      Base64String = ascii_string()</div>
+      <type variable="Data"/>
+      <type name_i="1" variable="Base64"/>
+      <type variable="Base64String"/>
+      <div class="discription">
+        <p class="english">Encodes a plain ASCII string into base64. The result will
+          be 33% larger than the data.</p>
+        <p>将一个平坦的ASCII编码字符串转换成base64编码. 结果将会比原数据大33%.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="decode/1" name="decode">decode(Base64) -> Data</h3>
+      <div class="type_desc">      Base64 = string() | binary(),<br/>      Data = binary()</div>
+      <h3 arity="1" id="decode_to_string/1" name="decode_to_string">decode_to_string(Base64) -> DataString</h3>
+      <div class="type_desc">      Base64 = string() | binary(),<br/>      DataString = string()</div>
+      <h3 arity="1" id="mime_decode/1" name="mime_decode">mime_decode(Base64) -> Data</h3>
+      <div class="type_desc">      Base64 = string() | binary(),<br/>      Data = binary()</div>
+      <h3 arity="1" id="mime_decode_to_string/1" name="mime_decode_to_string">mime_decode_to_string(Base64) -> DataString</h3>
+      <div class="type_desc">      Base64 = string() | binary(),<br/>      DataString = string()</div>
+      <type name_i="1" variable="Base64"/>
+      <type name_i="1" variable="Data"/>
+      <type name_i="2" variable="DataString"/>
+      <div class="discription">
+        <p class="english">Decodes a base64 encoded string to plain ASCII. See RFC4648.
+          <code>mime_decode/1</code> and <code>mime_decode_to_string/1</code>
+          strips away illegal characters, while <code>decode/1</code> and
+          <code>decode_to_string/1</code> only strips away whitespace characters.</p>
+        <p>将一个base64编码的字符串转换成平坦的ASCII编码. 参阅 RFC4648.  <code>mime_decode/1</code> 和 <code>mime_decode_to_string/1</code> 可以去除非法字符, 而<code>decode/1</code> 和 <code>decode_to_string/1</code> 只能去除空白字符.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

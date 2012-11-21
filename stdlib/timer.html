@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>timer</h1>
+  <h2 class="modsummary">Timer Functions</h2>
+  <div class="description">
+    <p class="english">This module provides useful functions related to time. Unless otherwise
+      stated, time is always measured in <code>milliseconds</code>.  All
+      timer functions return immediately, regardless of work carried
+      out by another process. 
+      </p>
+    <p>该模块提供了一些与时间相关的函数. 除非特殊说明, 时间总是以<code>毫秒</code>作为计量单位.  所有计时器函数都不顾其它进程的工作而立即返回. 
+      </p>
+    <p class="english">Successful evaluations of the timer functions yield return values
+      containing a timer reference, denoted <code>TRef</code> below. By using 
+      <code>cancel/1</code>, the returned reference can be used to cancel any
+      requested action. A <code>TRef</code> is an Erlang term, the contents
+      of which must not be altered.
+      </p>
+    <p>计时器函数成功执行之后会产生返回值(下面用<code>TRef</code>表示）. 通过使用<code>cancel/1</code>, the returned reference can be used to cancel any requested action. A <code>TRef</code> is an Erlang term, the contents of which must not be altered.
+      </p>
+    <p class="english">The timeouts are not exact, but should be <code>at least</code> as long
+      as requested.
+      </p>
+    <p>超时并不精确, 但是<code>至少</code>能够满足需求.
+      </p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="time"/>
+      <desc>
+        <p class="english">Time in milliseconds.</p>
+        <p>毫秒时间.</p>
+      </desc>
+    </datatype>
+    <datatype>
+      <name name="tref"/>
+      <desc>
+        <p class="english">A timer reference.</p>
+      </desc>
+      <p>计时器引用.</p>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="start/0" name="start">start() -> 'ok'</h3>
+      <div class="discription">
+        <p class="english">Starts the timer server. Normally, the server does not need
+          to be started explicitly. It is started dynamically if it
+          is needed. This is useful during development, but in a
+          target system the server should be started explicitly.  Use
+          configuration parameters for <code>kernel</code> for this.</p>
+        <p>启动计时器服务器. 通常, 这个服务器没必要显式启动. 它在需要的时候动态地启动. 这在开发阶段比较有用, 但是在目标系统中时间服务器应该显式启动. 使用<code>kernel</code>的配置参数.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="4" id="apply_after/4" name="apply_after">apply_after(Time, Module, Function, Arguments) ->
+                         {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Module = module(),<br/>      Function = atom(),<br/>      Arguments = [term()],<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <div class="discription">
+        <p class="english">Evaluates <code>apply(<anno>Module</anno>, <anno>Function</anno>, <anno>Arguments</anno>)</code> after <code><anno>Time</anno></code> amount of time
+          has elapsed. Returns <code>{ok, <anno>TRef</anno>}</code>, or <code>{error, <anno>Reason</anno>}</code>.</p>
+        <p>在<code><anno>Time</anno></code>时间后执行<code>apply(<anno>Module</anno>, <anno>Function</anno>, <anno>Arguments</anno>)</code>. 返回<code>{ok, <anno>TRef</anno>}</code>, 或者 <code>{error, <anno>Reason</anno>}</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="send_after/2" name="send_after">send_after(Time, Message) -> {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Message = term(),<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <h3 arity="3" id="send_after/3" name="send_after">send_after(Time, Pid, Message) -> {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Pid = pid() | (RegName = atom()),<br/>      Message = term(),<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <div class="discription">
+        <p class="english">
+          <div class="taglist">
+            <dt>
+              <code>send_after/3</code>
+            </dt>
+            <p class="english">
+              <p class="english">Evaluates <code><anno>Pid</anno> ! <anno>Message</anno></code> after <code><anno>Time</anno></code> amount
+              of time has elapsed. (<code><anno>Pid</anno></code> can also be an atom of a
+              registered name.) Returns <code>{ok, <anno>TRef</anno>}</code>, or
+              <code>{error, <anno>Reason</anno>}</code>.</p>
+              <p>在<code><anno>Time</anno></code>时间后执行 <code><anno>Pid</anno> ! <anno>Message</anno></code>. (<code><anno>Pid</anno></code> 可以是已注册的原子名.) 返回 <code>{ok, <anno>TRef</anno>}</code>, 或<code>{error, <anno>Reason</anno>}</code>.</p>
+            </p>
+            <dt>
+              <code>send_after/2</code>
+            </dt>
+            <p class="english">
+              <p class="english">Same as <code>send_after(<anno>Time</anno>, self(), <anno>Message</anno>)</code>.</p>
+              <p>与<code>send_after(<anno>Time</anno>, self(), <anno>Message</anno>)</code>相同.</p>
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="kill_after/1" name="kill_after">kill_after(Time) -> {'ok', TRef} | {'error', Reason2}</h3>
+      <div class="type_desc">      Time = time(),<br/>      TRef = tref(),<br/>      Reason2 = term()</div>
+      <h3 arity="2" id="kill_after/2" name="kill_after">kill_after(Time, Pid) -> {'ok', TRef} | {'error', Reason2}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Pid = pid() | (RegName = atom()),<br/>      TRef = tref(),<br/>      Reason2 = term()</div>
+      <h3 arity="2" id="exit_after/2" name="exit_after">exit_after(Time, Reason1) -> {'ok', TRef} | {'error', Reason2}</h3>
+      <div class="type_desc">      Time = time(),<br/>      TRef = tref(),<br/>      Reason1 = term(),<br/>      Reason2 = term()</div>
+      <h3 arity="3" id="exit_after/3" name="exit_after">exit_after(Time, Pid, Reason1) -> {'ok', TRef} | {'error', Reason2}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Pid = pid() | (RegName = atom()),<br/>      TRef = tref(),<br/>      Reason1 = term(),<br/>      Reason2 = term()</div>
+      <div class="discription">
+        <p class="english">
+          <div class="taglist">
+            <dt>
+              <code>exit_after/3</code>
+            </dt>
+            <p class="english">
+              <p class="english">Send an exit signal with reason <code><anno>Reason1</anno></code> to Pid
+              <code><anno>Pid</anno></code>. Returns <code>{ok, <anno>TRef</anno>}</code>, or
+              <code>{error, <anno>Reason2</anno>}</code>.</p>
+              <p>向<code><anno>Pid</anno></code>进程发送一个附加原因<code><anno>Reason1</anno></code>的退出信号. 返回<code>{ok, <anno>TRef</anno>}</code>, 或<code>{error, <anno>Reason2</anno>}</code>.</p>
+            </p>
+            <dt>
+              <code>exit_after/2</code>
+            </dt>
+            <p class="english">
+              <p class="english">Same as <code>exit_after(<anno>Time</anno>, self(), <anno>Reason1</anno>)</code>.     </p>
+              <p>与<code>exit_after(<anno>Time</anno>, self(), <anno>Reason1</anno>)</code>相同.     </p>
+            </p>
+            <dt>
+              <code>kill_after/2</code>
+            </dt>
+            <p class="english">
+              <p class="english">Same as <code>exit_after(<anno>Time</anno>, <anno>Pid</anno>, kill)</code>.     </p>
+              <p>与<code>exit_after(<anno>Time</anno>, <anno>Pid</anno>, kill)</code>相同.     </p>
+            </p>
+            <dt>
+              <code>kill_after/1</code>
+            </dt>
+            <p class="english">
+              <p class="english">Same as <code>exit_after(<anno>Time</anno>, self(), kill)</code>.     </p>
+              <p>与<code>exit_after(<anno>Time</anno>, self(), kill)</code>相同.     </p>
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="4" id="apply_interval/4" name="apply_interval">apply_interval(Time, Module, Function, Arguments) ->
+                            {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Module = module(),<br/>      Function = atom(),<br/>      Arguments = [term()],<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <div class="discription">
+        <p class="english">Evaluates <code>apply(<anno>Module</anno>, <anno>Function</anno>, <anno>Arguments</anno>)</code> repeatedly at
+          intervals of  <code><anno>Time</anno></code>. Returns <code>{ok, <anno>TRef</anno>}</code>, or
+          <code>{error, <anno>Reason</anno>}</code>.</p>
+        <p>重复地，每隔<code><anno>Time</anno></code>时间执行一遍<code>apply(<anno>Module</anno>, <anno>Function</anno>, <anno>Arguments</anno>)</code>. 返回 <code>{ok, <anno>TRef</anno>}</code>, 或 <code>{error, <anno>Reason</anno>}</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="send_interval/2" name="send_interval">send_interval(Time, Message) -> {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Message = term(),<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <h3 arity="3" id="send_interval/3" name="send_interval">send_interval(Time, Pid, Message) ->
+                           {'ok', TRef} | {'error', Reason}</h3>
+      <div class="type_desc">      Time = time(),<br/>      Pid = pid() | (RegName = atom()),<br/>      Message = term(),<br/>      TRef = tref(),<br/>      Reason = term()</div>
+      <div class="discription">
+        <p class="english">
+          <div class="taglist">
+            <dt>
+              <code>send_interval/3</code>
+            </dt>
+            <p class="english">
+              <p class="english">Evaluates <code><anno>Pid</anno> ! <anno>Message</anno></code> repeatedly after <code><anno>Time</anno></code>
+              amount of time has elapsed. (<code><anno>Pid</anno></code> can also be an atom of
+              a registered name.) Returns <code>{ok, <anno>TRef</anno>}</code> or
+              <code>{error, <anno>Reason</anno>}</code>.</p>
+              <p>重复地, <code><anno>Time</anno></code>时间之后执行一遍<code><anno>Pid</anno> ! <anno>Message</anno></code>. (<code><anno>Pid</anno></code> 可以是一个已注册的原子名.) 返回<code>{ok, <anno>TRef</anno>}</code> 或者 <code>{error, <anno>Reason</anno>}</code>.</p>
+            </p>
+            <dt>
+              <code>send_interval/2</code>
+            </dt>
+            <p class="english">
+              <p class="english">Same as <code>send_interval(<anno>Time</anno>, self(), <anno>Message</anno>)</code>.</p>
+              <p>与<code>send_interval(<anno>Time</anno>, self(), <anno>Message</anno>)</code>相同.</p>
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="cancel/1" name="cancel">cancel(TRef) -> {'ok', 'cancel'} | {'error', Reason}</h3>
+      <div class="type_desc">      TRef = tref(),<br/>      Reason = term()</div>
+      <div class="discription">
+        <p class="english">Cancels a previously requested timeout. <code><anno>TRef</anno></code> is a unique
+          timer reference returned by the timer function in question. Returns
+          <code>{ok, cancel}</code>, or <code>{error, <anno>Reason</anno>}</code> when <code><anno>TRef</anno></code>
+          is not a timer reference.</p>
+        <p>取消一个之前设置的超时. <code><anno>TRef</anno></code> 是一个由相应计时器函数返回的唯一的计时器引用. 返回<code>{ok, cancel}</code>, 或者当<code><anno>TRef</anno></code>不是计时器引用时返回<code>{error, <anno>Reason</anno>}</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="sleep/1" name="sleep">sleep(Time) -> 'ok'</h3>
+      <div class="type_desc">      Time = timeout()</div>
+      <div class="discription">
+        <p class="english">Suspends the process calling this function for <code><anno>Time</anno></code> amount
+          of milliseconds and then returns <code>ok</code>, or suspend the process
+	  forever if <code><anno>Time</anno></code> is the atom <code>infinity</code>. Naturally, this
+          function does <em>not</em> return immediately.</p>
+        <p>将调用这个函数的进程挂起<code><anno>Time</anno></code>毫秒，然后返回<code>ok</code>, 如果<code><anno>Time</anno></code> 设置为<code>infinity</code>进程将永远挂起. 当然, 这个函数<em>不是</em>立即返回的.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="tc/1" name="tc">tc(Fun) -> {Time, Value}</h3>
+      <div class="type_desc">      Fun = function(),<br/>      Time = integer(),<br/>      Value = term()</div>
+      <h3 arity="2" id="tc/2" name="tc">tc(Fun, Arguments) -> {Time, Value}</h3>
+      <div class="type_desc">      Fun = function(),<br/>      Arguments = [term()],<br/>      Time = integer(),<br/>      Value = term()</div>
+      <h3 arity="3" id="tc/3" name="tc">tc(Module, Function, Arguments) -> {Time, Value}</h3>
+      <div class="type_desc">      Module = module(),<br/>      Function = atom(),<br/>      Arguments = [term()],<br/>      Time = integer(),<br/>      Value = term()</div>
+      <type_desc variable="Time">In microseconds</type_desc>
+      <div class="discription">
+        <p class="english">
+          <div class="taglist">
+            <dt>
+              <code>tc/3</code>
+            </dt>
+            <p class="english">
+              <p class="english">Evaluates <code>apply(<anno>Module</anno>, <anno>Function</anno>, <anno>Arguments</anno>)</code> and measures
+              the elapsed real time as reported by <code>os:timestamp/0</code>.
+              Returns <code>{<anno>Time</anno>, <anno>Value</anno>}</code>, where
+              <code><anno>Time</anno></code> is the elapsed real time in <em>microseconds</em>,
+              and <code><anno>Value</anno></code> is what is returned from the apply.</p>
+            </p>
+            <dt>
+              <code>tc/2</code>
+            </dt>
+            <p class="english">
+              <p class="english">Evaluates <code>apply(<anno>Fun</anno>, <anno>Arguments</anno>)</code>. Otherwise works
+            like <code>tc/3</code>.</p>
+            </p>
+            <dt>
+              <code>tc/1</code>
+            </dt>
+            <p class="english">
+              <p class="english">Evaluates <code><anno>Fun</anno>()</code>. Otherwise works like <code>tc/2</code>.</p>
+            </p>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="now_diff/2" name="now_diff">now_diff(T2, T1) -> Tdiff</h3>
+      <div class="type_desc">      T1 = erlang:timestamp(),<br/>      T2 = erlang:timestamp(),<br/>      Tdiff = integer()</div>
+      <type_desc variable="Tdiff">In microseconds</type_desc>
+      <div class="discription">
+        <p class="english">Calculates the time difference <code><anno>Tdiff</anno> = <anno>T2</anno> - <anno>T1</anno></code> in
+          <em>microseconds</em>, where <code><anno>T1</anno></code> and <code><anno>T2</anno></code> probably
+          are timestamp tuples returned from <code>erlang:now/0</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="seconds/1" name="seconds">seconds(Seconds) -> MilliSeconds</h3>
+      <div class="type_desc">      Seconds = non_neg_integer(),<br/>      MilliSeconds = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the number of milliseconds in <code><anno>Seconds</anno></code>.</p>
+        <p>返回以<code><anno>秒</anno></code>为单位数值的毫秒数.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="minutes/1" name="minutes">minutes(Minutes) -> MilliSeconds</h3>
+      <div class="type_desc">      Minutes = non_neg_integer(),<br/>      MilliSeconds = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Return the number of milliseconds in <code><anno>Minutes</anno></code>.</p>
+        <p>返回以<code><anno>分</anno></code>为单位数值的毫秒数.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="hours/1" name="hours">hours(Hours) -> MilliSeconds</h3>
+      <div class="type_desc">      Hours = non_neg_integer(),<br/>      MilliSeconds = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the number of milliseconds in <code><anno>Hours</anno></code>.</p>
+        <p>返回以<code><anno>时</anno></code>为单位数值的毫秒数.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="hms/3" name="hms">hms(Hours, Minutes, Seconds) -> MilliSeconds</h3>
+      <div class="type_desc">      Hours = non_neg_integer(),<br/>      Minutes = non_neg_integer(),<br/>      Seconds = non_neg_integer(),<br/>      MilliSeconds = non_neg_integer()</div>
+      <div class="discription">
+        <p class="english">Returns the number of milliseconds in <code><anno>Hours</anno> + <anno>Minutes</anno> + <anno>Seconds</anno></code>.</p>
+        <p>返回<code><anno>Hours</anno> + <anno>Minutes</anno> + <anno>Seconds</anno></code>格式的毫秒数.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>Examples</h4>
+    <p class="english">This example illustrates  how to print out "Hello World!" in 5 seconds:</p>
+    <p>这个例子说明了如何在5秒之后输出"Hello World!":</p>
+    <pre>
+      1> <span>timer:apply_after(5000, io, format, ["~nHello World!~n", []]).</span>
+      {ok,TRef}
+      Hello World!</pre>
+    <p class="english">The following coding example illustrates a process which performs a 
+      certain action and if this action is not completed within a certain 
+      limit, then the process is killed.</p>
+    <p>下面的代码例子说明了一个进程执行某项操作，如果这个操作在限制的时间内没有完成，那么该进程被杀死.</p>
+    <pre>
+      Pid = spawn(mod, fun, [foo, bar]),
+      %% If pid is not finished in 10 seconds, kill him
+      {ok, R} = timer:kill_after(timer:seconds(10), Pid),
+      ...
+      %% We change our mind...
+      timer:cancel(R),
+      ...</pre>
+  </section>
+  <section>
+    <h4>WARNING</h4>
+    <p class="english">A timer can always be removed by calling <code>cancel/1</code>.
+      </p>
+    <p>计时器可以通过<code>cancel/1</code>函数调用取消.
+      </p>
+    <p class="english">An interval timer, i.e. a timer created by evaluating any of the 
+      functions <code>apply_interval/4</code>, <code>send_interval/3</code>, and 
+      <code>send_interval/2</code>, is linked to the process towards which
+      the timer performs its task.
+      </p>
+    <p class="english">A one-shot timer, i.e. a timer created by evaluating any of the
+      functions <code>apply_after/4</code>, <code>send_after/3</code>, 
+      <code>send_after/2</code>, <code>exit_after/3</code>, <code>exit_after/2</code>, 
+      <code>kill_after/2</code>, and <code>kill_after/1</code> is not linked to any
+      process. Hence, such a timer is removed only when it reaches its 
+      timeout, or if it is explicitly removed by a call to <code>cancel/1</code>.</p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
