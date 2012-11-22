@@ -65,7 +65,7 @@
       vertex or an edge is called a <marker id="label"></marker>
       <em>label</em>. Labels are Erlang terms.
       </p>
-    <p_zh>有向图可以通过额外的信息来注释. 这样的信息可以加到顶点或者边上. A digraph which has been annotated is called a <em>labeled digraph</em>, and the information attached to a vertex or an edge is called a <marker id="label"></marker> <em>label</em>. Labels are Erlang terms.
+    <p_zh>有向图可以通过额外的信息来注释. 这样的信息可以加到顶点或者边上. 注释过的图称为<em>标记有向图</em>, 附加到顶点或者边的信息称为<marker id="label"></marker> <em>标记</em>. 标记是Erlang项.
       </p_zh>
     <p>An edge e&nbsp;=&nbsp;(v,&nbsp;w) is said to 
       <marker id="emanate"></marker><em>emanate</em> from vertex v and 
@@ -95,6 +95,17 @@
       An <marker id="acyclic_digraph"></marker><em>acyclic digraph</em>
       is a digraph that has no cycles.
       </p>
+      <p_zh>e&nbsp;=&nbsp;(v,&nbsp;w) 表示从顶点v<marker id="emanate"></marker><em>发出</em> <marker id="incident"></marker><em>传入</em>到顶点w的边.  <marker id="out_degree"></marker><em>出度</em> 表示从某顶点发出的边的数量. <marker id="in_degree"></marker><em>入度</em>表示传入到某个顶点的边的数量. 如果有一条边从v发出传入到w, 那么就说w是v的一个<marker id="out_neighbour"></marker> <em>外邻点</em>, v是w的一个<marker id="in_neighbour"></marker><em>内邻点</em>. 图(V,&nbsp;E)上的一条从v[1]到v[k]的<marker id="path"></marker><em>路径</em>是一个顶点集合V中的非空序列v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] , 其中对于1&nbsp;&lt;=&nbsp;i&nbsp;&lt;&nbsp;k存在一条属于集合E的边(v[i],v[i+1]). 
+      路径P的<marker id="length"></marker><em>长度</em>为k-1. 
+      除了第一个和最后一个顶点可能相同外，其他顶点都不同的路径称为<marker id="simple_path"></marker><em>简单的</em> 
+      P is a <marker id="cycle"></marker><em>cycle</em> if the length 
+      of P is not zero and v[1] = v[k]. 
+      A <marker id="loop"></marker><em>loop</em> is a cycle of length one. 
+      A <marker id="simple_cycle"></marker><em>simple cycle</em> is a path
+      that is both a cycle and simple. 
+      An <marker id="acyclic_digraph"></marker><em>acyclic digraph</em>
+      is a digraph that has no cycles.
+      </p_zh>
   </description>
   <datatypes>
     <datatype>
