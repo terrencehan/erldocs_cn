@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>epp</h1>
+  <h2 class="modsummary">An Erlang Code Preprocessor</h2>
+  <div class="description">
+    <p class="english">The Erlang code preprocessor includes functions which are used
+      by <code>compile</code> to preprocess macros and include files before
+      the actual parsing takes place.</p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="macros"></name>
+    </datatype>
+    <datatype><name name="epp_handle"></name><desc><p class="english">Handle to the epp server.</p><p>epp服务器的句柄.</p></desc>>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="2" id="open/2" name="open">open(FileName, IncludePath) ->
+	{'ok', Epp} | {'error', ErrorDescriptor}</h3>
+      <div class="type_desc">      FileName = file:name(),<br/>      IncludePath = [DirectoryName = file:name()],<br/>      Epp = epp_handle(),<br/>      ErrorDescriptor = term()</div>
+      <h3 arity="3" id="open/3" name="open">open(FileName, IncludePath, PredefMacros) ->
+	{'ok', Epp} | {'error', ErrorDescriptor}</h3>
+      <div class="type_desc">      FileName = file:name(),<br/>      IncludePath = [DirectoryName = file:name()],<br/>      PredefMacros = macros(),<br/>      Epp = epp_handle(),<br/>      ErrorDescriptor = term()</div>
+      <div class="discription">
+        <p class="english">Opens a file for preprocessing.</p>
+        <p>打开一个文件来预处理.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="close/1" name="close">close(Epp) -> 'ok'</h3>
+      <div class="type_desc">      Epp = epp_handle()</div>
+      <div class="discription">
+        <p class="english">Closes the preprocessing of a file.</p>
+        <p>Closes the preprocessing of a file.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="parse_erl_form/1" name="parse_erl_form">parse_erl_form(Epp) ->
+        {'ok', AbsForm} | {'eof', Line} | {error, ErrorInfo}</h3>
+      <div class="type_desc">      Epp = epp_handle(),<br/>      AbsForm = erl_parse:abstract_form(),<br/>      Line = erl_scan:line(),<br/>      ErrorInfo = erl_scan:error_info() | erl_parse:error_info()</div>
+      <div class="discription">
+        <p class="english">Returns the next Erlang form from the opened Erlang source file.
+          The tuple <code>{eof, <anno>Line</anno>}</code> is returned at end-of-file. The first
+          form corresponds to an implicit attribute <code>-file(File,1).</code>, where
+          <code>File</code> is the name of the file.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="parse_file/3" name="parse_file">parse_file(FileName, IncludePath, PredefMacros) ->
+                {'ok', [Form]} | {error, OpenError}</h3>
+      <div class="type_desc">      FileName = file:name(),<br/>      IncludePath = [DirectoryName = file:name()],<br/>      Form = erl_parse:abstract_form() | {'error', ErrorInfo} | {'eof',Line},<br/>      PredefMacros = macros(),<br/>      Line = erl_scan:line(),<br/>      ErrorInfo = erl_scan:error_info() | erl_parse:error_info(),<br/>      OpenError = file:posix() | badarg | system_limit</div>
+      <div class="discription">
+        <p class="english">Preprocesses and parses an Erlang source file.
+          Note that the tuple <code>{eof, <anno>Line</anno>}</code> returned at end-of-file is
+          included as a "form".</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="format_error/1" name="format_error">format_error(ErrorDescriptor) -> io_lib:chars()</h3>
+      <div class="type_desc">      ErrorDescriptor = term()</div>
+      <div class="discription">
+        <p class="english">Takes an <code><anno>ErrorDescriptor</anno></code> and returns
+          a string which
+          describes the error or warning. This function is usually
+          called implicitly when processing an <code>ErrorInfo</code>
+          structure (see below).</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>Error Information</h4>
+    <p class="english">The <code>ErrorInfo</code> mentioned above is the standard
+      <code>ErrorInfo</code> structure which is returned from all IO
+      modules. It has the following format:
+      </p>
+    <pre>
+    {ErrorLine, Module, ErrorDescriptor}    </pre>
+    <p class="english">A string which describes the error is obtained with the following call:
+      </p>
+    <pre>
+    Module:format_error(ErrorDescriptor)    </pre>
+  </section>
+  <section>
+    <h4>See Also</h4>
+    <p class="english">
+      <a class="seealso" href="">erl_parse(3)</a>
+    </p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
