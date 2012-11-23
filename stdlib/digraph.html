@@ -85,13 +85,10 @@
     <p>e&nbsp;=&nbsp;(v,&nbsp;w) 表示从顶点v<marker id="emanate"></marker><em>发出</em> <marker id="incident"></marker><em>传入</em>到顶点w的边.  <marker id="out_degree"></marker><em>出度</em> 表示从某顶点发出的边的数量. <marker id="in_degree"></marker><em>入度</em>表示传入到某个顶点的边的数量. 如果有一条边从v发出传入到w, 那么就说w是v的一个<marker id="out_neighbour"></marker> <em>外邻点</em>, v是w的一个<marker id="in_neighbour"></marker><em>内邻点</em>. 图(V,&nbsp;E)上的一条从v[1]到v[k]的<marker id="path"></marker><em>路径</em>是一个顶点集合V中的非空序列v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] , 其中对于1&nbsp;&lt;=&nbsp;i&nbsp;&lt;&nbsp;k存在一条属于集合E的边(v[i],v[i+1]). 
       路径P的<marker id="length"></marker><em>长度</em>为k-1. 
       除了第一个和最后一个顶点可能相同外，其他顶点都不同的路径称为<marker id="simple_path"></marker><em>简单的</em> 
-      P is a <marker id="cycle"></marker><em>cycle</em> if the length 
-      of P is not zero and v[1] = v[k]. 
-      A <marker id="loop"></marker><em>loop</em> is a cycle of length one. 
-      A <marker id="simple_cycle"></marker><em>simple cycle</em> is a path
-      that is both a cycle and simple. 
-      An <marker id="acyclic_digraph"></marker><em>acyclic digraph</em>
-      is a digraph that has no cycles.
+      如果P的长度不为零且v[1] = v[k]则称P为一个<marker id="cycle"></marker><em>环</em>.
+      <marker id="loop"></marker><em>自环</em> 是一个长度为一的环. 
+      一个既是简单的又是环的路径称为<marker id="simple_cycle"></marker><em>简单环</em>. 
+      没有环的图称为<marker id="acyclic_digraph"></marker><em>无环图</em>.
       </p>
   </div>
   <datatypes>
@@ -145,6 +142,7 @@
           <code><anno>V1</anno></code> and <a class="seealso" href="#incident">incident</a>
           on <code><anno>V2</anno></code>. Returns <code><anno>E</anno></code>.
           </p>
+        <p><code>add_edge/5</code> 使用<code><anno>Label</anno></code>作为(新) <a class="seealso" href="#label">标签</a> 创建(或修改)图 <code><anno>G</anno></code>的边<code><anno>E</anno></code>. 这条边从<code><anno>V1</anno></code><a class="seealso" href="#emanate">发出</a> 并且 <a class="seealso" href="#incident">传入</a> 到 <code><anno>V2</anno></code>. 返回<code><anno>E</anno></code>.  </p>
         <p class="english"><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code> is
           equivalent to
           <code>add_edge(<anno>G</anno>,&nbsp;<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code>,
@@ -152,8 +150,14 @@
           represented by the term <code>['$e'&nbsp;|&nbsp;N]</code>, where N
           is an integer&nbsp;>=&nbsp;0.
           </p>
+        <p><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code> 等同于
+          <code>add_edge(<anno>G</anno>,&nbsp;<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>)</code>,
+          where <code><anno>E</anno></code> is a created edge. 创建的边由项<code>['$e'&nbsp;|&nbsp;N]</code>代表, 其中N是大于等于0的整数.
+          </p>
         <p class="english"><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>)</code> is equivalent to
           <code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;[])</code>.
+          </p>
+        <p><code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>)</code> 等同于<code>add_edge(<anno>G</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;[])</code>.
           </p>
         <p class="english">If the edge would create a cycle in 
 	  an <a class="seealso" href="#acyclic_digraph">acyclic digraph</a>,
@@ -163,6 +167,8 @@
           <code>{error,&nbsp;{bad_vertex,&nbsp;</code><anno>V</anno><code>}}</code> is
           returned, <anno>V</anno>&nbsp;=&nbsp;<code><anno>V1</anno></code> or
           <anno>V</anno>&nbsp;=&nbsp;<code><anno>V2</anno></code>.
+          </p>
+        <p>如果要边在一个<a class="seealso" href="#acyclic_digraph">无环图</a>中产生环, 那么返回<code>{error,&nbsp;{bad_edge,&nbsp;<anno>Path</anno>}}</code>. 如果<code><anno>V1</anno></code> 或 <code><anno>V2</anno></code>不是<code><anno>G</anno></code>的顶点, 则返回<code>{error,&nbsp;{bad_vertex,&nbsp;</code><anno>V</anno><code>}}</code>, <anno>V</anno>&nbsp;=&nbsp;<code><anno>V1</anno></code> 或 <anno>V</anno>&nbsp;=&nbsp;<code><anno>V2</anno></code>.
           </p>
       </div>
     </div>
@@ -179,8 +185,14 @@
           <a class="seealso" href="#label">label</a> of the
           vertex. Returns <code><anno>V</anno></code>.
           </p>
+        <p><code>add_vertex/3</code> 创建(或修改)图<code><anno>G</anno></code>的顶点<code><anno>V</anno></code> , using <code><anno>Label</anno></code> as the (new)
+          <a class="seealso" href="#label">label</a> of the
+          vertex. Returns <code><anno>V</anno></code>.
+          </p>
         <p class="english"><code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>)</code> is equivalent to
           <code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>,&nbsp;[])</code>.
+          </p>
+        <p><code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>)</code> 等同于<code>add_vertex(<anno>G</anno>,&nbsp;<anno>V</anno>,&nbsp;[])</code>.
           </p>
         <p class="english"><code>add_vertex/1</code> creates a vertex using the empty list
           as label, and returns the created vertex. The created vertex
@@ -195,6 +207,8 @@
       <div class="discription">
         <p class="english">Deletes the edge <code><anno>E</anno></code> from the digraph <code><anno>G</anno></code>.
           </p>
+        <p>从图<code><anno>G</anno>中删除边</code><code><anno>E</anno></code>.
+          </p>
       </div>
     </div>
     <div class="function">
@@ -203,6 +217,8 @@
       <div class="discription">
         <p class="english">Deletes the edges in the list <code><anno>Edges</anno></code> from the digraph
           <code><anno>G</anno></code>.
+          </p>
+        <p>从图<code><anno>G</anno></code>中删除列表<code><anno>Edges</anno></code>从的边 .
           </p>
       </div>
     </div>
@@ -214,6 +230,7 @@
           <a class="seealso" href="#path">paths</a> from the vertex
           <code><anno>V1</anno></code> to the vertex <code><anno>V2</anno></code>.
           </p>
+        <p>从图<code><anno>G</anno></code>中删除边直到从顶点<code><anno>V1</anno></code>到顶点<code><anno>V2</anno></code>不再有<a class="seealso" href="#path">路径</a> .  </p>
         <p class="english">A sketch of the procedure employed: Find an arbitrary
           <a class="seealso" href="#simple_path">simple path</a>
           v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] from <code><anno>V1</anno></code> to
@@ -235,6 +252,8 @@
           <code><anno>V</anno></code> or <a class="seealso" href="#incident">incident</a>
           on <code><anno>V</anno></code> are also deleted.
           </p>
+        <p>从图<code><anno>G</anno></code>中删除顶点<code><anno>V</anno></code>. 任何从<code><anno>V</anno></code><a class="seealso" href="#emanate">发出</a>并<a class="seealso" href="#incident">传入</a> 到 <code><anno>V</anno></code> 的边也被删除.
+          </p>
       </div>
     </div>
     <div class="function">
@@ -244,6 +263,7 @@
         <p class="english">Deletes the vertices in the list <code><anno>Vertices</anno></code> from the
           digraph <code><anno>G</anno></code>.
           </p>
+        <p>从图<code><anno>G</anno></code>中删除列表<code><anno>Vertices</anno></code>里的顶点.  </p>
       </div>
     </div>
     <div class="function">
@@ -256,6 +276,7 @@
           will, however, be deleted if the process that created the
           digraph terminates.
           </p>
+        <p>删除图<code><anno>G</anno></code>. 这个调用很重要，因为图是通过<code>ETS</code>实现的. 没有针对<code>ETS</code>表的垃圾回收. 然而，如果创建图的进程终止，那么图也自然被删除. </p>
       </div>
     </div>
     <div class="function">
@@ -263,6 +284,15 @@
       <div class="type_desc">      G = digraph(),<br/>      E = edge(),<br/>      V1 = vertex(),<br/>      V2 = vertex(),<br/>      Label = label()</div>
       <div class="discription">
         <p class="english">Returns <code>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</code> where
+          <code><anno>Label</anno></code> is the <a class="seealso" href="#label">label</a>
+          of the edge 
+	  <code><anno>E</anno></code> <a class="seealso" href="#emanate">emanating</a> from
+	  <code><anno>V1</anno></code> and <a class="seealso" href="#incident">incident</a> on
+	  <code><anno>V2</anno></code> of the digraph <code><anno>G</anno></code>.
+	  If there is no edge <code><anno>E</anno></code> of the
+          digraph <code><anno>G</anno></code>, then <code>false</code> is returned.
+          </p>
+        <p>Returns <code>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</code> where
           <code><anno>Label</anno></code> is the <a class="seealso" href="#label">label</a>
           of the edge 
 	  <code><anno>E</anno></code> <a class="seealso" href="#emanate">emanating</a> from
@@ -280,6 +310,8 @@
         <p class="english">Returns a list of all edges of the digraph <code><anno>G</anno></code>, in
           some unspecified order.
           </p>
+        <p>以一个列表的形式返回图<code><anno>G</anno></code>的所有边.(列表元素顺序未指定)
+          </p>
       </div>
     </div>
     <div class="function">
@@ -290,6 +322,7 @@
 	edges <a class="seealso" href="#emanate">emanating</a> from 
 	or <a class="seealso" href="#incident">incident</a> on <code><anno>V</anno></code>
 	of the digraph <code><anno>G</anno></code>, in some unspecified order.</p>
+        <p>以一个列表的形式返回图<code><anno>G</anno></code>顶点<code><anno>V</anno></code>上所有<a class="seealso" href="#emanate">发出</a> 和<a class="seealso" href="#incident">传入</a>的边.(列表元素顺序未指定).</p>
       </div>
     </div>
     <div class="function">
