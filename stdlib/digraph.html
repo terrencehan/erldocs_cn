@@ -107,6 +107,7 @@
       </name>
       <desc>
         <p class="english">A digraph as returned by <code>new/0,1</code>.</p>
+        <p>一个由<code>new/0,1</code>返回的图.</p>
       </desc>
     </datatype>
     <datatype>
@@ -198,6 +199,8 @@
           as label, and returns the created vertex. The created vertex
           is represented by the term <code>['$v'&nbsp;|&nbsp;N]</code>,
           where N is an integer&nbsp;>=&nbsp;0.
+          </p>
+        <p><code>add_vertex/1</code> 使用空列表作为标签创建一个顶点, 并且返回创建好的顶点. 新顶点由项<code>['$v'&nbsp;|&nbsp;N]</code>表示, 其中N是一个大于等于零的整数.
           </p>
       </div>
     </div>
@@ -292,14 +295,7 @@
 	  If there is no edge <code><anno>E</anno></code> of the
           digraph <code><anno>G</anno></code>, then <code>false</code> is returned.
           </p>
-        <p>Returns <code>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</code> where
-          <code><anno>Label</anno></code> is the <a class="seealso" href="#label">label</a>
-          of the edge 
-	  <code><anno>E</anno></code> <a class="seealso" href="#emanate">emanating</a> from
-	  <code><anno>V1</anno></code> and <a class="seealso" href="#incident">incident</a> on
-	  <code><anno>V2</anno></code> of the digraph <code><anno>G</anno></code>.
-	  If there is no edge <code><anno>E</anno></code> of the
-          digraph <code><anno>G</anno></code>, then <code>false</code> is returned.
+        <p>返回<code>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</code> 其中 <code><anno>Label</anno></code> 是图<code><anno>G</anno></code>中从 <code><anno>V1</anno></code><a class="seealso" href="#emanate">发出</a>并且<a class="seealso" href="#incident">传入</a> 到 <code><anno>V2</anno></code>的边<code><anno>E</anno></code>的<a class="seealso" href="#label">标签</a>. 如果图<code><anno>G</anno></code>中没有边<code><anno>E</anno></code>, 那么返回 <code>false</code>.
           </p>
       </div>
     </div>
@@ -339,8 +335,12 @@
           there are no cycles through <code><anno>V</anno></code>, then <code>false</code> is
           returned.
           </p>
+        <p>如果有一个长度大于等于2的<a class="seealso" href="#simple_cycle">简单环</a>通过顶点<code><anno>V</anno></code>, 那么环以一个顶点的列表<code>[<anno>V</anno>,&nbsp;...,&nbsp;<anno>V</anno>]</code>返回, 否则如果有一个<a class="seealso" href="#loop">自环</a> 通过 <code><anno>V</anno></code>, 那么自环以一个列表<code>[<anno>V</anno>]</code>返回. 如果没有环通过<code><anno>V</anno></code>, 则返回<code>false</code>.
+          </p>
         <p class="english"><code>get_path/3</code> is used for finding a simple cycle
           through <code><anno>V</anno></code>.
+          </p>
+        <p><code>get_path/3</code> 用于寻找一个通过<code><anno>V</anno>的简单环</code>.
           </p>
       </div>
     </div>
@@ -356,8 +356,12 @@
           <code>false</code> if no simple path from <code><anno>V1</anno></code> to <code><anno>V2</anno></code>
           of length one or more exists.
           </p>
+        <p>在图<code><anno>G</anno></code>中尝试寻找一个从顶点<code><anno>V1</anno></code> 到顶点<code><anno>V2</anno></code>的<a class="seealso" href="#simple_path">简单路径</a>. 以一个顶点列表<code>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</code>的形式返回路径, 或者如果没有从<code><anno>V1</anno></code> 到 <code><anno>V2</anno></code>长度大于等于1的简单路径则返回<code>false</code>.
+          </p>
         <p class="english">The digraph <code><anno>G</anno></code> is traversed in a depth-first manner,
           and the first path found is returned.
+          </p>
+        <p>以深度优先的方式遍历图<code><anno>G</anno></code>, 并且返回找到的第一条路径.
           </p>
       </div>
     </div>
@@ -373,8 +377,13 @@
           Note that a <a class="seealso" href="#loop">loop</a> through
           <code><anno>V</anno></code> is returned as the list <code>[<anno>V</anno>,&nbsp;<anno>V</anno>]</code>.
           </p>
+        <p>在图<code><anno>G</anno></code>中尝试寻找一个通过<code><anno>V</anno></code>且尽可能短的<a class="seealso" href="#simple_cycle">简单环</a>. 以一个顶点列表<code>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</code>的形式返回路径, 或者如果没有从<code><anno>V1</anno></code> 到 <code><anno>V2</anno></code>长度大于等于1的简单路径则返回<code>false</code>.
+           注意，一个通过<code><anno>V</anno></code>的<a class="seealso" href="#loop">自环</a> 以列表<code>[<anno>V</anno>,&nbsp;<anno>V</anno>]</code>的形式返回.
+          </p>
         <p class="english"><code>get_short_path/3</code> is used for finding a simple cycle
           through <code><anno>V</anno></code>.
+          </p>
+        <p><code>get_short_path/3</code>用以寻找一个通过<code><anno>V</anno></code>的简单环.
           </p>
       </div>
     </div>
@@ -389,8 +398,12 @@
           vertices, or <code>false</code> if no simple path from <code><anno>V1</anno></code>
           to <code><anno>V2</anno></code> of length one or more exists.
           </p>
+        <p>在图<code><anno>G</anno></code>中尝试寻找一个从顶点<code><anno>V1</anno></code> 到顶点<code><anno>V2</anno></code>尽可能短的<a class="seealso" href="#simple_path">简单路径</a>. 以一个顶点列表<code>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</code>的形式返回路径, 或者如果没有从<code><anno>V1</anno></code> 到 <code><anno>V2</anno></code>长度大于等于1的简单路径则返回<code>false</code>.
+          </p>
         <p class="english">The digraph <code><anno>G</anno></code> is traversed in a breadth-first
           manner, and the first path found is returned.
+          </p>
+        <p>以广度优先的方式遍历图<code><anno>G</anno></code>, 并且返回找到的第一条路径.
           </p>
       </div>
     </div>
@@ -401,6 +414,7 @@
         <p class="english">Returns the <a class="seealso" href="#in_degree">in-degree</a> of the vertex
           <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
           </p>
+        <p>返回图<code><anno>G</anno></code>中顶点<code><anno>V</anno></code>的<a class="seealso" href="#in_degree">入度</a>.  </p>
       </div>
     </div>
     <div class="function">
@@ -411,6 +425,7 @@
 	  edges <a class="seealso" href="#incident">incident</a> on
 	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
           </p>
+        <p>以列表的形式, 返回在图<code><anno>G</anno></code>中顶点<code><anno>V</anno></code>的所有<a class="seealso" href="#in_degree">入度</a>.(列表中元素顺序未指定)  </p>
       </div>
     </div>
     <div class="function">
@@ -420,6 +435,8 @@
         <p class="english">Returns a list of 
 	  all <a class="seealso" href="#in_neighbour">in-neighbours</a> of 
 	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+          </p>
+        <p>以列表的形式,返回在图<code><anno>G</anno></code>中顶点<code><anno>V</anno></code>的所有<a class="seealso" href="#in_neighbour">内邻点</a>.(列表元素顺序未指定).
           </p>
       </div>
     </div>
@@ -432,20 +449,25 @@
         <p class="english">Returns a list of <code>{Tag, Value}</code> pairs describing the
           digraph <code><anno>G</anno></code>. The following pairs are returned:
           </p>
+        <p>返回一个<code>{Tag, Value}</code>对的列表来描述图<code><anno>G</anno></code>. 返回下列对: </p>
         <list type="bulleted">
           <p class="english">
             <p class="english"><code>{cyclicity, <anno>Cyclicity</anno>}</code>, where <code><anno>Cyclicity</anno></code>
               is <code>cyclic</code> or <code>acyclic</code>, according to the
               options given to <code>new</code>.</p>
+            <p><code>{cyclicity, <anno>Cyclicity</anno>}</code>, 其中, 根据给<code>new</code>的选项, <code><anno>Cyclicity</anno></code> 是 <code>cyclic</code> 或 <code>acyclic</code>.</p>
           </p>
           <p class="english">
             <p class="english"><code>{memory, <anno>NoWords</anno>}</code>, where <code><anno>NoWords</anno></code> is
               the number of words allocated to the <code>ETS</code> tables.</p>
+            <p><code>{memory, <anno>NoWords</anno>}</code>, 其中 <code><anno>NoWords</anno></code> 是分配给该<code>ETS</code>表"字"的数量(内存大小).</p>
           </p>
           <p class="english">
             <p class="english"><code>{protection, <anno>Protection</anno>}</code>, where <code><anno>Protection</anno></code>
               is <code>protected</code> or <code>private</code>, according
               to the options given to <code>new</code>.</p>
+            <p><code>{protection, <anno>Protection</anno>}</code>, 其中, 根据给<code>new</code>的选项, <code><anno>Protection</anno></code>
+              是 <code>protected</code> 或 <code>private</code>.</p>
           </p>
         </list>
       </div>
@@ -454,6 +476,8 @@
       <h3 arity="0" id="new/0" name="new">new() -> digraph()</h3>
       <div class="discription">
         <p class="english">Equivalent to <code>new([])</code>.
+          </p>
+        <p>等同于<code>new([])</code>.
           </p>
       </div>
     </div>
@@ -468,28 +492,35 @@
         <p class="english">Returns 
 	  an <a class="seealso" href="#empty_digraph">empty digraph</a> with 
 	  properties according to the options in <code><anno>Type</anno></code>:</p>
+        <p>根据以下在<code><anno>Type</anno></code>中的选项返回一个具有相关特性的<a class="seealso" href="#empty_digraph">空图</a>:</p>
         <div class="taglist">
           <dt>
             <code>cyclic</code>
           </dt>
           <p class="english">Allow <a class="seealso" href="#cycle">cycles</a> in the
            digraph (default).</p>
+          <p>在图中有<a class="seealso" href="#cycle">环</a>(默认).</p>
           <dt>
             <code>acyclic</code>
           </dt>
           <p class="english">The digraph is to be kept <a class="seealso" href="#acyclic_digraph">acyclic</a>.</p>
+          <p>图将会一直保持<a class="seealso" href="#acyclic_digraph">无环</a>.</p>
           <dt>
             <code>protected</code>
           </dt>
           <p class="english">Other processes can read the digraph (default).</p>
+          <p>其他进程可以读取该图(默认).</p>
           <dt>
             <code>private</code>
           </dt>
           <p class="english">The digraph can be read and modified by the creating
            process only.</p>
+          <p>该图只能由创建它的进程读取和修改.</p>
         </div>
         <p class="english">If an unrecognized type option <code>T</code> is given or <code><anno>Type</anno></code>
 	   is not a proper list, there will be a <code>badarg</code> exception.
+          </p>
+        <p>如果给定一个不可识别的选项<code>T</code> 或者 <code><anno>Type</anno></code>不是一个[TODO]完全列表, 将会产生一个<code>badarg</code>异常.
           </p>
       </div>
     </div>
@@ -499,6 +530,7 @@
       <div class="discription">
         <p class="english">Returns the number of edges of the digraph <code><anno>G</anno></code>.
           </p>
+        <p>返回图<code><anno>G</anno></code>中边的数量.  </p>
       </div>
     </div>
     <div class="function">
@@ -507,6 +539,7 @@
       <div class="discription">
         <p class="english">Returns the number of vertices of the digraph <code><anno>G</anno></code>.
           </p>
+        <p>返回图<code><anno>G</anno></code>中顶点的数量.  </p>
       </div>
     </div>
     <div class="function">
@@ -516,6 +549,7 @@
         <p class="english">Returns the <a class="seealso" href="#out_degree">out-degree</a> of the vertex
           <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
           </p>
+        <p>返回图<code><anno>G</anno></code>中顶点<code><anno>V</anno></code>的<a class="seealso" href="#out_degree">出度</a>.  </p>
       </div>
     </div>
     <div class="function">
@@ -526,6 +560,8 @@
 	  edges <a class="seealso" href="#emanate">emanating</a> from 
           <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
           </p>
+        <p>以列表的形式, 返回图<code><anno>G</anno></code>中从<code><anno>V</anno></code><a class="seealso" href="#emanate">发出</a>的所有边.(列表元素顺序未指定).
+          </p>
       </div>
     </div>
     <div class="function">
@@ -533,9 +569,10 @@
       <div class="type_desc">      G = digraph(),<br/>      V = vertex(),<br/>      Vertices = [vertex()]</div>
       <div class="discription">
         <p class="english">Returns a list of 
-	  all <a class="seealso" href="#out_neighbour">out-neighbours</a> of 
-	  <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, in some unspecified order.
+	  all  of 
+	   of the digraph <code><anno>G</anno></code>, in some unspecified order.
           </p>
+        <p>以列表的形式, 返回图<code><anno>G</anno></code>中的<code><anno>V</anno></code>所有<a class="seealso" href="#out_neighbour">外邻点</a>.(列表元素顺序未指定) </p>
       </div>
     </div>
     <div class="function">
@@ -547,6 +584,8 @@
           <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>, or <code>false</code> if there
           is no vertex <code><anno>V</anno></code> of the digraph <code><anno>G</anno></code>.
           </p>
+        <p>返回<code>{<anno>V</anno>,&nbsp;<anno>Label</anno>}</code>,  其中 <code><anno>Label</anno></code>是图<code><anno>G</anno></code>中顶点<code><anno>V</anno></code>的<a class="seealso" href="#label">标签</a>, 或者, 如果图<code><anno>G</anno></code>中没有顶点<code><anno>V</anno></code>则返回<code>false</code>.
+          </p>
       </div>
     </div>
     <div class="function">
@@ -556,6 +595,7 @@
         <p class="english">Returns a list of all vertices of the digraph <code><anno>G</anno></code>, in
           some unspecified order.
           </p>
+        <p>以列表的形式, 返回图<code><anno>G</anno></code>的所有顶点.(列表元素顺序未指定) </p>
       </div>
     </div>
   </div>

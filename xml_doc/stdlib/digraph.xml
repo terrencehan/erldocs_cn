@@ -116,7 +116,8 @@
     </datatype>
     <datatype>
       <name><marker id="type-digraph">digraph()</marker></name>
-      <desc><p>A digraph as returned by <c>new/0,1</c>.</p></desc>
+      <desc><p>A digraph as returned by <c>new/0,1</c>.</p>
+      <p_zh>一个由<c>new/0,1</c>返回的图.</p_zh></desc>
     </datatype>
     <datatype>
       <name><marker id="type-edge">edge()</marker></name>
@@ -198,6 +199,8 @@
           is represented by the term <c>['$v'&nbsp;|&nbsp;N]</c>,
           where N is an integer&nbsp;&gt;=&nbsp;0.
           </p>
+        <p_zh><c>add_vertex/1</c> 使用空列表作为标签创建一个顶点, 并且返回创建好的顶点. 新顶点由项<c>['$v'&nbsp;|&nbsp;N]</c>表示, 其中N是一个大于等于零的整数.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -291,14 +294,7 @@
 	  If there is no edge <c><anno>E</anno></c> of the
           digraph <c><anno>G</anno></c>, then <c>false</c> is returned.
           </p>
-        <p_zh>Returns <c>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</c> where
-          <c><anno>Label</anno></c> is the <seealso marker="#label">label</seealso>
-          of the edge 
-	  <c><anno>E</anno></c> <seealso marker="#emanate">emanating</seealso> from
-	  <c><anno>V1</anno></c> and <seealso marker="#incident">incident</seealso> on
-	  <c><anno>V2</anno></c> of the digraph <c><anno>G</anno></c>.
-	  If there is no edge <c><anno>E</anno></c> of the
-          digraph <c><anno>G</anno></c>, then <c>false</c> is returned.
+        <p_zh>返回<c>{<anno>E</anno>,&nbsp;<anno>V1</anno>,&nbsp;<anno>V2</anno>,&nbsp;<anno>Label</anno>}</c> 其中 <c><anno>Label</anno></c> 是图<c><anno>G</anno></c>中从 <c><anno>V1</anno></c><seealso marker="#emanate">发出</seealso>并且<seealso marker="#incident">传入</seealso> 到 <c><anno>V2</anno></c>的边<c><anno>E</anno></c>的<seealso marker="#label">标签</seealso>. 如果图<c><anno>G</anno></c>中没有边<c><anno>E</anno></c>, 那么返回 <c>false</c>.
           </p_zh>
       </desc>
     </func>
@@ -338,9 +334,13 @@
           there are no cycles through <c><anno>V</anno></c>, then <c>false</c> is
           returned.
           </p>
+        <p_zh>如果有一个长度大于等于2的<seealso marker="#simple_cycle">简单环</seealso>通过顶点<c><anno>V</anno></c>, 那么环以一个顶点的列表<c>[<anno>V</anno>,&nbsp;...,&nbsp;<anno>V</anno>]</c>返回, 否则如果有一个<seealso marker="#loop">自环</seealso> 通过 <c><anno>V</anno></c>, 那么自环以一个列表<c>[<anno>V</anno>]</c>返回. 如果没有环通过<c><anno>V</anno></c>, 则返回<c>false</c>.
+          </p_zh>
         <p><c>get_path/3</c> is used for finding a simple cycle
           through <c><anno>V</anno></c>.
           </p>
+        <p_zh><c>get_path/3</c> 用于寻找一个通过<c><anno>V</anno>的简单环</c>.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -355,9 +355,13 @@
           <c>false</c> if no simple path from <c><anno>V1</anno></c> to <c><anno>V2</anno></c>
           of length one or more exists.
           </p>
+        <p_zh>在图<c><anno>G</anno></c>中尝试寻找一个从顶点<c><anno>V1</anno></c> 到顶点<c><anno>V2</anno></c>的<seealso marker="#simple_path">简单路径</seealso>. 以一个顶点列表<c>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</c>的形式返回路径, 或者如果没有从<c><anno>V1</anno></c> 到 <c><anno>V2</anno></c>长度大于等于1的简单路径则返回<c>false</c>.
+          </p_zh>
         <p>The digraph <c><anno>G</anno></c> is traversed in a depth-first manner,
           and the first path found is returned.
           </p>
+        <p_zh>以深度优先的方式遍历图<c><anno>G</anno></c>, 并且返回找到的第一条路径.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -372,9 +376,14 @@
           Note that a <seealso marker="#loop">loop</seealso> through
           <c><anno>V</anno></c> is returned as the list <c>[<anno>V</anno>,&nbsp;<anno>V</anno>]</c>.
           </p>
+          <p_zh>在图<c><anno>G</anno></c>中尝试寻找一个通过<c><anno>V</anno></c>且尽可能短的<seealso marker="#simple_cycle">简单环</seealso>. 以一个顶点列表<c>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</c>的形式返回路径, 或者如果没有从<c><anno>V1</anno></c> 到 <c><anno>V2</anno></c>长度大于等于1的简单路径则返回<c>false</c>.
+           注意，一个通过<c><anno>V</anno></c>的<seealso marker="#loop">自环</seealso> 以列表<c>[<anno>V</anno>,&nbsp;<anno>V</anno>]</c>的形式返回.
+          </p_zh>
         <p><c>get_short_path/3</c> is used for finding a simple cycle
           through <c><anno>V</anno></c>.
           </p>
+        <p_zh><c>get_short_path/3</c>用以寻找一个通过<c><anno>V</anno></c>的简单环.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -388,9 +397,13 @@
           vertices, or <c>false</c> if no simple path from <c><anno>V1</anno></c>
           to <c><anno>V2</anno></c> of length one or more exists.
           </p>
+        <p_zh>在图<c><anno>G</anno></c>中尝试寻找一个从顶点<c><anno>V1</anno></c> 到顶点<c><anno>V2</anno></c>尽可能短的<seealso marker="#simple_path">简单路径</seealso>. 以一个顶点列表<c>[<anno>V1</anno>,&nbsp;...,&nbsp;<anno>V2</anno>]</c>的形式返回路径, 或者如果没有从<c><anno>V1</anno></c> 到 <c><anno>V2</anno></c>长度大于等于1的简单路径则返回<c>false</c>.
+          </p_zh>
         <p>The digraph <c><anno>G</anno></c> is traversed in a breadth-first
           manner, and the first path found is returned.
           </p>
+        <p_zh>以广度优先的方式遍历图<c><anno>G</anno></c>, 并且返回找到的第一条路径.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -400,6 +413,7 @@
         <p>Returns the <seealso marker="#in_degree">in-degree</seealso> of the vertex
           <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>.
           </p>
+        <p_zh>返回图<c><anno>G</anno></c>中顶点<c><anno>V</anno></c>的<seealso marker="#in_degree">入度</seealso>.  </p_zh>
       </desc>
     </func>
     <func>
@@ -410,6 +424,7 @@
 	  edges <seealso marker="#incident">incident</seealso> on
 	  <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>, in some unspecified order.
           </p>
+        <p_zh>以列表的形式, 返回在图<c><anno>G</anno></c>中顶点<c><anno>V</anno></c>的所有<seealso marker="#in_degree">入度</seealso>.(列表中元素顺序未指定)  </p_zh>
       </desc>
     </func>
     <func>
@@ -420,6 +435,8 @@
 	  all <seealso marker="#in_neighbour">in-neighbours</seealso> of 
 	  <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>, in some unspecified order.
           </p>
+        <p_zh>以列表的形式,返回在图<c><anno>G</anno></c>中顶点<c><anno>V</anno></c>的所有<seealso marker="#in_neighbour">内邻点</seealso>.(列表元素顺序未指定).
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -431,20 +448,25 @@
         <p>Returns a list of <c>{Tag, Value}</c> pairs describing the
           digraph <c><anno>G</anno></c>. The following pairs are returned:
           </p>
+        <p_zh>返回一个<c>{Tag, Value}</c>对的列表来描述图<c><anno>G</anno></c>. 返回下列对: </p_zh>
         <list type="bulleted">
           <item>
             <p><c>{cyclicity, <anno>Cyclicity</anno>}</c>, where <c><anno>Cyclicity</anno></c>
               is <c>cyclic</c> or <c>acyclic</c>, according to the
               options given to <c>new</c>.</p>
+            <p_zh><c>{cyclicity, <anno>Cyclicity</anno>}</c>, 其中, 根据给<c>new</c>的选项, <c><anno>Cyclicity</anno></c> 是 <c>cyclic</c> 或 <c>acyclic</c>.</p_zh>
           </item>
           <item>
             <p><c>{memory, <anno>NoWords</anno>}</c>, where <c><anno>NoWords</anno></c> is
               the number of words allocated to the <c>ETS</c> tables.</p>
+            <p_zh><c>{memory, <anno>NoWords</anno>}</c>, 其中 <c><anno>NoWords</anno></c> 是分配给该<c>ETS</c>表"字"的数量(内存大小).</p_zh>
           </item>
           <item>
             <p><c>{protection, <anno>Protection</anno>}</c>, where <c><anno>Protection</anno></c>
               is <c>protected</c> or <c>private</c>, according
               to the options given to <c>new</c>.</p>
+            <p_zh><c>{protection, <anno>Protection</anno>}</c>, 其中, 根据给<c>new</c>的选项, <c><anno>Protection</anno></c>
+              是 <c>protected</c> 或 <c>private</c>.</p_zh>
           </item>
         </list>
       </desc>
@@ -455,6 +477,8 @@
       <desc>
         <p>Equivalent to <c>new([])</c>.
           </p>
+        <p_zh>等同于<c>new([])</c>.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -468,21 +492,28 @@
         <p>Returns 
 	  an <seealso marker="#empty_digraph">empty digraph</seealso> with 
 	  properties according to the options in <c><anno>Type</anno></c>:</p>
+        <p_zh>根据以下在<c><anno>Type</anno></c>中的选项返回一个具有相关特性的<seealso marker="#empty_digraph">空图</seealso>:</p_zh>
         <taglist>
           <tag><c>cyclic</c></tag>
           <item>Allow <seealso marker="#cycle">cycles</seealso> in the
            digraph (default).</item>
+          <item_zh>在图中有<seealso marker="#cycle">环</seealso>(默认).</item_zh>
           <tag><c>acyclic</c></tag>
           <item>The digraph is to be kept <seealso marker="#acyclic_digraph">acyclic</seealso>.</item>
+          <item_zh>图将会一直保持<seealso marker="#acyclic_digraph">无环</seealso>.</item_zh>
           <tag><c>protected</c></tag>
           <item>Other processes can read the digraph (default).</item>
+          <item_zh>其他进程可以读取该图(默认).</item_zh>
           <tag><c>private</c></tag>
           <item>The digraph can be read and modified by the creating
            process only.</item>
+          <item_zh>该图只能由创建它的进程读取和修改.</item_zh>
         </taglist>
         <p>If an unrecognized type option <c>T</c> is given or <c><anno>Type</anno></c>
 	   is not a proper list, there will be a <c>badarg</c> exception.
           </p>
+        <p_zh>如果给定一个不可识别的选项<c>T</c> 或者 <c><anno>Type</anno></c>不是一个[TODO]完全列表, 将会产生一个<c>badarg</c>异常.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -491,6 +522,7 @@
       <desc>
         <p>Returns the number of edges of the digraph <c><anno>G</anno></c>.
           </p>
+        <p_zh>返回图<c><anno>G</anno></c>中边的数量.  </p_zh>
       </desc>
     </func>
     <func>
@@ -499,6 +531,7 @@
       <desc>
         <p>Returns the number of vertices of the digraph <c><anno>G</anno></c>.
           </p>
+        <p_zh>返回图<c><anno>G</anno></c>中顶点的数量.  </p_zh>
       </desc>
     </func>
     <func>
@@ -508,6 +541,7 @@
         <p>Returns the <seealso marker="#out_degree">out-degree</seealso> of the vertex
           <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>.
           </p>
+        <p_zh>返回图<c><anno>G</anno></c>中顶点<c><anno>V</anno></c>的<seealso marker="#out_degree">出度</seealso>.  </p_zh>
       </desc>
     </func>
     <func>
@@ -518,6 +552,8 @@
 	  edges <seealso marker="#emanate">emanating</seealso> from 
           <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>, in some unspecified order.
           </p>
+        <p_zh>以列表的形式, 返回图<c><anno>G</anno></c>中从<c><anno>V</anno></c><seealso marker="#emanate">发出</seealso>的所有边.(列表元素顺序未指定).
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -525,9 +561,10 @@
       <fsummary>Return all out-neighbours of a vertex of  a digraph.</fsummary>
       <desc>
         <p>Returns a list of 
-	  all <seealso marker="#out_neighbour">out-neighbours</seealso> of 
-	  <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>, in some unspecified order.
+	  all  of 
+	   of the digraph <c><anno>G</anno></c>, in some unspecified order.
           </p>
+        <p_zh>以列表的形式, 返回图<c><anno>G</anno></c>中的<c><anno>V</anno></c>所有<seealso marker="#out_neighbour">外邻点</seealso>.(列表元素顺序未指定) </p_zh>
       </desc>
     </func>
     <func>
@@ -539,6 +576,8 @@
           <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>, or <c>false</c> if there
           is no vertex <c><anno>V</anno></c> of the digraph <c><anno>G</anno></c>.
           </p>
+        <p_zh>返回<c>{<anno>V</anno>,&nbsp;<anno>Label</anno>}</c>,  其中 <c><anno>Label</anno></c>是图<c><anno>G</anno></c>中顶点<c><anno>V</anno></c>的<seealso marker="#label">标签</seealso>, 或者, 如果图<c><anno>G</anno></c>中没有顶点<c><anno>V</anno></c>则返回<c>false</c>.
+          </p_zh>
       </desc>
     </func>
     <func>
@@ -548,6 +587,7 @@
         <p>Returns a list of all vertices of the digraph <c><anno>G</anno></c>, in
           some unspecified order.
           </p>
+        <p_zh>以列表的形式, 返回图<c><anno>G</anno></c>的所有顶点.(列表元素顺序未指定) </p_zh>
       </desc>
     </func>
   </funcs>
