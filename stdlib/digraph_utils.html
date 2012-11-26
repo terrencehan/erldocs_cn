@@ -27,6 +27,8 @@
       based on depth-first traversal of directed graphs. See the
       <code>digraph</code> module for basic functions on directed graphs.
       </p>
+    <p><code>digraph_utils</code> 模块实现了一些基于有向图深度优先遍历的算法. 参阅 <code>digraph</code> 模块中有向图的基本函数.
+      </p>
     <p class="english">A <marker id="digraph"></marker><em>directed graph</em> (or 
        just "digraph") is a pair (V,&nbsp;E) of a finite set V of
        <marker id="vertex"></marker><em>vertices</em> and a finite set E 
@@ -34,11 +36,14 @@
        "edges"). The set of edges E is a subset of V&nbsp;&times;&nbsp;V 
        (the Cartesian product of V with itself).
       </p>
+    <p> <marker id="digraph"></marker><em>有向图</em> (简写"digraph") 是由一个<marker id="vertex"></marker><em>顶点</em>的有限集合 V 和一个<marker id="edge"></marker><em>有向边</em> (或者简写"edges")的有限集合E构成的对(V,&nbsp;E). 边集合E是V&nbsp;&times;&nbsp;V (V与本身的笛卡尔积)的一个子集.
+      </p>
     <p class="english">Digraphs can be annotated with additional information. Such
       information may be attached to the vertices and to the edges of
       the digraph. A digraph which has been annotated is called a
       <em>labeled digraph</em>, and the information attached to a
       vertex or an edge is called a <marker id="label"></marker><em>label</em>.</p>
+    <p>有向图可以用附加信息作为注释. 这些信息可以附加在图的顶点和边上. 一个带有注释的图称为<em>标记图</em>, 附加在一个顶点或者边上的信息称为<marker id="label"></marker> <em>标记</em>.</p>
     <p class="english">An edge e&nbsp;=&nbsp;(v,&nbsp;w) is said 
       to <marker id="emanate"></marker><em>emanate</em> from vertex v and 
       to be <marker id="incident"></marker><em>incident</em> on vertex w. 
@@ -59,6 +64,17 @@
       An <marker id="acyclic_digraph"></marker><em>acyclic digraph</em> is 
       a digraph that has no cycles.
       </p>
+    <p>一条边e&nbsp;=&nbsp;(v,&nbsp;w) 表示从顶点v<marker id="emanate"></marker><em>发出</em> 并且 <marker id="incident"></marker><em>传入</em> 到顶点w. 如果存在一条从v发出并传入到w的边, 那么称w是v的一个<marker id="out_neighbour"></marker><em>外邻点</em>, 并且称v是w的一个<marker id="in_neighbour"></marker><em>内邻点</em>. 
+      A <marker id="path"></marker><em>路径</em> P from v[1] to v[k] in a 
+      digraph (V,&nbsp;E) is a non-empty sequence
+      v[1],&nbsp;v[2],&nbsp;...,&nbsp;v[k] of vertices in V such that
+      there is an edge (v[i],v[i+1]) in E for
+      1&nbsp;&lt;=&nbsp;i&nbsp;&lt;&nbsp;k. 
+      路径P的<marker id="length"></marker><em>长度</em>是k-1. 
+      如果P的长度不为零且v[1] = v[k], 那么P是一个<marker id="cycle"></marker><em>环</em>. 
+      <marker id="loop"></marker><em>自环</em>是长度为1的环. 
+      <marker id="acyclic_digraph"></marker><em>无环图</em> 是没有环的有向图.
+      </p>
     <p class="english">A <marker id="depth_first_traversal"></marker> <em>depth-first
       traversal</em> of a directed digraph can be viewed as a process
       that visits all vertices of the digraph. Initially, all vertices
@@ -73,7 +89,29 @@
       hitherto unvisited vertex is chosen, and the process is
       repeated.
       </p>
+    <p>有向图的<marker id="depth_first_traversal"></marker><em>深度优先遍历</em>可以看作是一个访问有向图所有顶点的过程. 首先, 所有顶点都被标注为未访问. 遍历从一个任意选择的顶点(标注为以访问)开始, 并且通过一条边至一个未访问的顶点, marking that vertex. The
+      search then proceeds from that vertex in the same fashion, until
+      there is no edge leading to an unvisited vertex. At that point
+      the process backtracks, and the traversal continues as long as
+      there are unexamined edges. If there remain unvisited vertices
+      when all edges from the first vertex have been examined, some
+      hitherto unvisited vertex is chosen, and the process is
+      repeated.
+      </p>
     <p class="english">A <marker id="partial_ordering"></marker><em>partial ordering</em> of 
+      a set S is a transitive, antisymmetric and reflexive relation
+      between the objects of S. The problem 
+      of <marker id="topsort"></marker><em>topological sorting</em> is to 
+      find a total
+      ordering of S that is a superset of the partial ordering. A
+      digraph G&nbsp;=&nbsp;(V,&nbsp;E) is equivalent to a relation E
+      on V (we neglect the fact that the version of directed graphs
+      implemented in the <code>digraph</code> module allows multiple edges
+      between vertices). If the digraph has no cycles of length two or
+      more, then the reflexive and transitive closure of E is a
+      partial ordering.
+      </p>
+    <p><marker id="partial_ordering"></marker><em>偏序</em> of 
       a set S is a transitive, antisymmetric and reflexive relation
       between the objects of S. The problem 
       of <marker id="topsort"></marker><em>topological sorting</em> is to 
@@ -99,6 +137,19 @@
       path from V to every other vertex of G. A <marker id="tree"></marker><em>tree</em> is an acyclic non-empty digraph
       such that there is a unique path between every pair of vertices,
       considering all edges undirected.</p>
+    <p>A <marker id="subgraph"></marker><em>子图</em> G' of G is a
+      digraph whose vertices and edges form subsets of the vertices
+      and edges of G. G' is <em>maximal</em> with respect to a
+      property P if all other subgraphs that include the vertices of
+      G' do not have the property P. A <marker id="strong_components"></marker> <em>strongly connected
+      component</em> is a maximal subgraph such that there is a path
+      between each pair of vertices. A <marker id="components"></marker><em>connected component</em> is a
+      maximal subgraph such that there is a path between each pair of
+      vertices, considering all edges undirected. An <marker id="arborescence"></marker><em>arborescence</em> is an acyclic
+      digraph with a vertex V, the <marker id="root"></marker><em>root</em>, such that there is a unique
+      path from V to every other vertex of G. <marker id="tree"></marker><em>树</em> 是无环非空有向图
+      such that there is a unique path between every pair of vertices,
+      将所有边当作无向的.</p>
   </div>
   <datatypes>
     <datatype>

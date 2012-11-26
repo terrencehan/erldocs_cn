@@ -99,9 +99,9 @@
         <p>Returns the length of the maximum initial segment of
           <c><anno>String</anno></c>, which consists entirely of characters from (not
           from) <c><anno>Chars</anno></c>.</p>
-        <p>Returns the length of the maximum initial segment of
+        <p_zh>Returns the length of the maximum initial segment of
           <c><anno>String</anno></c>, which consists entirely of characters from (not
-          from) <c><anno>Chars</anno></c>.</p>
+          from) <c><anno>Chars</anno></c>.</p_zh>
         <p>For example:</p>
         <p_zh>例如:</p_zh>
         <code type="none">
