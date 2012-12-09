@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>random</h1>
+  <h2 class="modsummary">Pseudo random number generation</h2>
+  <div class="description">
+    <p class="english">Random number generator. The method is attributed to
+      B.A. Wichmann and I.D.Hill, in 'An efficient and portable
+      pseudo-random number generator', Journal of Applied
+      Statistics. AS183. 1982. Also Byte March 1987. </p>
+    <p>随机数生成器. The method is attributed to
+      B.A. Wichmann and I.D.Hill, in 'An efficient and portable
+      pseudo-random number generator', Journal of Applied
+      Statistics. AS183. 1982. Also Byte March 1987. </p>
+    <p class="english">The current algorithm is a modification of the version attributed
+      to Richard A O'Keefe in the standard Prolog library.</p>
+    <p>目前的算法是对Prolog标准库中Richard A O'Keefe版本的修订.</p>
+    <p class="english">Every time a random number is requested, a state is used to calculate
+      it, and a new state produced. The state can either be implicit (kept
+      in the process dictionary) or be an explicit argument and return value.
+      In this implementation, the state (the type <code>ran()</code>) consists of a
+      tuple of three integers.</p>
+    <p>每次需要一个随机数的时候, 使用一个状态(state)来计算, 并且产生一个新的状态. 状态可以是隐式的(保存在进程字典里) 也可以是显式的参数或者返回值. 在这个实现里, 状态(类型<code>ran()</code>) 由一个三个整数的元组构成.</p>
+    <p class="english">It should be noted that this random number generator is not cryptographically 
+      strong. If a strong cryptographic random number generator is needed for
+      example <code>crypto:rand_bytes/1</code> could be used instead.</p>
+    <p>应该注意的是这个随机数生成器不是强加密的. 如果需要一个强加密随机数生成器可以使用<code>crypto:rand_bytes/1</code>来代替.</p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name name="ran"/>
+      <desc>
+        <p class="english">The state.</p>
+      </desc>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="seed/0" name="seed">seed() -> ran()</h3>
+      <div class="discription">
+        <p class="english">Seeds random number generation with default (fixed) values
+          in the process dictionary, and returns the old state.</p>
+        <p>在进程字典中使用默认(固定的)值为随机数生成作为种子, 并且返回旧的状态.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="seed/3" name="seed">seed(A1, A2, A3) -> 'undefined' | ran()</h3>
+      <div class="type_desc">      A1 = integer(),<br/>      A2 = integer(),<br/>      A3 = integer()</div>
+      <div class="discription">
+        <p class="english">Seeds random number generation with integer values in the process
+          dictionary, and returns the old state.</p>
+        <p>在进程字典中使用整数设置随机数种子, 并且返回旧的状态.</p>
+        <p class="english">One way of obtaining a seed is to use the BIF <code>now/0</code>:</p>
+        <p>一种获得种子的方式是使用BIF <code>now/0</code>:</p>
+        <pre>
+          ...
+          {A1,A2,A3} = now(),
+          random:seed(A1, A2, A3),
+          ...</pre>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" name="seed"/>
+      <div class="discription">
+        <p class="english"><code>seed({<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>})</code> is equivalent to <code>seed(<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>)</code>.
+	</p>
+        <p><code>seed({<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>})</code> 等同于<code>seed(<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>)</code>.
+	</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="seed0/0" name="seed0">seed0() -> ran()</h3>
+      <div class="discription">
+        <p class="english">Returns the default state.</p>
+        <p>返回默认状态.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="0" id="uniform/0" name="uniform">uniform() -> float()</h3>
+      <div class="discription">
+        <p class="english">Returns a random float uniformly distributed between <code>0.0</code>
+          and <code>1.0</code>, updating the state in the process dictionary.</p>
+        <p>返回一个介于<code>0.0</code>和<code>1.0</code>之间均匀分布的随机浮点数, 同时更新进程字典中的状态.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="uniform/1" name="uniform">uniform(N) -> pos_integer()</h3>
+      <div class="type_desc">      N = pos_integer()</div>
+      <div class="discription">
+        <p class="english">Given an integer <code><anno>N</anno> >= 1</code>, <code>uniform/1</code> returns a
+          random integer uniformly distributed between <code>1</code> and
+          <code><anno>N</anno></code>, updating the state in the process dictionary.</p>
+        <p>给定一个整数<code><anno>N</anno> >= 1</code>, <code>uniform/1</code> 返回一个均匀分布在<code>1</code> 和 <code><anno>N</anno></code>之间的随机整数, 同时更新进程字典中的状态.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="uniform_s/1" name="uniform_s">uniform_s(State0) -> {float(), State1}</h3>
+      <div class="type_desc">      State0 = ran(),<br/>      State1 = ran()</div>
+      <div class="discription">
+        <p class="english">Given a state, <code>uniform_s/1</code>returns a random float uniformly
+          distributed between <code>0.0</code> and <code>1.0</code>, and a new state.</p>
+        <p>给定一个状态, <code>uniform_s/1</code>返回一个均匀分布在<code>0.0</code>~<code>1.0</code>之间的浮点数和一个新状态.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="uniform_s/2" name="uniform_s">uniform_s(N, State0) -> {integer(), State1}</h3>
+      <div class="type_desc">      N = pos_integer(),<br/>      State0 = ran(),<br/>      State1 = ran()</div>
+      <div class="discription">
+        <p class="english">Given an integer <code><anno>N</anno> >= 1</code> and a state, <code>uniform_s/2</code>
+          returns a random integer uniformly distributed between <code>1</code> and
+          <code><anno>N</anno></code>, and a new state.</p>
+        <p>给定一个整数<code><anno>N</anno> >= 1</code>以及一个状态, <code>uniform_s/2</code>返回一个均匀分布在<code>1</code>~<code><anno>N</anno></code>之间的一个整数和一个新状态.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>注意</h4>
+    <p class="english">Some of the functions use the process dictionary variable
+      <code>random_seed</code> to remember the current seed.</p>
+    <p>其中一些函数使用进程字典值<code>random_seed</code>来记录当前种子.</p>
+    <p class="english">If a process calls <code>uniform/0</code> or <code>uniform/1</code> without
+      setting a seed first, <code>seed/0</code> is called automatically.</p>
+    <p>如果一个进程在调用<code>uniform/0</code> 或 <code>uniform/1</code> 之前没有先设置一个种子, 那么将会自动调用<code>seed/0</code>.</p>
+    <p class="english">The implementation changed in R15. Upgrading to R15 will break
+      applications that expect a specific output for a given seed. The output
+      is still deterministic number series, but different compared to releases
+      older than R15. The seed <code>{0,0,0}</code> will for example no longer
+      produce a flawed series of only zeros.</p>
+    <p>该实现在R15中发生了改变. 升级到R15将会破坏那些对给定的种子期望特定输出的应用. 输出仍然是确定性的数串, 但是与比R15早的版本有所不同. 例如, 种子<code>{0,0,0}</code> 将不会产生一个全都是零的串.</p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

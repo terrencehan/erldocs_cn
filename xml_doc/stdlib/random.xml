@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+
+<erlref>
+  <header>
+    <copyright>
+      <year>1996</year><year>2011</year>
+      <holder>Ericsson AB. All Rights Reserved.</holder>
+    </copyright>
+    <legalnotice>
+      The contents of this file are subject to the Erlang Public License,
+      Version 1.1, (the "License"); you may not use this file except in
+      compliance with the License. You should have received a copy of the
+      Erlang Public License along with this software. If not, it can be
+      retrieved online at http://www.erlang.org/.
+    
+      Software distributed under the License is distributed on an "AS IS"
+      basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+      the License for the specific language governing rights and limitations
+      under the License.
+    
+    </legalnotice>
+
+    <title>random</title>
+    <prepared>Joe Armstrong</prepared>
+    <responsible>Bjarne Dacker</responsible>
+    <docno>1</docno>
+    <approved>Bjarne D&auml;cker</approved>
+    <checked></checked>
+    <date>96-09-09</date>
+    <rev>A</rev>
+    <file>random.sgml</file>
+  </header>
+  <module>random</module>
+  <modulesummary>Pseudo random number generation</modulesummary>
+  <description>
+    <p>Random number generator. The method is attributed to
+      B.A. Wichmann and I.D.Hill, in 'An efficient and portable
+      pseudo-random number generator', Journal of Applied
+      Statistics. AS183. 1982. Also Byte March 1987. </p>
+    <p_zh>随机数生成器. The method is attributed to
+      B.A. Wichmann and I.D.Hill, in 'An efficient and portable
+      pseudo-random number generator', Journal of Applied
+      Statistics. AS183. 1982. Also Byte March 1987. </p_zh>
+    <p>The current algorithm is a modification of the version attributed
+      to Richard A O'Keefe in the standard Prolog library.</p>
+    <p_zh>目前的算法是对Prolog标准库中Richard A O'Keefe版本的修订.</p_zh>
+    <p>Every time a random number is requested, a state is used to calculate
+      it, and a new state produced. The state can either be implicit (kept
+      in the process dictionary) or be an explicit argument and return value.
+      In this implementation, the state (the type <c>ran()</c>) consists of a
+      tuple of three integers.</p>
+    <p_zh>每次需要一个随机数的时候, 使用一个状态(state)来计算, 并且产生一个新的状态. 状态可以是隐式的(保存在进程字典里) 也可以是显式的参数或者返回值. 在这个实现里, 状态(类型<c>ran()</c>) 由一个三个整数的元组构成.</p_zh>
+    <p>It should be noted that this random number generator is not cryptographically 
+      strong. If a strong cryptographic random number generator is needed for
+      example <c>crypto:rand_bytes/1</c> could be used instead.</p>
+    <p_zh>应该注意的是这个随机数生成器不是强加密的. 如果需要一个强加密随机数生成器可以使用<c>crypto:rand_bytes/1</c>来代替.</p_zh>
+  </description>
+  <datatypes>
+    <datatype>
+      <name name="ran"/>
+      <desc><p>The state.</p></desc>
+    </datatype>
+  </datatypes>
+  <funcs>
+    <func>
+      <name name="seed" arity="0"/>
+      <fsummary>Seeds random number generation with default values</fsummary>
+      <desc>
+        <p>Seeds random number generation with default (fixed) values
+          in the process dictionary, and returns the old state.</p>
+        <p_zh>在进程字典中使用默认(固定的)值为随机数生成作为种子, 并且返回旧的状态.</p_zh>
+      </desc>
+    </func>
+   <func>
+      <name name="seed" arity="3"/>
+      <fsummary>Seeds random number generator</fsummary>
+      <desc>
+        <p>Seeds random number generation with integer values in the process
+          dictionary, and returns the old state.</p>
+        <p_zh>在进程字典中使用整数设置随机数种子, 并且返回旧的状态.</p_zh>
+        <p>One way of obtaining a seed is to use the BIF <c>now/0</c>:</p>
+        <p_zh>一种获得种子的方式是使用BIF <c>now/0</c>:</p_zh>
+        <code type="none">
+          ...
+          {A1,A2,A3} = now(),
+          random:seed(A1, A2, A3),
+          ...</code>
+      </desc>
+    </func>
+    <func>
+      <name name="seed" arity="1"/>
+      <fsummary>Seeds random number generator</fsummary>
+      <desc>
+        <p>
+	<c>seed({<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>})</c> is equivalent to <c>seed(<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>)</c>.
+	</p>
+        <p_zh>
+	<c>seed({<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>})</c> 等同于<c>seed(<anno>A1</anno>, <anno>A2</anno>, <anno>A3</anno>)</c>.
+	</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="seed0" arity="0"/>
+      <fsummary>Return default state for random number generation</fsummary>
+      <desc>
+        <p>Returns the default state.</p>
+        <p_zh>返回默认状态.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="uniform" arity="0"/>
+      <fsummary>Return a random float</fsummary>
+      <desc>
+        <p>Returns a random float uniformly distributed between <c>0.0</c>
+          and <c>1.0</c>, updating the state in the process dictionary.</p>
+        <p_zh>返回一个介于<c>0.0</c>和<c>1.0</c>之间均匀分布的随机浮点数, 同时更新进程字典中的状态.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="uniform" arity="1"/>
+      <fsummary>Return a random integer</fsummary>
+      <desc>
+        <p>Given an integer <c><anno>N</anno> >= 1</c>, <c>uniform/1</c> returns a
+          random integer uniformly distributed between <c>1</c> and
+          <c><anno>N</anno></c>, updating the state in the process dictionary.</p>
+        <p_zh>给定一个整数<c><anno>N</anno> >= 1</c>, <c>uniform/1</c> 返回一个均匀分布在<c>1</c> 和 <c><anno>N</anno></c>之间的随机整数, 同时更新进程字典中的状态.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="uniform_s" arity="1"/>
+      <fsummary>Return a random float</fsummary>
+      <desc>
+        <p>Given a state, <c>uniform_s/1</c>returns a random float uniformly
+          distributed between <c>0.0</c> and <c>1.0</c>, and a new state.</p>
+        <p_zh>给定一个状态, <c>uniform_s/1</c>返回一个均匀分布在<c>0.0</c>~<c>1.0</c>之间的浮点数和一个新状态.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="uniform_s" arity="2"/>
+      <fsummary>Return a random integer</fsummary>
+      <desc>
+        <p>Given an integer <c><anno>N</anno> >= 1</c> and a state, <c>uniform_s/2</c>
+          returns a random integer uniformly distributed between <c>1</c> and
+          <c><anno>N</anno></c>, and a new state.</p>
+        <p_zh>给定一个整数<c><anno>N</anno> >= 1</c>以及一个状态, <c>uniform_s/2</c>返回一个均匀分布在<c>1</c>~<c><anno>N</anno></c>之间的一个整数和一个新状态.</p_zh>
+      </desc>
+    </func>
+  </funcs>
+
+  <section>
+    <title>注意</title>
+    <p>Some of the functions use the process dictionary variable
+      <c>random_seed</c> to remember the current seed.</p>
+    <p_zh>其中一些函数使用进程字典值<c>random_seed</c>来记录当前种子.</p_zh>
+    <p>If a process calls <c>uniform/0</c> or <c>uniform/1</c> without
+      setting a seed first, <c>seed/0</c> is called automatically.</p>
+    <p_zh>如果一个进程在调用<c>uniform/0</c> 或 <c>uniform/1</c> 之前没有先设置一个种子, 那么将会自动调用<c>seed/0</c>.</p_zh>
+    <p>The implementation changed in R15. Upgrading to R15 will break
+      applications that expect a specific output for a given seed. The output
+      is still deterministic number series, but different compared to releases
+      older than R15. The seed <c>{0,0,0}</c> will for example no longer
+      produce a flawed series of only zeros.</p>
+    <p_zh>该实现在R15中发生了改变. 升级到R15将会破坏那些对给定的种子期望特定输出的应用. 输出仍然是确定性的数串, 但是与比R15早的版本有所不同. 例如, 种子<c>{0,0,0}</c> 将不会产生一个全都是零的串.</p_zh>
+  </section>
+</erlref>
+
