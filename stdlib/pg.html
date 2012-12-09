@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>pg</h1>
+  <h2 class="modsummary">Distributed, Named Process Groups</h2>
+  <div class="description">
+    <p class="english">This (experimental) module implements process groups. A process
+      group is a group of processes that can be accessed by a common
+      name. For example, a group named <code>foobar</code> can include a set
+      of processes as members of this group and they can be located on
+      different nodes.</p>
+    <p class="english">When messages are sent to the named group, all members of
+      the group receive the message. The messages are serialized. If
+      the process <code>P1</code> sends the message <code>M1</code> to the group,
+      and process <code>P2</code> simultaneously sends message <code>M2</code>, then
+      all members of the group receive the two messages in the same
+      order. If members of a group terminate, they are automatically 
+      removed from the group.</p>
+    <p class="english">This module is not complete. The module is inspired by the ISIS
+      system and the causal order protocol of the ISIS system should 
+      also be implemented. At the moment, all messages are serialized
+      by sending them through a group master process.</p>
+  </div>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="create/1" name="create">create(PgName) -> 'ok' | {'error', Reason}</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Reason = 'already_created' | term()</div>
+      <div class="discription">
+        <p class="english">Creates an empty group named <code><anno>PgName</anno></code> on the current
+          node.</p>
+        <p>在当前节点创建一个名字是<code><anno>PgName</anno></code>的空进程组.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="create/2" name="create">create(PgName, Node) -> 'ok' | {'error', Reason}</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Node = node(),<br/>      Reason = 'already_created' | term()</div>
+      <div class="discription">
+        <p class="english">Creates an empty group named <code><anno>PgName</anno></code> on the node
+          <code><anno>Node</anno></code>.</p>
+        <p>在节点<code><anno>Node</anno></code>上创建一个名字是<code><anno>PgName</anno></code>的空进程组.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="join/2" name="join">join(PgName, Pid) -> Members</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Pid = pid(),<br/>      Members = [pid()]</div>
+      <div class="discription">
+        <p class="english">Joins the pid <code><anno>Pid</anno></code> to the process group
+          <code><anno>PgName</anno></code>.
+          Returns a list of all old members of the group.</p>
+        <p>将进程号<code><anno>Pid</anno></code>加入到进程组<code><anno>PgName</anno></code>. 以一个列表的形式返回进程组所有旧成员.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="send/2" name="send">send(PgName, Msg) -> 'ok'</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Msg = term()</div>
+      <div class="discription">
+        <p class="english">Sends the tuple <code>{pg_message, From, PgName, Msg}</code> to
+          all members of the process group <code><anno>PgName</anno></code>.</p>
+        <p>向进程组<code><anno>PgName</anno></code>中所有成员发送元组<code>{pg_message, From, PgName, Msg}</code>.</p>
+        <p class="english">Failure: <code>{badarg, {<anno>PgName</anno>, <anno>Msg</anno>}}</code>
+          if <code><anno>PgName</anno></code> is
+          not a process group (a globally registered name).</p>
+        <p>失败: 如果<code><anno>PgName</anno></code> 不是一个进程组(一个全局已注册名), 返回<code>{badarg, {<anno>PgName</anno>, <anno>Msg</anno>}}</code>
+          .</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="esend/2" name="esend">esend(PgName, Msg) -> 'ok'</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Msg = term()</div>
+      <div class="discription">
+        <p class="english">Sends the tuple <code>{pg_message, From, PgName, Msg}</code> to
+          all members of the process group <code><anno>PgName</anno></code>, except
+          ourselves.</p>
+        <p class="english">Failure: <code>{badarg, {<anno>PgName</anno>, <anno>Msg</anno>}}</code>
+          if <code><anno>PgName</anno></code> is
+          not a process group (a globally registered name).</p>
+        <p>失败: 如果<code><anno>PgName</anno></code> 不是一个进程组(一个全局已注册名), 返回<code>{badarg, {<anno>PgName</anno>, <anno>Msg</anno>}}</code>
+          .</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="members/1" name="members">members(PgName) -> Members</h3>
+      <div class="type_desc">      PgName = term(),<br/>      Members = [pid()]</div>
+      <div class="discription">
+        <p class="english">Returns a list of all members of the process group
+          <code>PgName</code>.</p>
+        <p>以一个列表的形式返回进程组<code>PgName</code>中所有的成员.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
