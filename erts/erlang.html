@@ -29,7 +29,7 @@
       <em>auto-imported</em>. Thus, it is not necessary to specify
       the module name and both the calls <code>atom_to_list(Erlang)</code> and
       <code>erlang:atom_to_list(Erlang)</code> are identical.</p>
-    <p>通常地, 大部分内建函数(BIFs)被视为存在于<code>erlang</code>中. 许多BIFs或多或少的被认为是Erlang程序语言的一部分且是<em>自动导入的</em>. 因此，没有必要指定模块名, 调用<code>atom_to_list(Erlang)</code> 和 <code>erlang:atom_to_list(Erlang)</code> 是一样的.</p>
+    <p>通常认为大部分内建函数(BIFs)在<code>erlang</code>模块里. 许多BIFs或多或少的被认为是Erlang程序语言的一部分且是<em>自动导入的</em>. 因此，没有必要指定模块名, 调用<code>atom_to_list(Erlang)</code> 和 <code>erlang:atom_to_list(Erlang)</code> 是一样的.</p>
     <p class="english">In the text, auto-imported BIFs are listed without module prefix.
       BIFs listed with module prefix are not auto-imported.</p>
     <p>在本文档中, 自动导入的BIFs没有模块前缀. 有模块前缀的BIFs不是自动导入的.</p>
@@ -41,7 +41,7 @@
     <p>BIFs可能由于各种原因失败. 对于所有的BIFs如果它们调用的时候使用了类型错误的参数那么将会以原因<code>badarg</code>失败. 其它导致BIFs失败的原因被描述The other reasons that may make BIFs fail are described in connection with the description of each individual BIF.</p>
     <p class="english">Some BIFs may be used in guard tests, these are marked with
       "Allowed in guard tests".</p>
-    <p>一些BIFs可能用于保护元测试, 这些函数都标有"允许在保护元测试中".</p>
+    <p>一些BIFs可能用于断言测试, 这些函数都标有"允许在断言测试中".</p>
   </div>
   <datatypes>
     <datatype>
@@ -78,7 +78,7 @@
 > <span>abs(-3).</span>
 3</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -186,17 +186,20 @@
           <code><anno>Module</anno></code> to <code><anno>Args</anno></code>. The applied function must
           be exported from <code>Module</code>. The arity of the function is
           the length of <code>Args</code>.</p>
+        <p>返回<code><anno>Module</anno></code>中函数<code>Function</code>对<code><anno>Args</anno></code>执行的结果. 执行的函数必须是从<code>Module</code>导出的. 函数的参数数目等于<code>Args</code>的长度.</p>
         <pre>
 > <span>apply(lists, reverse, [[a, b, c]]).</span>
 [c,b,a]</pre>
         <p class="english"><code>apply</code> can be used to evaluate BIFs by using
           the module name <code>erlang</code>.</p>
+        <p><code>apply</code>可以通过模块名<code>erlang</code>来执行内建函数.</p>
         <pre>
 > <span>apply(erlang, atom_to_list, ['Erlang']).</span>
 "Erlang"</pre>
         <p class="english">Note: If the number of arguments are known at compile-time,
           the call is better written as
           <code><anno>Module</anno>:<anno>Function</anno>(Arg1, Arg2, ..., ArgN)</code>.</p>
+        <p>注意: 如果参数中元素的数量在编译时已知, 该调用最好写为<code><anno>Fun</anno>(Arg1, Arg2, ... ArgN)</code>.</p>
         <p class="english">Failure: <code>error_handler:undefined_function/3</code> is called
           if the applied function is not exported. The error handler
           can be redefined (see
@@ -205,6 +208,9 @@
           redefined the default <code>error_handler</code> so the replacement
           module is undefined, an error with the reason <code>undef</code>
           is generated.</p>
+        <p>失败: 如果执行的函数并未到处那么将会调用<code>error_handler:undefined_function/3</code>. 可以重新定义错误处理函数(参阅
+          <a class="seealso" href="#process_flag/2">process_flag/2</a>).
+          如果<code>error_handler</code>为定义, 或者如果用户重新定义了默认的<code>error_handler</code>而且替代的模块没有定义, 则会生成原因<code>undef</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -221,6 +227,7 @@
 	  <code>unicode</code>, the characters will be encoded using UTF-8
 	  (meaning that characters from 16#80 up to 0xFF will be
 	  encoded in two bytes).</p>
+        <p>返回一个与<code>Atom</code>的字面量相关的二进制. 如果<code>Encoding</code> 为 <code>latin1</code>, 那么字面量中每个字符对应一个字节. 如果 <code>Encoding</code> 是 <code>utf8</code> 或 <code>unicode</code>, 字符将会用UTF-8来编码(意味着16#80 到 0xFF的字符将会编码为两个字节).</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">Currently, <code>atom_to_binary(Atom, latin1)</code> can
@@ -229,7 +236,8 @@
 	of atoms might be allowed to contain any Unicode character
 	and <code>atom_to_binary(Atom, latin1)</code> will fail if the
 	text representation for the <code>Atom</code> contains a Unicode
-	character greater than 16#FF.</p>
+    character greater than 16#FF.</p>
+          <p>目前, <code>atom_to_binary(Atom, latin1)</code>决不会失败，因为原子的字面量只能包含从0到16#FF的字符. 在将来的发行版里, 原子的字面量可能会允许包含任意Unicode字符并且<code>atom_to_binary(Atom, latin1)</code> 将会在<code>Atom</code>包含大于16#FF的Unicode字符时失败.</p>
         </div>
         <pre>
 > <span>atom_to_binary('Erlang', latin1).</span>
@@ -244,6 +252,7 @@
       <div class="discription">
         <p class="english">Returns a string which corresponds to the text
           representation of <code>Atom</code>.</p>
+        <p>返回一个与<code>Atom</code>字面量相关的字符串.</p>
         <pre>
 > <span>atom_to_list('Erlang').</span>
 "Erlang"</pre>
@@ -274,7 +283,7 @@
 </pre>
         <p class="english">See the STDLIB module <code>binary</code> for details about the <code>PosLen</code> semantics.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -287,7 +296,7 @@
       <div class="discription">
         <p class="english">The same as <code>binary_part(Subject, {Pos, Len})</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -303,6 +312,8 @@
 	is <code>utf8</code> or <code>unicode</code>, the binary must contain
 	valid UTF-8 sequences; furthermore, only Unicode characters up
 	to 0xFF are allowed.</p>
+        <p>返回一个字面量是<code>Binary</code>的原子. 如果<code>Encoding</code> 是 <code>latin1</code>, 不会发生二进制中的字节转换. 如果 <code>Encoding</code>
+	是 <code>utf8</code> 或 <code>unicode</code>, 那么该二进制串必须包含合法的UTF-8序列; 更进一步来说, 只允许u有到0xFF的Unicode字符.</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english"><code>binary_to_atom(Binary, utf8)</code> will fail if
@@ -329,7 +340,9 @@
       <div class="discription">
         <p class="english">Works like <a class="seealso" href="#binary_to_atom/2">binary_to_atom/2</a>,
           but the atom must already exist.</p>
+        <p>与<a class="seealso" href="#binary_to_atom/2">binary_to_atom/2</a>相似, 但是原子必须是已经存在的.</p>
         <p class="english">Failure: <code>badarg</code> if the atom does not already exist.</p>
+        <p>失败: <code>badarg</code> 如果原子不存在.</p>
       </div>
     </div>
     <div class="function">
@@ -340,6 +353,7 @@
       <div class="discription">
         <p class="english">Returns a list of integers which correspond to the bytes of
           <code>Binary</code>.</p>
+        <p>返回一个与<code>Binary</code>的字节对应的整数列表.</p>
       </div>
     </div>
     <div class="function">
@@ -443,7 +457,7 @@
 > <span>bit_size(&lt;&lt;1,2,3>>).</span>
 24</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -481,7 +495,7 @@
 > <span>byte_size(&lt;&lt;1,2,3>>).</span>
 3</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -922,7 +936,7 @@ false</pre>
 > <span>element(2, {a, b, c}).</span>
 b</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1093,7 +1107,7 @@ true
 > <span>float(55).</span>
 55.0</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">Note that if used on the top-level in a guard, it will
@@ -1103,7 +1117,7 @@ true
           <p class="english">When <code>float/1</code> is used in an expression in a guard,
             such as '<code>float(A) == 4.0</code>', it converts a number as
             described above.</p>
-          <p>当像'<code>float(A) == 4.0</code>'一样在保护元中的一个表达式里使用<code>float/1</code>, 它会如上所述转换一个数字.</p>
+          <p>当像'<code>float(A) == 4.0</code>'一样在断言中的一个表达式里使用<code>float/1</code>, 它会如上所述转换一个数字.</p>
         </div>
       </div>
     </div>
@@ -1532,7 +1546,7 @@ os_prompt% </pre>
 > <span>hd([1,2,3,4,5]).</span>
 1</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
         <p class="english">Failure: <code>badarg</code> if <code>List</code> is the empty list [].</p>
       </div>
     </div>
@@ -1651,7 +1665,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is an atom;
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1664,7 +1678,7 @@ os_prompt% </pre>
           otherwise returns <code>false</code>.</p>
         <p class="english">A binary always contains a complete number of bytes.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1676,7 +1690,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a bitstring (including a binary);
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1689,7 +1703,7 @@ os_prompt% </pre>
           either the atom <code>true</code> or the atom <code>false</code>
           (i.e. a boolean); otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1713,7 +1727,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a floating point
           number; otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1725,7 +1739,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a fun; otherwise
           returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1739,7 +1753,7 @@ os_prompt% </pre>
           applied with <code>Arity</code> number of arguments; otherwise
           returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
         <div class="warning">
           <h2>Warning:<br/></h2>
           <p class="english">Currently, <code>is_function/2</code> will also return
@@ -1759,7 +1773,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is an integer;
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1771,7 +1785,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a list with
           zero or more elements; otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1783,7 +1797,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is either an integer or a
           floating point number; otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1795,7 +1809,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a pid (process
           identifier); otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1807,7 +1821,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a port identifier;
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1875,7 +1889,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a reference;
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1887,7 +1901,7 @@ os_prompt% </pre>
         <p class="english">Returns <code>true</code> if <code>Term</code> is a tuple;
           otherwise returns <code>false</code>.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -1901,7 +1915,7 @@ os_prompt% </pre>
 > <span>length([1,2,3,4,5,6,7,8,9]).</span>
 9</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -2807,7 +2821,7 @@ os_prompt% </pre>
         <p class="english">Returns the name of the local node. If the node is not alive,
           <code>nonode@nohost</code> is returned instead.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -2821,7 +2835,7 @@ os_prompt% </pre>
           be a pid, a reference, or a port. If the local node is not
           alive, <code>nonode@nohost</code> is returned.</p>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -4547,7 +4561,7 @@ true</pre>
 > <span>round(5.5).</span>
 6</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -4558,7 +4572,7 @@ true</pre>
 > <span>self().</span>
 &lt;0.26.0></pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -4768,7 +4782,7 @@ true</pre>
 > <span>size({morni, mulle, bwange}).</span>
 3</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -6900,7 +6914,7 @@ ok
 > <span>tl([geesties, guilies, beasties]).</span>
 [guilies, beasties]</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
         <p class="english">Failure: <code>badarg</code> if <code>List</code> is the empty list [].</p>
       </div>
     </div>
@@ -7750,7 +7764,7 @@ ok
 > <span>trunc(5.5).</span>
 5</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">
@@ -7764,7 +7778,7 @@ ok
 > <span>tuple_size({morni, mulle, bwange}).</span>
 3</pre>
         <p class="english">Allowed in guard tests.</p>
-        <p>允许在保护元测试中.</p>
+        <p>允许在断言测试中.</p>
       </div>
     </div>
     <div class="function">

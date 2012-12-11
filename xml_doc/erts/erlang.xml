@@ -37,7 +37,7 @@
       <em>auto-imported</em>. Thus, it is not necessary to specify
       the module name and both the calls <c>atom_to_list(Erlang)</c> and
       <c>erlang:atom_to_list(Erlang)</c> are identical.</p>
-    <p_zh>通常地, 大部分内建函数(BIFs)被视为存在于<c>erlang</c>中. 许多BIFs或多或少的被认为是Erlang程序语言的一部分且是<em>自动导入的</em>. 因此，没有必要指定模块名, 调用<c>atom_to_list(Erlang)</c> 和 <c>erlang:atom_to_list(Erlang)</c> 是一样的.</p_zh>
+    <p_zh>通常认为大部分内建函数(BIFs)在<c>erlang</c>模块里. 许多BIFs或多或少的被认为是Erlang程序语言的一部分且是<em>自动导入的</em>. 因此，没有必要指定模块名, 调用<c>atom_to_list(Erlang)</c> 和 <c>erlang:atom_to_list(Erlang)</c> 是一样的.</p_zh>
     <p>In the text, auto-imported BIFs are listed without module prefix.
       BIFs listed with module prefix are not auto-imported.</p>
     <p_zh>在本文档中, 自动导入的BIFs没有模块前缀. 有模块前缀的BIFs不是自动导入的.</p_zh>
@@ -49,7 +49,7 @@
     <p_zh>BIFs可能由于各种原因失败. 对于所有的BIFs如果它们调用的时候使用了类型错误的参数那么将会以原因<c>badarg</c>失败. 其它导致BIFs失败的原因被描述The other reasons that may make BIFs fail are described in connection with the description of each individual BIF.</p_zh>
     <p>Some BIFs may be used in guard tests, these are marked with
       "Allowed in guard tests".</p>
-    <p_zh>一些BIFs可能用于保护元测试, 这些函数都标有"允许在保护元测试中".</p_zh>
+    <p_zh>一些BIFs可能用于断言测试, 这些函数都标有"允许在断言测试中".</p_zh>
   </description>
 
   <datatypes>
@@ -84,7 +84,7 @@
 > <input>abs(-3).</input>
 3</pre>
         <p>Allowed in guard tests.</p>
-        <p_zh>允许在保护元测试中.</p_zh>
+        <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -197,17 +197,20 @@
           <c><anno>Module</anno></c> to <c><anno>Args</anno></c>. The applied function must
           be exported from <c>Module</c>. The arity of the function is
           the length of <c>Args</c>.</p>
+        <p_zh>返回<c><anno>Module</anno></c>中函数<c>Function</c>对<c><anno>Args</anno></c>执行的结果. 执行的函数必须是从<c>Module</c>导出的. 函数的参数数目等于<c>Args</c>的长度.</p_zh>
         <pre>
 > <input>apply(lists, reverse, [[a, b, c]]).</input>
 [c,b,a]</pre>
         <p><c>apply</c> can be used to evaluate BIFs by using
           the module name <c>erlang</c>.</p>
+        <p_zh><c>apply</c>可以通过模块名<c>erlang</c>来执行内建函数.</p_zh>
         <pre>
 > <input>apply(erlang, atom_to_list, ['Erlang']).</input>
 "Erlang"</pre>
         <p>Note: If the number of arguments are known at compile-time,
           the call is better written as
           <c><anno>Module</anno>:<anno>Function</anno>(Arg1, Arg2, ..., ArgN)</c>.</p>
+        <p_zh>注意: 如果参数中元素的数量在编译时已知, 该调用最好写为<c><anno>Fun</anno>(Arg1, Arg2, ... ArgN)</c>.</p_zh>
         <p>Failure: <c>error_handler:undefined_function/3</c> is called
           if the applied function is not exported. The error handler
           can be redefined (see
@@ -216,6 +219,9 @@
           redefined the default <c>error_handler</c> so the replacement
           module is undefined, an error with the reason <c>undef</c>
           is generated.</p>
+        <p_zh>失败: 如果执行的函数并未到处那么将会调用<c>error_handler:undefined_function/3</c>. 可以重新定义错误处理函数(参阅
+          <seealso marker="#process_flag/2">process_flag/2</seealso>).
+          如果<c>error_handler</c>为定义, 或者如果用户重新定义了默认的<c>error_handler</c>而且替代的模块没有定义, 则会生成原因<c>undef</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -233,14 +239,18 @@
 	  <c>unicode</c>, the characters will be encoded using UTF-8
 	  (meaning that characters from 16#80 up to 0xFF will be
 	  encoded in two bytes).</p>
+        <p_zh>返回一个与<c>Atom</c>的字面量相关的二进制. 如果<c>Encoding</c> 为 <c>latin1</c>, 那么字面量中每个字符对应一个字节. 如果 <c>Encoding</c> 是 <c>utf8</c> 或 <c>unicode</c>, 字符将会用UTF-8来编码(意味着16#80 到 0xFF的字符将会编码为两个字节).</p_zh>
 
-	<note><p>Currently, <c>atom_to_binary(Atom, latin1)</c> can
+        <note>
+            <p>Currently, <c>atom_to_binary(Atom, latin1)</c> can
 	never fail because the text representation of an atom can only contain
 	characters from 0 to 16#FF. In a future release, the text representation
 	of atoms might be allowed to contain any Unicode character
 	and <c>atom_to_binary(Atom, latin1)</c> will fail if the
 	text representation for the <c>Atom</c> contains a Unicode
-	character greater than 16#FF.</p></note>
+    character greater than 16#FF.</p>
+            <p_zh>目前, <c>atom_to_binary(Atom, latin1)</c>决不会失败，因为原子的字面量只能包含从0到16#FF的字符. 在将来的发行版里, 原子的字面量可能会允许包含任意Unicode字符并且<c>atom_to_binary(Atom, latin1)</c> 将会在<c>Atom</c>包含大于16#FF的Unicode字符时失败.</p_zh>
+        </note>
 
         <pre>
 > <input>atom_to_binary('Erlang', latin1).</input>
@@ -256,6 +266,7 @@
       <desc>
         <p>Returns a string which corresponds to the text
           representation of <c>Atom</c>.</p>
+        <p_zh>返回一个与<c>Atom</c>字面量相关的字符串.</p_zh>
         <pre>
 > <input>atom_to_list('Erlang').</input>
 "Erlang"</pre>
@@ -293,7 +304,7 @@
       <p>See the STDLIB module <c>binary</c> for details about the <c>PosLen</c> semantics.</p>
 
       <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -308,7 +319,7 @@
       <p>The same as <c>binary_part(Subject, {Pos, Len})</c>.</p>
 
       <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -325,6 +336,8 @@
 	is <c>utf8</c> or <c>unicode</c>, the binary must contain
 	valid UTF-8 sequences; furthermore, only Unicode characters up
 	to 0xFF are allowed.</p>
+        <p_zh>返回一个字面量是<c>Binary</c>的原子. 如果<c>Encoding</c> 是 <c>latin1</c>, 不会发生二进制中的字节转换. 如果 <c>Encoding</c>
+	是 <c>utf8</c> 或 <c>unicode</c>, 那么该二进制串必须包含合法的UTF-8序列; 更进一步来说, 只允许u有到0xFF的Unicode字符.</p_zh>
 
 	<note><p><c>binary_to_atom(Binary, utf8)</c> will fail if
 	the binary contains Unicode characters greater than 16#FF.
@@ -351,7 +364,9 @@
       <desc>
         <p>Works like <seealso marker="#binary_to_atom/2">binary_to_atom/2</seealso>,
           but the atom must already exist.</p>
+        <p_zh>与<seealso marker="#binary_to_atom/2">binary_to_atom/2</seealso>相似, 但是原子必须是已经存在的.</p_zh>
         <p>Failure: <c>badarg</c> if the atom does not already exist.</p>
+        <p_zh>失败: <c>badarg</c> 如果原子不存在.</p_zh>
       </desc>
     </func>
     <func>
@@ -363,6 +378,7 @@
       <desc>
         <p>Returns a list of integers which correspond to the bytes of
           <c>Binary</c>.</p>
+        <p_zh>返回一个与<c>Binary</c>的字节对应的整数列表.</p_zh>
       </desc>
     </func>
     <func>
@@ -466,7 +482,7 @@
 > <input>bit_size(&lt;&lt;1,2,3&gt;&gt;).</input>
 24</pre>
         <p>Allowed in guard tests.</p>
-        <p_zh>允许在保护元测试中.</p_zh>
+        <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -505,7 +521,7 @@
 > <input>byte_size(&lt;&lt;1,2,3&gt;&gt;).</input>
 3</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -926,7 +942,7 @@ false</pre>
 > <input>element(2, {a, b, c}).</input>
 b</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1112,7 +1128,7 @@ true
 > <input>float(55).</input>
 55.0</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
         <note>
           <p>Note that if used on the top-level in a guard, it will
             test whether the argument is a floating point number; for
@@ -1121,7 +1137,7 @@ true
           <p>When <c>float/1</c> is used in an expression in a guard,
             such as '<c>float(A) == 4.0</c>', it converts a number as
             described above.</p>
-          <p_zh>当像'<c>float(A) == 4.0</c>'一样在保护元中的一个表达式里使用<c>float/1</c>, 它会如上所述转换一个数字.</p_zh>
+          <p_zh>当像'<c>float(A) == 4.0</c>'一样在断言中的一个表达式里使用<c>float/1</c>, 它会如上所述转换一个数字.</p_zh>
         </note>
       </desc>
     </func>
@@ -1551,7 +1567,7 @@ os_prompt% </pre>
 > <input>hd([1,2,3,4,5]).</input>
 1</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
         <p>Failure: <c>badarg</c> if <c>List</c> is the empty list [].</p>
       </desc>
     </func>
@@ -1677,7 +1693,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is an atom;
           otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1693,7 +1709,7 @@ os_prompt% </pre>
 	<p>A binary always contains a complete number of bytes.</p>
 
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1707,7 +1723,7 @@ os_prompt% </pre>
           otherwise returns <c>false</c>.</p>
 
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1721,7 +1737,7 @@ os_prompt% </pre>
           either the atom <c>true</c> or the atom <c>false</c>
           (i.e. a boolean); otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1747,7 +1763,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a floating point
           number; otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1760,7 +1776,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a fun; otherwise
           returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1775,7 +1791,7 @@ os_prompt% </pre>
           applied with <c>Arity</c> number of arguments; otherwise
           returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
         <warning>
           <p>Currently, <c>is_function/2</c> will also return
             <c>true</c> if the first argument is a tuple fun (a tuple
@@ -1795,7 +1811,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is an integer;
           otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1808,7 +1824,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a list with
           zero or more elements; otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1821,7 +1837,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is either an integer or a
           floating point number; otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1834,7 +1850,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a pid (process
           identifier); otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1847,7 +1863,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a port identifier;
           otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1918,7 +1934,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a reference;
           otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1931,7 +1947,7 @@ os_prompt% </pre>
         <p>Returns <c>true</c> if <c>Term</c> is a tuple;
           otherwise returns <c>false</c>.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -1946,7 +1962,7 @@ os_prompt% </pre>
 > <input>length([1,2,3,4,5,6,7,8,9]).</input>
 9</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -2817,7 +2833,7 @@ os_prompt% </pre>
         <p>Returns the name of the local node. If the node is not alive,
           <c>nonode@nohost</c> is returned instead.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -2832,7 +2848,7 @@ os_prompt% </pre>
           be a pid, a reference, or a port. If the local node is not
           alive, <c>nonode@nohost</c> is returned.</p>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -4411,7 +4427,7 @@ true</pre>
 > <input>round(5.5).</input>
 6</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -4423,7 +4439,7 @@ true</pre>
 > <input>self().</input>
 &lt;0.26.0></pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -4634,7 +4650,7 @@ true</pre>
 > <input>size({morni, mulle, bwange}).</input>
 3</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -6472,7 +6488,7 @@ ok
 > <input>tl([geesties, guilies, beasties]).</input>
 [guilies, beasties]</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
         <p>Failure: <c>badarg</c> if <c>List</c> is the empty list [].</p>
       </desc>
     </func>
@@ -7185,7 +7201,7 @@ ok
 > <input>trunc(5.5).</input>
 5</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
@@ -7200,7 +7216,7 @@ ok
 > <input>tuple_size({morni, mulle, bwange}).</input>
 3</pre>
         <p>Allowed in guard tests.</p>
-      <p_zh>允许在保护元测试中.</p_zh>
+      <p_zh>允许在断言测试中.</p_zh>
       </desc>
     </func>
     <func>
