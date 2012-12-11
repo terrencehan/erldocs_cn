@@ -422,18 +422,19 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
     <p class="english">The following functions should be exported from an
       <code>application</code> callback module.</p>
   </section>
-  <funcs>
-    <func>
-      <name>Module:start(StartType, StartArgs) -> {ok, Pid} | {ok, Pid, State} | {error, Reason}</name>
-      <fsummary>Start an application</fsummary>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 id="Module:start/2">Module:start(StartType, StartArgs) -> {ok, Pid} | {ok, Pid, State} | {error, Reason}</h3>
       <type>
-        <v>StartType = normal | {takeover,Node} | {failover,Node}</v>
-        <v>&nbsp;Node = node()</v>
-        <v>StartArgs = term()</v>
-        <v>Pid = pid()</v>
-        <v>State = term()</v>
+        <div class="type_desc">StartType = normal | {takeover,Node} | {failover,Node}</div>
+        <div class="type_desc">&nbsp;Node = node()</div>
+        <div class="type_desc">StartArgs = term()</div>
+        <div class="type_desc">Pid = pid()</div>
+        <div class="type_desc">State = term()</div>
       </type>
-      <desc>
+      <div class="discription">
         <p class="english">This function is called whenever an application is started
           using <code>application:start/1,2</code>, and should start
           the processes of the application. If the application is
@@ -464,19 +465,18 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
           <code>State</code> defaults to <code>[]</code>. If later the application
           is stopped, <code>State</code> is passed to
           <code>Module:prep_stop/1</code>.</p>
-      </desc>
-    </func>
-    <func>
-      <name>Module:start_phase(Phase, StartType, PhaseArgs) -> ok | {error, Reason}</name>
-      <fsummary>Extended start of an application</fsummary>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="Module:start_phase/3">Module:start_phase(Phase, StartType, PhaseArgs) -> ok | {error, Reason}</h3>
       <type>
-        <v>Phase = atom()</v>
-        <v>StartType = <a class="seealso" href="#type-start_type">start_type()</a></v>
-        <v>PhaseArgs = term()</v>
-        <v>Pid = pid()</v>
-        <v>State = state()</v>
+        <div class="type_desc">Phase = atom()</div>
+        <div class="type_desc">StartType = <a class="seealso" href="#type-start_type">start_type()</a></div>
+        <div class="type_desc">PhaseArgs = term()</div>
+        <div class="type_desc">Pid = pid()</div>
+        <div class="type_desc">State = state()</div>
       </type>
-      <desc>
+      <div class="discription">
         <p class="english">This function is used to start an application with included
           applications, when there is a need for synchronization between
           processes in the different applications during startup.</p>
@@ -489,15 +489,14 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
           included applications, for which the start phase is defined.</p>
         <p class="english">See <code>Module:start/2</code> for a description of
           <code>StartType</code>.</p>
-      </desc>
-    </func>
-    <func>
-      <name>Module:prep_stop(State) -> NewState</name>
-      <fsummary>Prepare an application for termination</fsummary>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="Module:prep_stop/1">Module:prep_stop(State) -> NewState</h3>
       <type>
-        <v>State = NewState = term()</v>
+        <div class="type_desc">State = NewState = term()</div>
       </type>
-      <desc>
+      <div class="discription">
         <p class="english">This function is called when an application is about to be
           stopped, before shutting down the processes of
           the application.</p>
@@ -508,15 +507,14 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
         <p class="english">The function is optional. If it is not defined, the processes
           will be terminated and then <code>Module:stop(State)</code> is
           called.</p>
-      </desc>
-    </func>
-    <func>
-      <name>Module:stop(State)</name>
-      <fsummary>Clean up after termination of an application</fsummary>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="Module:stop/1">Module:stop(State)</h3>
       <type>
-        <v>State = term()</v>
+        <div class="type_desc">State = term()</div>
       </type>
-      <desc>
+      <div class="discription">
         <p class="english">This function is called whenever an application has stopped.
           It is intended to be the opposite of <code>Module:start/2</code>
           and should do any necessary cleaning up. The return value is
@@ -525,19 +523,18 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
           <code>Module:prep_stop/1</code>, if such a function exists.
           Otherwise <code>State</code> is taken from the return value of
           <code>Module:start/2</code>.</p>
-      </desc>
-    </func>
-    <func>
-      <name>Module:config_change(Changed, New, Removed) -> ok</name>
-      <fsummary>Update the configuration parameters for an application.</fsummary>
+      </div>
+    </div>
+    <div class="function">
+      <h3 id="Module:config_change/3">Module:config_change(Changed, New, Removed) -> ok</h3>
       <type>
-        <v>Changed = [{Par,Val}]</v>
-        <v>New = [{Par,Val}]</v>
-        <v>Removed = [Par]</v>
-        <v>&nbsp;Par = atom()</v>
-        <v>&nbsp;Val = term()</v>
+        <div class="type_desc">Changed = [{Par,Val}]</div>
+        <div class="type_desc">New = [{Par,Val}]</div>
+        <div class="type_desc">Removed = [Par]</div>
+        <div class="type_desc">&nbsp;Par = atom()</div>
+        <div class="type_desc">&nbsp;Val = term()</div>
       </type>
-      <desc>
+      <div class="discription">
         <p class="english">This function is called by an application after a code
           replacement, if there are any changes to the configuration
           parameters.</p>
@@ -546,9 +543,9 @@ Nodes = [cp1@cave, {cp2@cave, cp3@cave}]</pre>
           a list of parameter-value tuples with all configuration
           parameters that have been added, and <code>Removed</code> is a list
           of all parameters that have been removed.</p>
-      </desc>
-    </func>
-  </funcs>
+      </div>
+    </div>
+  </div>
   <section>
     <h4>SEE ALSO</h4>
     <p class="english"><a class="seealso" href="../doc/design_principles/des_princ.html">OTP Design Principles</a>,

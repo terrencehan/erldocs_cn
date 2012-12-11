@@ -174,7 +174,7 @@ sub xml_to_html {
         $description->set_att( class => "description" );
     }
 
-    if ( my $funcs = $root->first_child('funcs') ) {
+    for my $funcs( $root->getElementsByTagName('funcs') ) {
         $funcs->set_tag('div');
         $funcs->set_att( class => "functions" );
 

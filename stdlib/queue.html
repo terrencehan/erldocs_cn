@@ -216,117 +216,109 @@
   <section>
     <h4>Extended API</h4>
   </section>
-  <funcs>
-    <func>
-      <name arity="1" name="get"/>
-      <fsummary>Return the front item of a queue</fsummary>
-      <desc>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="1" id="get/1" name="get">get(Q :: queue()) -> Item :: term()</h3>
+      <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> at the front of queue <code><anno>Q</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="get_r"/>
-      <fsummary>Return the rear item of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="get_r/1" name="get_r">get_r(Q :: queue()) -> Item :: term()</h3>
+      <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> at the rear of queue <code><anno>Q</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="drop"/>
-      <fsummary>Remove the front item from a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="drop/1" name="drop">drop(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the front item from <code><anno>Q1</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="drop_r"/>
-      <fsummary>Remove the rear item from a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="drop_r/1" name="drop_r">drop_r(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the rear item from <code><anno>Q1</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="peek"/>
-      <fsummary>Return the front item of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="peek/1" name="peek">peek(Q :: queue()) -> empty | {value,Item :: term()}</h3>
+      <div class="discription">
         <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
           front item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="peek_r"/>
-      <fsummary>Return the rear item of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="peek_r/1" name="peek_r">peek_r(Q :: queue()) -> empty | {value,Item :: term()}</h3>
+      <div class="discription">
         <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
           rear item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-  </funcs>
+      </div>
+    </div>
+  </div>
   <section>
     <h4>Okasaki API</h4>
   </section>
-  <funcs>
-    <func>
-      <name arity="2" name="cons"/>
-      <fsummary>Insert an item at the head of a queue</fsummary>
-      <desc>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="2" id="cons/2" name="cons">cons(Item :: term(), Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> at the head of queue <code><anno>Q1</anno></code>. Returns
           the new queue <code><anno>Q2</anno></code>.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="head"/>
-      <fsummary>Return the item at the head of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="head/1" name="head">head(Q :: queue()) -> Item :: term()</h3>
+      <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> from the head of queue <code><anno>Q</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="tail"/>
-      <fsummary>Remove the head item from a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="tail/1" name="tail">tail(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the head item from <code><anno>Q1</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="2" name="snoc"/>
-      <fsummary>Insert an item at the tail of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="snoc/2" name="snoc">snoc(Q1 :: queue(), Item :: term()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> as the tail item of queue <code><anno>Q1</anno></code>. Returns
           the new queue <code><anno>Q2</anno></code>.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="daeh"/>
-      <name arity="1" name="last"/>
-      <fsummary>Return the tail item of a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="daeh/1" name="daeh">daeh(Q :: queue()) -> Item :: term()</h3>
+      <h3 arity="1" id="last/1" name="last">last(Q :: queue()) -> Item :: term()</h3>
+      <div class="discription">
         <p class="english">Returns the tail item of queue <code><anno>Q</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
-      </desc>
-    </func>
-    <func>
-      <name arity="1" name="liat"/>
-      <name arity="1" name="init"/>
-      <name arity="1" name="lait"/>
-      <fsummary>Remove the tail item from a queue</fsummary>
-      <desc>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="liat/1" name="liat">liat(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <h3 arity="1" id="init/1" name="init">init(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <h3 arity="1" id="lait/1" name="lait">lait(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the tail item from <code><anno>Q1</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
         <p class="english">The name <code>lait/1</code> is a misspelling - do not use it anymore.</p>
-      </desc>
-    </func>
-  </funcs>
+      </div>
+    </div>
+  </div>
 </div>
 
     </div>
