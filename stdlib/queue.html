@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>queue</h1>
+  <h2 class="modsummary">Abstract Data Type for FIFO Queues</h2>
+  <div class="description">
+    <p class="english">This module implements (double ended) FIFO queues
+      in an efficient manner.</p>
+    <p class="english">All functions fail with reason <code>badarg</code> if arguments
+      are of wrong type, for example queue arguments are not
+      queues, indexes are not integers, list arguments are
+      not lists. Improper lists cause internal crashes.
+      An index out of range for a queue also causes
+      a failure with reason <code>badarg</code>.</p>
+    <p class="english">Some functions, where noted, fail with reason <code>empty</code>
+      for an empty queue.</p>
+    <p class="english">The data representing a queue as used by this module
+      should be regarded as opaque by other modules. Any code
+      assuming knowledge of the format is running on thin ice.</p>
+    <p class="english">All operations has an amortized O(1) running time, except
+      <code>len/1</code>, <code>join/2</code>, <code>split/2</code>, <code>filter/2</code>
+      and <code>member/2</code> that have O(n).
+      To minimize the size of a queue minimizing
+      the amount of garbage built by queue operations, the queues
+      do not contain explicit length information, and that is
+      why <code>len/1</code> is O(n). If better performance for this
+      particular operation is essential, it is easy for
+      the caller to keep track of the length.</p>
+    <p class="english">Queues are double ended. The mental picture of
+      a queue is a line of people (items) waiting for
+      their turn. The queue front is the end with the item
+      that has waited the longest. The queue rear is the end
+      an item enters when it starts to wait. If instead using
+      the mental picture of a list, the front is called head
+      and the rear is called tail.</p>
+    <p class="english">Entering at the front and exiting at the rear
+      are reverse operations on the queue.</p>
+    <p class="english">The module has several sets of interface functions. The
+      "Original API", the "Extended API" and the "Okasaki API".</p>
+    <p class="english">The "Original API" and the "Extended API" both use the
+      mental picture of a waiting line of items. Both also 
+      have reverse operations suffixed "_r".</p>
+    <p class="english">The "Original API" item removal functions return compound
+      terms with both the removed item and the resulting queue.
+      The "Extended API" contain alternative functions that build
+      less garbage as well as functions for just inspecting the
+      queue ends. Also the "Okasaki API" functions build less garbage.</p>
+    <p class="english">The "Okasaki API" is inspired by "Purely Functional Data structures"
+      by Chris Okasaki. It regards queues as lists.
+      The API is by many regarded as strange and avoidable.
+      For example many reverse operations have lexically reversed names,
+      some with more readable but perhaps less understandable aliases.</p>
+  </div>
+  <section>
+    <h4>Original API</h4>
+  </section>
+  <datatypes>
+    <datatype>
+      <name>
+        <marker id="type-queue">queue()</marker>
+      </name>
+      <desc>
+        <p class="english">As returned by <code>new/0</code>.</p>
+      </desc>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="new/0" name="new">new() -> queue()</h3>
+      <div class="discription">
+        <p class="english">Returns an empty queue.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="is_queue/1" name="is_queue">is_queue(Term :: term()) -> boolean()</h3>
+      <div class="discription">
+        <p class="english">Tests if <code><anno>Term</anno></code> is a queue and returns <code>true</code> if so and
+          <code>false</code> otherwise.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="is_empty/1" name="is_empty">is_empty(Q :: queue()) -> boolean()</h3>
+      <div class="discription">
+        <p class="english">Tests if <code><anno>Q</anno></code> is empty and returns <code>true</code> if so and
+          <code>false</code> otherwise.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="len/1" name="len">len(Q :: queue()) -> non_neg_integer()</h3>
+      <div class="discription">
+        <p class="english">Calculates and returns the length of queue <code><anno>Q</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="in/2" name="in">in(Item :: term(), Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
+        <p class="english">Inserts <code><anno>Item</anno></code> at the rear of queue <code><anno>Q1</anno></code>.
+          Returns the resulting queue <code><anno>Q2</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="in_r/2" name="in_r">in_r(Item :: term(), Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
+        <p class="english">Inserts <code><anno>Item</anno></code> at the front of queue <code><anno>Q1</anno></code>.
+          Returns the resulting queue <code><anno>Q2</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="out/1" name="out">out(Q1 :: queue()) ->
+                 {{value, Item :: term()}, Q2 :: queue()} |
+                 {empty, Q1 :: queue()}</h3>
+      <div class="discription">
+        <p class="english">Removes the item at the front of queue <code><anno>Q1</anno></code>. Returns the
+          tuple <code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, where <code><anno>Item</anno></code> is the
+          item removed and <code><anno>Q2</anno></code> is the resulting queue. If <code><anno>Q1</anno></code> is
+          empty, the tuple <code>{empty, <anno>Q1</anno>}</code> is returned.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="out_r/1" name="out_r">out_r(Q1 :: queue()) ->
+                   {{value, Item :: term()}, Q2 :: queue()} |
+                   {empty, Q1 :: queue()}</h3>
+      <div class="discription">
+        <p class="english">Removes the item at the rear of the queue <code><anno>Q1</anno></code>. Returns the
+          tuple <code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, where <code><anno>Item</anno></code> is the
+          item removed and <code><anno>Q2</anno></code> is the new queue. If <code><anno>Q1</anno></code> is
+          empty, the tuple <code>{empty, <anno>Q1</anno>}</code> is returned.  </p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="from_list/1" name="from_list">from_list(L :: list()) -> queue()</h3>
+      <div class="discription">
+        <p class="english">Returns a queue containing the items in <code><anno>L</anno></code> in the
+          same order; the head item of the list will become the front
+          item of the queue.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="to_list/1" name="to_list">to_list(Q :: queue()) -> list()</h3>
+      <div class="discription">
+        <p class="english">Returns a list of the items in the queue in the same order;
+          the front item of the queue will become the head of the list.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="reverse/1" name="reverse">reverse(Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="discription">
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that contains the items of
+          <code><anno>Q1</anno></code> in the reverse order.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="split/2" name="split">split(N :: non_neg_integer(), Q1 :: queue()) ->
+                   {Q2 :: queue(),Q3 :: queue()}</h3>
+      <div class="discription">
+        <p class="english">Splits <code><anno>Q1</anno></code> in two. The <code><anno>N</anno></code> front items
+          are put in <code><anno>Q2</anno></code> and the rest in <code><anno>Q3</anno></code></p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="join/2" name="join">join(Q1 :: queue(), Q2 :: queue()) -> Q3 :: queue()</h3>
+      <div class="discription">
+        <p class="english">Returns a queue <code><anno>Q3</anno></code> that is the result of joining
+          <code><anno>Q1</anno></code> and <code><anno>Q2</anno></code> with <code><anno>Q1</anno></code> in front of
+          <code><anno>Q2</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="filter/2" name="filter">filter(Fun, Q1 :: queue()) -> Q2 :: queue()</h3>
+      <div class="type_desc">      Fun = fun((Item = term()) -> boolean() | list()</div>
+      <div class="discription">
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of calling
+          <code><anno>Fun</anno>(<anno>Item</anno>)</code> on all items in <code><anno>Q1</anno></code>,
+          in order from front to rear.</p>
+        <p class="english">If <code><anno>Fun</anno>(<anno>Item</anno>)</code> returns <code>true</code>, <code>Item</code>
+          is copied to the result queue. If it returns <code>false</code>,
+          <code><anno>Item</anno></code> is not copied. If it returns a list
+          the list elements are inserted instead of <code>Item</code> in the
+          result queue.</p>
+        <p class="english">So, <code><anno>Fun</anno>(<anno>Item</anno>)</code> returning <code>[<anno>Item</anno>]</code> is thereby
+          semantically equivalent to returning <code>true</code>, just
+          as returning <code>[]</code> is semantically equivalent to
+          returning <code>false</code>. But returning a list builds
+          more garbage than returning an atom.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="member/2" name="member">member(Item :: term(), Q :: queue()) -> boolean()</h3>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Item</anno></code> matches some element
+          in <code><anno>Q</anno></code>, otherwise <code>false</code>.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>Extended API</h4>
+  </section>
+  <funcs>
+    <func>
+      <name arity="1" name="get"/>
+      <fsummary>Return the front item of a queue</fsummary>
+      <desc>
+        <p class="english">Returns <code><anno>Item</anno></code> at the front of queue <code><anno>Q</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="get_r"/>
+      <fsummary>Return the rear item of a queue</fsummary>
+      <desc>
+        <p class="english">Returns <code><anno>Item</anno></code> at the rear of queue <code><anno>Q</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="drop"/>
+      <fsummary>Remove the front item from a queue</fsummary>
+      <desc>
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
+          the front item from <code><anno>Q1</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="drop_r"/>
+      <fsummary>Remove the rear item from a queue</fsummary>
+      <desc>
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
+          the rear item from <code><anno>Q1</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="peek"/>
+      <fsummary>Return the front item of a queue</fsummary>
+      <desc>
+        <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
+          front item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="peek_r"/>
+      <fsummary>Return the rear item of a queue</fsummary>
+      <desc>
+        <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
+          rear item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+  </funcs>
+  <section>
+    <h4>Okasaki API</h4>
+  </section>
+  <funcs>
+    <func>
+      <name arity="2" name="cons"/>
+      <fsummary>Insert an item at the head of a queue</fsummary>
+      <desc>
+        <p class="english">Inserts <code><anno>Item</anno></code> at the head of queue <code><anno>Q1</anno></code>. Returns
+          the new queue <code><anno>Q2</anno></code>.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="head"/>
+      <fsummary>Return the item at the head of a queue</fsummary>
+      <desc>
+        <p class="english">Returns <code><anno>Item</anno></code> from the head of queue <code><anno>Q</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="tail"/>
+      <fsummary>Remove the head item from a queue</fsummary>
+      <desc>
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
+          the head item from <code><anno>Q1</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="2" name="snoc"/>
+      <fsummary>Insert an item at the tail of a queue</fsummary>
+      <desc>
+        <p class="english">Inserts <code><anno>Item</anno></code> as the tail item of queue <code><anno>Q1</anno></code>. Returns
+          the new queue <code><anno>Q2</anno></code>.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="daeh"/>
+      <name arity="1" name="last"/>
+      <fsummary>Return the tail item of a queue</fsummary>
+      <desc>
+        <p class="english">Returns the tail item of queue <code><anno>Q</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+      </desc>
+    </func>
+    <func>
+      <name arity="1" name="liat"/>
+      <name arity="1" name="init"/>
+      <name arity="1" name="lait"/>
+      <fsummary>Remove the tail item from a queue</fsummary>
+      <desc>
+        <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
+          the tail item from <code><anno>Q1</anno></code>.</p>
+        <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+        <p class="english">The name <code>lait/1</code> is a misspelling - do not use it anymore.</p>
+      </desc>
+    </func>
+  </funcs>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

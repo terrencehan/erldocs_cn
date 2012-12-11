@@ -215,6 +215,10 @@ sub xml_to_html {
                             $new_node->set_att( class => 'type_desc' );
                         }
                     }
+                    else{ #for BIFs
+                        $name->set_inner_xml($name_name. '/' . $name_arity);
+                        $name->set_att( id => $name_name . '/' . $name_arity );
+                    }
                     my $temp =
 "'fun', '$app', '${\$module->text}:$name_name/$name_arity', []";
                     push( @erldocs_index, $temp )
