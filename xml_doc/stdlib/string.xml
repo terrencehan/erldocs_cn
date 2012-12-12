@@ -234,7 +234,7 @@
           accordance with <c><anno>Number</anno></c>. The left margin is
           fixed. If the <c>length(<anno>String</anno>)</c> &lt; <c><anno>Number</anno></c>,
           <c><anno>String</anno></c> is padded with blanks or <c><anno>Character</anno></c>s.</p>
-        <p>根据<c><anno>Number</anno></c>调整<c><anno>String</anno></c>的长度并返回操作后的字符串. 左内边距是固定的. 如果<c>length(<anno>String</anno>)</c> &lt; <c><anno>Number</anno></c>, 将向<c><anno>String</anno></c>填补空格或<c><anno>Character</anno></c>s.</p>
+        <p_zh>根据<c><anno>Number</anno></c>调整<c><anno>String</anno></c>的长度并返回操作后的字符串. 左内边距是固定的. 如果<c>length(<anno>String</anno>)</c> &lt; <c><anno>Number</anno></c>, 将向<c><anno>String</anno></c>填补空格或<c><anno>Character</anno></c>s.</p_zh>
         <p>For example:</p>
         <p_zh>例如:</p_zh>
         <code type="none">
