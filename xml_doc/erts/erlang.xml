@@ -428,7 +428,7 @@
         <p>Returns an Erlang term which is the result of decoding
           the binary object <c>Binary</c>, which must be encoded
           according to the Erlang external term format.</p>
-        <p_zh>返回一个将二进制对象<c>Binary</c>解码的结果生成的Erlang项, 这个二进制对象必须按照Erlang外部项的格式编码.</p_zh>
+        <p_zh>返回一个将二进制对象<c>Binary</c>解码生成的Erlang项, 这个二进制对象必须按照Erlang外部项的格式编码.</p_zh>
         <warning>
 	  <p>When decoding binaries from untrusted sources, consider using
 	     <c>binary_to_term/2</c> to prevent denial of service attacks.</p>
