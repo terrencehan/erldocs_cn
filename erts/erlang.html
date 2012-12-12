@@ -388,10 +388,7 @@
           <code>Bitstring</code>. If the number of bits in the binary is not
 	  divisible by 8, the last element of the list will be a bitstring
 	  containing the remaining bits (1 up to 7 bits).</p>
-        <p>Returns a list of integers which correspond to the bytes of
-          <code>Bitstring</code>. If the number of bits in the binary is not
-	  divisible by 8, the last element of the list will be a bitstring
-	  containing the remaining bits (1 up to 7 bits).</p>
+        <p>返回一个与<code>Bitstring</code>字节对应的整数列表. 如果二进制中比特的数量不是8的倍数, 列表中的最后一个元素将会成为包含剩余比特(1到7比特)比特串.</p>
       </div>
     </div>
     <div class="function">
@@ -403,10 +400,12 @@
         <p class="english">Returns an Erlang term which is the result of decoding
           the binary object <code>Binary</code>, which must be encoded
           according to the Erlang external term format.</p>
+        <p>返回一个将二进制对象<code>Binary</code>解码的结果生成的Erlang项, 这个二进制对象必须按照Erlang外部项的格式编码.</p>
         <div class="warning">
           <h2>Warning:<br/></h2>
           <p class="english">When decoding binaries from untrusted sources, consider using
 	     <code>binary_to_term/2</code> to prevent denial of service attacks.</p>
+          <p>当从不信任的源解码二进制的时候, 考虑使用<code>binary_to_term/2</code>来防止拒绝服务攻击.</p>
         </div>
         <p class="english">See also
 	   <a class="seealso" href="#term_to_binary/1">term_to_binary/1</a>
