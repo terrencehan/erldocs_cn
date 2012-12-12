@@ -367,12 +367,14 @@
           corresponding to the bytes from position <code>Start</code> to
           position <code>Stop</code> in <code>Binary</code>. Positions in the
           binary are numbered starting from 1.</p>
+        <p>像<code>binary_to_list/1</code>, 但是返回一个与<code>Binary</code>内从位置<code>Start</code>到<code>Stop</code>字节对应的整数列表. 二进制串的位置从1开始.</p>
         <div class="note">
           <h2>Note:<br/></h2>
           <p class="english">This function's indexing style of using one-based indices for
 	  binaries is deprecated. New code should use the functions in
 	  the STDLIB module <code>binary</code> instead. They consequently
-	  use the same (zero-based) style of indexing.</p>
+      use the same (zero-based) style of indexing.</p>
+          <p>这个函数从1开始的索引方式是不赞成使用的. 新的代码应该使用STDLIB模块的<code>binary</code>函数. 这样就能使用相同的索引方式(从0开始).</p>
         </div>
       </div>
     </div>
@@ -383,6 +385,10 @@
       </type>
       <div class="discription">
         <p class="english">Returns a list of integers which correspond to the bytes of
+          <code>Bitstring</code>. If the number of bits in the binary is not
+	  divisible by 8, the last element of the list will be a bitstring
+	  containing the remaining bits (1 up to 7 bits).</p>
+        <p>Returns a list of integers which correspond to the bytes of
           <code>Bitstring</code>. If the number of bits in the binary is not
 	  divisible by 8, the last element of the list will be a bitstring
 	  containing the remaining bits (1 up to 7 bits).</p>

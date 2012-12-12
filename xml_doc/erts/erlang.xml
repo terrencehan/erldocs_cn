@@ -393,11 +393,15 @@
           corresponding to the bytes from position <c>Start</c> to
           position <c>Stop</c> in <c>Binary</c>. Positions in the
           binary are numbered starting from 1.</p>
+        <p_zh>像<c>binary_to_list/1</c>, 但是返回一个与<c>Binary</c>内从位置<c>Start</c>到<c>Stop</c>字节对应的整数列表. 二进制串的位置从1开始.</p_zh>
 
-	  <note><p>This function's indexing style of using one-based indices for
+        <note>
+            <p>This function's indexing style of using one-based indices for
 	  binaries is deprecated. New code should use the functions in
 	  the STDLIB module <c>binary</c> instead. They consequently
-	  use the same (zero-based) style of indexing.</p></note>
+      use the same (zero-based) style of indexing.</p>
+            <p_zh>这个函数从1开始的索引方式是不赞成使用的. 新的代码应该使用STDLIB模块的<c>binary</c>函数. 这样就能使用相同的索引方式(从0开始).</p_zh>
+        </note>
       </desc>
     </func>
     <func>
@@ -411,6 +415,7 @@
           <c>Bitstring</c>. If the number of bits in the binary is not
 	  divisible by 8, the last element of the list will be a bitstring
 	  containing the remaining bits (1 up to 7 bits).</p>
+        <p_zh>返回一个与<c>Bitstring</c>字节对应的整数列表. 如果二进制中比特的数量不是8的倍数, 列表中的最后一个元素将会成为包含剩余比特(1到7比特)比特串.</p_zh>
       </desc>
     </func>
     <func>
@@ -423,9 +428,11 @@
         <p>Returns an Erlang term which is the result of decoding
           the binary object <c>Binary</c>, which must be encoded
           according to the Erlang external term format.</p>
+        <p_zh>返回一个将二进制对象<c>Binary</c>解码的结果生成的Erlang项, 这个二进制对象必须按照Erlang外部项的格式编码.</p_zh>
         <warning>
 	  <p>When decoding binaries from untrusted sources, consider using
 	     <c>binary_to_term/2</c> to prevent denial of service attacks.</p>
+	  <p_zh>当从不信任的源解码二进制的时候, 考虑使用<c>binary_to_term/2</c>来防止拒绝服务攻击.</p_zh>
         </warning>
 	<p>See also
 	   <seealso marker="#term_to_binary/1">term_to_binary/1</seealso>
