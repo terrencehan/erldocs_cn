@@ -422,6 +422,7 @@
       <div class="discription">
         <p class="english">As <code>binary_to_term/1</code>, but takes options that affect decoding
            of the binary.</p>
+        <p>像<code>binary_to_term/1</code>, 但是接受可以影响二进制解码的选项.</p>
         <div class="taglist">
           <dt>
             <code>safe</code>
@@ -429,10 +430,18 @@
           <p class="english">
             <p class="english">Use this option when receiving binaries from an untrusted
                source.</p>
+            <p>当从未被信任的源获取二进制时使用这个选项.</p>
             <p class="english">When enabled, it prevents decoding data that may be used to
 	       attack the Erlang system.  In the event of receiving unsafe
                data, decoding fails with a badarg error.</p>
+            <p>当启用的时候, 它可以防止解码可能用来攻击Erlang系统的数据. 当接受到不安全的数据时, 解码会以badarg错误结束.</p>
             <p class="english">Currently, this prevents creation of new atoms directly,
+	       creation of new atoms indirectly (as they are embedded in
+	       certain structures like pids, refs, funs, etc.), and creation of
+	       new external function references.  None of those resources are
+	       currently garbage collected, so unchecked creation of them can
+               exhaust available memory.</p>
+            <p>目前, this prevents creation of new atoms directly,
 	       creation of new atoms indirectly (as they are embedded in
 	       certain structures like pids, refs, funs, etc.), and creation of
 	       new external function references.  None of those resources are
@@ -442,6 +451,7 @@
         </div>
         <p class="english">Failure: <code>badarg</code> if <code>safe</code> is specified and unsafe data
            is decoded.</p>
+        <p>失败: <code>badarg</code> 如果指定了<code>safe</code>并且解码了不安全的数据.</p>
         <p class="english">See also
            <a class="seealso" href="#term_to_binary/1">term_to_binary/1</a>,
            <a class="seealso" href="#binary_to_term/1">binary_to_term/1</a>,
@@ -456,6 +466,7 @@
       </type>
       <div class="discription">
         <p class="english">Returns an integer which is the size in bits of <code>Bitstring</code>.</p>
+        <p>返回<code>Bitstring</code>的比特数(整数).</p>
         <pre>
 > <span>bit_size(&lt;&lt;433:16,3:3>>).</span>
 19
@@ -494,6 +505,7 @@
         <p class="english">Returns an integer which is the number of bytes needed to contain
 	<code>Bitstring</code>. (That is, if the number of bits in <code>Bitstring</code> is not
 	divisible by 8, the resulting number of bytes will be rounded <em>up</em>.)</p>
+        <p>返回一个可以存放<code>Bitstring</code>的字节数. (也就是说, 如果<code>Bitstring</code>的比特数不能被8整除, 结果字节数将会<em>向上</em>取整.)</p>
         <pre>
 > <span>byte_size(&lt;&lt;433:16,3:3>>).</span>
 3
@@ -537,6 +549,7 @@
       <div class="discription">
         <p class="english">Returns <code>true</code> if the <code>Module</code> has old code,
 	and <code>false</code> otherwise.</p>
+        <p>如果<code>Module</code>有旧代码返回<code>true</code>, 否则<code>false</code>.</p>
         <p class="english">See also <a class="seealso" href="../kernel/code.html">code(3)</a>.</p>
       </div>
     </div>
@@ -553,6 +566,7 @@
           process has references to old code for this module, or if the
           process contains funs that references old code for this
           module. Otherwise, it returns <code>false</code>.</p>
+        <p>如果进程<code>Pid</code>正在执行<code>Module</code>的旧代码则返回<code>true</code>. 也就是说, 如果当前进程的调用执行该模块的旧代码, 或者如果进程与该模块的旧代码存在引用, 或者如果进程包含与该模块的旧代码存在引用的函数. 否则, 返回<code>false</code>.</p>
         <pre>
 > <span>check_process_code(Pid, lists).</span>
 false</pre>
@@ -566,6 +580,7 @@ false</pre>
       </type>
       <div class="discription">
         <p class="english">Computes and returns the crc32 (IEEE 802.3 style) checksum for <code>Data</code>.</p>
+        <p>计算并返回<code>Data</code>的crc32 (IEEE 802.3样式)校验和.</p>
       </div>
     </div>
     <div class="function">
@@ -777,6 +792,10 @@ false</pre>
           deletes all references for this module from the export table.
           Returns <code>undefined</code> if the module does not exist,
           otherwise <code>true</code>.</p>
+        <p>Makes the current code for <code>Module</code> become old code, and
+          deletes all references for this module from the export table.
+          Returns <code>undefined</code> if the module does not exist,
+          otherwise <code>true</code>.</p>
         <div class="warning">
           <h2>Warning:<br/></h2>
           <p class="english">This BIF is intended for the code server (see
@@ -951,6 +970,7 @@ b</pre>
       </type>
       <div class="discription">
         <p class="english">Returns the process dictionary and deletes it.</p>
+        <p>返回进程字典并且删除它.</p>
         <pre>
 > <span>put(key1, {1, 2, 3}),</span><span>put(key2, [a, b, c]),</span><span>erase().</span>
 [{key1,{1,2,3}},{key2,[a,b,c]}]</pre>
@@ -965,6 +985,7 @@ b</pre>
         <p class="english">Returns the value <code>Val</code> associated with <code>Key</code> and
           deletes it from the process dictionary. Returns
           <code>undefined</code> if no value is associated with <code>Key</code>.</p>
+        <p>返回与<code>Key</code>关联的值<code>Val</code>并且从进程字典中删除它. 如果没有与<code>Key</code>关联的指返回<code>undefined</code>.</p>
         <pre>
 > <span>put(key1, {merry, lambs, are, playing}),</span><span>X = erase(key1),</span><span>{X, erase(key1)}.</span>
 {{merry,lambs,are,playing},undefined}</pre>
@@ -981,6 +1002,8 @@ b</pre>
           exit reason will be <code>{Reason, Where}</code>, where <code>Where</code>
           is a list of the functions most recently called (the current
           function first). Since evaluating this function causes
+          the process to terminate, it has no return value.</p>
+        <p>以原因<code>Reason</code>停止执行(该函数的)调用进程, 其中<code>Reason</code>是任意项. 实际的退出原因将会是<code>{Reason, Where}</code>, 其中<code>Where</code> 是一个最近被调用的函数(首先是当前函数)的列表. Since evaluating this function causes
           the process to terminate, it has no return value.</p>
         <pre>
 > <span>catch error(foobar).</span>

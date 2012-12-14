@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>sets</h1>
+  <h2 class="modsummary">Functions for Set Manipulation</h2>
+  <div class="description">
+    <p class="english">Sets are collections of elements with no duplicate elements.
+      The representation of a set is not defined.</p>
+    <p>Set是非重复元素的集合. [TODO这里的representation怎么翻译合适?]set的陈述性说明并未定义.</p>
+    <p class="english">This module provides exactly the same interface as the module
+      <code>ordsets</code> but with a defined representation. One difference is
+      that while this module considers two elements as different if they
+      do not match (<code>=:=</code>), <code>ordsets</code> considers two elements as
+      different if and only if they do not compare equal (<code>==</code>).</p>
+    <p>该模块提供了与<code>ordsets</code>模块一样的接口This module provides exactly the same interface as the module
+       but with a defined representation. One difference is
+      that while this module considers two elements as different if they
+      do not match (<code>=:=</code>), <code>ordsets</code> considers two elements as
+      different if and only if they do not compare equal (<code>==</code>).</p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name>
+        <marker id="type-dict">set()</marker>
+      </name>
+      <desc>
+        <p class="english">As returned by <code>new/0</code>.</p>
+      </desc>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="new/0" name="new">new() -> set()</h3>
+      <div class="discription">
+        <p class="english">Returns a new empty set.</p>
+        <p>返回一个空的集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="is_set/1" name="is_set">is_set(Set) -> boolean()</h3>
+      <div class="type_desc">      Set = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Set</anno></code> is a set of
+          elements, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Set</anno></code>是集合返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="size/1" name="size">size(Set) -> non_neg_integer()</h3>
+      <div class="type_desc">      Set = set()</div>
+      <div class="discription">
+        <p class="english">Returns the number of elements in <code><anno>Set</anno></code>.</p>
+        <p>返回<code><anno>Set</anno></code>中元素的数量.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="to_list/1" name="to_list">to_list(Set) -> List</h3>
+      <div class="type_desc">      Set = set(),<br/>      List = [term()]</div>
+      <div class="discription">
+        <p class="english">Returns the elements of <code><anno>Set</anno></code> as a list.</p>
+        <p>以一个列表的形式返回<code><anno>Set</anno></code>中的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="from_list/1" name="from_list">from_list(List) -> Set</h3>
+      <div class="type_desc">      List = [term()],<br/>      Set = set()</div>
+      <div class="discription">
+        <p class="english">Returns an set of the elements in <code><anno>List</anno></code>.</p>
+        <p>返回一个由<code><anno>List</anno></code>中元素构成的集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_element/2" name="is_element">is_element(Element, Set) -> boolean()</h3>
+      <div class="type_desc">      Element = term(),<br/>      Set = set()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Element</anno></code> is an element of
+          <code><anno>Set</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Element</anno></code>是<code><anno>Set</anno></code>的一个元素返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="add_element/2" name="add_element">add_element(Element, Set1) -> Set2</h3>
+      <div class="type_desc">      Element = term(),<br/>      Set1 = set(),<br/>      Set2 = set()</div>
+      <div class="discription">
+        <p class="english">Returns a new set formed from <code><anno>Set1</anno></code> with
+          <code><anno>Element</anno></code> inserted.</p>
+        <p>返回一个新的集合Returns a new set formed from <code><anno>Set1</anno></code> with
+          <code><anno>Element</anno></code> inserted.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_element/2" name="del_element">del_element(Element, Set1) -> Set2</h3>
+      <div class="type_desc">      Element = term(),<br/>      Set1 = set(),<br/>      Set2 = set()</div>
+      <div class="discription">
+        <p class="english">Returns <code><anno>Set1</anno></code>, but with <code><anno>Element</anno></code> removed.</p>
+        <p>返回删除了<code><anno>Element</anno></code>的<code><anno>Set1</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="union/2" name="union">union(Set1, Set2) -> Set3</h3>
+      <div class="type_desc">      Set1 = set(),<br/>      Set2 = set(),<br/>      Set3 = set()</div>
+      <div class="discription">
+        <p class="english">Returns the merged (union) set of <code><anno>Set1</anno></code> and
+          <code><anno>Set2</anno></code>.</p>
+        <p>返回将<code><anno>Set1</anno></code> 和 <code><anno>Set2</anno></code>合并后的集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="union/1" name="union">union(SetList) -> Set</h3>
+      <div class="type_desc">      SetList = [set()],<br/>      Set = set()</div>
+      <div class="discription">
+        <p class="english">Returns the merged (union) set of the list of sets.</p>
+        <p>返回列表中集合的合并集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="intersection/2" name="intersection">intersection(Set1, Set2) -> Set3</h3>
+      <div class="type_desc">      Set1 = set(),<br/>      Set2 = set(),<br/>      Set3 = set()</div>
+      <div class="discription">
+        <p class="english">Returns the intersection of <code><anno>Set1</anno></code> and
+          <code><anno>Set2</anno></code>.</p>
+        <p>返回<code><anno>Set1</anno></code> 和 <code><anno>Set2</anno></code>的交集.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="intersection/1" name="intersection">intersection(SetList) -> Set</h3>
+      <div class="type_desc">      SetList = [set(),...],<br/>      Set = set()</div>
+      <div class="discription">
+        <p class="english">Returns the intersection of the non-empty list of sets.</p>
+        <p>返回非空列表中集合的交集.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_disjoint/2" name="is_disjoint">is_disjoint(Set1, Set2) -> boolean()</h3>
+      <div class="type_desc">      Set1 = set(),<br/>      Set2 = set()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Set1</anno></code> and
+          <code><anno>Set2</anno></code> are disjoint (have no elements in common),
+	  and <code>false</code> otherwise.</p>
+        <p> 如果<code><anno>Set1</anno></code> 和 <code><anno>Set2</anno></code>不相交(没有公共元素)返回<code>true</code>,
+	  否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="subtract/2" name="subtract">subtract(Set1, Set2) -> Set3</h3>
+      <div class="type_desc">      Set1 = set(),<br/>      Set2 = set(),<br/>      Set3 = set()</div>
+      <div class="discription">
+        <p class="english">Returns only the elements of <code><anno>Set1</anno></code> which are not
+          also elements of <code><anno>Set2</anno></code>.</p>
+        <p>返回在<code><anno>Set1</anno></code>中但不包含在<code><anno>Set2</anno></code>中的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_subset/2" name="is_subset">is_subset(Set1, Set2) -> boolean()</h3>
+      <div class="type_desc">      Set1 = set(),<br/>      Set2 = set()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> when every element of <code><anno>Set1</anno></code>1 is
+          also a member of <code><anno>Set2</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Set1</anno></code>中每个元素都是<code><anno>Set2</anno></code>的成员则返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="fold/3" name="fold">fold(Function, Acc0, Set) -> Acc1</h3>
+      <div class="type_desc">      Function = fun((E = term(),AccIn) -> AccOut),<br/>      Set = set(),<br/>      Acc0 = T,<br/>      Acc1 = T,<br/>      AccIn = T,<br/>      AccOut = T</div>
+      <div class="discription">
+        <p class="english">Fold <code><anno>Function</anno></code> over every element in <code><anno>Set</anno></code>
+          returning the final value of the accumulator.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="filter/2" name="filter">filter(Pred, Set1) -> Set2</h3>
+      <div class="type_desc">      Pred = fun((E = term()) -> boolean()),<br/>      Set1 = set(),<br/>      Set2 = set()</div>
+      <div class="discription">
+        <p class="english">Filter elements in <code><anno>Set1</anno></code> with boolean function
+          <code><anno>Pred</anno></code>.</p>
+        <p>用布尔函数过滤<code><anno>Set1</anno></code>中的元素.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>See Also</h4>
+    <p class="english"><a class="seealso" href="">ordsets(3)</a>,
+      <a class="seealso" href="">gb_sets(3)</a></p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
