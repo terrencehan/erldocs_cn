@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+
+<erlref>
+  <header>
+    <copyright>
+      <year>1996</year><year>2011</year>
+      <holder>Ericsson AB. All Rights Reserved.</holder>
+    </copyright>
+    <legalnotice>
+      The contents of this file are subject to the Erlang Public License,
+      Version 1.1, (the "License"); you may not use this file except in
+      compliance with the License. You should have received a copy of the
+      Erlang Public License along with this software. If not, it can be
+      retrieved online at http://www.erlang.org/.
+    
+      Software distributed under the License is distributed on an "AS IS"
+      basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+      the License for the specific language governing rights and limitations
+      under the License.
+    
+    </legalnotice>
+
+    <title>ordsets</title>
+    <prepared>Robert Virding</prepared>
+    <responsible>Bjarne Dacker</responsible>
+    <docno>1</docno>
+    <approved>Bjarne D&auml;cker</approved>
+    <checked></checked>
+    <date>99-07-27</date>
+    <rev>A</rev>
+    <file>ordsets.sgml</file>
+  </header>
+  <module>ordsets</module>
+  <modulesummary>Functions for Manipulating Sets as Ordered Lists</modulesummary>
+  <description>
+    <p>Sets are collections of elements with no duplicate elements.
+      An <c>ordset</c> is a representation of a set, where an ordered
+      list is used to store the elements of the set. An ordered list
+      is more efficient than an unordered list.</p>
+    <p>This module provides exactly the same interface as the module
+      <c>sets</c> but with a defined representation. One difference is
+      that while <c>sets</c> considers two elements as different if they
+      do not match (<c>=:=</c>), this module considers two elements as
+      different if and only if they do not compare equal (<c>==</c>).</p>
+  </description>
+
+  <datatypes>
+    <datatype>
+      <name name="ordset" n_vars="1"/>
+      <desc><p>As returned by new/0.</p></desc>
+    </datatype>
+  </datatypes>
+  <funcs>
+    <func>
+      <name name="new" arity="0"/>
+      <fsummary>Return an empty set</fsummary>
+      <desc>
+        <p>Returns a new empty ordered set.</p>
+        <p_zh>返回一个空的有序集合.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="is_set" arity="1"/>
+      <fsummary>Test for an <c>Ordset</c></fsummary>
+      <desc>
+        <p>Returns <c>true</c> if <c><anno>Ordset</anno></c> is an ordered set of
+          elements, otherwise <c>false</c>.</p>
+        <p_zh>如果<c><anno>Ordset</anno></c>是有序集合返回<c>true</c>, 否则返回 <c>false</c>.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="size" arity="1"/>
+      <fsummary>Return the number of elements in a set</fsummary>
+      <desc>
+        <p>Returns the number of elements in <c><anno>Ordset</anno></c>.</p>
+        <p_zh>返回<c><anno>Ordset</anno></c>中元素的数量.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="to_list" arity="1"/>
+      <fsummary>Convert an <c>Ordset</c>into a list</fsummary>
+      <desc>
+        <p>Returns the elements of <c><anno>Ordset</anno></c> as a list.</p>
+        <p_zh>以一个列表的形式返回<c><anno>Ordset</anno></c>中的元素.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="from_list" arity="1"/>
+      <fsummary>Convert a list into an <c>Ordset</c></fsummary>
+      <desc>
+        <p>Returns an ordered set of the elements in <c><anno>List</anno></c>.</p>
+        <p_zh>返回一个由<c><anno>List</anno></c>中元素构成的有序集合.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="is_element" arity="2"/>
+      <fsummary>Test for membership of an <c>Ordset</c></fsummary>
+      <desc>
+        <p>Returns <c>true</c> if <c><anno>Element</anno></c> is an element of
+          <c><anno>Ordset</anno></c>, otherwise <c>false</c>.</p>
+        <p_zh>如果<c><anno>Element</anno></c>是<c><anno>Ordset</anno></c>的一个元素返回<c>true</c>, 否则返回 <c>false</c>.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="add_element" arity="2"/>
+      <fsummary>Add an element to an <c>Ordset</c></fsummary>
+      <desc>
+        <p>Returns a new ordered set formed from <c><anno>Ordset1</anno></c> with
+          <c><anno>Element</anno></c> inserted.</p>
+        <p_zh>返回一个新的有序集合Returns a new set formed from <c><anno>Ordset1</anno></c> with
+          <c><anno>Element</anno></c> inserted.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="del_element" arity="2"/>
+      <fsummary>Remove an element from an <c>Ordset</c></fsummary>
+      <desc>
+        <p>Returns <c><anno>Ordset1</anno></c>, but with <c><anno>Element</anno></c> removed.</p>
+        <p_zh>返回删除了<c><anno>Element</anno></c>的<c><anno>Ordset1</anno></c>.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="union" arity="2"/>
+      <fsummary>Return the union of two <c>Ordsets</c></fsummary>
+      <desc>
+        <p>Returns the merged (union) set of <c><anno>Ordset1</anno></c> and
+          <c><anno>Ordset2</anno></c>.</p>
+        <p_zh>返回将<c><anno>Ordset1</anno></c> 和 <c><anno>Ordset2</anno></c>合并后的集合.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="union" arity="1"/>
+      <fsummary>Return the union of a list of <c>Ordsets</c></fsummary>
+      <desc>
+        <p>Returns the merged (union) set of the list of sets.</p>
+        <p_zh>返回列表中集合的合并集合.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="intersection" arity="2"/>
+      <fsummary>Return the intersection of two <c>Ordsets</c></fsummary>
+      <desc>
+        <p>Returns the intersection of <c><anno>Ordset1</anno></c> and
+          <c><anno>Ordset2</anno></c>.</p>
+        <p_zh>返回<c><anno>Ordset1</anno></c> 和 <c><anno>Ordset2</anno></c>的交集.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="intersection" arity="1"/>
+      <fsummary>Return the intersection of a list of <c>Ordsets</c></fsummary>
+      <desc>
+        <p>Returns the intersection of the non-empty list of sets.</p>
+        <p_zh>返回非空列表中集合的交集.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="is_disjoint" arity="2"/>
+      <fsummary>Check whether two <c>Ordsets</c> are disjoint</fsummary>
+      <desc>
+        <p>Returns <c>true</c> if <c><anno>Ordset1</anno></c> and
+          <c><anno>Ordset2</anno></c> are disjoint (have no elements in common),
+	  and <c>false</c> otherwise.</p>
+        <p_zh> 如果<c><anno>Ordset1</anno></c> 和 <c><anno>Ordset2</anno></c>不相交(没有公共元素)返回<c>true</c>,
+	  否则返回<c>false</c>.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="subtract" arity="2"/>
+      <fsummary>Return the difference of two <c>Ordsets</c></fsummary>
+      <desc>
+        <p>Returns only the elements of <c><anno>Ordset1</anno></c> which are not
+          also elements of <c><anno>Ordset2</anno></c>.</p>
+        <p_zh>返回在<c><anno>Ordset1</anno></c>中但不包含在<c><anno>Ordset2</anno></c>中的元素.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="is_subset" arity="2"/>
+      <fsummary>Test for subset</fsummary>
+      <desc>
+        <p>Returns <c>true</c> when every element of <c><anno>Ordset1</anno></c> is
+          also a member of <c><anno>Ordset2</anno></c>, otherwise <c>false</c>.</p>
+        <p_zh>如果<c><anno>Ordset1</anno></c>中每个元素都是<c><anno>Ordset2</anno></c>的成员则返回<c>true</c>, 否则返回 <c>false</c>.</p_zh>
+      </desc>
+    </func>
+    <func>
+      <name name="fold" arity="3"/>
+      <fsummary>Fold over set elements</fsummary>
+      <desc>
+        <p>Fold <c><anno>Function</anno></c> over every element in <c><anno>Ordset</anno></c>
+          returning the final value of the accumulator.</p>
+      </desc>
+    </func>
+    <func>
+      <name name="filter" arity="2"/>
+      <fsummary>Filter set elements</fsummary>
+      <desc>
+        <p>Filter elements in <c><anno>Ordset1</anno></c> with boolean function
+          <c><anno>Pred</anno></c>.</p>
+        <p_zh>用布尔函数<c><anno>Ordset1</anno></c>过滤<c><anno>Set1</anno></c>中的元素.</p_zh>
+      </desc>
+    </func>
+  </funcs>
+
+  <section>
+    <title>See Also</title>
+    <p><seealso marker="gb_sets">gb_sets(3)</seealso>,
+      <seealso marker="sets">sets(3)</seealso></p>
+  </section>
+</erlref>
+

@@ -201,7 +201,7 @@
       <desc>
         <p>Filter elements in <c><anno>Set1</anno></c> with boolean function
           <c><anno>Pred</anno></c>.</p>
-        <p_zh>用布尔函数过滤<c><anno>Set1</anno></c>中的元素.</p_zh>
+        <p_zh>用布尔函数<c><anno>Pred</anno></c>过滤<c><anno>Set1</anno></c>中的元素.</p_zh>
       </desc>
     </func>
   </funcs>

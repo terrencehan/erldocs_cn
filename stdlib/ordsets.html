@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>ordsets</h1>
+  <h2 class="modsummary">Functions for Manipulating Sets as Ordered Lists</h2>
+  <div class="description">
+    <p class="english">Sets are collections of elements with no duplicate elements.
+      An <code>ordset</code> is a representation of a set, where an ordered
+      list is used to store the elements of the set. An ordered list
+      is more efficient than an unordered list.</p>
+    <p class="english">This module provides exactly the same interface as the module
+      <code>sets</code> but with a defined representation. One difference is
+      that while <code>sets</code> considers two elements as different if they
+      do not match (<code>=:=</code>), this module considers two elements as
+      different if and only if they do not compare equal (<code>==</code>).</p>
+  </div>
+  <datatypes>
+    <datatype>
+      <name n_vars="1" name="ordset"/>
+      <desc>
+        <p class="english">As returned by new/0.</p>
+      </desc>
+    </datatype>
+  </datatypes>
+  <div class="functions">
+    <h4>Functions:</h4>
+    <hr/>
+    <div class="function">
+      <h3 arity="0" id="new/0" name="new">new() -> []</h3>
+      <div class="discription">
+        <p class="english">Returns a new empty ordered set.</p>
+        <p>返回一个空的有序集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="is_set/1" name="is_set">is_set(Ordset) -> boolean()</h3>
+      <div class="type_desc">      Ordset = term()</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Ordset</anno></code> is an ordered set of
+          elements, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Ordset</anno></code>是有序集合返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="size/1" name="size">size(Ordset) -> non_neg_integer()</h3>
+      <div class="type_desc">      Ordset = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns the number of elements in <code><anno>Ordset</anno></code>.</p>
+        <p>返回<code><anno>Ordset</anno></code>中元素的数量.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="to_list/1" name="to_list">to_list(Ordset) -> List</h3>
+      <div class="type_desc">      Ordset = ordset(T),<br/>      List = [T]</div>
+      <div class="discription">
+        <p class="english">Returns the elements of <code><anno>Ordset</anno></code> as a list.</p>
+        <p>以一个列表的形式返回<code><anno>Ordset</anno></code>中的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="from_list/1" name="from_list">from_list(List) -> Ordset</h3>
+      <div class="type_desc">      List = [T],<br/>      Ordset = ordset(T)</div>
+      <div class="discription">
+        <p class="english">Returns an ordered set of the elements in <code><anno>List</anno></code>.</p>
+        <p>返回一个由<code><anno>List</anno></code>中元素构成的有序集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_element/2" name="is_element">is_element(Element, Ordset) -> boolean()</h3>
+      <div class="type_desc">      Element = term(),<br/>      Ordset = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Element</anno></code> is an element of
+          <code><anno>Ordset</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Element</anno></code>是<code><anno>Ordset</anno></code>的一个元素返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="add_element/2" name="add_element">add_element(E, ordset(T)) -> [T | E,...]</h3>
+      <div class="type_desc">      Element = E,<br/>      Ordset1 = ordset(T),<br/>      Ordset2 = ordset(T | E)</div>
+      <div class="discription">
+        <p class="english">Returns a new ordered set formed from <code><anno>Ordset1</anno></code> with
+          <code><anno>Element</anno></code> inserted.</p>
+        <p>返回一个新的有序集合Returns a new set formed from <code><anno>Ordset1</anno></code> with
+          <code><anno>Element</anno></code> inserted.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="del_element/2" name="del_element">del_element(Element, Ordset1) -> Ordset2</h3>
+      <div class="type_desc">      Element = term(),<br/>      Ordset1 = ordset(T),<br/>      Ordset2 = ordset(T)</div>
+      <div class="discription">
+        <p class="english">Returns <code><anno>Ordset1</anno></code>, but with <code><anno>Element</anno></code> removed.</p>
+        <p>返回删除了<code><anno>Element</anno></code>的<code><anno>Ordset1</anno></code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="union/2" name="union">union(Ordset1, Ordset2) -> Ordset3</h3>
+      <div class="type_desc">      Ordset1 = ordset(T1),<br/>      Ordset2 = ordset(T2),<br/>      Ordset3 = ordset(T1 | T2)</div>
+      <div class="discription">
+        <p class="english">Returns the merged (union) set of <code><anno>Ordset1</anno></code> and
+          <code><anno>Ordset2</anno></code>.</p>
+        <p>返回将<code><anno>Ordset1</anno></code> 和 <code><anno>Ordset2</anno></code>合并后的集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="union/1" name="union">union(OrdsetList) -> Ordset</h3>
+      <div class="type_desc">      OrdsetList = [ordset(T)],<br/>      Ordset = ordset(T)</div>
+      <div class="discription">
+        <p class="english">Returns the merged (union) set of the list of sets.</p>
+        <p>返回列表中集合的合并集合.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="intersection/2" name="intersection">intersection(Ordset1, Ordset2) -> Ordset3</h3>
+      <div class="type_desc">      Ordset1 = ordset(_),<br/>      Ordset2 = ordset(_),<br/>      Ordset3 = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns the intersection of <code><anno>Ordset1</anno></code> and
+          <code><anno>Ordset2</anno></code>.</p>
+        <p>返回<code><anno>Ordset1</anno></code> 和 <code><anno>Ordset2</anno></code>的交集.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="1" id="intersection/1" name="intersection">intersection(OrdsetList) -> Ordset</h3>
+      <div class="type_desc">      OrdsetList = [ordset(_),...],<br/>      Ordset = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns the intersection of the non-empty list of sets.</p>
+        <p>返回非空列表中集合的交集.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_disjoint/2" name="is_disjoint">is_disjoint(Ordset1, Ordset2) -> boolean()</h3>
+      <div class="type_desc">      Ordset1 = ordset(_),<br/>      Ordset2 = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> if <code><anno>Ordset1</anno></code> and
+          <code><anno>Ordset2</anno></code> are disjoint (have no elements in common),
+	  and <code>false</code> otherwise.</p>
+        <p> 如果<code><anno>Ordset1</anno></code> 和 <code><anno>Ordset2</anno></code>不相交(没有公共元素)返回<code>true</code>,
+	  否则返回<code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="subtract/2" name="subtract">subtract(Ordset1, Ordset2) -> Ordset3</h3>
+      <div class="type_desc">      Ordset1 = ordset(_),<br/>      Ordset2 = ordset(_),<br/>      Ordset3 = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns only the elements of <code><anno>Ordset1</anno></code> which are not
+          also elements of <code><anno>Ordset2</anno></code>.</p>
+        <p>返回在<code><anno>Ordset1</anno></code>中但不包含在<code><anno>Ordset2</anno></code>中的元素.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="is_subset/2" name="is_subset">is_subset(Ordset1, Ordset2) -> boolean()</h3>
+      <div class="type_desc">      Ordset1 = ordset(_),<br/>      Ordset2 = ordset(_)</div>
+      <div class="discription">
+        <p class="english">Returns <code>true</code> when every element of <code><anno>Ordset1</anno></code> is
+          also a member of <code><anno>Ordset2</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Ordset1</anno></code>中每个元素都是<code><anno>Ordset2</anno></code>的成员则返回<code>true</code>, 否则返回 <code>false</code>.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="3" id="fold/3" name="fold">fold(Function, Acc0, Ordset) -> Acc1</h3>
+      <div class="type_desc">      Function = fun((Element = T, AccIn = term()) -> AccOut = term()),<br/>      Ordset = ordset(T),<br/>      Acc0 = term(),<br/>      Acc1 = term()</div>
+      <div class="discription">
+        <p class="english">Fold <code><anno>Function</anno></code> over every element in <code><anno>Ordset</anno></code>
+          returning the final value of the accumulator.</p>
+      </div>
+    </div>
+    <div class="function">
+      <h3 arity="2" id="filter/2" name="filter">filter(Pred, Ordset1) -> Ordset2</h3>
+      <div class="type_desc">      Pred = fun((Element = T) -> boolean()),<br/>      Ordset1 = ordset(T),<br/>      Ordset2 = ordset(T)</div>
+      <div class="discription">
+        <p class="english">Filter elements in <code><anno>Ordset1</anno></code> with boolean function
+          <code><anno>Pred</anno></code>.</p>
+        <p>用布尔函数<code><anno>Ordset1</anno></code>过滤<code><anno>Set1</anno></code>中的元素.</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <h4>See Also</h4>
+    <p class="english"><a class="seealso" href="">gb_sets(3)</a>,
+      <a class="seealso" href="">sets(3)</a></p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>
