@@ -33,12 +33,15 @@
     <p>This module provides an interface to standard Erlang IO servers.
       The output functions all return <c>ok</c> if they are successful,
       or exit if they are not.</p>
+    <p_zh>这个模块地痛了标准Erlang IO服务器的接口.  如果成功的话输出函数都返回<c>ok</c>, 或者如果不是就退出.</p_zh>
     <p>In the following description, all functions have an optional
       parameter <c>IoDevice</c>. If included, it must be the pid of a
       process which handles the IO protocols. Normally, it is the
       <c>IoDevice</c> returned by
       <seealso marker="kernel:file#open/2">file:open/2</seealso>.</p>
+    <p_zh>在下述描述里, 所有函数都有一个可选的参数<c>IoDevice</c>. 如果包含这个选项, 它一定是处理IO协议进程的进程号. 通常是<seealso marker="kernel:file#open/2">file:open/2</seealso>返回的<c>IoDevice</c>.</p_zh>
     <p>For a description of the IO protocols refer to the STDLIB Users Guide.</p>
+    <p_zh>关于IO协议的描述，参阅STDLIB用户指南.</p_zh>
     <warning>
 
     <p>As of R13A, data supplied to the <seealso
@@ -48,17 +51,25 @@
     before trying to output the data on an
     <c>io_device()</c>.</p>
 
+    <p_zh>自从R13A起, 提供给<seealso marker="#put_chars/2">put_chars</seealso>函数的数据应该是 <seealso marker="unicode#type-chardata"><c>unicode:chardata()</c></seealso>格式. 这意味在向<c>io_device()</c>输出数据之前传递给该函数的二进制需要转换成UTF-8.</p_zh>
+
     <p>If an io_device() is set in binary mode, the functions <seealso
     marker="#get_chars/3">get_chars</seealso> and <seealso
     marker="#get_line/2">get_line</seealso> may return binaries
     instead of lists. The binaries will, as of R13A, be encoded in
     UTF-8.</p>
+    <p_zh>如果把io_device()设置二进制模式, 函数<seealso marker="#get_chars/3">get_chars</seealso> 和 <seealso
+    marker="#get_line/2">get_line</seealso> 可能返回二进制而不是列表. 从R13A开始二进制数据将会编码成UTF-8.</p_zh>
 
     <p>To work with binaries in ISO-latin-1 encoding, use the <seealso
     marker="kernel:file">file</seealso> module instead.</p>
 
+    <p_zh>对于ISO-latin-1编码的二进制数据, 请使用<seealso marker="kernel:file">file</seealso>模块.</p_zh>
+
     <p>For conversion functions between character encodings, see the <seealso
     marker="stdlib:unicode">unicode</seealso> module.</p>
+
+    <p_zh>关于字符编码的转换函数, 请参阅<seealso marker="stdlib:unicode">unicode</seealso> 模块.</p_zh>
 
     </warning>
 
@@ -113,6 +124,8 @@
           <c><anno>IoDevice</anno></c> (i.e. the width of a terminal). The function
           only succeeds for terminal devices, for all other devices
           the function returns <c>{error, enotsup}</c></p>
+
+          <p_zh>获取<c><anno>IoDevice</anno></c>的列数 (例如终端的宽度). 该函数只对终端设备有效, 对于其它设备则返回<c>{error, enotsup}</c></p_zh>
       </desc>
     </func>
     <func>
@@ -122,6 +135,7 @@
       <desc>
         <p>Writes the characters of <c><anno>CharData</anno></c> to the io_server()
           (<c><anno>IoDevice</anno></c>).</p>
+        <p_zh>向io_server() (<c><anno>IoDevice</anno></c>)写字符<c><anno>CharData</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -130,6 +144,7 @@
       <fsummary>Write a newline</fsummary>
       <desc>
         <p>Writes new line to the standard output (<c><anno>IoDevice</anno></c>).</p>
+        <p_zh>向标准输出(<c><anno>IoDevice</anno></c>)写换行符.</p_zh>
       </desc>
     </func>
     <func>
@@ -140,6 +155,7 @@
         <p>Reads <c><anno>Count</anno></c> characters from standard input
           (<c><anno>IoDevice</anno></c>), prompting it with <c><anno>Prompt</anno></c>. It
           returns:</p>
+        <p_zh>从标准输入(<c><anno>IoDevice</anno></c>)读<c><anno>Count</anno></c>个字符, 以<c><anno>Prompt</anno></c>作为提示符. 返回:</p_zh>
         <taglist>
           <tag><c><anno>Data</anno></c></tag>
           <item>
@@ -148,10 +164,14 @@
             latin1 range). If the io_server() is set to deliver
             binaries, they will be encoded in UTF-8 (regardless of if
             the device actually supports Unicode or not).</p>
+            <p_zh>输入的字符. 如果设备支持Unicode, the data may represent codepoints larger than 255 (the
+            latin1 range). If the io_server() is set to deliver
+            binaries, they will be encoded in UTF-8 (无论设备是否支持Unicode).</p_zh>
           </item>
           <tag><c>eof</c></tag>
           <item>
             <p>End of file was encountered.</p>
+            <p_zh>遇到文件结尾符.</p_zh>
           </item>
 	  <tag><c>{error,<anno>Reason</anno>}</c></tag>
 	  <item>
@@ -168,6 +188,7 @@
       <desc>
         <p>Reads a line from the standard input (<c><anno>IoDevice</anno></c>),
           prompting it with <c><anno>Prompt</anno></c>. It returns:</p>
+        <p_zh>从标准输入(<c><anno>IoDevice</anno></c>)读一行, 以<c><anno>Prompt</anno></c>作为提示符. 返回:</p_zh>
         <taglist>
           <tag><c><anno>Data</anno></c></tag>
           <item>
