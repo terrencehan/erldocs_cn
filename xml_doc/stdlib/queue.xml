@@ -170,7 +170,7 @@
           tuple <c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, where <c><anno>Item</anno></c> is the
           item removed and <c><anno>Q2</anno></c> is the resulting queue. If <c><anno>Q1</anno></c> is
           empty, the tuple <c>{empty, <anno>Q1</anno>}</c> is returned.</p>
-        <p_zh>移除队列<c><anno>Q1</anno></c>头部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的相, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
+        <p_zh>移除队列<c><anno>Q1</anno></c>头部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的项, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -181,7 +181,7 @@
           tuple <c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, where <c><anno>Item</anno></c> is the
           item removed and <c><anno>Q2</anno></c> is the new queue. If <c><anno>Q1</anno></c> is
           empty, the tuple <c>{empty, <anno>Q1</anno>}</c> is returned.  </p>
-        <p_zh>移除队列<c><anno>Q1</anno></c>尾部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的相, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
+        <p_zh>移除队列<c><anno>Q1</anno></c>尾部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的项, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
       </desc>
     </func>
 
