@@ -43,11 +43,11 @@
       not lists. Improper lists cause internal crashes.
       An index out of range for a queue also causes
       a failure with reason <c>badarg</c>.</p>
-    <p_zh>如果参数类型不正确，所有函数以理由<c>badarg</c>失败, 例如队列参数不是队列, 索引不是整数, 列表参数不是列表. [TODO]Improper lists cause internal crashes.
-      超范围的队列索引也会引起理由是<c>badarg</c>的失败.</p_zh>
+    <p_zh>如果参数类型不正确，所有函数以原因<c>badarg</c>失败, 例如队列参数不是队列, 索引不是整数, 列表参数不是列表. [TODO]Improper lists cause internal crashes.
+      超范围的队列索引也会引起原因是<c>badarg</c>的失败.</p_zh>
     <p>Some functions, where noted, fail with reason <c>empty</c>
       for an empty queue.</p>
-    <p_zh>需要注意的是, 有些函数对于空队列以理由<c>empty</c>失败.</p_zh>
+    <p_zh>需要注意的是, 有些函数对于空队列以原因<c>empty</c>失败.</p_zh>
     <p>The data representing a queue as used by this module
       should be regarded as opaque by other modules. Any code
       assuming knowledge of the format is running on thin ice.</p>
@@ -114,6 +114,7 @@
       <fsummary>Create an empty queue</fsummary>
       <desc>
         <p>Returns an empty queue.</p>
+        <p_zh>返回一个空队列.</p_zh>
       </desc>
     </func>
     <func>
@@ -122,6 +123,7 @@
       <desc>
         <p>Tests if <c><anno>Term</anno></c> is a queue and returns <c>true</c> if so and
           <c>false</c> otherwise.</p>
+        <p_zh>测试<c><anno>Term</anno></c>是否为队列, 如果是的话返回<c>true</c>, 否则返回 <c>false</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -130,6 +132,7 @@
       <desc>
         <p>Tests if <c><anno>Q</anno></c> is empty and returns <c>true</c> if so and
           <c>false</c> otherwise.</p>
+        <p_zh>测试<c><anno>Q</anno></c>是否为空, 如果是的话返回<c>true</c>, 否则返回<c>false</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -137,6 +140,7 @@
       <fsummary>Get the length of a queue</fsummary>
       <desc>
         <p>Calculates and returns the length of queue <c><anno>Q</anno></c>.</p>
+        <p_zh>计算并返回队列<c><anno>Q</anno></c>的长度.</p_zh>
       </desc>
     </func>
 
@@ -146,6 +150,7 @@
       <desc>
         <p>Inserts <c><anno>Item</anno></c> at the rear of queue <c><anno>Q1</anno></c>.
           Returns the resulting queue <c><anno>Q2</anno></c>.</p>
+        <p_zh>在队列<c><anno>Q1</anno></c>尾部插入<c><anno>Item</anno></c>. 返回结果队列<c><anno>Q2</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -154,6 +159,7 @@
       <desc>
         <p>Inserts <c><anno>Item</anno></c> at the front of queue <c><anno>Q1</anno></c>.
           Returns the resulting queue <c><anno>Q2</anno></c>.</p>
+        <p_zh>在队列<c><anno>Q1</anno></c>头部插入<c><anno>Item</anno></c>. 返回结果队列<c><anno>Q2</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -164,6 +170,7 @@
           tuple <c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, where <c><anno>Item</anno></c> is the
           item removed and <c><anno>Q2</anno></c> is the resulting queue. If <c><anno>Q1</anno></c> is
           empty, the tuple <c>{empty, <anno>Q1</anno>}</c> is returned.</p>
+        <p_zh>移除队列<c><anno>Q1</anno></c>头部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的相, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -174,6 +181,7 @@
           tuple <c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, where <c><anno>Item</anno></c> is the
           item removed and <c><anno>Q2</anno></c> is the new queue. If <c><anno>Q1</anno></c> is
           empty, the tuple <c>{empty, <anno>Q1</anno>}</c> is returned.  </p>
+        <p_zh>移除队列<c><anno>Q1</anno></c>尾部的项. 返回元组<c>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</c>, 其中 <c><anno>Item</anno></c> 是移除的相, <c><anno>Q2</anno></c> 是结果队列. 如果 <c><anno>Q1</anno></c> 为空, 返回元组<c>{empty, <anno>Q1</anno>}</c>.</p_zh>
       </desc>
     </func>
 
@@ -184,6 +192,7 @@
         <p>Returns a queue containing the items in <c><anno>L</anno></c> in the
           same order; the head item of the list will become the front
           item of the queue.</p>
+        <p_zh>返回一个以相同顺序包含<c><anno>L</anno></c>中项的队列; 列表的第一个项会成为队列的头部项.</p_zh>
       </desc>
     </func>
     <func>
@@ -192,6 +201,7 @@
       <desc>
         <p>Returns a list of the items in the queue in the same order;
           the front item of the queue will become the head of the list.</p>
+        <p_zh>返回一个以相同顺序包含队列项的列表; 队列的头部项会成为列表的头(第一个项).</p_zh>
       </desc>
     </func>
 
@@ -201,6 +211,7 @@
       <desc>
         <p>Returns a queue <c><anno>Q2</anno></c> that contains the items of
           <c><anno>Q1</anno></c> in the reverse order.</p>
+        <p_zh>返回一个以相反顺序包含<c><anno>Q1</anno></c>中项的队列<c><anno>Q2</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -209,6 +220,7 @@
       <desc>
         <p>Splits <c><anno>Q1</anno></c> in two. The <c><anno>N</anno></c> front items
           are put in <c><anno>Q2</anno></c> and the rest in <c><anno>Q3</anno></c></p>
+        <p_zh>将<c><anno>Q1</anno></c>分裂成两个. 前<c><anno>N</anno></c>个项放入<c><anno>Q2</anno></c>, 剩下的放入<c><anno>Q3</anno></c></p_zh>
       </desc>
     </func>
     <func>
@@ -218,6 +230,7 @@
         <p>Returns a queue <c><anno>Q3</anno></c> that is the result of joining
           <c><anno>Q1</anno></c> and <c><anno>Q2</anno></c> with <c><anno>Q1</anno></c> in front of
           <c><anno>Q2</anno></c>.</p>
+        <p_zh>返回一个将<c><anno>Q1</anno></c> 和 <c><anno>Q2</anno></c>连接产生的队列<c><anno>Q3</anno></c>, 其中<c><anno>Q1</anno></c>在 <c><anno>Q2</anno></c>之前.</p_zh>
       </desc>
     </func>
     <func>
@@ -227,16 +240,20 @@
         <p>Returns a queue <c><anno>Q2</anno></c> that is the result of calling
           <c><anno>Fun</anno>(<anno>Item</anno>)</c> on all items in <c><anno>Q1</anno></c>,
           in order from front to rear.</p>
+        <p_zh>返回以头部到尾部顺序对<c><anno>Q1</anno></c>中所有项调用<c><anno>Fun</anno>(<anno>Item</anno>)</c>后产生的队列<c><anno>Q2</anno></c>.</p_zh>
         <p>If <c><anno>Fun</anno>(<anno>Item</anno>)</c> returns <c>true</c>, <c>Item</c>
           is copied to the result queue. If it returns <c>false</c>,
           <c><anno>Item</anno></c> is not copied. If it returns a list
           the list elements are inserted instead of <c>Item</c> in the
           result queue.</p>
+        <p_zh>如果<c><anno>Fun</anno>(<anno>Item</anno>)</c> 返回<c>true</c>, 复制<c>Item</c>到结果队列. 如果返回<c>false</c>,
+          <c><anno>Item</anno></c> 不会被复制. 如果函数返回的是一个列表，那么会将列表中的元素(而不是<c>Item</c>)插入到结果队列.</p_zh>
         <p>So, <c><anno>Fun</anno>(<anno>Item</anno>)</c> returning <c>[<anno>Item</anno>]</c> is thereby
           semantically equivalent to returning <c>true</c>, just
           as returning <c>[]</c> is semantically equivalent to
           returning <c>false</c>. But returning a list builds
           more garbage than returning an atom.</p>
+        <p_zh>所以, 返回<c>[<anno>Item</anno>]</c>的<c><anno>Fun</anno>(<anno>Item</anno>)</c>语义和返回<c>true</c>的相同, 同样，返回<c>[]</c>和返回<c>false</c>语义相同. 但是返回列表会比返回原子产生更多的内存垃圾.</p_zh>
       </desc>
     </func>
     <func>
@@ -245,6 +262,7 @@
       <desc>
         <p>Returns <c>true</c> if <c><anno>Item</anno></c> matches some element
           in <c><anno>Q</anno></c>, otherwise <c>false</c>.</p>
+        <p_zh>如果<c><anno>Item</anno></c>与<c><anno>Q</anno></c>中一些项匹配则返回<c>true</c>, 否则返回<c>false</c>.</p_zh>
       </desc>
     </func>
   </funcs>

@@ -32,11 +32,11 @@
       not lists. Improper lists cause internal crashes.
       An index out of range for a queue also causes
       a failure with reason <code>badarg</code>.</p>
-    <p>如果参数类型不正确，所有函数以理由<code>badarg</code>失败, 例如队列参数不是队列, 索引不是整数, 列表参数不是列表. [TODO]Improper lists cause internal crashes.
-      超范围的队列索引也会引起理由是<code>badarg</code>的失败.</p>
+    <p>如果参数类型不正确，所有函数以原因<code>badarg</code>失败, 例如队列参数不是队列, 索引不是整数, 列表参数不是列表. [TODO]Improper lists cause internal crashes.
+      超范围的队列索引也会引起原因是<code>badarg</code>的失败.</p>
     <p class="english">Some functions, where noted, fail with reason <code>empty</code>
       for an empty queue.</p>
-    <p>需要注意的是, 有些函数对于空队列以理由<code>empty</code>失败.</p>
+    <p>需要注意的是, 有些函数对于空队列以原因<code>empty</code>失败.</p>
     <p class="english">The data representing a queue as used by this module
       should be regarded as opaque by other modules. Any code
       assuming knowledge of the format is running on thin ice.</p>
@@ -103,6 +103,7 @@
       <h3 arity="0" id="new/0" name="new">new() -> queue()</h3>
       <div class="discription">
         <p class="english">Returns an empty queue.</p>
+        <p>返回一个空队列.</p>
       </div>
     </div>
     <div class="function">
@@ -110,6 +111,7 @@
       <div class="discription">
         <p class="english">Tests if <code><anno>Term</anno></code> is a queue and returns <code>true</code> if so and
           <code>false</code> otherwise.</p>
+        <p>测试<code><anno>Term</anno></code>是否为队列, 如果是的话返回<code>true</code>, 否则返回 <code>false</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -117,12 +119,14 @@
       <div class="discription">
         <p class="english">Tests if <code><anno>Q</anno></code> is empty and returns <code>true</code> if so and
           <code>false</code> otherwise.</p>
+        <p>测试<code><anno>Q</anno></code>是否为空, 如果是的话返回<code>true</code>, 否则返回<code>false</code>.</p>
       </div>
     </div>
     <div class="function">
       <h3 arity="1" id="len/1" name="len">len(Q :: queue()) -> non_neg_integer()</h3>
       <div class="discription">
         <p class="english">Calculates and returns the length of queue <code><anno>Q</anno></code>.</p>
+        <p>计算并返回队列<code><anno>Q</anno></code>的长度.</p>
       </div>
     </div>
     <div class="function">
@@ -130,6 +134,7 @@
       <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> at the rear of queue <code><anno>Q1</anno></code>.
           Returns the resulting queue <code><anno>Q2</anno></code>.</p>
+        <p>在队列<code><anno>Q1</anno></code>尾部插入<code><anno>Item</anno></code>. 返回结果队列<code><anno>Q2</anno></code>.</p>
       </div>
     </div>
     <div class="function">
@@ -137,6 +142,7 @@
       <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> at the front of queue <code><anno>Q1</anno></code>.
           Returns the resulting queue <code><anno>Q2</anno></code>.</p>
+        <p>在队列<code><anno>Q1</anno></code>头部插入<code><anno>Item</anno></code>. 返回结果队列<code><anno>Q2</anno></code>.</p>
       </div>
     </div>
     <div class="function">
@@ -148,6 +154,7 @@
           tuple <code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, where <code><anno>Item</anno></code> is the
           item removed and <code><anno>Q2</anno></code> is the resulting queue. If <code><anno>Q1</anno></code> is
           empty, the tuple <code>{empty, <anno>Q1</anno>}</code> is returned.</p>
+        <p>移除队列<code><anno>Q1</anno></code>头部的项. 返回元组<code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, 其中 <code><anno>Item</anno></code> 是移除的相, <code><anno>Q2</anno></code> 是结果队列. 如果 <code><anno>Q1</anno></code> 为空, 返回元组<code>{empty, <anno>Q1</anno>}</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -159,6 +166,7 @@
           tuple <code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, where <code><anno>Item</anno></code> is the
           item removed and <code><anno>Q2</anno></code> is the new queue. If <code><anno>Q1</anno></code> is
           empty, the tuple <code>{empty, <anno>Q1</anno>}</code> is returned.  </p>
+        <p>移除队列<code><anno>Q1</anno></code>尾部的项. 返回元组<code>{{value, <anno>Item</anno>}, <anno>Q2</anno>}</code>, 其中 <code><anno>Item</anno></code> 是移除的相, <code><anno>Q2</anno></code> 是结果队列. 如果 <code><anno>Q1</anno></code> 为空, 返回元组<code>{empty, <anno>Q1</anno>}</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -167,6 +175,7 @@
         <p class="english">Returns a queue containing the items in <code><anno>L</anno></code> in the
           same order; the head item of the list will become the front
           item of the queue.</p>
+        <p>返回一个以相同顺序包含<code><anno>L</anno></code>中项的队列; 列表的第一个项会成为队列的头部项.</p>
       </div>
     </div>
     <div class="function">
@@ -174,6 +183,7 @@
       <div class="discription">
         <p class="english">Returns a list of the items in the queue in the same order;
           the front item of the queue will become the head of the list.</p>
+        <p>返回一个以相同顺序包含队列项的列表; 队列的头部项会成为列表的头(第一个项).</p>
       </div>
     </div>
     <div class="function">
@@ -181,6 +191,7 @@
       <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that contains the items of
           <code><anno>Q1</anno></code> in the reverse order.</p>
+        <p>返回一个以相反顺序包含<code><anno>Q1</anno></code>中项的队列<code><anno>Q2</anno></code>.</p>
       </div>
     </div>
     <div class="function">
@@ -189,6 +200,7 @@
       <div class="discription">
         <p class="english">Splits <code><anno>Q1</anno></code> in two. The <code><anno>N</anno></code> front items
           are put in <code><anno>Q2</anno></code> and the rest in <code><anno>Q3</anno></code></p>
+        <p>将<code><anno>Q1</anno></code>分裂成两个. 前<code><anno>N</anno></code>个项放入<code><anno>Q2</anno></code>, 剩下的放入<code><anno>Q3</anno></code></p>
       </div>
     </div>
     <div class="function">
@@ -197,6 +209,7 @@
         <p class="english">Returns a queue <code><anno>Q3</anno></code> that is the result of joining
           <code><anno>Q1</anno></code> and <code><anno>Q2</anno></code> with <code><anno>Q1</anno></code> in front of
           <code><anno>Q2</anno></code>.</p>
+        <p>返回一个将<code><anno>Q1</anno></code> 和 <code><anno>Q2</anno></code>连接产生的队列<code><anno>Q3</anno></code>, 其中<code><anno>Q1</anno></code>在 <code><anno>Q2</anno></code>之前.</p>
       </div>
     </div>
     <div class="function">
@@ -206,16 +219,20 @@
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of calling
           <code><anno>Fun</anno>(<anno>Item</anno>)</code> on all items in <code><anno>Q1</anno></code>,
           in order from front to rear.</p>
+        <p>返回以头部到尾部顺序对<code><anno>Q1</anno></code>中所有项调用<code><anno>Fun</anno>(<anno>Item</anno>)</code>后产生的队列<code><anno>Q2</anno></code>.</p>
         <p class="english">If <code><anno>Fun</anno>(<anno>Item</anno>)</code> returns <code>true</code>, <code>Item</code>
           is copied to the result queue. If it returns <code>false</code>,
           <code><anno>Item</anno></code> is not copied. If it returns a list
           the list elements are inserted instead of <code>Item</code> in the
           result queue.</p>
+        <p>如果<code><anno>Fun</anno>(<anno>Item</anno>)</code> 返回<code>true</code>, 复制<code>Item</code>到结果队列. 如果返回<code>false</code>,
+          <code><anno>Item</anno></code> 不会被复制. 如果函数返回的是一个列表，那么会将列表中的元素(而不是<code>Item</code>)插入到结果队列.</p>
         <p class="english">So, <code><anno>Fun</anno>(<anno>Item</anno>)</code> returning <code>[<anno>Item</anno>]</code> is thereby
           semantically equivalent to returning <code>true</code>, just
           as returning <code>[]</code> is semantically equivalent to
           returning <code>false</code>. But returning a list builds
           more garbage than returning an atom.</p>
+        <p>所以, 返回<code>[<anno>Item</anno>]</code>的<code><anno>Fun</anno>(<anno>Item</anno>)</code>语义和返回<code>true</code>的相同, 同样，返回<code>[]</code>和返回<code>false</code>语义相同. 但是返回列表会比返回原子产生更多的内存垃圾.</p>
       </div>
     </div>
     <div class="function">
@@ -223,6 +240,7 @@
       <div class="discription">
         <p class="english">Returns <code>true</code> if <code><anno>Item</anno></code> matches some element
           in <code><anno>Q</anno></code>, otherwise <code>false</code>.</p>
+        <p>如果<code><anno>Item</anno></code>与<code><anno>Q</anno></code>中一些项匹配则返回<code>true</code>, 否则返回<code>false</code>.</p>
       </div>
     </div>
   </div>
