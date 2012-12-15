@@ -25,20 +25,33 @@
   <div class="description">
     <p class="english">This module implements (double ended) FIFO queues
       in an efficient manner.</p>
+    <p>这个模块用一种高效的方式实现了(双头)FIFO队列..</p>
     <p class="english">All functions fail with reason <code>badarg</code> if arguments
       are of wrong type, for example queue arguments are not
       queues, indexes are not integers, list arguments are
       not lists. Improper lists cause internal crashes.
       An index out of range for a queue also causes
       a failure with reason <code>badarg</code>.</p>
+    <p>如果参数类型不正确，所有函数以理由<code>badarg</code>失败, 例如队列参数不是队列, 索引不是整数, 列表参数不是列表. [TODO]Improper lists cause internal crashes.
+      超范围的队列索引也会引起理由是<code>badarg</code>的失败.</p>
     <p class="english">Some functions, where noted, fail with reason <code>empty</code>
       for an empty queue.</p>
+    <p>需要注意的是, 有些函数对于空队列以理由<code>empty</code>失败.</p>
     <p class="english">The data representing a queue as used by this module
       should be regarded as opaque by other modules. Any code
       assuming knowledge of the format is running on thin ice.</p>
+    <p>该模块表示队列的数据对其它模块应该认为是不透明的. 任何对(队列)数据形式作假设的代码都会承受很大的风险.</p>
     <p class="english">All operations has an amortized O(1) running time, except
       <code>len/1</code>, <code>join/2</code>, <code>split/2</code>, <code>filter/2</code>
       and <code>member/2</code> that have O(n).
+      To minimize the size of a queue minimizing
+      the amount of garbage built by queue operations, the queues
+      do not contain explicit length information, and that is
+      why <code>len/1</code> is O(n). If better performance for this
+      particular operation is essential, it is easy for
+      the caller to keep track of the length.</p>
+    <p>除了<code>len/1</code>, <code>join/2</code>, <code>split/2</code>, <code>filter/2</code>
+      以及 <code>member/2</code> 的运行时间是O(n), 所有的操作都是O(1)的.
       To minimize the size of a queue minimizing
       the amount of garbage built by queue operations, the queues
       do not contain explicit length information, and that is
