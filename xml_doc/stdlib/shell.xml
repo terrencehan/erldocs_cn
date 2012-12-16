@@ -36,6 +36,7 @@
   <description>
     <p>The module <c>shell</c> implements an Erlang shell.
       </p>
+    <p_zh><c>shell</c>模块实现了Erlang shell. </p_zh>
     <p>The shell is a user interface program 
       for entering expression sequences. The expressions are
       evaluated and a value is returned. 
@@ -113,21 +114,28 @@
       <tag><c>b()</c></tag>
       <item>
         <p>Prints the current variable bindings.</p>
+        <p_zh>打印当前的变量绑定.</p_zh>
       </item>
       <tag><c>f()</c></tag>
       <item>
         <p>Removes all variable bindings.
           </p>
+        <p_zh>移除所有变量绑定.
+          </p_zh>
       </item>
       <tag><c>f(X)</c></tag>
       <item>
         <p>Removes the binding of variable <c>X</c>.
           </p>
+        <p_zh>移除变量<c>X</c>的绑定.
+          </p_zh>
       </item>
       <tag><c>h()</c></tag>
       <item>
         <p>Prints the history list.
           </p>
+        <p_zh>打印历史列表.
+          </p_zh>
       </item>
       <tag><c>history(N)</c></tag>
       <item>
@@ -135,6 +143,7 @@
           history list to <c>N</c>. The previous number is returned.
           The default number is 20.
           </p>
+        <p_zh>将保存在历史列表中"之前命令"(相对于此命令)的数量设置为<c>N</c>. 返回修改之前的数值. 默认值为20.  </p_zh>
       </item>
       <tag><c>results(N)</c></tag>
       <item>
@@ -142,6 +151,7 @@
           the history list to <c>N</c>. The previous number is returned.
           The default number is 20.
           </p>
+        <p_zh>将保存在历史列表中"之前命令"(相对于此命令)的结果数量设置为<c>N</c>. 返回修改之前的数值. 默认值为20.  </p_zh>
       </item>
       <tag><c>e(N)</c></tag>
       <item>
@@ -149,6 +159,8 @@
           it is negative, the <c>N</c>th previous command is repeated
           (i.e., <c>e(-1)</c> repeats the previous command).
           </p>
+        <p_zh>如果<c>N</c>是整数, 重复命令<c>N</c>. 如果为负, 重复前第<c>N</c>条命令 (例如, <c>e(-1)</c> 重复先前一条命令).
+          </p_zh>
       </item>
       <tag><c>v(N)</c></tag>
       <item>
@@ -162,6 +174,8 @@
       <item>
         <p>Evaluates <c>shell_default:help()</c>.
           </p>
+        <p_zh>执行<c>shell_default:help()</c>.
+          </p_zh>
       </item>
       <tag><c>c(File)</c></tag>
       <item>

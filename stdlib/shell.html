@@ -25,6 +25,7 @@
   <div class="description">
     <p class="english">The module <code>shell</code> implements an Erlang shell.
       </p>
+    <p><code>shell</code>模块实现了Erlang shell. </p>
     <p class="english">The shell is a user interface program 
       for entering expression sequences. The expressions are
       evaluated and a value is returned. 
@@ -103,12 +104,15 @@
       </dt>
       <p class="english">
         <p class="english">Prints the current variable bindings.</p>
+        <p>打印当前的变量绑定.</p>
       </p>
       <dt>
         <code>f()</code>
       </dt>
       <p class="english">
         <p class="english">Removes all variable bindings.
+          </p>
+        <p>移除所有变量绑定.
           </p>
       </p>
       <dt>
@@ -117,12 +121,16 @@
       <p class="english">
         <p class="english">Removes the binding of variable <code>X</code>.
           </p>
+        <p>移除变量<code>X</code>的绑定.
+          </p>
       </p>
       <dt>
         <code>h()</code>
       </dt>
       <p class="english">
         <p class="english">Prints the history list.
+          </p>
+        <p>打印历史列表.
           </p>
       </p>
       <dt>
@@ -133,6 +141,7 @@
           history list to <code>N</code>. The previous number is returned.
           The default number is 20.
           </p>
+        <p>将保存在历史列表中"之前命令"(相对于此命令)的数量设置为<code>N</code>. 返回修改之前的数值. 默认值为20.  </p>
       </p>
       <dt>
         <code>results(N)</code>
@@ -142,6 +151,7 @@
           the history list to <code>N</code>. The previous number is returned.
           The default number is 20.
           </p>
+        <p>将保存在历史列表中"之前命令"(相对于此命令)的结果数量设置为<code>N</code>. 返回修改之前的数值. 默认值为20.  </p>
       </p>
       <dt>
         <code>e(N)</code>
@@ -150,6 +160,8 @@
         <p class="english">Repeats the command <code>N</code>, if <code>N</code> is positive. If
           it is negative, the <code>N</code>th previous command is repeated
           (i.e., <code>e(-1)</code> repeats the previous command).
+          </p>
+        <p>如果<code>N</code>是整数, 重复命令<code>N</code>. 如果为负, 重复前第<code>N</code>条命令 (例如, <code>e(-1)</code> 重复先前一条命令).
           </p>
       </p>
       <dt>
@@ -167,6 +179,8 @@
       </dt>
       <p class="english">
         <p class="english">Evaluates <code>shell_default:help()</code>.
+          </p>
+        <p>执行<code>shell_default:help()</code>.
           </p>
       </p>
       <dt>
