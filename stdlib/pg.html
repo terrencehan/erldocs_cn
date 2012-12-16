@@ -28,6 +28,7 @@
       name. For example, a group named <code>foobar</code> can include a set
       of processes as members of this group and they can be located on
       different nodes.</p>
+    <p>这个实验性的模块实现了进程组. 进程组是一组可以通过一个公共名字访问的进程. 例如, 一个名字是<code>foobar</code>的组可以包含一些进程作为该组的成员并且它们可以位于不同的节点.</p>
     <p class="english">When messages are sent to the named group, all members of
       the group receive the message. The messages are serialized. If
       the process <code>P1</code> sends the message <code>M1</code> to the group,
@@ -35,10 +36,14 @@
       all members of the group receive the two messages in the same
       order. If members of a group terminate, they are automatically 
       removed from the group.</p>
+    <p>当把消息发送给命名组时, 组内所有成员都能收到该消息. 消息是序列化的. 
+      如果进程<code>P1</code>向进程组发送消息<code>M1</code>, 同时进程<code>P2</code>发送消息<code>M2</code>, 那么所有进程组内成员会按同样的顺序接收到这两个消息. 如果组内成员被终止, 那么它们（被终止的进程）将会从进程组移除.</p>
     <p class="english">This module is not complete. The module is inspired by the ISIS
       system and the causal order protocol of the ISIS system should 
       also be implemented. At the moment, all messages are serialized
       by sending them through a group master process.</p>
+    <p>这个模块并未完成. 它的灵感源自ISIS系统and the causal order protocol of the ISIS system should 
+      also be implemented. 目前, 所有的消息都是序列化的，并且通过进程组主进程发送.</p>
   </div>
   <div class="functions">
     <h4>Functions:</h4>
