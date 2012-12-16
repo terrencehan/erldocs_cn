@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+      <meta charset="utf-8"/> 
+    <title>erldos.cn--Erlang/OTP中文参考手册</title>
+    <link type="text/css" rel="stylesheet" href="../stylesheets/main.css" />
+
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="erldocs" href="/search.xml">
+
+  </head>
+  <body>
+
+    <div id="sidebar" class="inactive">
+      <input type="text" id="search" autocomplete="off"
+             placeholder="press TAB to search" />
+      <ul id="results"> </ul>
+    </div>
+
+    <div id="content">
+        <div style="margin:0px; padding:10px 20px">
+  <h1>shell_default</h1>
+  <h2 class="modsummary">Customizing the Erlang Environment</h2>
+  <div class="description">
+    <p class="english">The functions in <code>shell_default</code> are called when no module
+      name is given in a shell command.
+      </p>
+    <p>当shell命令中的模块名未给定时, 调用<code>shell_default</code>中的函数. </p>
+    <p class="english">Consider the following shell dialogue:</p>
+    <p>考虑下面的shell对话:</p>
+    <pre>
+1 > <span>lists:reverse("abc").</span>
+"cba"
+2 > <span>c(foo).</span>
+{ok, foo}    </pre>
+    <p class="english">In command one, the module <code>lists</code> is called. In command
+      two, no module name is specified. The shell searches the modules
+      <code>user_default</code> followed by <code>shell_default</code> for the
+      function <code>foo/1</code>.
+      </p>
+    <p>在命令1中, 调用了<code>lists</code>模块. 在命令2中, 没有指定模块名. 为了查找函数<code>foo/1</code>, shell在搜索完模块<code>user_default</code>之后搜索<code>shell_default</code>.
+      </p>
+    <p class="english"><code>shell_default</code> is intended for "system wide"
+      customizations to the shell. <code>user_default</code> is intended for
+      "local" or individual user customizations.</p>
+    <p><code>shell_default</code>设计用来对shell“系统范围”的自定义. <code>user_default</code>设计用来“本地”或个体用户的自定义.</p>
+  </div>
+  <section>
+    <h4>Hint</h4>
+    <p class="english">To add your own commands to the shell, create a module called
+      <code>user_default</code> and add the commands you want. Then add the
+      following line as the <em>first</em> line in your <code>.erlang</code> file in your
+      home directory. </p>
+    <p>为了向shell添加你自己的命令, 创建一个名字是<code>user_default</code>模块并且加入你想要的命令. 然后添加下面行作为你的HOME目录下<code>.erlang</code>文件的<em>第一</em>行. </p>
+    <pre>
+code:load_abs("$PATH/user_default").    </pre>
+    <p class="english"><code>$PATH</code> is the directory where your
+      <code>user_default</code> module can be found.</p>
+    <p><code>$PATH</code> 可是找到你的<code>user_default</code>模块的文件夹.</p>
+  </section>
+</div>
+
+    </div>
+    <script type="text/javascript">
+      var CURRENT_ROOT = "../";
+    </script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/erldocs_index.js"></script>
+    <script type="text/javascript" src="../js/erldocs.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE erlref SYSTEM "erlref.dtd">
+
+<erlref>
+  <header>
+    <copyright>
+      <year>1996</year>
+      <year>2011</year>
+      <holder>Ericsson AB, All Rights Reserved</holder>
+    </copyright>
+    <legalnotice>
+  The contents of this file are subject to the Erlang Public License,
+  Version 1.1, (the "License"); you may not use this file except in
+  compliance with the License. You should have received a copy of the
+  Erlang Public License along with this software. If not, it can be
+  retrieved online at http://www.erlang.org/.
+
+  Software distributed under the License is distributed on an "AS IS"
+  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
+  the License for the specific language governing rights and limitations
+  under the License.
+
+  The Initial Developer of the Original Code is Ericsson AB.
+    </legalnotice>
+
+    <title>shell_default</title>
+    <prepared>Joe Armstrong</prepared>
+    <responsible>Joe Armstrong</responsible>
+    <docno></docno>
+    <approved>Bjarne D&auml;cker</approved>
+    <checked>Joe Armstrong</checked>
+    <date>1996-09-09</date>
+    <rev>A</rev>
+    <file>shell_default.sgml</file>
+  </header>
+  <module>shell_default</module>
+  <modulesummary>Customizing the Erlang Environment</modulesummary>
+  <description>
+    <p>The functions in <c>shell_default</c> are called when no module
+      name is given in a shell command.
+      </p>
+    <p_zh>当shell命令中的模块名未给定时, 调用<c>shell_default</c>中的函数. </p_zh>
+    <p>Consider the following shell dialogue:</p>
+    <p_zh>考虑下面的shell对话:</p_zh>
+    <pre>
+1 > <input>lists:reverse("abc").</input>
+"cba"
+2 > <input>c(foo).</input>
+{ok, foo}    </pre>
+    <p>In command one, the module <c>lists</c> is called. In command
+      two, no module name is specified. The shell searches the modules
+      <c>user_default</c> followed by <c>shell_default</c> for the
+      function <c>foo/1</c>.
+      </p>
+    <p_zh>在命令1中, 调用了<c>lists</c>模块. 在命令2中, 没有指定模块名. 为了查找函数<c>foo/1</c>, shell在搜索完模块<c>user_default</c>之后搜索<c>shell_default</c>.
+      </p_zh>
+    <p><c>shell_default</c> is intended for "system wide"
+      customizations to the shell. <c>user_default</c> is intended for
+      "local" or individual user customizations.</p>
+    <p_zh><c>shell_default</c>设计用来对shell“系统范围”的自定义. <c>user_default</c>设计用来“本地”或个体用户的自定义.</p_zh>
+  </description>
+
+  <section>
+    <title>Hint</title>
+    <p>To add your own commands to the shell, create a module called
+      <c>user_default</c> and add the commands you want. Then add the
+      following line as the <em>first</em> line in your <c>.erlang</c> file in your
+      home directory. </p>
+    <p_zh>为了向shell添加你自己的命令, 创建一个名字是<c>user_default</c>模块并且加入你想要的命令. 然后添加下面行作为你的HOME目录下<c>.erlang</c>文件的<em>第一</em>行. </p_zh>
+    <pre>
+code:load_abs("$PATH/user_default").    </pre>
+    <p><c>$PATH</c> is the directory where your
+      <c>user_default</c> module can be found.</p>
+    <p_zh><c>$PATH</c> 可是找到你的<c>user_default</c>模块的文件夹.</p_zh>
+  </section>
+</erlref>
+

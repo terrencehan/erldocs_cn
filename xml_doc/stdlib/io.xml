@@ -41,7 +41,7 @@
       <seealso marker="kernel:file#open/2">file:open/2</seealso>.</p>
     <p_zh>在下述描述里, 所有函数都有一个可选的参数<c>IoDevice</c>. 如果包含这个选项, 它一定是处理IO协议进程的进程号. 通常是<seealso marker="kernel:file#open/2">file:open/2</seealso>返回的<c>IoDevice</c>.</p_zh>
     <p>For a description of the IO protocols refer to the STDLIB Users Guide.</p>
-    <p_zh>关于IO协议的描述，参阅STDLIB用户指南.</p_zh>
+    <p_zh>关于IO协议的描述, 参阅STDLIB用户指南.</p_zh>
     <warning>
 
     <p>As of R13A, data supplied to the <seealso
@@ -164,9 +164,7 @@
             latin1 range). If the io_server() is set to deliver
             binaries, they will be encoded in UTF-8 (regardless of if
             the device actually supports Unicode or not).</p>
-            <p_zh>输入的字符. 如果设备支持Unicode, the data may represent codepoints larger than 255 (the
-            latin1 range). If the io_server() is set to deliver
-            binaries, they will be encoded in UTF-8 (无论设备是否支持Unicode).</p_zh>
+            <p_zh>输入的字符. 如果设备支持Unicode, 代表codepoints的数据可能大于255(latin1编码范围). 如果io_server()设置为deliver binaries, 它们将被编码成UTF-8(无论设备是否支持Unicode).</p_zh>
           </item>
           <tag><c>eof</c></tag>
           <item>
@@ -177,6 +175,7 @@
 	  <item>
 	    <p>Other (rare) error condition, for instance <c>{error,estale}</c>
 	    if reading from an NFS file system.</p>
+	    <p_zh>其他错误条件(很少遇到), 例如如果从NFS文件系统读时错误<c>{error,estale}</c>.</p_zh>
 	  </item>
         </taglist>
       </desc>
@@ -198,15 +197,18 @@
             latin1 range). If the io_server() is set to deliver
             binaries, they will be encoded in UTF-8 (regardless of if
             the device actually supports Unicode or not).</p>
+            <p_zh>由LF或EOF结尾的字符串. 如果设备支持Unicode, 代表codepoints的数据可能大于255(latin1编码范围). 如果io_server()设置为deliver binaries, 它们将被编码成UTF-8(无论设备是否支持Unicode).</p_zh>
           </item>
           <tag><c>eof</c></tag>
           <item>
             <p>End of file was encountered.</p>
+            <p_zh>遇到文件结尾符.</p_zh>
           </item>
 	  <tag><c>{error,<anno>Reason</anno>}</c></tag>
 	  <item>
 	    <p>Other (rare) error condition, for instance <c>{error,estale}</c>
 	    if reading from an NFS file system.</p>
+	    <p_zh>其他错误条件(很少遇到), 例如如果从NFS文件系统读时错误<c>{error,estale}</c>.</p_zh>
 	  </item>
         </taglist>
       </desc>
@@ -303,8 +305,8 @@
       <name name="write" arity="2"/>
       <fsummary>Write a term</fsummary>
       <desc>
-        <p>Writes the term <c><anno>Term</anno></c> to the standard output
-          (<c><anno>IoDevice</anno></c>).</p>
+        <p>Writes the term <c><anno>Term</anno></c> to the standard output (<c><anno>IoDevice</anno></c>).</p>
+        <p_zh>向标准输出(<c><anno>IoDevice</anno></c>)写项<c><anno>Term</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -315,18 +317,22 @@
         <p>Reads a term <c><anno>Term</anno></c> from the standard input
           (<c><anno>IoDevice</anno></c>), prompting it with <c><anno>Prompt</anno></c>. It
           returns:</p>
+        <p_zh>从标准输入(<c><anno>IoDevice</anno></c>)读入一个项<c><anno>Term</anno></c>, 提示符为<c><anno>Prompt</anno></c>. 返回:</p_zh>
         <taglist>
           <tag><c>{ok, <anno>Term</anno>}</c></tag>
           <item>
             <p>The parsing was successful.</p>
+            <p_zh>分析正确.</p_zh>
           </item>
           <tag><c>eof</c></tag>
           <item>
             <p>End of file was encountered.</p>
+            <p_zh>遇到文件结尾符.</p_zh>
           </item>
           <tag><c>{error, <anno>ErrorInfo</anno>}</c></tag>
           <item>
             <p>The parsing failed.</p>
+            <p_zh>分析失败.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -342,14 +348,17 @@
           <tag><c>{ok, Term, <anno>EndLine</anno>}</c></tag>
           <item>
             <p>The parsing was successful.</p>
+            <p_zh>分析正确.</p_zh>
           </item>
           <tag><c>{eof, <anno>EndLine</anno>}</c></tag>
           <item>
             <p>End of file was encountered.</p>
+            <p_zh>遇到文件结尾符.</p_zh>
           </item>
           <tag><c>{error, <anno>ErrorInfo</anno>, <anno>ErrorLine</anno>}</c></tag>
           <item>
             <p>The parsing failed.</p>
+            <p_zh>分析失败.</p_zh>
           </item>
         </taglist>
       </desc>
@@ -370,6 +379,7 @@
           below. If <c><anno>Format</anno></c> is an atom or a binary, it is first
           converted to a list with the aid of <c>atom_to_list/1</c>
           or <c>binary_to_list/1</c>.</p>
+        <p_zh>依照<c><anno>Format</anno></c>将<c><anno>Data</anno></c> (<c>[]</c>)中的项写到标准输出(<c><anno>IoDevice</anno></c>).  <c><anno>Format</anno></c> 包含将会拷贝到输出设备的平整(普通)字符, 以及格式控制符, 见下述. 如果<c><anno>Format</anno></c>是原子或者二进制数据, 它首先通过<c>atom_to_list/1</c>或<c>binary_to_list/1</c>函数进行转换.</p_zh>
         <pre>
 1> <input>io:fwrite("Hello world!~n", []).</input>
 Hello world!
@@ -380,32 +390,39 @@ ok</pre>
           arguments. If <c>F</c>, <c>P</c>, or <c>Pad</c> is <c>*</c>,
           the next argument in <c>Data</c> is used as the numeric value
           of <c>F</c> or <c>P</c>.</p>
+        <p_zh>控制符的格式一般为<c>~F.P.PadModC</c>. 字符<c>C</c>决定了控制符的类型, <c>F</c> 和 <c>P</c>是可选的数字参数. 如果 <c>F</c>, <c>P</c>, 或 <c>Pad</c> 是 <c>*</c>, <c>Data</c>中的下一个参数作为<c>F</c> 或 <c>P</c>的数值.</p_zh>
         <p><c>F</c> is the <c>field width</c> of the printed argument. A
           negative value means that the argument will be left justified
           within the field, otherwise it will be right justified. If no
           field width is specified, the required print width will be
           used. If the field width specified is too small, then the
           whole field will be filled with <c>*</c> characters.</p>
+        <p_zh><c>F</c>是打印参数的<c>字段宽度</c>. 负数表示该参数是左对齐的, 否则是右对齐. 如果不指定字段宽度, 将会使用需要打印的宽度. 如果指定的字段宽度太小, 那么整个字段将会以<c>*</c>字符填充.</p_zh>
         <p><c>P</c> is the <c>precision</c> of the printed argument. A
           default value is used if no precision is specified. The
           interpretation of precision depends on the control sequences.
           Unless otherwise specified, the argument <c>within</c> is used
           to determine print width.</p>
+        <p_zh><c>P</c> 是打印参数的<c>精度</c>. 如果不指定精度会使用默认值. 精度的解释依赖于控制符. 除非另外指定, 参数<c>within</c>用来确定打印宽度.</p_zh>
         <p><c>Pad</c> is the padding character. This is the character
           used to pad the printed representation of the argument so that
           it conforms to the specified field width and precision. Only
           one padding character can be specified and, whenever
           applicable, it is used for both the field width and precision.
           The default padding character is <c>' '</c> (space).</p>
+      <p_zh><c>Pad</c> 是填充字符. 这个字符用来填充打印的参数以符合指定的字段宽度和精度. 只能指定一个填充字符, 如果合适的话, 它可用于字段宽度和精度. 默认的填充字符是<c>' '</c> (空格).</p_zh>
         <p><c>Mod</c> is the control sequence modifier. It is either a
 	single character (currently only 't', for unicode translation,
 	is supported) that changes the interpretation of Data.</p>
+        <p_zh><c>Mod</c>是控制符的修饰符. 它是单个字符(目前只支持用于unicode转换的't'), 可以改变Data的翻译.</p_zh>
 
          <p>The following control sequences are available:</p>
+         <p_zh>以下控制符可用:</p_zh>
         <taglist>
           <tag><c>~</c></tag>
           <item>
             <p>The character <c>~</c> is written.</p>
+            <p_zh>输出<c>~</c>.</p_zh>
           </item>
           <tag><c>c</c></tag>
           <item>

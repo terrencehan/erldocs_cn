@@ -34,7 +34,7 @@
       <a class="seealso" href="../kernel/file.html#open/2">file:open/2</a>.</p>
     <p>在下述描述里, 所有函数都有一个可选的参数<code>IoDevice</code>. 如果包含这个选项, 它一定是处理IO协议进程的进程号. 通常是<a class="seealso" href="../kernel/file.html#open/2">file:open/2</a>返回的<code>IoDevice</code>.</p>
     <p class="english">For a description of the IO protocols refer to the STDLIB Users Guide.</p>
-    <p>关于IO协议的描述，参阅STDLIB用户指南.</p>
+    <p>关于IO协议的描述, 参阅STDLIB用户指南.</p>
     <div class="warning">
       <h2>Warning:<br/></h2>
       <p class="english">As of R13A, data supplied to the <a class="seealso" href="#put_chars/2">put_chars</a> function should be in the
@@ -150,9 +150,7 @@
             latin1 range). If the io_server() is set to deliver
             binaries, they will be encoded in UTF-8 (regardless of if
             the device actually supports Unicode or not).</p>
-            <p>输入的字符. 如果设备支持Unicode, the data may represent codepoints larger than 255 (the
-            latin1 range). If the io_server() is set to deliver
-            binaries, they will be encoded in UTF-8 (无论设备是否支持Unicode).</p>
+            <p>输入的字符. 如果设备支持Unicode, 代表codepoints的数据可能大于255(latin1编码范围). 如果io_server()设置为deliver binaries, 它们将被编码成UTF-8(无论设备是否支持Unicode).</p>
           </p>
           <dt>
             <code>eof</code>
@@ -167,6 +165,7 @@
           <p class="english">
             <p class="english">Other (rare) error condition, for instance <code>{error,estale}</code>
 	    if reading from an NFS file system.</p>
+            <p>其他错误条件(很少遇到), 例如如果从NFS文件系统读时错误<code>{error,estale}</code>.</p>
           </p>
         </div>
       </div>
@@ -193,12 +192,14 @@
             latin1 range). If the io_server() is set to deliver
             binaries, they will be encoded in UTF-8 (regardless of if
             the device actually supports Unicode or not).</p>
+            <p>由LF或EOF结尾的字符串. 如果设备支持Unicode, 代表codepoints的数据可能大于255(latin1编码范围). 如果io_server()设置为deliver binaries, 它们将被编码成UTF-8(无论设备是否支持Unicode).</p>
           </p>
           <dt>
             <code>eof</code>
           </dt>
           <p class="english">
             <p class="english">End of file was encountered.</p>
+            <p>遇到文件结尾符.</p>
           </p>
           <dt>
             <code>{error,<anno>Reason</anno>}</code>
@@ -206,6 +207,7 @@
           <p class="english">
             <p class="english">Other (rare) error condition, for instance <code>{error,estale}</code>
 	    if reading from an NFS file system.</p>
+            <p>其他错误条件(很少遇到), 例如如果从NFS文件系统读时错误<code>{error,estale}</code>.</p>
           </p>
         </div>
       </div>
@@ -311,8 +313,8 @@
       <h3 arity="2" id="write/2" name="write">write(IoDevice, Term) -> 'ok'</h3>
       <div class="type_desc">      IoDevice = device(),<br/>      Term = term()</div>
       <div class="discription">
-        <p class="english">Writes the term <code><anno>Term</anno></code> to the standard output
-          (<code><anno>IoDevice</anno></code>).</p>
+        <p class="english">Writes the term <code><anno>Term</anno></code> to the standard output (<code><anno>IoDevice</anno></code>).</p>
+        <p>向标准输出(<code><anno>IoDevice</anno></code>)写项<code><anno>Term</anno></code>.</p>
       </div>
     </div>
     <div class="function">
@@ -324,24 +326,28 @@
         <p class="english">Reads a term <code><anno>Term</anno></code> from the standard input
           (<code><anno>IoDevice</anno></code>), prompting it with <code><anno>Prompt</anno></code>. It
           returns:</p>
+        <p>从标准输入(<code><anno>IoDevice</anno></code>)读入一个项<code><anno>Term</anno></code>, 提示符为<code><anno>Prompt</anno></code>. 返回:</p>
         <div class="taglist">
           <dt>
             <code>{ok, <anno>Term</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">The parsing was successful.</p>
+            <p>分析正确.</p>
           </p>
           <dt>
             <code>eof</code>
           </dt>
           <p class="english">
             <p class="english">End of file was encountered.</p>
+            <p>遇到文件结尾符.</p>
           </p>
           <dt>
             <code>{error, <anno>ErrorInfo</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">The parsing failed.</p>
+            <p>分析失败.</p>
           </p>
         </div>
       </div>
@@ -359,18 +365,21 @@
           </dt>
           <p class="english">
             <p class="english">The parsing was successful.</p>
+            <p>分析正确.</p>
           </p>
           <dt>
             <code>{eof, <anno>EndLine</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">End of file was encountered.</p>
+            <p>遇到文件结尾符.</p>
           </p>
           <dt>
             <code>{error, <anno>ErrorInfo</anno>, <anno>ErrorLine</anno>}</code>
           </dt>
           <p class="english">
             <p class="english">The parsing failed.</p>
+            <p>分析失败.</p>
           </p>
         </div>
       </div>
@@ -396,6 +405,7 @@
           below. If <code><anno>Format</anno></code> is an atom or a binary, it is first
           converted to a list with the aid of <code>atom_to_list/1</code>
           or <code>binary_to_list/1</code>.</p>
+        <p>依照<code><anno>Format</anno></code>将<code><anno>Data</anno></code> (<code>[]</code>)中的项写到标准输出(<code><anno>IoDevice</anno></code>).  <code><anno>Format</anno></code> 包含将会拷贝到输出设备的平整(普通)字符, 以及格式控制符, 见下述. 如果<code><anno>Format</anno></code>是原子或者二进制数据, 它首先通过<code>atom_to_list/1</code>或<code>binary_to_list/1</code>函数进行转换.</p>
         <pre>
 1> <span>io:fwrite("Hello world!~n", []).</span>
 Hello world!
@@ -406,33 +416,40 @@ ok</pre>
           arguments. If <code>F</code>, <code>P</code>, or <code>Pad</code> is <code>*</code>,
           the next argument in <code>Data</code> is used as the numeric value
           of <code>F</code> or <code>P</code>.</p>
+        <p>控制符的格式一般为<code>~F.P.PadModC</code>. 字符<code>C</code>决定了控制符的类型, <code>F</code> 和 <code>P</code>是可选的数字参数. 如果 <code>F</code>, <code>P</code>, 或 <code>Pad</code> 是 <code>*</code>, <code>Data</code>中的下一个参数作为<code>F</code> 或 <code>P</code>的数值.</p>
         <p class="english"><code>F</code> is the <code>field width</code> of the printed argument. A
           negative value means that the argument will be left justified
           within the field, otherwise it will be right justified. If no
           field width is specified, the required print width will be
           used. If the field width specified is too small, then the
           whole field will be filled with <code>*</code> characters.</p>
+        <p><code>F</code>是打印参数的<code>字段宽度</code>. 负数表示该参数是左对齐的, 否则是右对齐. 如果不指定字段宽度, 将会使用需要打印的宽度. 如果指定的字段宽度太小, 那么整个字段将会以<code>*</code>字符填充.</p>
         <p class="english"><code>P</code> is the <code>precision</code> of the printed argument. A
           default value is used if no precision is specified. The
           interpretation of precision depends on the control sequences.
           Unless otherwise specified, the argument <code>within</code> is used
           to determine print width.</p>
+        <p><code>P</code> 是打印参数的<code>精度</code>. 如果不指定精度会使用默认值. 精度的解释依赖于控制符. 除非另外指定, 参数<code>within</code>用来确定打印宽度.</p>
         <p class="english"><code>Pad</code> is the padding character. This is the character
           used to pad the printed representation of the argument so that
           it conforms to the specified field width and precision. Only
           one padding character can be specified and, whenever
           applicable, it is used for both the field width and precision.
           The default padding character is <code>' '</code> (space).</p>
+        <p><code>Pad</code> 是填充字符. 这个字符用来填充打印的参数以符合指定的字段宽度和精度. 只能指定一个填充字符, 如果合适的话, 它可用于字段宽度和精度. 默认的填充字符是<code>' '</code> (空格).</p>
         <p class="english"><code>Mod</code> is the control sequence modifier. It is either a
 	single character (currently only 't', for unicode translation,
 	is supported) that changes the interpretation of Data.</p>
+        <p><code>Mod</code>是控制符的修饰符. 它是单个字符(目前只支持用于unicode转换的't'), 可以改变Data的翻译.</p>
         <p class="english">The following control sequences are available:</p>
+        <p>以下控制符可用:</p>
         <div class="taglist">
           <dt>
             <code>~</code>
           </dt>
           <p class="english">
             <p class="english">The character <code>~</code> is written.</p>
+            <p>输出<code>~</code>.</p>
           </p>
           <dt>
             <code>c</code>
