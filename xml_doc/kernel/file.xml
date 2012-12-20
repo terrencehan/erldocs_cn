@@ -580,7 +580,7 @@
           the names of all the files in the directory. The names are
           not sorted.</p>
         <p_zh>列出文件夹下的所有文件. 如果成功, 返回<c>{ok, <anno>Filenames</anno>}</c>.
-          否则, 返回<c>{error, <anno>Reason</anno>}</c>. <c><anno>Filenames</anno></c> 是一个包含文件夹中所有文件名的列表. 这些名字没有保存下来.</p_zh>
+          否则, 返回<c>{error, <anno>Reason</anno>}</c>. <c><anno>Filenames</anno></c> 是一个包含文件夹中所有文件名的列表. 这些名字没有排序.</p_zh>
         <p>Typical error reasons are:</p>
         <p_zh>典型的错误原因:</p_zh>
         <taglist>
