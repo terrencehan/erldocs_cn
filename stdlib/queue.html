@@ -254,14 +254,18 @@
       <h3 arity="1" id="get/1" name="get">get(Q :: queue()) -> Item :: term()</h3>
       <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> at the front of queue <code><anno>Q</anno></code>.</p>
+        <p>返回队列<code><anno>Q</anno></code>头部的<code><anno>Item</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
       <h3 arity="1" id="get_r/1" name="get_r">get_r(Q :: queue()) -> Item :: term()</h3>
       <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> at the rear of queue <code><anno>Q</anno></code>.</p>
+        <p>返回队列<code><anno>Q</anno></code>尾部的<code><anno>Item</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -269,7 +273,9 @@
       <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the front item from <code><anno>Q1</anno></code>.</p>
+        <p>返回将<code><anno>Q1</anno></code>头部项移除后的队列<code><anno>Q2</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -277,7 +283,9 @@
       <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the rear item from <code><anno>Q1</anno></code>.</p>
+        <p>返回将<code><anno>Q1</anno></code>尾部项移除后的队列<code><anno>Q2</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -285,6 +293,7 @@
       <div class="discription">
         <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
           front item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>返回元组<code>{value, <anno>Item</anno>}</code> 其中 <code><anno>Item</anno></code> 是<code><anno>Q</anno></code>头部项, 或者当<code><anno>Q</anno></code>时返回<code>empty</code>.</p>
       </div>
     </div>
     <div class="function">
@@ -292,6 +301,7 @@
       <div class="discription">
         <p class="english">Returns the tuple <code>{value, <anno>Item</anno>}</code> where <code><anno>Item</anno></code> is the
           rear item of <code><anno>Q</anno></code>, or <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>返回元组<code>{value, <anno>Item</anno>}</code> 其中 <code><anno>Item</anno></code> 是<code><anno>Q</anno></code>尾部项, 或者当<code><anno>Q</anno></code>时返回<code>empty</code>.</p>
       </div>
     </div>
   </div>
@@ -306,13 +316,16 @@
       <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> at the head of queue <code><anno>Q1</anno></code>. Returns
           the new queue <code><anno>Q2</anno></code>.</p>
+        <p>在<code><anno>Q1</anno></code>头部插入<code><anno>Item</anno></code>. 返回新队列<code><anno>Q2</anno></code>.</p>
       </div>
     </div>
     <div class="function">
       <h3 arity="1" id="head/1" name="head">head(Q :: queue()) -> Item :: term()</h3>
       <div class="discription">
         <p class="english">Returns <code><anno>Item</anno></code> from the head of queue <code><anno>Q</anno></code>.</p>
+        <p>返回<code><anno>Q</anno></code>的头部<code><anno>Item</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -320,7 +333,9 @@
       <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the head item from <code><anno>Q1</anno></code>.</p>
+        <p>返回将<code><anno>Q1</anno></code>头部项移除后的队列<code><anno>Q2</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -328,6 +343,7 @@
       <div class="discription">
         <p class="english">Inserts <code><anno>Item</anno></code> as the tail item of queue <code><anno>Q1</anno></code>. Returns
           the new queue <code><anno>Q2</anno></code>.</p>
+        <p>插入<code><anno>Item</anno>作为</code><code><anno>Q1</anno></code>的尾部项. 返回新队列<code><anno>Q2</anno></code>.</p>
       </div>
     </div>
     <div class="function">
@@ -335,7 +351,9 @@
       <h3 arity="1" id="last/1" name="last">last(Q :: queue()) -> Item :: term()</h3>
       <div class="discription">
         <p class="english">Returns the tail item of queue <code><anno>Q</anno></code>.</p>
+        <p class="english">返回<code><anno>Q</anno></code>的尾部项.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
       </div>
     </div>
     <div class="function">
@@ -345,8 +363,11 @@
       <div class="discription">
         <p class="english">Returns a queue <code><anno>Q2</anno></code> that is the result of removing
           the tail item from <code><anno>Q1</anno></code>.</p>
+        <p>返回将<code><anno>Q1</anno></code>尾部项移除后的队列<code><anno>Q2</anno></code>.</p>
         <p class="english">Fails with reason <code>empty</code> if <code><anno>Q1</anno></code> is empty.</p>
+        <p>如果<code><anno>Q</anno></code>为空, 以<code>empty</code>原因失败.</p>
         <p class="english">The name <code>lait/1</code> is a misspelling - do not use it anymore.</p>
+        <p>名字<code>lait/1</code>是错误的拼写- 不要再使用它了.</p>
       </div>
     </div>
   </div>

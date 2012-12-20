@@ -279,7 +279,9 @@
       <fsummary>Return the front item of a queue</fsummary>
       <desc>
         <p>Returns <c><anno>Item</anno></c> at the front of queue <c><anno>Q</anno></c>.</p>
+        <p_zh>返回队列<c><anno>Q</anno></c>头部的<c><anno>Item</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -287,7 +289,9 @@
       <fsummary>Return the rear item of a queue</fsummary>
       <desc>
         <p>Returns <c><anno>Item</anno></c> at the rear of queue <c><anno>Q</anno></c>.</p>
+        <p_zh>返回队列<c><anno>Q</anno></c>尾部的<c><anno>Item</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -296,7 +300,9 @@
       <desc>
         <p>Returns a queue <c><anno>Q2</anno></c> that is the result of removing
           the front item from <c><anno>Q1</anno></c>.</p>
+        <p_zh>返回将<c><anno>Q1</anno></c>头部项移除后的队列<c><anno>Q2</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q1</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -305,7 +311,9 @@
       <desc>
         <p>Returns a queue <c><anno>Q2</anno></c> that is the result of removing
           the rear item from <c><anno>Q1</anno></c>.</p>
+        <p_zh>返回将<c><anno>Q1</anno></c>尾部项移除后的队列<c><anno>Q2</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q1</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -314,6 +322,7 @@
       <desc>
         <p>Returns the tuple <c>{value, <anno>Item</anno>}</c> where <c><anno>Item</anno></c> is the
           front item of <c><anno>Q</anno></c>, or <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>返回元组<c>{value, <anno>Item</anno>}</c> 其中 <c><anno>Item</anno></c> 是<c><anno>Q</anno></c>头部项, 或者当<c><anno>Q</anno></c>时返回<c>empty</c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -322,6 +331,7 @@
       <desc>
         <p>Returns the tuple <c>{value, <anno>Item</anno>}</c> where <c><anno>Item</anno></c> is the
           rear item of <c><anno>Q</anno></c>, or <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>返回元组<c>{value, <anno>Item</anno>}</c> 其中 <c><anno>Item</anno></c> 是<c><anno>Q</anno></c>尾部项, 或者当<c><anno>Q</anno></c>时返回<c>empty</c>.</p_zh>
       </desc>
     </func>
   </funcs>
@@ -338,6 +348,7 @@
       <desc>
         <p>Inserts <c><anno>Item</anno></c> at the head of queue <c><anno>Q1</anno></c>. Returns
           the new queue <c><anno>Q2</anno></c>.</p>
+        <p_zh>在<c><anno>Q1</anno></c>头部插入<c><anno>Item</anno></c>. 返回新队列<c><anno>Q2</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -345,7 +356,9 @@
       <fsummary>Return the item at the head of a queue</fsummary>
       <desc>
         <p>Returns <c><anno>Item</anno></c> from the head of queue <c><anno>Q</anno></c>.</p>
+        <p_zh>返回<c><anno>Q</anno></c>的头部<c><anno>Item</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -354,7 +367,9 @@
       <desc>
         <p>Returns a queue <c><anno>Q2</anno></c> that is the result of removing
           the head item from <c><anno>Q1</anno></c>.</p>
+        <p_zh>返回将<c><anno>Q1</anno></c>头部项移除后的队列<c><anno>Q2</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q1</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -363,6 +378,7 @@
       <desc>
         <p>Inserts <c><anno>Item</anno></c> as the tail item of queue <c><anno>Q1</anno></c>. Returns
           the new queue <c><anno>Q2</anno></c>.</p>
+      <p_zh>插入<c><anno>Item</anno>作为</c><c><anno>Q1</anno></c>的尾部项. 返回新队列<c><anno>Q2</anno></c>.</p_zh>
       </desc>
     </func>
     <func>
@@ -371,7 +387,9 @@
       <fsummary>Return the tail item of a queue</fsummary>
       <desc>
         <p>Returns the tail item of queue <c><anno>Q</anno></c>.</p>
+        <p>返回<c><anno>Q</anno></c>的尾部项.</p>
         <p>Fails with reason <c>empty</c> if <c><anno>Q</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
       </desc>
     </func>
     <func>
@@ -382,8 +400,11 @@
       <desc>
         <p>Returns a queue <c><anno>Q2</anno></c> that is the result of removing
           the tail item from <c><anno>Q1</anno></c>.</p>
+        <p_zh>返回将<c><anno>Q1</anno></c>尾部项移除后的队列<c><anno>Q2</anno></c>.</p_zh>
         <p>Fails with reason <c>empty</c> if <c><anno>Q1</anno></c> is empty.</p>
+        <p_zh>如果<c><anno>Q</anno></c>为空, 以<c>empty</c>原因失败.</p_zh>
         <p>The name <c>lait/1</c> is a misspelling - do not use it anymore.</p>
+        <p_zh>名字<c>lait/1</c>是错误的拼写- 不要再使用它了.</p_zh>
       </desc>
     </func>
   </funcs>
