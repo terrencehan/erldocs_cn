@@ -38,6 +38,9 @@
       the time at longitude zero, without any adjustment for daylight
       saving. Universal Coordinated Time (UTC) time is also called
       Greenwich Mean Time (GMT).</p>
+  <p_zh>
+  当时间调整为当前时区和夏时制时就是本地的。当时间反映了0经度的时间而不局限于某个夏时制时就是世界时间。通用协调时间也称作格林威治标准时间。
+  </p_zh>
     <p>The time functions <c>local_time/0</c> and
       <c>universal_time/0</c> provided in this module both return date
       and time. The reason for this is that separate functions for date
@@ -47,23 +50,35 @@
       applies to the Erlang BIFs <c>date/0</c> and <c>time/0</c>, and
       their use is strongly discouraged if a reliable date/time stamp
       is required.</p>
+  <p_zh>
+      这个模块提供的时间函数<c>local_time/0</c>和<c>universal_time/0</c>都返回日期和时间。原因是分别返回日期和时间的函数会产生日期/时间的组合，而这种组合被表示为24小时的形式。比如其中一个函数在午夜前被调用，而另一个函数在午夜后被调用，就会出现这种情况。这个问题也出现在Erlang BIFs中的<c>data/0</c>和<c>time/0</c>函数，当需要一个可靠的日期/时间戳的时候，它们的性能就会大打折扣。
+  </p_zh>
     <p>All dates conform to the Gregorian calendar. This calendar was
       introduced by Pope Gregory XIII in 1582 and was used in all
       Catholic countries from this year. Protestant parts of Germany
       and the Netherlands adopted it in 1698, England followed in 1752,
       and Russia in 1918 (the October revolution of 1917 took place in
       November according to the Gregorian calendar).</p>
+  <p_zh>
+  所有的时间都是阳历的。这种日历是Pope Gregory XIII在1582年提出的，并从这年开始在所有的天主教国家使用。德国新教地区和新西兰在1698年采用，英国是在1752年，俄罗斯在1918年采用（根据阳历1917年的十月革命其实是在十一月份发生的）。
+  </p_zh>
     <p>The Gregorian calendar in this module is extended back to year 0.
       For a given date, the <em>gregorian days</em> is the number of
       days up to and including the date specified. Similarly,
       the <em>gregorian seconds</em> for a given date and time, is
       the the number of seconds up to and including the specified date
       and time.</p>
+  <p_zh>
+      阳历在这个模块里是从元年开始的。对于一个给定的日期，<em>阳历天数</em>是到这天并包括这天在内的数目。同样的，对于一个给定日期和时间的<em>阳历秒</em>，是到这个日期的并包括这个日期在内的秒数。
+  </p_zh>
     <p>For computing differences between epochs in time, use
       the functions counting gregorian days or seconds. If epochs are
       given as local time, they must be converted to universal time, in
       order to get the correct value of the elapsed time between epochs.
       Use of the function <c>time_difference/2</c> is discouraged.</p>
+  <p_zh>
+      为了计算不同时间点在时间上的不同，使用函数来计数阳历天数而或者秒数。如果时间点是以当地时间的形式给出，为了得出在这些时间点之间的准确时间值，必须将它们转化成通用时间的形式。使用函数<c>time_difference/2</c>效果不好。
+  </p_zh>
     <p>There exists different definitions for the week of the year.
       The calendar module contains a week of the year implementation
       which conforms to the ISO 8601 standard. Since the week number for
@@ -72,6 +87,9 @@
       together with the week number. The function <c>iso_week_number/0</c>
       and <c>iso_week_number/1</c> returns a tuple of the year and the
       week number.</p>
+  <p_zh>
+      对于星期的定义有多种。日历模块包含着一个符合ISO8601标准的星期的实现。因为对于一个给定日期的星期数可能坐落在上年、今年或者下年，所以在给出星期数的同时提供年份的信息显得十分的重要。 <c>iso_week_number/0</c> 函数和<c>iso_week_number/1</c>函数返回年份和星期的元组。
+  </p_zh>
   </description>
 
   <datatypes>
@@ -89,6 +107,9 @@
       <desc><p>Year cannot be abbreviated. Example: 93 denotes year
         93, not 1993. Valid range depends on the underlying OS. The
         date tuple must denote a valid date.</p>
+    <p_zh>
+        年份不能缩写。比如：93代表93年，而不是1993年。合法的范围取决于底层的操作系统。日期元组必须代表一个合法的日期。
+    </p_zh>
       </desc>
     </datatype>
     <datatype>
